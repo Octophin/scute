@@ -4,11 +4,12 @@ import jinja2
 import os
 import collections
 
-here = os.path.dirname(os.path.realpath(__file__))
+here = os.path.dirname(os.path.abspath(__file__))
 
 class scute:
     hooks = {}
     def __init__(self, options, flaskServer):
+        print(here)
         self.options = options
         self.server = flaskServer
         my_loader = jinja2.ChoiceLoader([
