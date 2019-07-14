@@ -1,1 +1,25 @@
-{}
+{
+    "general": {
+        "label": "General settings",
+        "description": "General settings for the device",
+        "fields": {
+            "friendlyName": {
+                "label": "Friendly name",
+                "description": "The device's friendly name",
+                "type": "text",
+                "exclueFromPresets": "<boolean>",
+                "validateWith": "<functionName>"
+            },
+            "selectExample": {
+                "label": "An example list",
+                "type": "select",
+                "list": {
+                    "applesGreen": "Green Apples",
+                    "applesRed": "Red Apples",
+                    "applesMagic": "Magic Apples"
+                },
+                "order": -22
+            }
+        }
+    }
+}

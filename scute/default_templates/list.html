@@ -1,0 +1,25 @@
+{% for device in reportValues %}
+
+    {% for key,category in reportSchema.items() | sort(attribute='1.order')%}
+
+        <h2>{{category.label}}</h2>
+
+        <ul>
+
+        {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+
+            {% if reportValues[device][fieldKey] is defined %}
+
+            <li>{{fieldSchema.label}} : {{reportValues[device][fieldKey]}}</li>
+
+            {% endif %}
+
+        {% endfor %}
+
+        </ul>
+
+    {% endfor %}
+
+    <a href="/config/{{device}}">View / Edit Config</a>
+
+{% endfor %}

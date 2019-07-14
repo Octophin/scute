@@ -22,12 +22,11 @@ test.registerHook("get_devices", getDevices)
 def getFields(deviceID):
     return {"hello": "world"}
 
-test.registerHook("get_fields", getFields)
+test.registerHook("get_report_fields", getFields)
 
 def getFriendlyName(deviceID):
     return deviceID + "FRIENDLY"
 
-test.registerHook("get_field__friendlyName", getFriendlyName)
+test.registerHook("get_report_field__friendlyName", getFriendlyName)
 
-report = test.getReport("deviceOne")
 

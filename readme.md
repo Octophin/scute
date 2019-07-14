@@ -85,17 +85,17 @@ This reads from the report schema file path passed in to the options which conta
 
 For each device in the device list, the system checks for and runs the following methods
 
-* getFields(deviceID, fieldsList)
+* get_report_fields(deviceID, fieldsList)
 
 This takes a device ID and a list of all fields (as strings) in the report schema. If present, it should return an object with key:value pairs of the field and its value. This is useful for the bulk loading of report data from a JSON file for instance.
 
-* getField__fieldName(deviceID, fieldName)
+* get_report_field__fieldName(deviceID, fieldName)
 
 This, if it exists takes a device ID and a field name and return a value for the field. It will overwrite anything set in the general getFields() function. 
 
 ## Device actions
 
-Each device can have an action performed on it. Each action should be defined in an `deviceActionsSchema.json`. This looks like:
+Each device can have an action performed on it. Each action should be defined in an actions schema passed in to config. This looks like:
 
 ```JSON
 
@@ -106,12 +106,12 @@ Each device can have an action performed on it. Each action should be defined in
 
 ```
 
-* key (string) - The name of the action that will be called (called as `action__actionName(deviceID)`).
+* key (string) - The name of the hook that will be called (called as `action__actionName(deviceID)`).
 
 * label (string) - Friendly name shown on the button.
 * order (number) - Order the button should appear. Lower numbers go first.
 
-These actions will be shown as buttons which will, on being pressed run a python function with the naming convention of `action__actionName` passing in the device ID.
+These actions will be shown as buttons which will, on being pressed, run a hook with the naming convention of `action__actionName` passing in the device ID.
 
 ## Configuration management
 
@@ -132,7 +132,6 @@ Device configuration is managed by a JSON schema which auto generates a configur
                 "list": {
                     "<listItemValue>": "<listItemLabel>"
                 },
-                "listFrom": "<functionName>",
                 "exclueFromPresets": "<boolean>",
                 "validateWith": "<functionName>"
             }
@@ -161,11 +160,9 @@ Device configuration is managed by a JSON schema which auto generates a configur
 * description (string) - Additional information about a field shown to a user 
 * type (string) - Used in the template system. Currently available types
     * text
-    * textarea
     * select
     * boolean
 * list (object) - A key value pair of list items only used in the select field type
-* listFrom (string) - A function name called to retrieve the list information, this is passed the deviceId and fieldName - e.g `getCountryList(deviceID, fieldName)`. List from overwrites anything in list. The function should return an object (dictionary) of labels and values like the list parameter takes.
 * excludeFromPresets - SCUTE allows users to save configuration presets, some values don't make sense to save as part of a preset. This boolean field allows such a field to be set (for example the friendly name of a device wouldn't make sense to store in a preset used by multiple devices)
 * validateWith - This takes the name of a boolean function that will be called with the field value (it is also passed the device ID and field name). For example `checkIfDate(value, deviceID, fieldName)`
 

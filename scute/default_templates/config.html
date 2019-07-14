@@ -1,0 +1,36 @@
+<form>
+    {% for key,category in schema.items() | sort(attribute='1.order')%}
+
+        <h2>{{category.label}}</h2>
+
+        {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+
+            <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
+
+            {% if fieldSchema.type == "text" %}
+
+            <input type="text" name="{{fieldKey}}"/>
+
+            {% endif %}
+
+            {% if fieldSchema.type == "select" %}
+
+            <select name="{{fieldKey}}">
+
+                {% for value,label in fieldSchema.list.items() %}
+
+                    <option value="{{value}}">{{label}}</option>
+
+                {% endfor %}
+
+            </select>
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endfor %}
+
+    <input type="submit" value="save" />
+
+</form>
