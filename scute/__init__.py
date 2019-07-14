@@ -1,5 +1,5 @@
 import json
-from flask import render_template, send_from_directory
+from flask import render_template, send_from_directory, request
 import jinja2
 import os
 import collections
@@ -17,7 +17,7 @@ class scute:
         ])
         self.server.jinja_loader = my_loader
         self.server.add_url_rule('/', 'index', self.deviceListView)
-        self.server.add_url_rule('/config/<device>', 'deviceConfig', self.deviceConfigView)
+        self.server.add_url_rule('/config/<device>', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
         with open(options["reportSchema"]) as reportSchema:  
             fields = {}
@@ -73,5 +73,20 @@ class scute:
     def deviceListView(self):
         return render_template("list.html", reportValues=self.getAllDeviceReports(), reportSchema=self.reportSchema)
     def deviceConfigView(self, device):
-        return render_template("config.html", schema=self.configSchema, device=device)
+        
+        # Save config
+        if request.method == "POST":
+            try:
+                self.hooks["save_config"](device, request.form)
+            except:
+                pass
+
+        # Load existing config and render form
+        currentConfig = {}
+        try:
+            currentConfig = self.hooks["read_config"](device)
+        except:
+            pass
+    
+        return render_template("config.html", schema=self.configSchema, device=device, current=currentConfig)
     

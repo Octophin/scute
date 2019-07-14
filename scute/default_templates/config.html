@@ -1,4 +1,4 @@
-<form>
+<form method="post">
     {% for key,category in schema.items() | sort(attribute='1.order')%}
 
         <h2>{{category.label}}</h2>
@@ -9,17 +9,17 @@
 
             {% if fieldSchema.type == "text" %}
 
-            <input type="text" name="{{fieldKey}}"/>
+            <input id="{{fieldKey}}" type="text" name="{{fieldKey}}" value="{{current[fieldKey]}}"/>
 
             {% endif %}
 
             {% if fieldSchema.type == "select" %}
 
-            <select name="{{fieldKey}}">
+            <select id="{{fieldKey}}" name="{{fieldKey}}">
 
                 {% for value,label in fieldSchema.list.items() %}
 
-                    <option value="{{value}}">{{label}}</option>
+                    <option {% if current[fieldKey] == value %} selected="selected" {% endif %} value="{{value}}">{{label}}</option>
 
                 {% endfor %}
 
@@ -29,7 +29,7 @@
 
             {% if fieldSchema.type == "boolean" %}
 
-                <input type="checkbox" name="{{fieldKey}}"/>
+                <input id="{{fieldKey}}" {% if current[fieldKey] is defined %} checked="checked" {% endif %} type="checkbox" name="{{fieldKey}}"/>
 
             {% endif %}
 
