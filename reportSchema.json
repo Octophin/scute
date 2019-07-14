@@ -1,1 +1,14 @@
-{}
+{
+    "general": {
+        "label": "General settings",
+        "description": "Basic settings for the category",
+        "order": 1,
+        "fields": {
+            "friendlyName": {
+                "label": "Friendly name",
+                "order": 2,
+                "transform": "uppercase"
+            }
+        }
+    }
+}

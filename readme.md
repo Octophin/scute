@@ -39,13 +39,13 @@ Options look like:
 
 ## Device list
 
-The system checks for a `getDeviceList` function and runs it. This should simply return a list of unique ids of devices. These device ids are then passed around to the other functions to get configuration, reports and data from a device and push changes to that device.
+The system checks for a `getDeviceList` hook and runs it. This should simply return a list of unique ids of devices. These device ids are then passed around to the other functions to get configuration, reports and data from a device and push changes to that device.
 
 ## Device Report
 
 This contains information about a device for a device report screen / listing.
 
-This reads from a `deviceReportSchema.json` file which contains a schema of fields like the following:
+This reads from the report schema file path passed in to the options which contains a schema of fields like the following:
 
 ```JSON
 
