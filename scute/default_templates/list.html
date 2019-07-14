@@ -22,4 +22,11 @@
 
     <a href="/config/{{device}}">View / Edit Config</a>
 
+    {% for route,actionSchema in actions.items() %}
+
+        <a href="{{route}}/{{device}}">{{actionSchema.label}}</a>
+
+    {% endfor %}
+
+
 {% endfor %}

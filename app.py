@@ -1,7 +1,7 @@
 # Example file
 
 from scute import scute
-from flask import Flask
+from flask import Flask, request
 import json
 
 app = Flask(__name__)
@@ -41,3 +41,8 @@ def readConfig(deviceID):
         return json.load(configFile)
 
 test.registerHook("read_config", readConfig)
+
+@app.route('/export/<device>')
+def export(device):
+    return 'Export data for ' + device
+    

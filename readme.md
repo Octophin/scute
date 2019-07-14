@@ -95,23 +95,22 @@ This, if it exists takes a device ID and a field name and return a value for the
 
 ## Device actions
 
-Each device can have an action performed on it. Each action should be defined in an actions schema passed in to config. This looks like:
+Each device can have an action performed on it. Each action should be defined in an actions schema passed in to config. At the moment these are simply links that can be registered as Flask routes:
 
 ```JSON
 
-    "<actionName>": {
+    "<actionRoute>": {
         "label": "<actionLabel>",
-        "order": "<actionOrder>"
+        "order": "<actionOrder>",
     }
 
 ```
 
-* key (string) - The name of the hook that will be called (called as `action__actionName(deviceID)`).
+* key (string) - The path to direct the user to. `/export` would go through to `/export/<deviceID>` for example.
 
 * label (string) - Friendly name shown on the button.
 * order (number) - Order the button should appear. Lower numbers go first.
 
-These actions will be shown as buttons which will, on being pressed, run a hook with the naming convention of `action__actionName` passing in the device ID.
 
 ## Configuration management
 
@@ -163,14 +162,14 @@ Device configuration is managed by a JSON schema which auto generates a configur
     * select
     * boolean
 * list (object) - A key value pair of list items only used in the select field type
-* excludeFromPresets - SCUTE allows users to save configuration presets, some values don't make sense to save as part of a preset. This boolean field allows such a field to be set (for example the friendly name of a device wouldn't make sense to store in a preset used by multiple devices)
-* validateWith - This takes the name of a boolean function that will be called with the field value (it is also passed the device ID and field name). For example `checkIfDate(value, deviceID, fieldName)`
+* excludeFromPresets (not yet implemented) - SCUTE allows users to save configuration presets, some values don't make sense to save as part of a preset. This boolean field allows such a field to be set (for example the friendly name of a device wouldn't make sense to store in a preset used by multiple devices)
+* validateWith (not yet implemented) - This takes the name of a boolean function that will be called with the field value (it is also passed the device ID and field name). For example `checkIfDate(value, deviceID, fieldName)`
 
-### Viewing data
+### Viewing data (not yet implemented)
 
 Alongside reports, devices can show a view of their data. The views available are templates that do something with the device data they receive. How this data is formatted and what the view does depends on the view. A view is simply a Jinja template that has access to the data it is provided.
 
-To register a view, add it to `deviceDataViews.json` to the following specification:
+To register a view, pass in its config in the initial options object to the following specification:
 
 ```JSON
 
