@@ -1,0 +1,2 @@
+include scute/client_side/*
+include scute/default_templates/*
