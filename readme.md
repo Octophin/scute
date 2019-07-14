@@ -57,7 +57,6 @@ This reads from the report schema file path passed in to the options which conta
             "<fieldName>": {
                 "label": "<fieldLabel>",
                 "order": "<fieldOrder>",
-                "transform": "<fieldValueTransformFunction>"
             }
         }
     }
@@ -79,7 +78,6 @@ This reads from the report schema file path passed in to the options which conta
 
 * label (string) - Friendly name for the field shown to the user
 * order - Lower the number the higher up the page this will sit.
-* transform - A custom transformation function which formats the value (called as `transform__<transformName>(value, fieldName)`)
 
 (Note that at this time this structure is flat and cannot support nested / sub objects.)
 
@@ -94,12 +92,6 @@ This takes a device ID and a list of all fields (as strings) in the report schem
 * getField__fieldName(deviceID, fieldName)
 
 This, if it exists takes a device ID and a field name and return a value for the field. It will overwrite anything set in the general getFields() function. 
-
-### Transforms
-
-Each field schema can also use a custom transformation function which formats the value. This is run last for every field (if present).
-
-* transform__transformName(value)
 
 ## Device actions
 
