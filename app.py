@@ -6,21 +6,16 @@ from flask import Flask
 app = Flask(__name__)
 
 options = {
-        "templateDirectory": "",
-        "reportSchema": "",
-        "actionsSchema": "",
-        "configSchema": "",
-        "dataViews": "",
-        "staticFolder": ""
+        "reportSchema": "reportSchema.json",
+        "actionsSchema": "actionsSchema.json",
+        "configSchema": "configSchema.json",
+        "dataViews": "dataViews.json",
     }
 
-hooks = {}
+test = scute(options, app)
 
 def getDevices():
     return ["hello", "world"]
 
-hooks["getDevices"] = getDevices
+test.registerHook("getDevices", getDevices)
 
-test = scute(options, hooks, app)
-
-print(test.getDevices())
