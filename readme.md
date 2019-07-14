@@ -12,44 +12,46 @@ It has been built by Octophin Digital for the Arribada Horizon biologging tags.
 * make copies of the templates under `scute/default_templates` and place them in your Flask templates folder (usually `/templates`). Files in this directory will override the default ones.
 * Run the app using `python -m flask run`
 
-# Dependencies
+# Initialisation
 
-SCUTE is currently built on top of Python, Flask and Jinja.
-
-# System configuration
-
-SCUTE makes a `SCUTE` class available. This takes a construction object which tells SCUTE where to look for templates, schema and functions, which hooks to register and a flask server app object.
-
-Options look like:
+SCUTE makes a `SCUTE` class available. It is used in the following way:
 
 ```Python
 
-    {
-        "templateDirectory": "",
-        "reportSchema": "",
-        "actionsSchema": "",
-        "configSchema": "",
-        "dataViews": "",
-        "staticFolder": "",
+from scute import scute
+from flask import Flask
+
+app = Flask(__name__)
+
+options = {
+        "reportSchema": "reportSchema.json",
+        "actionsSchema": "actionsSchema.json",
+        "configSchema": "configSchema.json",
+        "dataViews": "dataViews.json",
     }
 
+myScuteInstance = scute(options, app)
 
 ```
 
-* templateDirectory (path) - Location of the template directory (used to override the default SCUTE templates)
-* reportSchema (path) - reportSchema JSON file path
-* actionSchema (path) - actionsSchema JSON file path
-* configScheam (path) - configSchema JSON file path
-* dataViews (path) - dataViews JSON file path,
-* staticFolder (path) - path to the static directory the frontend will use for any client side CSS and JavaScript
+# Hooks
 
-# Feeds
+SCUTE makes use of various hooks that can be registered using the `registerHook` class. This takes a hook name (string) and a function for that hook. For example:
+
+```Python
+
+def getDevices():
+    return ["deviceOne", "deviceTwo"]
+
+myScuteInstance.registerHook("get_devices", getDevices)
+
+```
 
 ## Device list
 
-The system checks for a `getDeviceList` hook and runs it. This should simply return a list of unique ids of devices. These device ids are then passed around to the other functions to get configuration, reports and data from a device and push changes to that device.
+The system checks for a `get_devices` hook and runs it. This should simply return a list of unique ids of devices. These device ids are then passed around to the other functions to get configuration, reports and data from a device and push changes to that device.
 
-## Device Report
+## Device Report JSON schema
 
 This contains information about a device for a device report screen / listing.
 
@@ -93,13 +95,13 @@ This reads from the report schema file path passed in to the options which conta
 
 For each device in the device list, the system checks for and runs the following methods
 
-* get_report_fields(deviceID, fieldsList)
+* `get_report_fields(deviceID, fieldsList)`
 
 This takes a device ID and a list of all fields (as strings) in the report schema. If present, it should return an object with key:value pairs of the field and its value. This is useful for the bulk loading of report data from a JSON file for instance.
 
-* get_report_field__fieldName(deviceID, fieldName)
+* `get_report_field__fieldName(deviceID, fieldName)`
 
-This, if it exists takes a device ID and a field name and return a value for the field. It will overwrite anything set in the general getFields() function. 
+This, if it exists takes a device ID and a field name and return a value for the field. It will overwrite anything set in the general `get_report_fields()` function. 
 
 ## Device actions
 
@@ -172,6 +174,34 @@ Device configuration is managed by a JSON schema which auto generates a configur
 * list (object) - A key value pair of list items only used in the select field type
 * excludeFromPresets (not yet implemented) - SCUTE allows users to save configuration presets, some values don't make sense to save as part of a preset. This boolean field allows such a field to be set (for example the friendly name of a device wouldn't make sense to store in a preset used by multiple devices)
 * validateWith (not yet implemented) - This takes the name of a boolean function that will be called with the field value (it is also passed the device ID and field name). For example `checkIfDate(value, deviceID, fieldName)`
+
+### Loading in saved configuration into the form
+
+To load in saved configuration into the already set form values, use the `read_config` hook which gets passed the deviceID it's looking for the configuration for. This should return a dictionary with the key:value configuration pairs.
+
+```Python
+
+def readConfig(deviceID):
+    with open(deviceID + '_config.json', 'r') as configFile:
+        return json.load(configFile)
+
+myScuteInstance.registerHook("read_config", readConfig)
+
+```
+
+### Saving configuration
+
+When the configuration form is saved a `save_config` hook is run. For example:
+
+```Python
+
+def saveConfig(deviceID, config):
+    with open(deviceID + '_config.json', 'w') as configFile:  
+        json.dump(config, configFile)
+
+myScuteInstance.registerHook("save_config", saveConfig)
+
+```
 
 ### Viewing data (not yet implemented)
 
