@@ -9,7 +9,7 @@ It has been built by Octophin Digital for the Arribada Horizon biologging tags.
 * copy the `app.py` example file and the `exampleSchema` directory from this repository to a new directory
 * `pip install git+https://github.com/octophin/scute`
 * make changes to `app.py` and the JSON schema files to make it relevant to your device
-* make copies of the templates under `scute/default_templates` and place them in your Flask templates folder (usually `/templates`). Files in this directory will override the default ones.
+* optionally, make copies of the templates under `scute/default_templates` and place them in your Flask templates folder (usually `/templates`). Files in this directory will override the default ones.
 * Run the app using `python -m flask run`
 
 # Initialisation
