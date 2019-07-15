@@ -61,3 +61,9 @@ document.querySelectorAll("input, select").forEach(function (element) {
     });
 
 });
+
+let triggerAction = function(action){
+    
+    console.log(action);    
+
+};

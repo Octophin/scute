@@ -265,6 +265,16 @@ td.deviceHeader[data-active] {
     background-color: #0e2940;
 }
 
+td.empty {
+    background-color: transparent !important;
+}
+
+.inline-action {
+    font-weight: bold;
+    color: #0e2940;
+    text-align: center;
+}
+
 /* SCROLL BAR */
 
 .scroll-bar {
@@ -327,10 +337,6 @@ button:hover {
 
 button:active {
     color: #4a7f48;
-}
-
-.buttons-wrapper {
-    justify-content: space-between;
 }
 
 .buttons-wrapper.form-buttons {

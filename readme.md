@@ -112,6 +112,7 @@ Each device can have an action performed on it. Each action should be defined in
     "<actionRoute>": {
         "label": "<actionLabel>",
         "order": "<actionOrder>",
+        "bulk": "<boolean>"
     }
 
 ```
@@ -120,6 +121,7 @@ Each device can have an action performed on it. Each action should be defined in
 
 * label (string) - Friendly name shown on the button.
 * order (number) - Order the button should appear. Lower numbers go first.
+* bulk (boolean) - Can this action be performed on multiple devices?
 
 
 ## Configuration management

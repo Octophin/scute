@@ -1,6 +1,12 @@
 {
     "/export": {
-        "label": "export",
-        "order": 3
+        "label": "Export data",
+        "order": 3,
+        "bulk": true
+    },
+    "/disconnect": {
+        "label": "Disconnect",
+        "order": 3,
+        "bulk": false
     }
 }

@@ -45,7 +45,7 @@
                     <table>
                         <tr>
                             <td>
-                                Tag Name:
+                                Fields
                             </td>
                             {% for device in reportValues %}
                                 <td class="deviceHeader">
@@ -65,33 +65,57 @@
                             {% endfor %}
                         {% endfor %}
                         <tr>
-                            <td>XXX</td>
+                            <td class="empty"></td>
                             {% for deviceKey,deviceValues in reportValues.items() %}
                                 <td>
-                                    <a href="/config/{{deviceKey}}">Config</a>
+                                    <a class="inline-action" href="/config/{{deviceKey}}">
+                                        Configuration
+                                    </a>
                                 </td>
                             {% endfor %}
                         </tr>
+                        {% for actionKey,actionSchema in actions.items() %}
+
+                            <tr>
+
+                            <td class="empty"></td>
+
+                            {% for deviceKey,deviceValues in reportValues.items() %}
+
+                                <td>
+                                    <a href="{{actionKey}}?devices[]={{deviceKey}}" class="inline-action">{{actionSchema.label}}</a>
+                                </td>
+
+                            {% endfor %}
+
+                            </tr>
+
+                        {% endfor %}
+
                     </table>
 
                 </section>
 
-                <section style="visibility:hidden;" class="buttons actions">
+                <section class="buttons actions" style="visibility:hidden;">
 
                     <section class="banner-block happy-margin">
                         <div class="banner selected-devices flex">
-                            <h3><span class="count">2</span> selected</h3>
-                            <a onclick="clearDevices()" class="quit-button icon-wrapper">
+                            <h3>
+                                <span class="count">2</span>
+                                selected</h3>
+                            <a class="quit-button icon-wrapper" onclick="clearDevices()">
                                 <img alt="X Icon" src="/scute/images/x-icon.png">
                             </a>
                         </div>
                         <br/>
                         <div class="buttons-wrapper flex secondary-buttons">
-                        {% for actionKey,actionSchema in actions.items() %}
-                            <button class="secondary navy" type="button">
-                                {{actionSchema.label}}
-                            </button>
-                        {% endfor %}
+                            {% for actionKey,actionSchema in actions.items() %}
+                                {% if actionSchema.bulk == true %}
+                                    <button onclick="triggerAction('{{actionKey}}')" class="secondary navy" type="button">
+                                        {{actionSchema.label}}
+                                    </button>
+                                {% endif %}
+                            {% endfor %}
                         </div>
                     </section>
                 </section>
