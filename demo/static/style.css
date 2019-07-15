@@ -6,6 +6,7 @@
     max-width: 100%;
     text-decoration-line: none;
     font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
 }
 
 body {
@@ -403,6 +404,7 @@ label {
     color: #8a8a8a;
     position: relative;
     width: 320px;
+    margin-bottom: 1em;
 }
 
 input {
@@ -466,10 +468,23 @@ input:checked+label::after {
 
 @media screen and (max-width: 730px) {
 
-    label, input, .form-field {
+    label, input, .form-field, select {
         display: block;
         width: 100%;
-        margin: 1em;
+        /* margin: 1em auto; */
+    }
+
+    .buttons-wrapper {
+        display: block;
+        width: 100%;
+    }
+
+    button, button.primary {
+        width: 100%;
+    }
+
+    input[type="checkbox"]+label::after {
+        right: 0;
     }
 }
 
