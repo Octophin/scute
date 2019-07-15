@@ -1,42 +1,68 @@
-<form method="post">
-    {% for key,category in schema.items() | sort(attribute='1.order')%}
+{% extends "base.html" %}
+{% block content %}
 
-        <h2>{{category.label}}</h2>
+<section>
+    <div class="form-block happy-margin">
+        <div class="form-block-wrapper">
+            <div class="form-title happy-padding navy">
+                <form class="form-body" method="post">
+                    {% for key,category in schema.items() | sort(attribute='1.order')%}
+                    <div class="form-title happy-padding navy">
+                        <h2>{{category.label}}</h2>
+                        <div class="subheading red top-tail-margin navy">
+                            <div class="icon">
+                                <img src="/static/images/info-icon.png">
+                            </div>
+                            <h4 class="inline-block">The fields in red are unsaved changes</h4>
+                        </div>
+                    </div>
 
-        {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
 
-            <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
+                    {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+                    <div class="form-field happy-margin">
+                  
+                        {% if fieldSchema.type == "text" %}
 
-            {% if fieldSchema.type == "text" %}
+                        <label class="inline-block" for="{{fieldKey}}">{{fieldSchema.label}}</label>
+                        <input id="{{fieldKey}}" type="text" name="{{fieldKey}}" value="{{current[fieldKey]}}" />
 
-            <input id="{{fieldKey}}" type="text" name="{{fieldKey}}" value="{{current[fieldKey]}}"/>
+                        {% endif %}
 
-            {% endif %}
+                        {% if fieldSchema.type == "select" %}
 
-            {% if fieldSchema.type == "select" %}
+                        <label class="inline-block" for="{{fieldKey}}">{{fieldSchema.label}}</label>
+                        <select id="{{fieldKey}}" name="{{fieldKey}}">
 
-            <select id="{{fieldKey}}" name="{{fieldKey}}">
+                            {% for value,label in fieldSchema.list.items() %}
 
-                {% for value,label in fieldSchema.list.items() %}
+                            <option {% if current[fieldKey] == value %} selected="selected" {% endif %}
+                                value="{{value}}">
+                                {{label}}</option>
 
-                    <option {% if current[fieldKey] == value %} selected="selected" {% endif %} value="{{value}}">{{label}}</option>
+                            {% endfor %}
 
-                {% endfor %}
+                        </select>
 
-            </select>
+                        {% endif %}
 
-            {% endif %}
+                        {% if fieldSchema.type == "boolean" %}
 
-            {% if fieldSchema.type == "boolean" %}
+                        <input id="{{fieldKey}}" {% if current[fieldKey] is defined %} checked="checked" {% endif %}
+                            type="checkbox" name="{{fieldKey}}" />
+                        <label class="inline-block" for="{{fieldKey}}">{{fieldSchema.label}}</label>
 
-                <input id="{{fieldKey}}" {% if current[fieldKey] is defined %} checked="checked" {% endif %} type="checkbox" name="{{fieldKey}}"/>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
 
-            {% endif %}
+                    {% endfor %}
+                    <div class="form-field happy-margin">
+                        <input type="submit" value="save" />
+                    </div>
 
-        {% endfor %}
-
-    {% endfor %}
-
-    <input type="submit" value="save" />
-
-</form>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
