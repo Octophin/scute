@@ -8,7 +8,7 @@
                 "label": "Config",
                 "description": "Accelerometer config number",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 1
             },
@@ -16,7 +16,7 @@
                 "label": "highThreshold",
                 "description": "highThreshold",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 2
             },
@@ -29,7 +29,7 @@
                 "label": "maximumAquisitionTime",
                 "description": "maximumAquisitionTime",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 4
             },
@@ -45,7 +45,7 @@
                 "label": "sampleRate",
                 "description": "sampleRate",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 6
             },
@@ -53,7 +53,7 @@
                 "label": "scheduledAquisitionInterval",
                 "description": "scheduledAquisitionInterval",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 7
             }
@@ -79,7 +79,7 @@
                 "label": "advertisingInterval",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 1
             },
@@ -87,7 +87,7 @@
                 "label": "connectionInterval",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 2
             },
@@ -95,7 +95,7 @@
                 "label": "inactivityTimeout",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 3
             },
@@ -116,7 +116,7 @@
                 "label": "scheduledDuration",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 6
             },
@@ -124,7 +124,7 @@
                 "label": "scheduledInterval",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 6
             },
@@ -132,7 +132,7 @@
                 "label": "triggerControl",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 8
             }
@@ -162,7 +162,7 @@
                 "label": "maximumAquisitionTime",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 5
             },
@@ -178,7 +178,7 @@
                 "label": "sampleRate",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 7
             },
@@ -186,7 +186,7 @@
                 "label": "scheduledAquisitionInterval",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 8
             }
@@ -211,7 +211,7 @@
                 "label": "fileSize",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 3
             },
@@ -239,7 +239,7 @@
                 "label": "highThreshold",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 1
             },
@@ -252,7 +252,7 @@
                 "label": "lowThreshold",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 3
             },
@@ -260,7 +260,7 @@
                 "label": "maximumAquisitionTime",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 4
             },
@@ -276,7 +276,7 @@
                 "label": "sampleRate",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 6
             },
@@ -284,7 +284,7 @@
                 "label": "scheduledAquisitionInterval",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 7
             }
@@ -299,7 +299,7 @@
                 "label": "dateTime",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>"
             }
         }
@@ -313,7 +313,7 @@
                 "label": "hysteresisPeriod",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 1
             },
@@ -333,7 +333,7 @@
                 "label": "friendlyName",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 2
             },
@@ -341,7 +341,7 @@
                 "label": "deviceIdentifier",
                 "description": "",
                 "type": "text",
-                "exclueFromPresets": "<boolean>",
+                "exclueFromPresets": false,
                 "validateWith": "<functionName>",
                 "order": 1
             }

@@ -21,7 +21,7 @@
 
 
                 {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-                <div class="form-field happy-margin">
+                <div class="form-field happy-margin" {% if fieldSchema.exclueFromPresets == true %}data-exclude-from-preset="true" {% endif %}>
 
                     {% if fieldSchema.type == "text" %}
 
@@ -60,7 +60,7 @@
 
                 <div class="buttons-wrapper form-buttons">
                     <button type="submit" class="featured button">Save</button>
-                    <button class="primary button">Save as preset</button>
+                    <button onclick="savePreset()" type="button" class="primary button">Save as preset</button>
                 </div>
             </form>
         </div>
