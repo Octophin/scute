@@ -69,7 +69,7 @@
                     {% endfor %}
                     {% endfor %}
                     <tr>
-                        <td></td>
+                        <td>XXX</td>
                         {% for deviceKey,deviceValues in reportValues.items() %}
                         <td><a href="/config/{{deviceKey}}">Config</a></td>
                         {% endfor %}
@@ -113,39 +113,37 @@
 
 
 
+                <section class="scroll-bar">
+                    <div class="scroll-bar gray happy-margin">
+                    </div>
+                    <div class="scroll-bar green happy-margin">
+                    </div>
+                </section>
 
+                <section class="buttons">
+                    <div class="buttons-wrapper flex happy-margin primary-buttons">
+                        <button class="primary navy" type="button">
+                            Select
+                        </button>
+                    </div>
+                    <div class="buttons-wrapper flex happy-margin secondary-buttons">
+                        <button class="secondary navy" type="button">
+                            Download
+                        </button>
+                        <button class="secondary navy" type="button">
+                            Configure
+                        </button>
+                        <button class="secondary navy" type="button">
+                            Delete
+                        </button>
+                        <button class="secondary navy" type="button">
+                            Clear log
+                        </button>
+                    </div>
+                </section>
 
             </section>
     </div>
-
-    <section class="scroll-bar">
-        <div class="scroll-bar gray happy-margin">
-        </div>
-        <div class="scroll-bar green happy-margin">
-        </div>
-    </section>
-
-    <section class="buttons">
-        <div class="buttons-wrapper flex happy-margin primary-buttons">
-            <button class="primary navy" type="button">
-                Select
-            </button>
-        </div>
-        <div class="buttons-wrapper flex happy-margin secondary-buttons">
-            <button class="secondary navy" type="button">
-                Download
-            </button>
-            <button class="secondary navy" type="button">
-                Configure
-            </button>
-            <button class="secondary navy" type="button">
-                Delete
-            </button>
-            <button class="secondary navy" type="button">
-                Clear log
-            </button>
-        </div>
-    </section>
 
     <section class="banner-block happy-margin">
         <div class="banner selected-devices flex ">
