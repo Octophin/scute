@@ -19,7 +19,6 @@ class scute:
         self.server.add_url_rule('/', 'index', self.deviceListView)
         self.server.add_url_rule('/config/<device>', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
-        self.server.add_url_rule('/scute/images/<path:filename>', 'static_images', self.static_images)
         with open(options["reportSchema"]) as reportSchema:  
             fields = {}
             self.reportSchema = json.load(reportSchema)
@@ -60,10 +59,8 @@ class scute:
                 pass
         return reportValues
     def static_assets(self, filename):
+        print("PATH", request.path)
         return send_from_directory(here + "/client_side", filename)
-    def static_images(self, filename):
-        print(here + "/client_side/images" + filename)
-        return send_from_directory(here + "/client_side/images", filename)
     def registerHook(self, hookName, hookFunction):
         self.hooks[hookName] = hookFunction
     def getDevices(self):
