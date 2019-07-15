@@ -59,7 +59,9 @@ class scute:
                 pass
         return reportValues
     def static_assets(self, filename):
-        return send_from_directory(here + request.path.replace("/scute/", "/client_side/"), filename)
+        location = here + request.path.replace("/scute/", "/client_side/")
+        print(location)
+        return send_from_directory(location, "/client_side/"), filename)
     def registerHook(self, hookName, hookFunction):
         self.hooks[hookName] = hookFunction
     def getDevices(self):
