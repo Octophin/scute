@@ -1,9 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-
-
-
 <main id="mainMenu">
+
     <div class="main-wrapper happy-margin">
         <div class="tab-titles-wrapper top-tail-margin">
             <div class="tabs flex">
@@ -43,78 +41,6 @@
                         <p class="inline-block">2X/1X/XX19 - 1X:4X</p>
                     </div>
                 </div>
-
-                <section class="main-table">
-                    <table>
-                        <tr>
-                            <td>
-                                Tag Name:
-                            </td>
-                            {% for device in reportValues %}
-                            <td>
-                                {{device}}
-                            </td>
-                            {% endfor %}
-                        </tr>
-                        
-                            {% for key,category in reportSchema.items() | sort(attribute='1.order') %}
-                                 {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-                                 <tr>
-                                     <td>{{fieldKey}}</td>
-                                     {% for deviceKey,deviceValues in reportValues.items() %}
-                                        <td>{{deviceValues[fieldKey]}}</td>
-                                     {% endfor %}
-                                 </tr>
-                                 {% endfor %}
-                            {% endfor %}
-                        <tr>
-                            <td></td>
-                            {% for deviceKey,deviceValues in reportValues.items() %}
-                                  <td><a href="/config/{{deviceKey}}">Config</a></td>
-                            {% endfor %}
-                        </tr>
-                    </table>
-
-                        {# {% for device in reportValues %}
-
-                        {% for key,category in reportSchema.items() | sort(attribute='1.order')%}
-
-                        <h2>{{category.label}}</h2>
-
-                        <ul>
-
-                            {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-
-                            {% if reportValues[device][fieldKey] is defined %}
-
-                            <li>{{fieldSchema.label}} : {{reportValues[device][fieldKey]}}</li>
-
-                            {% endif %}
-
-                            {% endfor %}
-
-                        </ul>
-
-                        {% endfor %}
-
-                        {# {% for device in reportValues %}
-
-                        <a href="/config/{{device}}">View / Edit Config</a>
-
-                        {% for route,actionSchema in actions.items() %}
-
-                        <a href="{{route}}/{{device}}">{{actionSchema.label}}</a>
-
-                        {% endfor %}
-
-
-                        {% endfor %} #}
-
-
-
-                   
-
-                </section>
             </div>
 
             <section class="scroll-bar">
@@ -173,7 +99,55 @@
             </section>
         </section>
 
-    </div>Î
-</main>
+    </div>
 
+    <section>
+        <div class="form-block happy-margin">
+            <div class="form-block-wrapper">
+                <div class="form-title happy-padding navy">
+                    <h2>Form - example category heading</h2>
+                    <div class="subheading red top-tail-margin navy">
+                        <div class="icon">
+                            <img src="/static/images/info-icon.png">
+                        </div>
+                        <h4 class="inline-block">The fields in red are unsaved changes</h4>
+                    </div>
+                </div>
+
+                <form class="form-body">
+                    <div class="form-field happy-margin">
+                        <label class="inline-block">Field name:</label>
+                        <input type="text" class"text-input inline-block">
+                    </div>
+                    <div class="form-field happy-margin">
+                        <label class="inline-block">Field name:</label>
+                        <input type="textarea" class"text-input inline-block">
+                    </div>
+                    <div class="form-field happy-margin">
+                        <label class="inline-block">Field name:</label>
+                        <select>
+                            <option>Option 1</option>
+                            <option>Option 2</option>
+                            <option>Option 3</option>
+                            <option>Option 4</option>
+                            <option>Option 5</option>
+                        </select>
+                    </div>
+                    <div class="form-field checkbox-wrapper happy-margin">
+                        <input type="checkbox">
+                        <label class="inline-block">Checkbox 💕</label>
+                    </div>
+                    <div class="form-field happy-margin">
+                        <label class="inline-block">Radio button</label>
+                        <input type="radio">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    <section class="links top-tail-margin">
+        <a href="/status/123456">Get Status of Tag 123456</a><br>
+        <a href="/config/get/123456">Get Config of Tag 123456</a>
+    </section>
+</main>
 {% endblock %}
