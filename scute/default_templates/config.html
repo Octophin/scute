@@ -5,32 +5,33 @@
     <div class="form-block happy-margin">
         <div class="form-block-wrapper">
             <div class="form-title happy-padding navy">
-                <form class="form-body" method="post">
+                {# <form class="form-body" method="post"> #}
+                        <div class="subheading red top-tail-margin navy">
+                                <div class="icon">
+                                    <img src="/scute/images/info-icon.png">
+                                </div>
+                                <h4>The fields in red are unsaved changes</h4>
+                            </div>
+                            <form class="form-body flex" method="post">
                     {% for key,category in schema.items() | sort(attribute='1.order')%}
                     <div class="form-title happy-padding navy">
                         <h2>{{category.label}}</h2>
-                        <div class="subheading red top-tail-margin navy">
-                            <div class="icon">
-                                <img src="/static/images/info-icon.png">
-                            </div>
-                            <h4 class="inline-block">The fields in red are unsaved changes</h4>
-                        </div>
                     </div>
 
 
                     {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
                     <div class="form-field happy-margin">
-                  
+
                         {% if fieldSchema.type == "text" %}
 
-                        <label class="inline-block" for="{{fieldKey}}">{{fieldSchema.label}}</label>
+                        <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
                         <input id="{{fieldKey}}" type="text" name="{{fieldKey}}" value="{{current[fieldKey]}}" />
 
                         {% endif %}
 
                         {% if fieldSchema.type == "select" %}
 
-                        <label class="inline-block" for="{{fieldKey}}">{{fieldSchema.label}}</label>
+                        <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
                         <select id="{{fieldKey}}" name="{{fieldKey}}">
 
                             {% for value,label in fieldSchema.list.items() %}
@@ -49,7 +50,7 @@
 
                         <input id="{{fieldKey}}" {% if current[fieldKey] is defined %} checked="checked" {% endif %}
                             type="checkbox" name="{{fieldKey}}" />
-                        <label class="inline-block" for="{{fieldKey}}">{{fieldSchema.label}}</label>
+                        <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
 
                         {% endif %}
                     </div>
