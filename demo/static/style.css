@@ -1,7 +1,20 @@
-
 /* ! NM's STYLES... */
 
 /* GENERAL */
+
+* {
+    max-width: 100%;
+    text-decoration-line: none;
+}
+
+body {
+    font-family: Trebuchet MS, Arial, Helvetica, sans-serif !important;
+    box-sizing: border-box;
+    position: relative;
+    max-width: 1100px;
+    height: 100%;
+    margin: auto;
+}
 
 * {
     font-family: 'Roboto', sans-serif;
@@ -325,12 +338,25 @@ button.secondary {
 /* FORMS */
 
 .form-block-wrapper {
-    margin: 0 8em;
+    margin: auto;
+    width: 46em;
+    max-width: 100%;
 }
 
 .form-block {
     background-color: white;
     border-top: solid thick #6ab468;
+}
+
+.form-body {
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+.form-field {
+    display: inline-flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 .icon {
@@ -339,9 +365,22 @@ button.secondary {
     vertical-align: middle;
 }
 
+label,
+input,
+select,
+.icon,
+.subheading * {
+    display: inline-block;
+}
+
 label {
     color: #8a8a8a;
-    margin-right: 3em;
+    position: relative;
+    width: 320px;
+}
+
+input {
+    width: 60%;
 }
 
 input,
@@ -349,14 +388,13 @@ select {
     line-height: 1.8em;
     border-radius: 2px;
     border: solid thin #8a8a8a;
-    width: 20em;
     font-size: 1em;
     padding: 0.2em;
 }
 
 select {
     height: 2.5em;
-    width: 20.5em;
+    width: 61.5%;
     -webkit-appearance: none;
     padding: 0.5em;
 }
@@ -372,13 +410,14 @@ input[type="checkbox"] {
     position: relative;
     bottom: -1.5em;
     z-index: 1;
+    display: contents;
 }
 
 input[type="checkbox"]+label::after {
     content: "";
     position: absolute;
-    left: 8.4em;
-    top: 0.3em;
+    right: 0.5em;
+    top: 0em;
     width: 1em;
     height: 1em;
     display: inline-block;
@@ -391,11 +430,6 @@ input[type="checkbox"]+label::after {
     vertical-align: middle;
 }
 
-label {
-    position: relative;
-    width: 100%;
-}
-
 input:checked+label::after {
     background-image: url(/static/images/check-icon.png);
 }
@@ -403,17 +437,6 @@ input:checked+label::after {
 
 /* ! END OF NM'S STYLES */
 
-* {
-    max-width: 100%;
-    text-decoration-line: none;
-}
-
-body {
-    font-family: Trebuchet MS, Arial, Helvetica, sans-serif !important;
-    box-sizing: border-box;
-    position: relative;
-    height: 100%;
-}
 
 main {
     position: relative;
@@ -430,13 +453,8 @@ header,
 .calibrateFoot {
     width: 100%;
     min-width: 320px;
-    max-width: 800px;
+    max-width: 1200px;
 }
-
-/* input,
-textarea {
-    display: block;
-} */
 
 .buttonStack,
 #disconnected {
