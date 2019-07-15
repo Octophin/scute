@@ -458,7 +458,7 @@ input[type="checkbox"]+label::after {
 }
 
 input:checked+label::after {
-    background-image: url(/static/images/check-icon.png);
+    background-image: url(images/check-icon.png);
 }
 
 
@@ -734,7 +734,7 @@ header {
     vertical-align: middle;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../static/images/icons/noun_back_1270476_FFFFFF.svg");
+    background-image: url("images/icons/noun_back_1270476_FFFFFF.svg");
     width: 3rem;
     height: 3rem;
     display: inline-block;
@@ -745,7 +745,7 @@ header {
     vertical-align: middle;
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url("../static/images/icons/noun_Home_2045781_FFFFFF.svg");
+    background-image: url("images/icons/noun_Home_2045781_FFFFFF.svg");
     width: 3rem;
     height: 3rem;
     display: inline-block;
