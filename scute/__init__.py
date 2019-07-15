@@ -1,5 +1,5 @@
 import json
-from flask import render_template, send_from_directory, request
+from flask import render_template, send_from_directory, request, send_file
 import jinja2
 import os
 import collections
@@ -60,8 +60,7 @@ class scute:
         return reportValues
     def static_assets(self, filename):
         location = here + request.path.replace("/scute/", "/client_side/")
-        print(location)
-        return send_from_directory(location, filename)
+        return send_file(location)
     def registerHook(self, hookName, hookFunction):
         self.hooks[hookName] = hookFunction
     def getDevices(self):
