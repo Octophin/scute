@@ -62,6 +62,7 @@ class scute:
     def static_assets(self, filename):
         return send_from_directory(here + "/client_side", filename)
     def static_images(self, filename):
+        print(here + "/client_side/images" + filename)
         return send_from_directory(here + "/client_side/images", filename)
     def registerHook(self, hookName, hookFunction):
         self.hooks[hookName] = hookFunction
