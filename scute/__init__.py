@@ -1,5 +1,5 @@
 import json
-from flask import render_template, send_from_directory, request, send_file
+from flask import render_template, send_from_directory, request, send_file, safe_join
 import jinja2
 import os
 import collections
@@ -59,12 +59,7 @@ class scute:
                 pass
         return reportValues
     def static_assets(self, filename):
-        # TODO must be better way of sending from subdirectories
-        if "images" in request.path:
-            location = "/client_side/images/"
-        else:
-            location = "/client_side/"
-        return send_from_directory(here + location, filename)
+        return send_from_directory(here + "/client_side/", filename)
     def registerHook(self, hookName, hookFunction):
         self.hooks[hookName] = hookFunction
     def getDevices(self):
