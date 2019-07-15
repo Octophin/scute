@@ -4,65 +4,65 @@
 <section>
     <div class="form-block happy-margin">
         <div class="form-block-wrapper">
-            <div class="form-title happy-padding navy">
-                {# <form class="form-body" method="post"> #}
-                        <div class="subheading red top-tail-margin navy">
-                                <div class="icon">
-                                    <img src="/scute/images/info-icon.png">
-                                </div>
-                                <h4>The fields in red are unsaved changes</h4>
-                            </div>
-                            <form class="form-body flex" method="post">
-                    {% for key,category in schema.items() | sort(attribute='1.order')%}
-                    <div class="form-title happy-padding navy">
-                        <h2>{{category.label}}</h2>
+            <div class="form-headings navy happy-margin">
+                <h2>Form Example</h2>
+                <div class="subheading red top-tail-margin navy">
+                    <div class="icon">
+                        <img src="/scute/images/info-icon.png">
                     </div>
-
-
-                    {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-                    <div class="form-field happy-margin">
-
-                        {% if fieldSchema.type == "text" %}
-
-                        <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
-                        <input id="{{fieldKey}}" type="text" name="{{fieldKey}}" value="{{current[fieldKey]}}" />
-
-                        {% endif %}
-
-                        {% if fieldSchema.type == "select" %}
-
-                        <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
-                        <select id="{{fieldKey}}" name="{{fieldKey}}">
-
-                            {% for value,label in fieldSchema.list.items() %}
-
-                            <option {% if current[fieldKey] == value %} selected="selected" {% endif %}
-                                value="{{value}}">
-                                {{label}}</option>
-
-                            {% endfor %}
-
-                        </select>
-
-                        {% endif %}
-
-                        {% if fieldSchema.type == "boolean" %}
-
-                        <input id="{{fieldKey}}" {% if current[fieldKey] is defined %} checked="checked" {% endif %}
-                            type="checkbox" name="{{fieldKey}}" />
-                        <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
-
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-
-                    {% endfor %}
-                    <div class="form-field happy-margin">
-                        <input type="submit" value="save" />
-                    </div>
-
-                </form>
+                    <h4>The fields in red are unsaved changes</h4>
+                </div>
             </div>
+            <form class="form-body flex" method="post">
+                {% for key,category in schema.items() | sort(attribute='1.order')%}
+                <div class="form-title happy-padding navy">
+                    <h2>{{category.label}}</h2>
+                </div>
+
+
+                {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+                <div class="form-field happy-margin">
+
+                    {% if fieldSchema.type == "text" %}
+
+                    <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
+                    <input id="{{fieldKey}}" type="text" name="{{fieldKey}}" value="{{current[fieldKey]}}" />
+
+                    {% endif %}
+
+                    {% if fieldSchema.type == "select" %}
+
+                    <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
+                    <select id="{{fieldKey}}" name="{{fieldKey}}">
+
+                        {% for value,label in fieldSchema.list.items() %}
+
+                        <option {% if current[fieldKey] == value %} selected="selected" {% endif %} value="{{value}}">
+                            {{label}}</option>
+
+                        {% endfor %}
+
+                    </select>
+
+                    {% endif %}
+
+                    {% if fieldSchema.type == "boolean" %}
+
+                    <input id="{{fieldKey}}" {% if current[fieldKey] is defined %} checked="checked" {% endif %}
+                        type="checkbox" name="{{fieldKey}}" />
+                    <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
+
+                    {% endif %}
+                </div>
+                {% endfor %}
+
+                {% endfor %}
+
+                <div class="buttons-wrapper form-buttons">
+                    <button class="primary button">Normal button</button>
+                    <button class="featured button">Featured button</button>
+                </div>
+            </form>
         </div>
     </div>
 </section>
