@@ -5,34 +5,17 @@
 * {
     max-width: 100%;
     text-decoration-line: none;
+    font-family: 'Roboto', sans-serif;
 }
 
 body {
     font-family: Trebuchet MS, Arial, Helvetica, sans-serif !important;
     box-sizing: border-box;
     position: relative;
-    max-width: 1100px;
     height: 100%;
-    margin: auto;
-}
-
-* {
-    font-family: 'Roboto', sans-serif;
-}
-
-body {
-    margin: 1em auto;
-}
-
-p,
-label {
-    font-size: 1em;
-    margin: 0;
-}
-
-a:hover,
-.burger:hover {
-    cursor: pointer;
+    margin: 0 auto;
+    width: 46em;
+    max-width: 100%;
 }
 
 .happy-margin {
@@ -83,6 +66,7 @@ a:hover,
     display: inline-block;
 }
 
+
 /* NAV */
 
 header,
@@ -119,10 +103,11 @@ nav h3 {
     margin-bottom: 0;
 }
 
+
 /* MAIN */
 
 #mainMenu {
-    background-color: #f5f5f5;
+    background-color: #f5f5f5;;
 }
 
 .main-wrapper {
@@ -285,7 +270,9 @@ button {
     margin: 0 0.5em 0.5em 0;
 }
 
-button:hover {
+button:hover,
+a:hover,
+.burger:hover {
     cursor: pointer;
 }
 
@@ -298,7 +285,7 @@ button.primary {
     background-color: transparent;
     border: solid 1px #0e2940;
     border-radius: 2px;
-    padding: 0.5em 1em;
+    padding: 0.5em 0.8em;
     font-size: 1.1em;
     font-weight: 400;
     width: 8.8em;
@@ -309,14 +296,36 @@ button.secondary {
     border: solid 1px #8a8a8a;
 }
 
+button.featured {
+    background-color: #6ab469;
+    color: white;
+    border: none;
+}
+
+button:hover {
+    background-color: white;
+    color: #6ab469;
+    border: solid 1px #6ab469;
+}
+
+button:active {
+    color: #4a7f48;
+}
+
 .buttons-wrapper {
     justify-content: space-between;
+    padding-bottom: 1em;
+}
+
+.buttons-wrapper.form-buttons {
+    margin: 2em 1em;
 }
 
 /* BANNERS */
 
 .banner-block {
     margin-top: 2em;
+    padding-bottom: 2em;
 }
 
 .banner {
@@ -338,14 +347,18 @@ button.secondary {
 /* FORMS */
 
 .form-block-wrapper {
-    margin: auto;
+    margin: 4em auto;
     width: 46em;
     max-width: 100%;
 }
 
 .form-block {
     background-color: white;
+}
+
+.form-headings {
     border-top: solid thick #6ab468;
+    padding: 1em 0;
 }
 
 .form-body {
@@ -446,32 +459,11 @@ main {
     min-height: calc(100% - 52px);
 }
 
-body,
-header,
-.galleryFooterMenu,
-.settingsActions,
-.calibrateFoot {
-    width: 100%;
-    min-width: 320px;
-    max-width: 1200px;
-}
-
 .buttonStack,
 #disconnected {
     display: block;
     width: 100%;
 }
-
-/* button {
-    background-color: transparent;
-    border: solid 1px #006d78;
-    border-radius: 7px;
-    margin: 5px 8px;
-    padding-bottom: 2px;
-    vertical-align: middle;
-    color: #006d78;
-    font-size: 1.125rem;
-} */
 
 /* Fonts */
 
@@ -486,10 +478,6 @@ header,
 .lightteal {
     color: #0097a7;
 }
-
-/* .lightgrey {
-    color: #bcbebf;
-} */
 
 .darkgrey {
     color: #2b3435;
@@ -696,11 +684,6 @@ header {
     float: right;
 }
 
-/* .galleryFilter:nth-child(even) {
-    text-align: right;
-} */
-
-
 .galleryFilter label {
     padding-right: 2px;
 }
@@ -710,7 +693,6 @@ header {
     vertical-align: middle;
     display: inline;
 }
-
 
 .sectionHead {
     background: linear-gradient(0deg, #027A81 0%, #0097a7 100%);
@@ -722,7 +704,6 @@ header {
     min-width: 320px;
     max-width: 640px;
     margin: 5px 0;
-
 }
 
 .sectionHead span {
@@ -844,7 +825,6 @@ img.galleryImage {
     position: absolute;
     top: 4px;
     left: 0;
-    cursor: pointer;
     box-sizing: border-box;
     text-align: center;
     z-index: 10;
@@ -858,7 +838,6 @@ img.galleryImage {
     position: absolute;
     bottom: 4px;
     right: 0;
-    cursor: pointer;
     box-sizing: border-box;
     text-align: center;
 }
@@ -1011,13 +990,8 @@ nav.calibrateFoot {
 }
 
 
-
-
 /* Main menu*/
 
-/* #mainMenu {
-    padding-top: 52px;
-} */
 
 .commandButton {
     width: calc(100% - 16px);
@@ -1253,12 +1227,6 @@ dl span dd {
     max-width: 45%
 }
 
-/*#settings ul li span input.shorter,
-#settings ul li span select.shorter,
-#report dl span dd.shorter {
-    width: calc(20% - 1.4rem);
-}*/
-
 #settings ul li span.radios input {
     width: 15px;
     height: 15px;
@@ -1369,11 +1337,6 @@ dl {
     right: 0;
 }
 
-/*
-#endpoints .subhead > span {
-    width: calc(100% - 1.6rem);
-}*/
-
 .deviceItemTop {
     display: inline-block;
     width: calc(100% - 10px);
@@ -1417,20 +1380,7 @@ dl {
 }
 
 
-
-/* #endpoints dl {
-    width: calc(100% - 10px);
-    display: inline-block;
-    vertical-align: top;
-    height: 3rem;
-    margin-top: 0.5rem;
-    color: #2b3435;
-} */
-
 #endpoints .inner {
-    /* height: 100px;
-    display: inline;
-    display: inline-flex; */
     width: 100%;
     color: #2b3435;
 }
@@ -1451,73 +1401,13 @@ dl {
     font-size: 0.8em;
 }
 
-/* #endpoints .inner > div {
-  max-width: 50%;
-  min-width: calc(34% - 6px);
-}
-
-#endpoints .inner > div:not(:first-child) {
-  padding-left: 5px;
-}
-
-#endpoints dl h4,
-#endpoints dl .latestActivityValues,
-#endpoints dl span {
-    vertical-align: top;
-} */
-
-/* #endpoints dl .latestActivityValues { */
-/* width: calc(70% + 6px); */
-/* min-width: 11.5rem; */
-/* position: absolute; */
-/* right: 15px; */
-/* } */
-
-/* #endpoints dl span {
-    float: right;
-    max-width: 8rem;
-    min-width: 5.4rem;
-    width: calc(50% - 3px);
-    margin-left: 3px;
-}
-
-#endpoints dl .latestActivityValues dd {
-    border: none;
-    width: 100%;
-    margin: unset;
-    font-size: 1.5rem;
-}
-
-#endpoints table {
-  width: 100%;
-}
-
-#endpoints table > tr {
-  color: #2b3435;
-} */
-
-#endpoints th {
-    /* min-width: calc(100% / 12);
-  max-width: 120px; */
-}
-
-#endpoints th.table-words {
-    /* min-width: 90px; */
-}
-
 #endpoints tr>td:nth-child(even) {
     font-weight: bold;
 }
 
 
-
-
 /* Browser handling */
 
-
-/*.nativeTimePicker * {
-    display: none;
-}*/
 
 .fallbackTimePicker * {
     display: none;
@@ -1616,42 +1506,3 @@ textarea {
     }
 
 }
-
-/*
-
-@media (min-width: 520px) {
-    .miniReportMiddle {
-        float: right;
-        margin-right: 11rem;
-        max-width: 3.5rem;
-        position: relative;
-    }
-
-    .exit {
-        margin: 0.7rem 0 0.25rem 0.25rem;
-        font-size: 0.9rem;
-        position: relative;
-        top: 0.75rem;
-        right: unset;
-    }
-
-    .trigger {
-        right: 0;
-    }
-
-    #report,
-    #settings {
-        max-width: 32.5rem;
-        margin-left: auto;
-        margin-right: auto;
-    }
-}
-
-
-@media (min-aspect-ratio: 1/1) {
-    img.galleryImage {
-        width: auto;
-        height: calc(100% - 13.125rem);
-    }
-}
-*/
