@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='scute',
-      version='0.1.14',
+      version='0.1.15',
       description='Tool for making hardware user interfaces',
       url='https://github.com/Octophin/scute',
       author='Octophin Digital',
