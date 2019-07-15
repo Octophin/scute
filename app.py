@@ -42,7 +42,13 @@ def readConfig(deviceID):
 
 test.registerHook("read_config", readConfig)
 
-@app.route('/export/<device>')
-def export(device):
-    return 'Export data for ' + device
+@app.route('/export')
+def export():
+    devices = request.args.getlist("devices[]")
+    return 'Export data for ' + json.dumps(devices)
+
+@app.route('/disconnect')
+def disconnect():
+    devices = request.args.getlist("devices[]")
+    return 'Disconnecting ' + json.dumps(devices)
     

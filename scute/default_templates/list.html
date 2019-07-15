@@ -48,7 +48,7 @@
                                 Fields
                             </td>
                             {% for device in reportValues %}
-                                <td class="deviceHeader">
+                                <td data-device="{{device}}" class="deviceHeader">
                                     {{device}}
                                 </td>
                             {% endfor %}

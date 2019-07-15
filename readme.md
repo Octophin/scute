@@ -117,11 +117,22 @@ Each device can have an action performed on it. Each action should be defined in
 
 ```
 
-* key (string) - The path to direct the user to. `/export` would go through to `/export/<deviceID>` for example.
+* key (string) - The path to direct the user to. `/export` would go through to `/export/` and be passed in a query string with `devices[]` populated with a single or multiple devices as an array.
 
 * label (string) - Friendly name shown on the button.
 * order (number) - Order the button should appear. Lower numbers go first.
 * bulk (boolean) - Can this action be performed on multiple devices?
+
+Example usage:
+
+```python
+
+@app.route('/export')
+def export():
+    devices = request.args.getlist("devices[]")
+    return 'Exporting data for ' + json.dumps(devices)
+
+```
 
 
 ## Configuration management

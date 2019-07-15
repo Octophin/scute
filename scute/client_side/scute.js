@@ -63,7 +63,20 @@ document.querySelectorAll("input, select").forEach(function (element) {
 });
 
 let triggerAction = function(action){
-    
-    console.log(action);    
+   
+    let devices = [];
+    let queryString = "?";
+
+    document.querySelectorAll(".deviceHeader[data-active]").forEach(function (element, index) {
+
+        let device = element.getAttribute("data-device");
+
+        devices.push(device);
+        
+        queryString += "devices[]=" + device + "&";
+
+    });
+
+    document.location.href = action + queryString;
 
 };
