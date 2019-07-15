@@ -59,8 +59,12 @@ class scute:
                 pass
         return reportValues
     def static_assets(self, filename):
-        location = here + request.path.replace("/scute/", "/client_side/")
-        return send_file(location)
+        # TODO must be better way of sending from subdirectories
+        if "images" in request.path:
+            location = "/client_side/images/"
+        else:
+            location = "/client_side/"
+        return send_from_directory(here + location, filename)
     def registerHook(self, hookName, hookFunction):
         self.hooks[hookName] = hookFunction
     def getDevices(self):
