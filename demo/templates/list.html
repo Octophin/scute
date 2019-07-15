@@ -1,8 +1,10 @@
+<link rel="stylesheet" href="/static/style.css" />
+
 {% for device in reportValues %}
 
     {% for key,category in reportSchema.items() | sort(attribute='1.order')%}
 
-        <h2>{{category.label}}!</h2>
+        <h2>{{category.label}}</h2>
 
         <ul>
 

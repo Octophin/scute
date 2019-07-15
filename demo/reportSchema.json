@@ -1,0 +1,25 @@
+{
+    "general": {
+        "label": "General settings",
+        "description": "Basic settings for the category",
+        "order": 1,
+        "fields": {
+            "friendlyName": {
+                "label": "Friendly name"
+            },
+            "hello": {
+                "label": "Hello world",
+                "order": 2
+            }
+        }
+    },
+    "magic": {
+        "label": "Magic settings",
+        "description": "Other settings for the category",
+        "fields": {
+            "friendlyName": {
+                "label": "Friendly name"
+            }
+        }
+    }
+}

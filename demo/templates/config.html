@@ -1,0 +1,42 @@
+<form method="post">
+    {% for key,category in schema.items() | sort(attribute='1.order')%}
+
+        <h2>{{category.label}}</h2>
+
+        {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+
+            <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
+
+            {% if fieldSchema.type == "text" %}
+
+            <input id="{{fieldKey}}" type="text" name="{{fieldKey}}" value="{{current[fieldKey]}}"/>
+
+            {% endif %}
+
+            {% if fieldSchema.type == "select" %}
+
+            <select id="{{fieldKey}}" name="{{fieldKey}}">
+
+                {% for value,label in fieldSchema.list.items() %}
+
+                    <option {% if current[fieldKey] == value %} selected="selected" {% endif %} value="{{value}}">{{label}}</option>
+
+                {% endfor %}
+
+            </select>
+
+            {% endif %}
+
+            {% if fieldSchema.type == "boolean" %}
+
+                <input id="{{fieldKey}}" {% if current[fieldKey] is defined %} checked="checked" {% endif %} type="checkbox" name="{{fieldKey}}"/>
+
+            {% endif %}
+
+        {% endfor %}
+
+    {% endfor %}
+
+    <input type="submit" value="save" />
+
+</form>
