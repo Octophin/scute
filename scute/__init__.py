@@ -18,6 +18,7 @@ class scute:
         self.server.jinja_loader = my_loader
         self.server.add_url_rule('/', 'index', self.deviceListView)
         self.server.add_url_rule('/config/<device>', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
+        self.server.add_url_rule('/presets', 'presets', self.presets)
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
         with open(options["reportSchema"]) as reportSchema:  
             fields = {}
@@ -70,7 +71,7 @@ class scute:
             deviceReports[device] = self.getDeviceReport(device)
         return deviceReports
     def deviceListView(self):
-        return render_template("list.html", reportValues=self.getAllDeviceReports(), reportSchema=self.reportSchema, actions=self.actionsSchema)
+        return render_template("list.html", title="Device Manager",reportValues=self.getAllDeviceReports(), reportSchema=self.reportSchema, actions=self.actionsSchema)
     def deviceConfigView(self, device):
 
         # Save config
@@ -87,5 +88,7 @@ class scute:
         except:
             pass
     
-        return render_template("config.html", schema=self.configSchema, device=device, current=currentConfig)
-    
+        return render_template("config.html", title="Configuration", schema=self.configSchema, device=device, current=currentConfig)
+    def presets(self):
+        devices = request.args.getlist("devices[]")
+        return render_template("presets.html", title="Presets", devices=devices)
