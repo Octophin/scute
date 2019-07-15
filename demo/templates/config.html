@@ -20,7 +20,7 @@
 
                     {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
                     <div class="form-field happy-margin">
-                  
+
                         {% if fieldSchema.type == "text" %}
 
                         <label class="inline-block" for="{{fieldKey}}">{{fieldSchema.label}}</label>
