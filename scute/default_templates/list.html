@@ -2,149 +2,102 @@
 {% block content %}
 
 
-
-<main id="mainMenu">
-    <div class="main-wrapper happy-margin">
-        <div class="tab-titles-wrapper top-tail-margin">
-            <div class="tabs flex">
-                <div class="flex article-wrapper">
-                    <article class="tab-title happy-padding white selected">
-                        <h4>Device Manager</h4>
-                    </article>
-                    <article class="tab-title happy-padding gray-background navy">
-                        <h4>Interface Settings</h4>
-                    </article>
-                </div>
-
-                <div class="reload-icon inline-block">
-                    <img src="/scute/images/reload-icon.png" alt="Reload Icon">
-                </div>
-            </div>
-        </div>
-
-        <section class="main-table-wrapper" toolVersion>
-            <div class="table-nav flex top-tail-margin top-tail-padding">
-                <div class="table-nav-left">
-                    <span class="usb-icon inline-block">
-                        <img src="/scute/images/usb-icon.png" alt="USB icon">
-                    </span>
-                    <div class="inline-block navy table-header">
-                        <h2>Tag Manager</h2>
+    <main id="mainMenu">
+        <div class="main-wrapper happy-margin">
+            <div class="tab-titles-wrapper top-tail-margin">
+                <div class="tabs flex">
+                    <div class="flex article-wrapper">
+                        <article class="tab-title happy-padding white selected">
+                            <h4>Device Manager</h4>
+                        </article>
+                        <article class="tab-title happy-padding gray-background navy">
+                            <h4>Interface Settings</h4>
+                        </article>
                     </div>
-                </div>
-                <div class="table-nav-right gray">
-                    <div class="last-loaded key inline-block">
-                        <p class="inline-block light-gray">Last loaded:</p>
-                    </div>
-                    <div class="date value inline-block">
-                        <p class="inline-block">2X/1X/XX19 - 1X:4X</p>
+
+                    <div class="reload-icon inline-block">
+                        <img alt="Reload Icon" src="/scute/images/reload-icon.png">
                     </div>
                 </div>
             </div>
 
-            <section class="main-table">
-                <table>
-                    <tr>
-                        <td>
-                            Tag Name:
-                        </td>
-                        {% for device in reportValues %}
-                        <td>
-                            {{device}}
-                        </td>
-                        {% endfor %}
-                    </tr>
+            <section class="main-table-wrapper" toolversion>
+                <div class="table-nav flex top-tail-margin top-tail-padding">
+                    <div class="table-nav-left">
+                        <span class="usb-icon inline-block">
+                            <img alt="USB icon" src="/scute/images/usb-icon.png">
+                        </span>
+                        <div class="inline-block navy table-header">
+                            <h2>Tag Manager</h2>
+                        </div>
+                    </div>
+                    <div class="table-nav-right gray">
+                        <div class="last-loaded key inline-block">
+                            <p class="inline-block light-gray">Last loaded:</p>
+                        </div>
+                        <div class="date value inline-block">
+                            <p class="inline-block">2X/1X/XX19 - 1X:4X</p>
+                        </div>
+                    </div>
+                </div>
 
-                    {% for key,category in reportSchema.items() | sort(attribute='1.order') %}
-                    {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-                    <tr>
-                        <td>{{fieldKey}}</td>
-                        {% for deviceKey,deviceValues in reportValues.items() %}
-                        <td>{{deviceValues[fieldKey]}}</td>
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
-                    {% endfor %}
-                    <tr>
-                        <td>XXX</td>
-                        {% for deviceKey,deviceValues in reportValues.items() %}
-                        <td><a href="/config/{{deviceKey}}">Config</a></td>
-                        {% endfor %}
-                    </tr>
-                </table>
-
-                {# {% for device in reportValues %}
-
-                        {% for key,category in reportSchema.items() | sort(attribute='1.order')%}
-
-                        <h2>{{category.label}}</h2>
-
-                        <ul>
-
-                            {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-
-                            {% if reportValues[device][fieldKey] is defined %}
-
-                            <li>{{fieldSchema.label}} : {{reportValues[device][fieldKey]}}</li>
-
-                            {% endif %}
-
+                <section class="main-table">
+                    <table>
+                        <tr>
+                            <td>
+                                Tag Name:
+                            </td>
+                            {% for device in reportValues %}
+                                <td class="deviceHeader">
+                                    {{device}}
+                                </td>
                             {% endfor %}
+                        </tr>
 
-                        </ul>
-
+                        {% for key,category in reportSchema.items() | sort(attribute='1.order') %}
+                            {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+                                <tr>
+                                    <td>{{fieldSchema.label}}</td>
+                                    {% for deviceKey,deviceValues in reportValues.items() %}
+                                        <td>{{deviceValues[fieldKey]}}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
                         {% endfor %}
+                        <tr>
+                            <td>XXX</td>
+                            {% for deviceKey,deviceValues in reportValues.items() %}
+                                <td>
+                                    <a href="/config/{{deviceKey}}">Config</a>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                    </table>
 
-                        {# {% for device in reportValues %}
+                </section>
 
-                        <a href="/config/{{device}}">View / Edit Config</a>
+                <section style="visibility:hidden;" class="buttons actions">
 
-                        {% for route,actionSchema in actions.items() %}
-
-                        <a href="{{route}}/{{device}}">{{actionSchema.label}}</a>
-
+                    <section class="banner-block happy-margin">
+                        <div class="banner selected-devices flex">
+                            <h3><span class="count">2</span> selected</h3>
+                            <a onclick="clearDevices()" class="quit-button icon-wrapper">
+                                <img alt="X Icon" src="/scute/images/x-icon.png">
+                            </a>
+                        </div>
+                        <br/>
+                        <div class="buttons-wrapper flex secondary-buttons">
+                        {% for actionKey,actionSchema in actions.items() %}
+                            <button class="secondary navy" type="button">
+                                {{actionSchema.label}}
+                            </button>
                         {% endfor %}
-
-
-                        {% endfor %} #}
+                        </div>
+                    </section>
+                </section>
 
             </section>
 
-            <section class="buttons">
-                    <div class="buttons-wrapper flex happy-margin primary-buttons">
-                        <button class="primary navy" type="button">
-                            Select
-                        </button>
-                    </div>
-                    <div class="buttons-wrapper flex happy-margin secondary-buttons">
-                        <button class="secondary navy" type="button">
-                            Download
-                        </button>
-                        <button class="secondary navy" type="button">
-                            Configure
-                        </button>
-                        <button class="secondary navy" type="button">
-                            Delete
-                        </button>
-                        <button class="secondary navy" type="button">
-                            Clear log
-                        </button>
-                    </div>
-                </section>
-    </div>
-
-    <section class="banner-block happy-margin">
-        <div class="banner selected-devices flex ">
-            <h3>2 devices selected</h3>
-            <a class="quit-button icon-wrapper">
-                <img src="/scute/images/x-icon.png" alt="X Icon">
-            </a>
         </div>
-    </section>
-
-    </section>
-
-    </div>
-</main>
-
+    </main>
 {% endblock %}

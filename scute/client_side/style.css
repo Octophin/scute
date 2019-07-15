@@ -256,6 +256,15 @@ tr:nth-child(even) td:first-child {
     background-color: #f2f8f2;
 }
 
+td.deviceHeader {
+    cursor: pointer;
+}
+
+td.deviceHeader[data-active] {
+    color: white;
+    background-color: #0e2940;
+}
+
 /* SCROLL BAR */
 
 .scroll-bar {
@@ -423,7 +432,7 @@ select {
     padding: 0.5em;
 }
 
-input:focus {
+input:focus, input[data-changed] {
     border: solid thin red;
 }
 

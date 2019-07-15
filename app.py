@@ -1,4 +1,4 @@
-# Example file
+# Demonstration file
 
 from scute import scute
 from flask import Flask, request
@@ -7,10 +7,10 @@ import json
 app = Flask(__name__)
 
 options = {
-        "reportSchema": "reportSchema.json",
-        "actionsSchema": "actionsSchema.json",
-        "configSchema": "configSchema.json",
-        "dataViews": "dataViews.json",
+        "reportSchema": "exampleSchema/reportSchema.json",
+        "actionsSchema": "exampleSchema/actionsSchema.json",
+        "configSchema": "exampleSchema/configSchema.json",
+        "dataViews": "exampleSchema/dataViews.json",
     }
 
 test = scute(options, app)
