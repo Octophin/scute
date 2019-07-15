@@ -1,6 +1,6 @@
 # Schema Compiled Utility Template Engine
 
-SCUTE will build an administration interface from JSON schema files, allowing people to view reports about connected devices, update and manage configuration and view and export data from the device.
+SCUTE will build an extendable administration interface from JSON schema files, allowing people to view reports about connected devices, update and manage configuration and perform actions such as viewing and exporting data from the device.
 
 It has been built by Octophin Digital for the Arribada Horizon biologging tags.
 
@@ -215,23 +215,3 @@ def saveConfig(deviceID, config):
 myScuteInstance.registerHook("save_config", saveConfig)
 
 ```
-
-### Viewing data (not yet implemented)
-
-Alongside reports, devices can show a view of their data. The views available are templates that do something with the device data they receive. How this data is formatted and what the view does depends on the view. A view is simply a Jinja template that has access to the data it is provided.
-
-To register a view, pass in its config in the initial options object to the following specification:
-
-```JSON
-
-    "viewName": {
-        "label": "<viewLabel>",
-        "description": "<viewDescription>",
-        "data": "<functionName>"
-    }
-
-```
-
-* key (string) - System name for the view, also used in the template which should be named `viewName.html` and placed in the `templates` directory.
-* label (string) - Friendly name for the view shown to the user
-* data (string) - Function name called to retrieve the data which is then passed to the template.

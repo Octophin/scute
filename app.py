@@ -9,8 +9,7 @@ app = Flask(__name__)
 options = {
         "reportSchema": "exampleSchema/reportSchema.json",
         "actionsSchema": "exampleSchema/actionsSchema.json",
-        "configSchema": "exampleSchema/configSchema.json",
-        "dataViews": "exampleSchema/dataViews.json",
+        "configSchema": "exampleSchema/configSchema.json"
     }
 
 test = scute(options, app)

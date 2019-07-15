@@ -44,8 +44,6 @@ class scute:
                     fields[field] = self.configSchema[category]["fields"][field]
                     if "order" not in fields[field]:
                         fields[field]["order"] = 0
-        with open(options["dataViews"]) as dataViews:  
-            self.dataViews = json.load(dataViews)
     def getDeviceReport(self, deviceID):
         reportValues = {}
         # First try to get all fields, then overwrite with specific ones
