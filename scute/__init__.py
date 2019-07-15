@@ -58,8 +58,8 @@ class scute:
             except:
                 pass
         return reportValues
-    def static_assets(self, filename):
-        print(here + "/static/" + filename)
+    def static_assets(self, filename, path):
+        print(filename, path)
         return send_from_directory(here + "/client_side", filename)
     def registerHook(self, hookName, hookFunction):
         self.hooks[hookName] = hookFunction
