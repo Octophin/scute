@@ -31,13 +31,13 @@ def getFriendlyName(deviceID):
 test.registerHook("get_report_field__friendlyName", getFriendlyName)
 
 def saveConfig(deviceID, config):
-    with open(deviceID + '_config.json', 'w') as configFile:  
+    with open("exampleConfig_" + deviceID + '_config.json', 'w') as configFile:  
         json.dump(config, configFile)
 
 test.registerHook("save_config", saveConfig)
 
 def readConfig(deviceID):
-    with open(deviceID + '_config.json', 'r') as configFile:
+    with open("exampleConfig_" + deviceID + '_config.json', 'r') as configFile:
         return json.load(configFile)
 
 test.registerHook("read_config", readConfig)
