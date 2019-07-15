@@ -319,7 +319,6 @@ button:active {
 
 .buttons-wrapper {
     justify-content: space-between;
-    padding-bottom: 1em;
 }
 
 .buttons-wrapper.form-buttons {
@@ -423,7 +422,7 @@ select {
 
 select {
     height: 2.5em;
-    width: 61.5%;
+    width: 60%;
     -webkit-appearance: none;
     padding: 0.5em;
 }
@@ -446,7 +445,7 @@ input[type="checkbox"] {
 input[type="checkbox"]+label::after {
     content: "";
     position: absolute;
-    right: 0.5em;
+    right: 0.3em;
     top: 0em;
     width: 1em;
     height: 1em;
