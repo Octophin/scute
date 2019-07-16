@@ -1,6 +1,6 @@
 # Schema Compiled Utility Template Engine
 
-SCUTE will build an extendable administration interface from JSON schema files, allowing people to view reports about connected devices, update and manage configuration (with preset saving and loading) and perform actions such as viewing and exporting data from the device.
+SCUTE will build an extendable graphical administration interface for hardware devices from JSON schema files, allowing people to view reports about connected devices, update and manage configuration (with preset saving and loading) and perform actions such as viewing and exporting data from the device (on one device or several at once).
 
 It has been built by Octophin Digital for the Arribada Horizon biologging tags.
 
@@ -36,7 +36,7 @@ myScuteInstance = scute(options, app)
 
 # Hooks
 
-SCUTE makes use of various hooks that can be registered using the `registerHook` class. This takes a hook name (string) and a function for that hook. For example:
+SCUTE makes use of various hooks that can be registered using the `registerHook` method on the class. This takes a hook name (string) and a function for that hook. For example:
 
 ```Python
 
@@ -49,7 +49,7 @@ myScuteInstance.registerHook("get_devices", getDevices)
 
 ## Device list
 
-The system checks for a `get_devices` hook and runs it. This should simply return a list of unique ids of devices. These device ids are then passed around to the other functions to get configuration, reports and data from a device and push changes to that device.
+The system checks for a `get_devices` hook and runs it. This should simply return a list of unique ids of connected devices. These device ids are then passed around to the other functions to get configuration, reports and data from a device and push changes to those devices.
 
 ## Device Report JSON schema
 
@@ -97,7 +97,7 @@ For each device in the device list, the system checks for and runs the following
 
 * `get_report_fields(deviceID, fieldsList)`
 
-This takes a device ID and a list of all fields (as strings) in the report schema. If present, it should return an object with key:value pairs of the field and its value. This is useful for the bulk loading of report data from a JSON file for instance.
+This takes a device ID and a list of all fields (as a list of strings) in the report schema. If present, it should return an object with key:value pairs of the field and its value. This is useful for the bulk loading of report data from a JSON file for instance.
 
 * `get_report_field__fieldName(deviceID, fieldName)`
 
