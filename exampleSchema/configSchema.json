@@ -61,7 +61,7 @@
     },
     "battery": {
         "label": "Battery Settings",
-        "description": "",
+        "description": "Battery settings for the device",
         "order": 2,
         "fields": {
             "battery.logEnable": {
@@ -72,7 +72,7 @@
     },
     "bluetooth": {
         "label": "Bluetooth Settings",
-        "description": "",
+        "description": "Bluetooth settings for the device",
         "order": 3,
         "fields": {
             "bluetooth.advertisingInterval": {
@@ -140,7 +140,7 @@
     },
     "gps": {
         "label": "GPS Settings",
-        "description": "",
+        "description": "GPS settings for the device",
         "order": 4,
         "fields": {
             "gps.logDebugEnable": {
@@ -195,7 +195,7 @@
     },
     "logging": {
         "label": "Logging Settings",
-        "description": "",
+        "description": "Logging settings for the device",
         "order": 5,
         "fields": {
             "logging.dateTimeStampEnable": {
@@ -233,7 +233,7 @@
     },
     "pressureSensor": {
         "label": "Pressure Sensor Settings",
-        "description": "",
+        "description": "Pressure sensor settings for the device",
         "order": 6,
         "fields": {
             "pressureSensor.highThreshold": {
@@ -293,7 +293,7 @@
     },
     "rtc": {
         "label": "RTC",
-        "description": "",
+        "description": "RTC settings for the device",
         "order": 7,
         "fields": {
             "rtc.dateTime": {
@@ -307,7 +307,7 @@
     },
     "saltwaterSwitch": {
         "label": "Saltwater Switch Settings",
-        "description": "",
+        "description": "Saltwater switch settings for the device",
         "order": 8,
         "fields": {
             "saltwaterSwitch.hysteresisPeriod": {
@@ -327,7 +327,7 @@
     },
     "system": {
         "label": "System Settings",
-        "description": "",
+        "description": "System settings for the device",
         "order": 9,
         "fields": {
             "system.friendlyName": {

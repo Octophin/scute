@@ -17,21 +17,30 @@
                 {% for key,category in schema.items() | sort(attribute='1.order')%}
                 <div class="form-title happy-padding navy">
                     <h2>{{category.label}}</h2>
+                    <p>{{category.description}}</p>
                 </div>
 
 
                 {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-                <div class="form-field happy-margin" {% if fieldSchema.exclueFromPresets == true %}data-exclude-from-preset="true" {% endif %}>
+                <div class="form-field happy-margin"
+                    {% if fieldSchema.exclueFromPresets == true %}data-exclude-from-preset="true" {% endif %}>
 
                     {% if fieldSchema.type == "text" %}
 
-                    <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
+                    <span class="icon">
+                        <img src="/scute/images/info-icon-navy.png" alt="Info icon">
+                    </span>
+                    <label for="{{fieldKey}}">{{fieldSchema.label}}
+                    </label>
                     <input id="{{fieldKey}}" type="text" name="{{fieldKey}}" value="{{current[fieldKey]}}" />
 
                     {% endif %}
 
                     {% if fieldSchema.type == "select" %}
 
+                    <span class="icon">
+                        <img src="/scute/images/info-icon-navy.png" alt="Info icon">
+                    </span>
                     <label for="{{fieldKey}}">{{fieldSchema.label}}</label>
                     <select id="{{fieldKey}}" name="{{fieldKey}}">
 
@@ -48,6 +57,9 @@
 
                     {% if fieldSchema.type == "boolean" %}
 
+                    <span class="icon">
+                        <img src="/scute/images/info-icon-navy.png" alt="Info icon">
+                    </span>
                     <input id="{{fieldKey}}" {% if current[fieldKey] is defined %} checked="checked" {% endif %}
                         type="checkbox" name="{{fieldKey}}" />
                     <label for="{{fieldKey}}">{{fieldSchema.label}}</label>

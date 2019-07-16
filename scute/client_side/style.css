@@ -103,12 +103,16 @@ body {
 }
 
 .icon {
-    width: 2em;
+    width: 1.5em;
     display: inline-block;
 }
 
 .icon img {
     vertical-align: middle;
+}
+
+label .icon:hover {
+    cursor: pointer
 }
 
 
@@ -471,7 +475,6 @@ input:focus {
     border: solid thin red;
 }
 
-
 /*  CHECKBOXES */
 
 input[type="checkbox"] {
@@ -482,10 +485,18 @@ input[type="checkbox"] {
     display: contents;
 }
 
+input[type=checkbox]+label {
+    right: 43em;
+}
+
+.icon+label {
+    margin-left: -2em;
+}
+
 input[type="checkbox"]+label::after {
     content: "";
     position: absolute;
-    right: -7.5em;
+    right: -4.5em;
     top: 0em;
     width: 1em;
     height: 1em;
