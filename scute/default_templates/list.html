@@ -2,129 +2,130 @@
 {% block content %}
 
 
-    <main id="mainMenu">
-        <div class="main-wrapper happy-margin">
-            <div class="tab-titles-wrapper top-tail-margin">
-                <div class="tabs flex">
-                    <div class="flex article-wrapper">
-                        <article class="tab-title happy-padding white selected">
-                            <h2>Device Manager</h2>
-                        </article>
-                        <article class="tab-title happy-padding gray-background navy">
-                            <h2>Interface Settings</h2>
-                        </article>
-                    </div>
+<main id="mainMenu">
+    <div class="main-wrapper happy-margin">
+        <div class="tab-titles-wrapper top-tail-margin">
+            <div class="tabs flex">
+                <div class="flex article-wrapper">
+                    <article class="tab-title happy-padding white selected">
+                        <h2>Device Manager</h2>
+                    </article>
+                    <article class="tab-title happy-padding gray-background navy">
+                        <h2>Interface Settings</h2>
+                    </article>
+                </div>
 
                     <div class="reload-icon inline-block">
                         <img alt="Reload Icon" src="/scute/images/reload-icon.png">
                     </div>
+            </div>
+        </div>
+
+        <section class="main-table-wrapper" toolversion>
+            <div class="table-nav flex top-tail-margin top-tail-padding">
+                <div class="table-nav-left">
+                    <span class="usb-icon inline-block">
+                        <img alt="USB icon" src="/scute/images/usb-icon.png">
+                    </span>
+                    <div class="inline-block navy table-header">
+                        <h2>Current Devices</h2>
+                    </div>
+                </div>
+                <div class="table-nav-right gray">
+                    <div class="last-loaded key inline-block">
+                        <p class="inline-block light-gray">Last loaded:</p>
+                    </div>
+                    <div class="date value inline-block">
+                        <p class="inline-block">2X/1X/XX19 - 1X:4X</p>
+                    </div>
                 </div>
             </div>
 
-            <section class="main-table-wrapper" toolversion>
-                <div class="table-nav flex top-tail-margin top-tail-padding">
-                    <div class="table-nav-left">
-                        <span class="usb-icon inline-block">
-                            <img alt="USB icon" src="/scute/images/usb-icon.png">
-                        </span>
-                        <div class="inline-block navy table-header">
-                            <h2>Current Devices</h2>
-                        </div>
-                    </div>
-                    <div class="table-nav-right gray">
-                        <div class="last-loaded key inline-block">
-                            <p class="inline-block light-gray">Last loaded:</p>
-                        </div>
-                        <div class="date value inline-block">
-                            <p class="inline-block">2X/1X/XX19 - 1X:4X</p>
-                        </div>
-                    </div>
-                </div>
-
-                <section class="main-table">
-                    <table>
-                        <tr>
-                            <td>
-                                Fields
-                            </td>
-                            {% for device in reportValues %}
-                                <td data-device="{{device}}" class="deviceHeader">
-                                    {{device}}
-                                </td>
-                            {% endfor %}
-                        </tr>
-
-                        {% for key,category in reportSchema.items() | sort(attribute='1.order') %}
-                            {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-                                <tr>
-                                    <td>{{fieldSchema.label}}</td>
-                                    {% for deviceKey,deviceValues in reportValues.items() %}
-                                        <td>{{deviceValues[fieldKey]}}</td>
-                                    {% endfor %}
-                                </tr>
-                            {% endfor %}
+            <section class="main-table">
+                <table>
+                    <tr>
+                        <td>
+                            Fields
+                        </td>
+                        {% for device in reportValues %}
+                        <td data-device="{{device}}" class="deviceHeader">
+                            {{device}}
+                        </td>
                         {% endfor %}
-                        <tr>
-                            <td class="empty"></td>
-                            {% for deviceKey,deviceValues in reportValues.items() %}
-                                <td>
-                                    <a class="inline-action" href="/config/{{deviceKey}}">
-                                        Configuration
-                                    </a>
-                                </td>
-                            {% endfor %}
-                        </tr>
-                        {% for actionKey,actionSchema in actions.items() %}
+                    </tr>
 
-                            <tr>
-
-                            <td class="empty"></td>
-
-                            {% for deviceKey,deviceValues in reportValues.items() %}
-
-                                <td>
-                                    <a href="{{actionKey}}?devices[]={{deviceKey}}" class="inline-action">{{actionSchema.label}}</a>
-                                </td>
-
-                            {% endfor %}
-
-                            </tr>
-
+                    {% for key,category in reportSchema.items() | sort(attribute='1.order') %}
+                    {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+                    <tr>
+                        <td>{{fieldSchema.label}}</td>
+                        {% for deviceKey,deviceValues in reportValues.items() %}
+                        <td>{{deviceValues[fieldKey]}}</td>
                         {% endfor %}
-
-                    </table>
-
-                </section>
-
-                <section class="buttons actions" style="visibility:hidden;">
-
-                    <section class="banner-block happy-margin">
-                        <div class="banner selected-devices flex">
-                            <h3>
-                                <span class="count">2</span>
-                                selected</h3>
-                            <a class="quit-button icon-wrapper" onclick="clearDevices()">
-                                <img alt="X Icon" src="/scute/images/x-icon.png">
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                    <tr>
+                        <td class="empty"></td>
+                        {% for deviceKey,deviceValues in reportValues.items() %}
+                        <td>
+                            <a class="button navy inline-action" href="/config/{{deviceKey}}">
+                                Configuration
                             </a>
-                        </div>
-                        <br/>
-                        <div class="buttons-wrapper flex secondary-buttons">
-                            {% for actionKey,actionSchema in actions.items() %}
-                                {% if actionSchema.bulk == true %}
-                                    <button onclick="triggerAction('{{actionKey}}')" class="secondary navy" type="button">
-                                        {{actionSchema.label}}
-                                    </button>
-                                {% endif %}
-                            {% endfor %}
-                            <button onclick="triggerAction('presets')" class="secondary navy" type="button">
-                                Load preset
-                            </button>
-                        </div>
-                    </section>
-                </section>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    {% for actionKey,actionSchema in actions.items() %}
+
+                    <tr>
+
+                        <td class="empty"></td>
+
+                        {% for deviceKey,deviceValues in reportValues.items() %}
+
+                        <td>
+                            <a href="{{actionKey}}?devices[]={{deviceKey}}"
+                                class="button navy inline-action">{{actionSchema.label}}</a>
+                        </td>
+
+                        {% endfor %}
+
+                    </tr>
+
+                    {% endfor %}
+
+                </table>
 
             </section>
 
-        </div>
-    </main>
+            <section class="buttons actions" style="visibility:hidden;">
+
+                <section class="banner-block happy-margin">
+                    <div class="banner selected-devices flex">
+                        <h3>
+                            <span class="count">2</span>
+                            selected</h3>
+                        <a class="quit-button icon-wrapper" onclick="clearDevices()">
+                            <img alt="X Icon" src="/scute/images/x-icon.png">
+                        </a>
+                    </div>
+                    <br />
+                    <div class="buttons-wrapper flex secondary-buttons">
+                        {% for actionKey,actionSchema in actions.items() %}
+                        {% if actionSchema.bulk == true %}
+                        <button onclick="triggerAction('{{actionKey}}')" class="secondary navy" type="button">
+                            {{actionSchema.label}}
+                        </button>
+                        {% endif %}
+                        {% endfor %}
+                        <button onclick="triggerAction('presets')" class="secondary navy" type="button">
+                            Load preset
+                        </button>
+                    </div>
+                </section>
+            </section>
+
+        </section>
+
+    </div>
+</main>
 {% endblock %}

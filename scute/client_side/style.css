@@ -18,7 +18,8 @@ h2 {
     font-size: 1em;
 }
 
-h3 {
+h3,
+p {
     font-size: 0.9em;
 }
 
@@ -33,7 +34,6 @@ h5 {
 h6 {
     font-size: 0.6em;
 }
-
 
 /* GENERAL */
 
@@ -50,7 +50,7 @@ body {
     position: relative;
     height: 100%;
     margin: 0 auto;
-    width: 46em;
+    width: 70em;
     max-width: 100%;
 }
 
@@ -84,6 +84,10 @@ body {
 
 .red {
     color: red;
+}
+
+.green {
+    color: #50B75F;
 }
 
 .gray-background {
@@ -273,6 +277,11 @@ td {
     font-weight: 300;
 }
 
+table tr td:first-of-type {
+    position: sticky;
+    left: 0em;
+}
+
 table tr:first-of-type td {
     font-weight: bolder;
 }
@@ -290,11 +299,13 @@ tr:nth-child(even) td {
 }
 
 tr:nth-child(odd) td:first-child {
-    background-color: hsla(129, 42%, 52%, 0.05);
+    background-color: #f8fbf7;
+    /* background-color: hsla(129, 42%, 52%, 0.05); */
 }
 
 tr:nth-child(even) td:first-child {
-    background-color: hsla(129, 42%, 52%, 0.1);
+    background-color: #f2f8f2;
+    /* background-color: hsla(129, 42%, 52%, 0.1); */
 }
 
 
@@ -323,6 +334,17 @@ button.primary {
     font-size: 1.1em;
     font-weight: 400;
     width: 8.8em;
+}
+
+.button,
+.button a {
+    background-color: transparent;
+    border: solid 0.1em #0e2940;
+    border-radius: 0.1em;
+    padding: 0.5em 0.8em;
+    font-size: 1.1em;
+    font-weight: 400;
+    display: -webkit-box;
 }
 
 button.secondary {
@@ -383,7 +405,6 @@ button:active {
 
 .form-block-wrapper {
     margin: 4em auto;
-    width: 46em;
     max-width: 100%;
 }
 
@@ -464,7 +485,7 @@ input[type="checkbox"] {
 input[type="checkbox"]+label::after {
     content: "";
     position: absolute;
-    right: 0.3em;
+    right: -7.5em;
     top: 0em;
     width: 1em;
     height: 1em;
