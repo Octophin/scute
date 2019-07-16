@@ -90,3 +90,32 @@ class scute:
     def presets(self):
         devices = request.args.getlist("devices[]")
         return render_template("presets.html", title="Presets", devices=devices)
+    def expandJSON(self, json):
+        # Expand a JSON object with dot based keys into a nested JSON
+        expanded = {}
+        for key,value in json.items():
+            output = expanded
+            parts = key.split(".")
+            for index,part in enumerate(parts,start=1):
+                if part not in output:
+                    output[part] = {}
+                if index == len(parts):
+                    output[part] = value
+                output = output[part]
+        return expanded
+    def flattenJSON(self, object):
+        out = {}
+        def flatten(x, name=''):
+            if type(x) is dict:
+                for a in x:
+                    flatten(x[a], name + a + '.')
+            elif type(x) is list:
+                i = 0
+                for a in x:
+                    flatten(a, name + str(i) + '.')
+                    i += 1
+            else:
+                out[name[:-1]] = x
+
+        flatten(object)
+        return out
