@@ -15,17 +15,27 @@ options = {
 exampleInstance = scute(options, app)
 
 def getDevices():
-    return ["deviceOne", "deviceTwo"]
+    return ["ONE", "TWO"]
 
 exampleInstance.registerHook("get_devices", getDevices)
 
 def getFields(deviceID):
-    return {"hello": "world"}
+    return  {
+           "batteryLevel": 50,
+           "fileSize": 123456,
+           "sensorsEnabled": [
+               "gps",
+               "pressure",
+               "saltwater",
+               "accelerometer"
+           ],
+           "firmwareVersion": 4,
+           "fileType": "LINEAR"}
 
 exampleInstance.registerHook("get_report_fields", getFields)
 
 def getFriendlyName(deviceID):
-    return deviceID + "FRIENDLY"
+    return deviceID[0] + deviceID[1]
 
 exampleInstance.registerHook("get_report_field__friendlyName", getFriendlyName)
 

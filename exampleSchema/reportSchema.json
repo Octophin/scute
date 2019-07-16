@@ -1,24 +1,39 @@
 {
-    "general": {
-        "label": "General settings",
-        "description": "Basic settings for the category",
+    "system": {
+        "label": "System Settings",
+        "description": "",
         "order": 1,
         "fields": {
             "friendlyName": {
-                "label": "Friendly name"
+                "label": "friendlyName",
+                "order": 1
             },
-            "hello": {
-                "label": "Hello world",
-                "order": 2
+            "batteryLevel": {
+                "label": "batteryLevel",
+                "order": 3
+            },
+            "firmwareVersion": {
+                "label": "firmwareVersion",
+                "order": 7
             }
         }
     },
-    "magic": {
-        "label": "Magic settings",
-        "description": "Other settings for the category",
+    "logging": {
+        "label": "Logging settings",
+        "description": "",
+        "order": 2,
         "fields": {
-            "friendlyName": {
-                "label": "Friendly name"
+            "fileSize": {
+                "label": "fileSize",
+                "order": 1
+            },
+            "fileType": {
+                "label": "fileType",
+                "order": 2
+            },
+            "sensorsEnabled": {
+                "label": "sensorsEnabled",
+                "order": 3
             }
         }
     }
