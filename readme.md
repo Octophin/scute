@@ -1,6 +1,6 @@
 # Schema Compiled Utility Template Engine
 
-SCUTE will build an extendable administration interface from JSON schema files, allowing people to view reports about connected devices, update and manage configuration and perform actions such as viewing and exporting data from the device.
+SCUTE will build an extendable administration interface from JSON schema files, allowing people to view reports about connected devices, update and manage configuration (with preset saving and loading) and perform actions such as viewing and exporting data from the device.
 
 It has been built by Octophin Digital for the Arribada Horizon biologging tags.
 
@@ -177,6 +177,8 @@ Device configuration is managed by a JSON schema which auto generates a configur
 ### Fields
 
 * key (string) - The system name for the field. This will be called in save functions when saving configuration.
+
+_Scute contains helper functions for flattening and unflattening `.` seperated keys for fields such as `parent.child.subfield`. These are called `flattenJSON()` and `expandJSON()`. They are demonstrated in the example `app.py` file._
 
 * label (string) - Friendly name for the field shown to a user
 * description (string) - Additional information about a field shown to a user 
