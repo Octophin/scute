@@ -69,7 +69,7 @@ class scute:
             deviceReports[device] = self.getDeviceReport(device)
         return deviceReports
     def deviceListView(self):
-        return render_template("list.html", title="Device Manager",reportValues=self.getAllDeviceReports(), reportSchema=self.reportSchema, actions=self.actionsSchema)
+        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.reportSchema, actions=self.actionsSchema)
     def deviceConfigView(self, device):
 
         # Save config
