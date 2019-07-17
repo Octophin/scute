@@ -456,7 +456,7 @@ select {
     padding: 0.5em;
 }
 
-input:focus {
+input:focus, [data-changed] {
     border: solid thin red;
 }
 
