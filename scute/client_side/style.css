@@ -1,13 +1,8 @@
 /* FONTS */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    font-weight:
+    /* font-weight: normal; */
 }
 
 h1 {
@@ -18,8 +13,7 @@ h2 {
     font-size: 1em;
 }
 
-h3,
-p {
+h3, p {
     font-size: 0.9em;
 }
 
@@ -115,16 +109,13 @@ label .icon:hover {
     cursor: pointer
 }
 
-
 /* NAV */
 
-header,
-nav {
+header, nav {
     line-height: 4em;
 }
 
-nav,
-nav a {
+nav, nav a {
     color: white;
 }
 
@@ -153,7 +144,6 @@ nav a {
     margin-bottom: 0;
 }
 
-
 /* MAIN */
 
 #mainMenu {
@@ -168,7 +158,6 @@ nav a {
 .main-table-wrapper {
     background-color: white;
 }
-
 
 /* TAB TITLES */
 
@@ -207,7 +196,6 @@ article.selected {
     max-width: 1.5em;
     margin-top: 0.8em;
 }
-
 
 /* MAIN TABLE */
 
@@ -312,6 +300,14 @@ tr:nth-child(even) td:first-child {
     /* background-color: hsla(129, 42%, 52%, 0.1); */
 }
 
+.deviceHeader {
+    cursor: pointer;
+}
+
+.deviceHeader[data-active] {
+    background-color: #042A43;
+    color: white;
+}
 
 /* BUTTONS */
 
@@ -319,9 +315,7 @@ button {
     margin: 0 0.5em 0.5em 0;
 }
 
-button:hover,
-a:hover,
-.home-icon:hover {
+button:hover, a:hover, .home-icon:hover {
     cursor: pointer;
 }
 
@@ -329,8 +323,7 @@ body button.selected {
     border: solid 0.1em red;
 }
 
-button,
-button.primary {
+button, button.primary {
     background-color: transparent;
     border: solid 0.1em #0e2940;
     border-radius: 0.1em;
@@ -340,8 +333,7 @@ button.primary {
     width: 8.8em;
 }
 
-.button,
-.button a {
+.button, .button a {
     background-color: transparent;
     border: solid 0.1em #0e2940;
     border-radius: 0.1em;
@@ -380,7 +372,6 @@ button:active {
     margin: 2em 1em;
 }
 
-
 /* BANNERS */
 
 .banner-block {
@@ -403,7 +394,6 @@ button:active {
 .quit-button {
     width: 2em;
 }
-
 
 /* FORMS */
 
@@ -436,11 +426,7 @@ button:active {
     justify-content: space-between;
 }
 
-label,
-input,
-select,
-.icon,
-.subheading * {
+label, input, select, .icon, .subheading * {
     display: inline-block;
 }
 
@@ -455,8 +441,7 @@ input {
     width: 60%;
 }
 
-input,
-select {
+input, select {
     line-height: 1.8em;
     border-radius: 0.1em;
     border: solid thin #8a8a8a;
@@ -514,46 +499,30 @@ input:checked+label::after {
     background-image: url(images/check-icon.png);
 }
 
-
 /* MQ - MOBILE */
 
 @media screen and (max-width: 730px) {
-
     /* LIST */
-    .tabs,
-    .tab-title,
-    .article-wrapper.flex,
-    .tab-titles-wrapper article,
-    .table-nav,
-    .table-nav-left,
-    .table-nav-right {
+    .tabs, .tab-title, .article-wrapper.flex, .tab-titles-wrapper article, .table-nav, .table-nav-left, .table-nav-right {
         display: block;
         width: 100%;
         margin: 1em auto;
         height: unset;
     }
-
     /* FORMS */
-    label,
-    input,
-    .form-field,
-    select {
+    label, input, .form-field, select {
         display: block;
         width: 100%;
     }
-
     .buttons-wrapper {
         display: block;
         width: 100%;
         margin: auto;
         padding: 1em;
     }
-
-    button,
-    button.primary {
+    button, button.primary {
         width: 100%;
     }
-
     input[type="checkbox"]+label::after {
         right: 0;
     }
