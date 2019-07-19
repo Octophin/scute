@@ -471,6 +471,16 @@ button.scary {
     box-shadow: 1em 1em 1em -0.8em #B3B1B1;
 }
 
+.pop-up p {
+    font-size: 1.3em;
+    line-height: 2em;
+    padding: 0 3em;
+}
+
+.pop-up-buttons {
+    margin: 2em 1em 0;
+}
+
 /* BANNERS */
 
 .banner-block {
