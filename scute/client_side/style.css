@@ -68,6 +68,10 @@ body {
     margin: 0 1em;
 }
 
+.bold {
+    font-weight: bolder;
+}
+
 .navy {
     color: #0e2940;
 }
@@ -251,7 +255,11 @@ article.selected {
     left: 24.4em;
 }
 
-tr td:not(:first-of-type) {
+.circle.selected {
+    border: solid 2px#50B75F;
+}
+
+#mainMenu tr td:not(:first-of-type) {
     text-align: center;
 }
 
@@ -266,7 +274,6 @@ tr td:not(:first-of-type) {
     margin: 1em;
     overflow-x: auto;
     scrollbar-color: #50B75F #e5e5e5;
-    border-bottom: solid thin #B3B1B1;
 }
 
 .main-table::-webkit-scrollbar {
@@ -397,34 +404,46 @@ button:active {
 .buttons-wrapper {
     flex-flow: row wrap;
     justify-content: space-between;
-    padding: 1em 3em;
+    padding: 2em;
     width: 100%;
 }
 
-.buttons-wrapper * {
+.divider {
+    border-top: solid thin #B3B1B1;
+    margin: 1em ;
+}
+
+.buttons-wrapper.inactive * {
     color: #B3B1B1;
+}
+
+.buttons-wrapper.inactive button,
+.buttons-wrapper.inactive select {
+    border: solid thin #B3B1B1;
 }
 
 .buttons-wrapper .dropdown-icon {
     width: 0.8em;
     height: 0.8em;
     position: relative;
-    left: -3em;
+    left: -3.8em;
     top: 0.8em;
-}
-
-.buttons-wrapper button {
-    border: solid thin #B3B1B1;
 }
 
 .buttons-wrapper.form-buttons {
     margin: 2em 1em;
 }
 
+button.scary {
+    color: red;
+    border: solid 2px red;
+}
+
 .select-all-button-wrapper {
-    display: flex;
-    justify-content: flex-end;
-    margin: 2em;
+    justify-content: space-between;
+    align-items: center;
+    flex-flow: row nowrap;
+    margin: 2em 1em;
 }
 
 .buttons-wrapper select {
@@ -436,7 +455,20 @@ button:active {
     width: 8.8em;
     line-height: 1.4;
     position: relative;
+    border: solid 0.1em #0e2940;
 }
+
+/* POP-UP */
+
+.pop-up {
+    background-color: white;
+    padding: 1em;
+    margin: 2em auto;
+    text-align: center;
+    width: 40%;
+    display: block;
+}
+
 /* BANNERS */
 
 .banner-block {
