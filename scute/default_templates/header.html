@@ -3,14 +3,14 @@
         <div class="nav-tab nav-branding">
             <a>ARRIBADA INITIATIVE</a>
         </div>
-        <div class="nav-tab navy">
-            <a>Advanced Reports</a>
+        <div class="nav-tab navy {% if url_for(request.endpoint) == "/reports" %}selected{% endif %}">
+            <a href="/reports">Advanced Reports</a>
         </div>
-        <div class="nav-tab navy">
+        <div class="nav-tab navy {% if url_for(request.endpoint) == "/presets" %}selected{% endif %}">
             <a href="/presets">Preset Manager</a>
         </div>
-        <div class="nav-tab navy selected">
-            <a>Device Manager</a>
+        <div class="nav-tab navy {% if url_for(request.endpoint) == "/" %}selected{% endif %}">
+            <a href="/">Device Manager</a>
         </div>
     </nav>
 </section>
