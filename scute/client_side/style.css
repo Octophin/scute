@@ -111,25 +111,33 @@ label .icon:hover {
 
 /* NAV */
 
-header, nav {
-    line-height: 4em;
-}
-
-nav, nav a {
-    color: white;
-}
-
 nav {
     flex-flow: row nowrap;
     justify-content: space-between;
     margin: 0;
-    background-color: #0e2940;
-    padding: 0 1em;
+    border-bottom: solid thin #F6F6F6;
 }
 
+.nav-tab {
+    width: calc(100% / 4);
+    text-align: center;
+    border-right: solid thin #F6F6F6;
+    margin: 0;
+    padding: 0.8em 0;
+}
+
+.nav-tab.selected {
+    border-bottom: solid #042A43;
+    background: linear-gradient(#FFFFFF, #EBEBEB);
+}
 nav a {
     font-weight: 400;
     font-size: 1.2em;
+}
+
+.nav-branding {
+    background-color: #50B75F;
+    color: white;
 }
 
 .home-icon {
@@ -153,6 +161,7 @@ nav a {
 
 .main-wrapper {
     margin-top: 0;
+    padding-top: 0.5em;
 }
 
 .main-table-wrapper {
@@ -167,13 +176,6 @@ nav a {
     margin-left: 0;
     margin-top: 0;
     padding-top: 2em;
-}
-
-.tabs {
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    width: 100%;
-    color: white;
 }
 
 .articles {
@@ -503,7 +505,7 @@ input:checked+label::after {
 
 @media screen and (max-width: 730px) {
     /* LIST */
-    .tabs, .tab-title, .article-wrapper.flex, .tab-titles-wrapper article, .table-nav, .table-nav-left, .table-nav-right {
+    .tab-title, .article-wrapper.flex, .tab-titles-wrapper article, .table-nav, .table-nav-left, .table-nav-right {
         display: block;
         width: 100%;
         margin: 1em auto;
