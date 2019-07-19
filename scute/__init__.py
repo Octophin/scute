@@ -87,9 +87,25 @@ class scute:
             pass
     
         return render_template("config.html", title="Configuration", schema=self.configSchema, device=device, current=currentConfig)
+    
     def presets(self):
-        devices = request.args.getlist("devices[]")
-        return render_template("presets.html", title="Presets", devices=devices)
+
+        presetDirectory = here + '/client_side/config_presets/'
+
+        presetFilesNames = os.listdir(presetDirectory)
+        presetFilesNames = sorted(presetFilesNames, reverse=False)
+
+        presetFiles = []
+        for idx, file in enumerate(presetFilesNames):
+            with open(presetDirectory + file, "r") as f1:
+                fileRaw = f1.read()
+                fileJSON = json.loads(fileRaw)
+
+            presetFiles.append({"ID": idx, "filename": file, "name":fileJSON["name"], "description":fileJSON["description"], "presets":fileJSON["presets"] })
+
+        return render_template("presets.html", title="Presets", presets=presetFiles)
+
+
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON
         expanded = {}
