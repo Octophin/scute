@@ -1,8 +1,9 @@
 # Demonstration file
 
 from scute import scute
-from flask import Flask, request
+from flask import Flask, request, jsonify
 import json
+import os
 
 app = Flask(__name__)
 
@@ -51,6 +52,7 @@ def readConfig(deviceID):
 
 exampleInstance.registerHook("read_config", readConfig)
 
+
 @app.route('/export')
 def export():
     devices = request.args.getlist("devices[]")
@@ -60,4 +62,4 @@ def export():
 def disconnect():
     devices = request.args.getlist("devices[]")
     return 'Disconnecting ' + json.dumps(devices)
-    
+

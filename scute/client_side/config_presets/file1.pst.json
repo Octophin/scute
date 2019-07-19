@@ -1,0 +1,10 @@
+{
+    "name": "This is the First one",
+    "description": "Two line description of first file",
+    "dateTime": "2019-01-01",
+    "presets": {
+        "one": 1,
+        "two": 2,
+        "three": 3
+    }
+}
