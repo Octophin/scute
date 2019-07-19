@@ -122,6 +122,9 @@ let loadPreset = function (presetID) {
     var span = document.getElementById('presetHeading');
     span.textContent = presetList[presetID]['name'];
 
+    var span = document.getElementById('presetDate');
+    span.textContent = presetList[presetID]['dateTime'];
+
     document.getElementById("presetName").value = presetList[presetID]['name'];
     document.getElementById("preseDescription").value = presetList[presetID]['description'];
     document.getElementById("presetFields").value = JSON.stringify(presetList[presetID]['presets']);
