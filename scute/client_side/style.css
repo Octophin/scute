@@ -496,7 +496,31 @@ button.scary {
 }
 
 .presets-manager-list {
+    border: solid thin #B3B1B1;
+}
+
+.edit-presets-icons {
+    flex-flow: row nowrap;
+    justify-content: space-between;
     padding: 1em;
+}
+
+.edit-presets-icons img {
+    width: 1.2em;
+}
+
+.presets-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.presets-list ul li {
+    border-top: solid thin #B3B1B1;
+    padding: 1em;
+}
+
+.preset-title {
+    line-height: 2em;
 }
 
 /* BANNERS */

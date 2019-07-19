@@ -15,15 +15,24 @@
 
     <div class="presets-manager-wrapper flex">
         <div class="presets-manager-list scrolling">
-            <span class="add preset" onclick="addPreset()">+</span>
-            <ul>
-                {% for preset in presets  %}
-                <li onclick="loadPreset({{ preset.ID }})"><span class="title">{{ preset.name }}</span><br>
-                    <span class="description">{{ preset.description }}</span>
-                </li>
-                {% endfor %}
+            <div class="edit-presets-icons flex">
+                <span class="icon add-preset" onclick="addPreset()">
+                    <img src="scute/images/add-icon.png" alt="Delete icon" />
+                </span>
+                <span class="icon">
+                    <img src="scute/images/delete-icon.png" alt="Delete icon" />
+                </span>
+            </div>
+            <div class="presets-list">
+                <ul>
+                    {% for preset in presets  %}
+                    <li onclick="loadPreset({{ preset.ID }})"><span class="preset-title navy bold">{{ preset.name }}</span><br>
+                        <span class="description gray">{{ preset.description }}</span>
+                    </li>
+                    {% endfor %}
 
-            </ul>
+                </ul>
+            </div>
         </div>
         <div class="presets-manager-content">
             <div class="heading">
@@ -36,7 +45,6 @@
                 <input type="text" id="presetName" name="presetName" required>
                 <label for="preseDescription">Preset Description</label>
                 <input type="text" id="preseDescription" name="preseDescription" required>
-                {# <textArea id="presetFields" name="presetFields"></textArea> #}
             </div>
 
         </div>
