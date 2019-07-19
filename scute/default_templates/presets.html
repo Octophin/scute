@@ -3,48 +3,59 @@
 
 <script type="text/javascript">
     var presetList = [];
-    {% for preset in presets %}
-    presetList.push({{ preset| tojson }});
+    {% for preset in presets  %}
+    presetList.push({{ preset|tojson }});
 
     {% endfor %}
 </script>
 
 <section class="happy-margin presetManager">
 
-    <h2>Set and Edit Presents Below ({{presets|length}}) </h2>
-    <span class="add preset" onclick="addPreset()">+</span>
+    <h1 class="navy">Set and Edit Presents Below ({{presets|length}}) </h1>
+    
+    <div class="presets-manager-wrapper flex">
+        <div class="presets-manager-list scrolling">
+            <div class="edit-presets-icons flex">
+                <span class="icon add-preset" onclick="addPreset()">
+                    <img src="scute/images/add-icon.png" alt="Delete icon" />
+                </span>
+                <span class="icon">
+                    <img src="scute/images/delete-icon.png" alt="Delete icon" />
+                </span>
+            </div>
+            <div class="presets-list">
+                <ul>
+                    {% for preset in presets  %}
+                    <li onclick="loadPreset({{ preset.ID }})"><span class="preset-title navy bold">{{ preset.name }}</span><br>
+                        <span class="description gray">{{ preset.description }}</span>
+                    </li>
+                    {% endfor %}
 
-    <div class="verticalListColumn scrolling">
-        <ul>
-            {% for preset in presets  %}
-            <li onclick="loadPreset({{ preset.ID }})"><span class="title">{{ preset.name }}</span><br>
-                <span class="description">{{ preset.description }}</span>
-            </li>
-            {% endfor %}
-
-        </ul>
-    </div>
-    <div class="content">
-        <div class="heading">
-            <span id="presetHeading"></span>
-            <span id="presetDate"></span>
+                </ul>
+            </div>
         </div>
-        <div class="presetForm" id="presetForm" style="visibility:hidden">
-            <form>
-
-                <label for="presetName">Preset Name</label>
-                <input type="text" id="presetName" name="presetName" required>
-                <label for="presetDescription">Preset Description</label>
-                <input type="text" id="presetDescription" name="preseDescription" required>
-                <textArea id="presetFields" name="presetFields"></textArea>
-                <div class="presetDeleteWrapper" id="presetDeleteWrapper" style="visibility:hidden">
-                    <span clsss="presetDelete" data-presetID="" onClick="deletePreset()">Delete</span>
-                </div>
-                <div class="presetSaveWrapper" id="presetSaveWrapper" >
-                    <span clsss="presetSave" onClick="savePreset()">Save</span>
-                </div>
-            </form>
-        </div>
+        <div class="presets-manager-content">
+                <div class="heading">
+                        <span id="presetHeading"></span>
+                        <span id="presetDate"></span>
+                    </div>
+                    <div class="presetForm" id="presetForm" style="visibility:hidden">
+                        <form>
+            
+                            <label for="presetName">Preset Name</label>
+                            <input type="text" id="presetName" name="presetName" required>
+                            <label for="preseDescription">Preset Description</label>
+                            <input type="text" id="preseDescription" name="preseDescription" required>
+                            <textArea id="presetFields" name="presetFields"></textArea>
+                            <div class="presetDeleteWrapper" id="presetDeleteWrapper" style="visibility:hidden">
+                                <span clsss="presetDelete" data-presetID="" onClick="deletePreset()">Delete</span>
+                            </div>
+                            <div class="presetSaveWrapper" id="presetSaveWrapper" >
+                                <span clsss="presetSave" onClick="savePreset()">Save</span>
+                            </div>
+                        </form>
+                    </div>
+            
 
         </div>
     </div>
@@ -52,3 +63,4 @@
 </section>
 
 {% endblock %}
+
