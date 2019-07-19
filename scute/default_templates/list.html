@@ -52,27 +52,27 @@
                     {% endfor %}
                     {% endfor %}
                     <tr>
-                        <td class="empty"></td>
+                        {# <td class="empty"></td> #}
                         <span class="circle circle2"></span>
                         {% for deviceKey,deviceValues in reportValues.items() %}
-                        <td>
+                        {# <td>
                             <a class="button navy inline-action" href="/config/{{deviceKey}}">
                                 Configuration
                             </a>
-                        </td>
+                        </td> #}
                         {% endfor %}
                     </tr>
                     {% for actionKey,actionSchema in actions.items() %}
 
                     <tr>
 
-                        <td class="empty"></td>
+                        {# <td class="empty"></td> #}
                         {% for deviceKey,deviceValues in reportValues.items() %}
 
-                        <td>
+                        {# <td>
                             <a href="{{actionKey}}?devices[]={{deviceKey}}"
                                 class="button navy inline-action">{{actionSchema.label}}</a>
-                        </td>
+                        </td> #}
 
                         {% endfor %}
 
@@ -82,11 +82,32 @@
 
                 </table>
 
+                <div class="select-all-button-wrapper">
+                    <button>Select all</button>
+                </div>
+
             </section>
 
-            <section class="buttons actions" style="visibility:hidden;">
+            <section class="buttons actions">
 
-                <section class="banner-block happy-margin">
+                <div class="buttons-wrapper flex">
+                    <button>Export Data</button>
+                    <button>Configure</button>
+                    <select>
+                        <option>Apply Preset
+                        </option>
+                        <option>Preset A</option>
+                        <option>Preset B</option>
+                        <options>Preset C</options>
+                    </select>
+                    <span class="dropdown-icon">
+                        <img src="scute/images/drop-down-icon.png" alt="Drop-down icon">
+                    </span>
+                    <button>Delete</button>
+                    <button>Disconnect</button>
+                </div>
+
+                {# <section class="banner-block happy-margin">
                     <div class="banner selected-devices flex">
                         <h3>
                             <span class="count">2</span>
@@ -108,7 +129,7 @@
                             Load preset
                         </button>
                     </div>
-                </section>
+                </section> #}
             </section>
 
         </section>

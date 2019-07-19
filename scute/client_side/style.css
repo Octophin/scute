@@ -44,7 +44,7 @@ body {
     position: relative;
     height: 100%;
     margin: 0 auto;
-    width: 70em;
+    width: 66em;
     max-width: 100%;
 }
 
@@ -115,13 +115,13 @@ nav {
     flex-flow: row nowrap;
     justify-content: space-between;
     margin: 0;
-    border-bottom: solid thin #F6F6F6;
+    border-bottom: solid thin #B3B1B1;
 }
 
 .nav-tab {
     width: calc(100% / 4);
     text-align: center;
-    border-right: solid thin #F6F6F6;
+    border-right: solid thin #B3B1B1;
     margin: 0;
     padding: 0.8em 0;
 }
@@ -156,12 +156,12 @@ nav a {
 
 #mainMenu {
     background-color: #f5f5f5;
-    ;
 }
 
 .main-wrapper {
     margin-top: 0;
     padding-top: 0.5em;
+    padding-bottom: 2em;
 }
 
 .main-table-wrapper {
@@ -217,6 +217,7 @@ article.selected {
 .table-nav-right {
     margin-right: 1em;
     font-weight: 300;
+    font-size: 1.1em;
 }
 
 .usb-icon {
@@ -243,11 +244,11 @@ article.selected {
 }
 
 .circle1 {
-    left: 16.3em;
+    left: 15.4em;
 }
 
 .circle2 {
-    left: 27em;
+    left: 24.4em;
 }
 
 tr td:not(:first-of-type) {
@@ -265,6 +266,7 @@ tr td:not(:first-of-type) {
     margin: 1em;
     overflow-x: auto;
     scrollbar-color: #50B75F #e5e5e5;
+    border-bottom: solid thin #B3B1B1;
 }
 
 .main-table::-webkit-scrollbar {
@@ -322,12 +324,10 @@ tr:nth-child(even) td {
 
 tr:nth-child(odd) td:first-child {
     background-color: hsla(129, 42%, 52%, 0.05);
-    /* background-color: hsla(129, 42%, 52%, 0.05); */
 }
 
 tr:nth-child(even) td:first-child {
     background-color: hsla(129, 42%, 52%, 0.12);
-    /* background-color: hsla(129, 42%, 52%, 0.1); */
 }
 
 .deviceHeader {
@@ -395,13 +395,48 @@ button:active {
 }
 
 .buttons-wrapper {
+    flex-flow: row wrap;
     justify-content: space-between;
+    padding: 1em 3em;
+    width: 100%;
+}
+
+.buttons-wrapper * {
+    color: #B3B1B1;
+}
+
+.buttons-wrapper .dropdown-icon {
+    width: 0.8em;
+    height: 0.8em;
+    position: relative;
+    left: -3em;
+    top: 0.8em;
+}
+
+.buttons-wrapper button {
+    border: solid thin #B3B1B1;
 }
 
 .buttons-wrapper.form-buttons {
     margin: 2em 1em;
 }
 
+.select-all-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2em;
+}
+
+.buttons-wrapper select {
+    background-color: transparent;
+    border-radius: 0.1em;
+    padding: 0.5em 0.8em;
+    font-size: 1.1em;
+    font-weight: 400;
+    width: 8.8em;
+    line-height: 1.4;
+    position: relative;
+}
 /* BANNERS */
 
 .banner-block {
