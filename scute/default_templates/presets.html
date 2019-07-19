@@ -11,32 +11,35 @@
 
 <section class="happy-margin presetManager">
 
-    <h2>Set and Edit Presents Below ({{presets|length}}) </h2>
-    <span class="add preset" onclick="addPreset()">+</span>
+    <h1 class="navy">Set and edit presets below</h1>
 
-    <div class="verticalListColumn scrolling">
-        <ul>
-            {% for preset in presets  %}
-            <li onclick="loadPreset({{ preset.ID }})"><span class="title">{{ preset.name }}</span><br>
-                <span class="description">{{ preset.description }}</span>
-            </li>
-            {% endfor %}
+    <div class="presets-manager-wrapper flex">
+        <div class="presets-manager-list scrolling">
+            <span class="add preset" onclick="addPreset()">+</span>
+            <ul>
+                {% for preset in presets  %}
+                <li onclick="loadPreset({{ preset.ID }})"><span class="title">{{ preset.name }}</span><br>
+                    <span class="description">{{ preset.description }}</span>
+                </li>
+                {% endfor %}
 
-        </ul>
-    </div>
-    <div class="content" >
-        <div class="heading">
-            <span id="presetHeading"></span>
-            <span id="presetDate"></span>
+            </ul>
         </div>
-        <div class="presetForm" style="display: visble;">
+        <div class="presets-manager-content">
+            <div class="heading">
+                <h2 class="navy">Preset ({{presets|length}}) </h2>
+                <span id="presetHeading"></span>
+                <span id="presetDate"></span>
+            </div>
+            <div class="presetForm" style="display: visble;">
                 <label for="presetName">Preset Name</label>
                 <input type="text" id="presetName" name="presetName" required>
                 <label for="preseDescription">Preset Description</label>
                 <input type="text" id="preseDescription" name="preseDescription" required>
-                <textArea id="presetFields" name="presetFields" ></textArea>
-        </div>
+                {# <textArea id="presetFields" name="presetFields"></textArea> #}
+            </div>
 
+        </div>
     </div>
 
 </section>

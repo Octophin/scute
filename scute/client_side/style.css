@@ -481,6 +481,24 @@ button.scary {
     margin: 2em 1em 0;
 }
 
+/* PRESETS MANAGER PAGE */
+
+.presets-manager-wrapper {
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 2em 0;
+}
+
+.presets-manager-content {
+    flex: 2;
+    padding: 1em;
+}
+
+.presets-manager-list {
+    padding: 1em;
+}
+
 /* BANNERS */
 
 .banner-block {
