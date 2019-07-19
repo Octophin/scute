@@ -467,6 +467,8 @@ button.scary {
     text-align: center;
     width: 40%;
     display: block;
+    border: solid thin #B3B1B1;
+    box-shadow: 1em 1em 1em -0.8em #B3B1B1;
 }
 
 /* BANNERS */
