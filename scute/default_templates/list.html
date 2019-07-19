@@ -25,6 +25,8 @@
                 </div>
             </div>
 
+
+
             <section class="main-table">
                 <table>
                     <tr>
@@ -42,6 +44,7 @@
                     {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
                     <tr>
                         <td>{{fieldSchema.label}}</td>
+                        <span class="circle circle1"></span>
                         {% for deviceKey,deviceValues in reportValues.items() %}
                         <td>{{deviceValues[fieldKey]}}</td>
                         {% endfor %}
@@ -50,6 +53,7 @@
                     {% endfor %}
                     <tr>
                         <td class="empty"></td>
+                        <span class="circle circle2"></span>
                         {% for deviceKey,deviceValues in reportValues.items() %}
                         <td>
                             <a class="button navy inline-action" href="/config/{{deviceKey}}">
@@ -63,7 +67,6 @@
                     <tr>
 
                         <td class="empty"></td>
-
                         {% for deviceKey,deviceValues in reportValues.items() %}
 
                         <td>
