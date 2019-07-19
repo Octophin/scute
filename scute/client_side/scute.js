@@ -118,14 +118,10 @@ let savePreset = function () {
 
 let loadPreset = function (presetID) {
 
-    document.getElementById("presetForm").style.visibility= 'visible' ;
-
-    var span = document.getElementById('presetHeading');
-    span.textContent = presetList[presetID].name;
-
-    var span = document.getElementById('presetDate');
-    span.textContent = presetList[presetID].date;
-
+    document.getElementById("presetDeleteWrapper").style.visibility= 'visible';
+    document.getElementById("presetForm").style.visibility= 'visible';
+    document.getElementById('presetHeading').textContent = presetList[presetID].name;
+    document.getElementById('presetDate').textContent = presetList[presetID].date;
     document.getElementById("presetName").value = presetList[presetID].name;
     document.getElementById("preseDescription").value = presetList[presetID].description;
     document.getElementById("presetFields").value = JSON.stringify(presetList[presetID].presets);
@@ -135,7 +131,13 @@ let loadPreset = function (presetID) {
 
 let addPreset = function () {
 
-    alert("addPreset TBC");
+    document.getElementById("presetDeleteWrapper").style.visibility= 'hidden';
+    document.getElementById("presetForm").style.visibility= 'visible';
+    document.getElementById('presetHeading').textContent = "Add Preset";
+    document.getElementById('presetDate').textContent = '';
+    document.getElementById("presetName").value = '';
+    document.getElementById("preseDescription").value = '';
+    document.getElementById("presetFields").value = '';
 
 };
 

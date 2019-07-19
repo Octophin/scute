@@ -3,8 +3,8 @@
 
 <script type="text/javascript">
     var presetList = [];
-    {% for preset in presets  %}
-    presetList.push({{ preset|tojson }});
+    {% for preset in presets %}
+    presetList.push({{ preset| tojson }});
 
     {% endfor %}
 </script>
@@ -24,18 +24,26 @@
 
         </ul>
     </div>
-    <div class="content" >
+    <div class="content">
         <div class="heading">
             <span id="presetHeading"></span>
             <span id="presetDate"></span>
         </div>
         <div class="presetForm" id="presetForm" style="visibility:hidden">
+            <form>
+
                 <label for="presetName">Preset Name</label>
                 <input type="text" id="presetName" name="presetName" required>
                 <label for="preseDescription">Preset Description</label>
                 <input type="text" id="preseDescription" name="preseDescription" required>
-                <textArea id="presetFields" name="presetFields" ></textArea>
-            <span clsss="presetDelete" data-presetID="" onClick="deletePreset()">Delete</span>
+                <textArea id="presetFields" name="presetFields"></textArea>
+                <div class="presetDeleteWrapper" id="presetDeleteWrapper" style="visibility:hidden">
+                    <span clsss="presetDelete" data-presetID="" onClick="deletePreset()">Delete</span>
+                </div>
+                <div class="presetSaveWrapper" id="presetSaveWrapper" >
+                    <span clsss="presetSave" onClick="savePreset()">Save</span>
+                </div>
+            </form>
         </div>
 
     </div>
