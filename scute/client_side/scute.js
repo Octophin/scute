@@ -118,12 +118,13 @@ let savePreset = function () {
 
 let loadPreset = function (presetID) {
 
+    document.getElementById("presetForm").style.visibility= 'visible' ;
 
     var span = document.getElementById('presetHeading');
     span.textContent = presetList[presetID].name;
 
     var span = document.getElementById('presetDate');
-    span.textContent = presetList[presetID].dateTime;
+    span.textContent = presetList[presetID].date;
 
     document.getElementById("presetName").value = presetList[presetID].name;
     document.getElementById("preseDescription").value = presetList[presetID].description;

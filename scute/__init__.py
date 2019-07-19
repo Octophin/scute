@@ -101,7 +101,7 @@ class scute:
                 fileRaw = f1.read()
                 fileJSON = json.loads(fileRaw)
 
-            presetFiles.append({"ID": idx, "filename": file, "name":fileJSON["name"], "description":fileJSON["description"], "presets":fileJSON["presets"] })
+            presetFiles.append({"ID": idx, "filename": file, "name":fileJSON["name"], "description":fileJSON["description"], "presets":fileJSON["presets"], "date": fileJSON['dateTime'] })
 
         return render_template("presets.html", title="Presets", presets=presetFiles)
 
