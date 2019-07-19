@@ -143,6 +143,6 @@ let addPreset = function () {
 
 let deletePreset = function () {
 
-    alert("deletePreset TBC");
+    alert("Not yet implemented: deletePreset");
 
 };
