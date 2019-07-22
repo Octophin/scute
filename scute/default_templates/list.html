@@ -20,7 +20,7 @@
                         <p class="inline-block light-gray">Last loaded:</p>
                     </div>
                     <div class="date value inline-block">
-                        <p class="inline-block">2X/1X/XX19 - 1X:4X</p>
+                        <p class="inline-block">{{ timeLoaded }}</p>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
                     <tr>
                         <td>{{fieldSchema.label}}</td>
-                        <span class="circle1 circle selected"></span>
+                        <span class="circle1 circle selected-no"></span>
                         {% for deviceKey,deviceValues in reportValues.items() %}
                         <td>{{deviceValues[fieldKey]}}</td>
                         {% endfor %}

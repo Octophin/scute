@@ -3,6 +3,7 @@ from flask import render_template, send_from_directory, request, send_file, safe
 import jinja2
 import os
 import collections
+from datetime import datetime, date
 
 here = os.path.dirname(os.path.abspath(__file__))
 
@@ -44,6 +45,7 @@ class scute:
                     fields[field] = self.configSchema[category]["fields"][field]
                     if "order" not in fields[field]:
                         fields[field]["order"] = 0
+    
     def getDeviceReport(self, deviceID):
         reportValues = {}
         # First try to get all fields, then overwrite with specific ones
@@ -57,19 +59,25 @@ class scute:
             except:
                 pass
         return reportValues
+    
     def static_assets(self, filename):
         return send_from_directory(here + "/client_side/", filename)
+    
     def registerHook(self, hookName, hookFunction):
         self.hooks[hookName] = hookFunction
+    
     def getDevices(self):
         return self.hooks["get_devices"]()
+    
     def getAllDeviceReports(self):
         deviceReports = {}
         for device in self.getDevices():
             deviceReports[device] = self.getDeviceReport(device)
         return deviceReports
+
     def deviceListView(self):
-        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.reportSchema, actions=self.actionsSchema)
+        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.reportSchema, actions=self.actionsSchema, timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    
     def deviceConfigView(self, device):
 
         # Save config
