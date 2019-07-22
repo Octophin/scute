@@ -28,38 +28,70 @@
             <section class="main-table">
                 <table>
                     <tr>
-                        <td>
-                            Fields
-                        </td>
+                        <td>Report</td>
                         {% for device in reportValues %}
                         <td data-device="{{device}}" class="deviceHeader">
                             {{device}}
                         </td>
                         {% endfor %}
                     </tr>
-
+                    <!-- categories in report loop -->
                     {% for key,category in reportSchema.items() | sort(attribute='1.order') %}
-                    {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-                    <tr>
-                        <td>{{fieldSchema.label}}</td>
-                        <span class="circle1 circle selected-no"></span>
-                        {% for deviceKey,deviceValues in reportValues.items() %}
-                        <td>{{deviceValues[fieldKey]}}</td>
+
+                        <!-- report field loop rows -->
+                        {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+                        <tr>
+                            <td>{{fieldSchema.label}}</td>
+                            <span class="circle1 circle selected-no"></span>
+                            <!-- output the field cell -->
+                            {% for deviceKey,deviceValues in reportValues.items() %}
+                            <td>
+                                {% if deviceValues[fieldKey] is mapping %}
+                                    mapping 
+                                    <!-- TODO - detect list: this is not working... -->
+                                {% else %}
+                                
+                                {{deviceValues[fieldKey]}}
+                                {% endif %}
+
+                            </td>
+                            {% endfor %}
+                            </span>
+
+                        </tr>
                         {% endfor %}
-                    </tr>
+
                     {% endfor %}
-                    {% endfor %}
-                    <tr>
-                        <span class="circle circle2"></span>
-                        {% for deviceKey,deviceValues in reportValues.items() %}
+                    
+                        <!-- action  loop rows -->
+                        {% for actionKey, actionSchema in actions.items()  | sort(attribute='1.order') %}
+                        <tr class="blankField"><td>&nbsp;</td>
+                            {% for deviceKey,deviceValues in reportValues.items() %}
+                            <td>
+                                {% if actionSchema.type == "link" %}
+                                    <!-- One action -->
+                                    <a href="{{ actionSchema.url }}/{{ deviceKey }}"><button>{{ actionSchema.label }}</button></a>
+                                {% elif actionSchema.type == "selectList" %}
+                                    <!-- Form with select list & device -->
+                                    <form action="{{ actionSchema.url }}/{{ deviceKey }}" method="get">
+                                        <select name = "action" onchange='if(this.value != "") { this.form.submit(); }'>
+                                                <option value="">{{actionSchema.label}}</option>
+                                                {% for selectOption in actionSchema.select %}
+                                                <option value = "{{selectOption.value}}">{{selectOption.label}}</option>
+                                                {% endfor %}
+
+                                        </select>
+                                    
+                                    </form>
+                                    
+                                {% endif %}
+                                
+                                
+                                
+                            </td>
+                            {% endfor %}
+                        </tr>
                         {% endfor %}
-                    </tr>
-                    {% for actionKey,actionSchema in actions.items() %}
-                    <tr>
-                        {% for deviceKey,deviceValues in reportValues.items() %}
-                        {% endfor %}
-                    </tr>
-                    {% endfor %}
 
                 </table>
 

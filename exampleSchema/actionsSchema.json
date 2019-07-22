@@ -1,12 +1,42 @@
 {
-    "/export": {
-        "label": "Export data",
-        "order": 3,
-        "bulk": true
+    "config": {
+        "type": "link",
+        "label": "Config",
+        "order": 1,
+        "bulk":false,
+        "url": "/config",
+        "icon": ""
     },
-    "/disconnect": {
-        "label": "Disconnect",
+    "export": {
+        "type": "link",
+        "label": "Export data",
+        "order": 2,
+        "bulk": true,
+        "url": "/export",
+        "icon": ""
+    },
+    "actionList": {
+        "type": "selectList",
+        "label": "Other Actions",
         "order": 3,
-        "bulk": false
+        "bulk": false,
+        "url": "/action",
+        "icon": "",
+        "select": [
+            {
+                "value": "erase_log",
+                "label": "Erase Log"
+            },{
+                "value": "reset_flash",
+                "label": "Reset flash"
+            },{
+                "value": "update_gps_almanac",
+                "label": "Update GPS"
+            },
+            {
+                "value": "apply_gps_ascii",
+                "label": "Apply GPS ASCII"
+            } ]
+
     }
 }

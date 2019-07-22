@@ -80,6 +80,8 @@ class scute:
     
     def deviceConfigView(self, device):
 
+        print(device)
+
         # Save config
         if request.method == "POST":
             try:

@@ -22,6 +22,7 @@ exampleInstance.registerHook("get_devices", getDevices)
 
 def getFields(deviceID):
     return  {
+           "id": "11:11:00:00:00:00",
            "batteryLevel": 50,
            "fileSize": 123456,
            "sensorsEnabled": [

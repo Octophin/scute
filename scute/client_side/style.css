@@ -527,6 +527,11 @@ button.scary {
     background-color: #6ab469;
 }
 
+.blankField{
+    background-color: white !important;
+
+}
+
 /* BANNERS */
 
 .banner-block {
