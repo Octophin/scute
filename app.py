@@ -16,7 +16,7 @@ options = {
 exampleInstance = scute(options, app)
 
 def getDevices():
-    return ["ONE", "TWO"]
+    return ["ONE", "TWO", "THREE", "FOUR"]
 
 exampleInstance.registerHook("get_devices", getDevices)
 
