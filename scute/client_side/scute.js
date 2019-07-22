@@ -118,7 +118,7 @@ let savePreset = function () {
 
 let loadPreset = function (presetID) {
 
-    removeThisClassFromLI('preset-list-item-selected');
+    removeThisClassFrom('preset-list-item-selected', 'li');
     document.getElementById("preset-list-item-" + presetID).classList.add('preset-list-item-selected');
 
     document.getElementById("presetDeleteWrapper").style.visibility = 'visible';
@@ -134,7 +134,7 @@ let loadPreset = function (presetID) {
 
 let addPreset = function () {
 
-    removeThisClassFromLI('preset-list-item-selected');
+    removeThisClassFrom('preset-list-item-selected', 'li');
 
     document.getElementById("presetDeleteWrapper").style.visibility = 'hidden';
     document.getElementById("presetForm").style.visibility = 'visible';
@@ -148,16 +148,18 @@ let addPreset = function () {
 
 let deletePreset = function () {
 
-    removeThisClassFromLI('preset-list-item-selected');
+    removeThisClassFrom('preset-list-item-selected', 'li');
 
     alert("Not yet implemented: deletePreset");
 
 };
 
 
-function removeThisClassFromLI(thisClass) {
-    var target = document.querySelectorAll("li." + thisClass);
+let removeThisClassFrom = function (thisClass, thisElement) {
+
+    var target = document.querySelectorAll(thisElement + "." + thisClass);
+
     for (var i = 0; i < target.length; i++) {
         target[i].classList.remove(thisClass);
     }
-}
+};
