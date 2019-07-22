@@ -26,7 +26,7 @@
             <div class="presets-list">
                 <ul>
                     {% for preset in presets  %}
-                    <li onclick="loadPreset({{ preset.ID }})"><span class="preset-title navy bold">{{ preset.name }}</span><br>
+                    <li onclick="loadPreset({{ preset.ID }})" class="preset-list-item" id="preset-list-item-{{ preset.ID }}"  ><span class="preset-title navy bold">{{ preset.name }}</span><br>
                         <span class="description gray">{{ preset.description }}</span>
                     </li>
                     {% endfor %}

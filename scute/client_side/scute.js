@@ -118,8 +118,11 @@ let savePreset = function () {
 
 let loadPreset = function (presetID) {
 
-    document.getElementById("presetDeleteWrapper").style.visibility= 'visible';
-    document.getElementById("presetForm").style.visibility= 'visible';
+    removeThisClassFromLI('preset-list-item-selected');
+    document.getElementById("preset-list-item-" + presetID).classList.add('preset-list-item-selected');
+
+    document.getElementById("presetDeleteWrapper").style.visibility = 'visible';
+    document.getElementById("presetForm").style.visibility = 'visible';
     document.getElementById('presetHeading').textContent = presetList[presetID].name;
     document.getElementById('presetDate').textContent = presetList[presetID].date;
     document.getElementById("presetName").value = presetList[presetID].name;
@@ -131,8 +134,10 @@ let loadPreset = function (presetID) {
 
 let addPreset = function () {
 
-    document.getElementById("presetDeleteWrapper").style.visibility= 'hidden';
-    document.getElementById("presetForm").style.visibility= 'visible';
+    removeThisClassFromLI('preset-list-item-selected');
+
+    document.getElementById("presetDeleteWrapper").style.visibility = 'hidden';
+    document.getElementById("presetForm").style.visibility = 'visible';
     document.getElementById('presetHeading').textContent = "Add Preset";
     document.getElementById('presetDate').textContent = '';
     document.getElementById("presetName").value = '';
@@ -143,6 +148,16 @@ let addPreset = function () {
 
 let deletePreset = function () {
 
+    removeThisClassFromLI('preset-list-item-selected');
+
     alert("Not yet implemented: deletePreset");
 
 };
+
+
+function removeThisClassFromLI(thisClass) {
+    var target = document.querySelectorAll("li." + thisClass);
+    for (var i = 0; i < target.length; i++) {
+        target[i].classList.remove(thisClass);
+    }
+}
