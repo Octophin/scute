@@ -426,6 +426,15 @@ button:active {
 
 .buttons-wrapper.form-buttons {
     margin: 2em 1em;
+    text-align: right;
+}
+
+.buttons-wrapper.form-buttons button {
+    display: inline-block;
+}
+
+.buttons-wrapper.form-buttons button:first-of-type {
+    padding: 0.5em 3em;
 }
 
 button.scary {
