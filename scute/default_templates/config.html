@@ -29,8 +29,8 @@
 
                         {% if fieldSchema.description|length > 1 %}
                             <span class="icon" title="{{ fieldSchema.description }}">
-                            <img src="/scute/images/info-icon-navy.png" alt="Info icon">
-                        </span>
+                                <img src="/scute/images/info-icon-navy.png" alt="Info icon">
+                            </span>
                         {% endif %}
 
                         <label for="{{fieldKey}}">{{fieldSchema.label}}{% if fieldSchema.userLocked == true %} (read only){% endif %}

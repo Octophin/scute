@@ -620,6 +620,7 @@ select {
     width: 60%;
     -webkit-appearance: none;
     padding: 0.5em;
+    margin-right: 0;
 }
 
 input:focus, [data-changed] {
