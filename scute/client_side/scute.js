@@ -115,28 +115,48 @@ document.querySelectorAll("[data-action]").forEach(function (element) {
 
         });
 
-        document.location.href = action + "?" + query;
+        let targetURL = action + "?" + query;
+
+        if (element.hasAttribute("data-warn")) {
+
+            let warning = "Apply " + element.innerHTML + " to " + selectedDevices.toString() + "?";
+
+            showConfirm(warning, targetURL);
+
+            return false;
+
+        } else {
+
+            document.location.href = targetURL;
+
+        }
+
 
     });
 
 });
 
-let triggerAction = function (action) {
+let showConfirm = function (warning, targetURL) {
 
-    let devices = [];
-    let queryString = "?";
+    // Remove existing popup
 
-    document.querySelectorAll(".deviceHeader[data-active]").forEach(function (element, index) {
+    if (document.getElementById("popup")) {
 
-        let device = element.getAttribute("data-device");
+        document.getElementById("popup").outerHTML = "";
 
-        devices.push(device);
+    }
 
-        queryString += "devices[]=" + device + "&";
+    let popup = `<section id="popup" class="are-you-sure">
+                    <div class="pop-up navy">
+                        <p>${warning}</p>
+                        <div class="pop-up-buttons">
+                            <button onclick="document.location.href='${targetURL}'">Yes</button>
+                            <button onclick="document.getElementById('popup').outerHTML = ''">No</button>
+                        </div>
+                    </div>
+                </section>`;
 
-    });
-
-    document.location.href = action + queryString;
+    document.querySelector("main").insertAdjacentHTML("afterbegin", popup);
 
 };
 
