@@ -570,6 +570,11 @@ button.scary {
 .form-headings {
     border-top: solid thick #6ab468;
     padding-top: 1em;
+    margin: 1em 0;
+}
+
+.form-headings h1, .form-headings div {
+    margin: 0.5em;
 }
 
 .subheading {
@@ -635,6 +640,10 @@ input[type=checkbox]+label {
     right: 43em;
 }
 
+form input[type=checkbox] + label {
+    padding-left: 3em;
+}
+
 .icon+label {
     margin-left: -2em;
 }
@@ -642,7 +651,7 @@ input[type=checkbox]+label {
 input[type="checkbox"]+label::after {
     content: "";
     position: absolute;
-    right: -4.5em;
+    right: -6.8em;
     top: 0em;
     width: 1em;
     height: 1em;
