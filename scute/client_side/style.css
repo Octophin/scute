@@ -546,6 +546,10 @@ button.scary {
     margin-left: 1em;
 }
 
+.presetForm form .form-field.happy-margin input[type=checkbox]+label {
+    right: 23.5em;
+}
+
 /* BANNERS */
 
 .banner-block {
@@ -676,7 +680,7 @@ form input[type=checkbox] + label {
 input[type="checkbox"]+label::after {
     content: "";
     position: absolute;
-    right: -6.8em;
+    right: -1.8em;
     top: 0em;
     width: 1em;
     height: 1em;
