@@ -18,7 +18,7 @@ class scute:
         ])
         self.server.jinja_loader = my_loader
         self.server.add_url_rule('/', 'index', self.deviceListView)
-        self.server.add_url_rule('/config/<device>', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
+        self.server.add_url_rule('/config', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/presets', 'presets', self.presets)
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
         with open(options["reportSchema"]) as reportSchema:  
@@ -78,7 +78,9 @@ class scute:
     def deviceListView(self):
         return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.reportSchema, actions=self.actionsSchema, timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     
-    def deviceConfigView(self, device):
+    def deviceConfigView(self):
+
+        device = request.args.getlist("devices[]")[0]
 
         # Save config
         if request.method == "POST":

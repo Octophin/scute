@@ -1,6 +1,12 @@
 let getSelectedDevices = function () {
 
-    
+    let selected = Array.from(document.querySelectorAll(".deviceHeader[data-active]"));
+
+    return selected.map(function (element) {
+
+        return element.getAttribute("data-device");
+
+    });
 
 };
 
@@ -21,9 +27,7 @@ document.querySelectorAll(".deviceHeader").forEach(function (element) {
 
         }
 
-        let selected = document.querySelectorAll(".deviceHeader[data-active]");
-
-        selected.forEach
+        let selected = getSelectedDevices();
 
         let bulkActions = Array.from(document.querySelectorAll("[data-bulk='true']"));
 
@@ -90,14 +94,28 @@ document.querySelectorAll("input, select").forEach(function (element) {
 
 });
 
-document.querySelectorAll("data-action").forEach(function (element) {
+document.querySelectorAll("[data-action]").forEach(function (element) {
 
     element.addEventListener("click", function () {
 
+        if (element.hasAttribute("disabled")) {
+
+            return false;
+
+        }
+
         let action = element.getAttribute("data-action");
+        let selectedDevices = getSelectedDevices();
 
+        let query = "";
 
+        selectedDevices.forEach(function (device) {
 
+            query += "devices[]=" + device + "&";
+
+        });
+
+        document.location.href = action + "?" + query;
 
     });
 

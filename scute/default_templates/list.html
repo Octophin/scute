@@ -92,7 +92,7 @@
 
                         {% for key,action in actions.items() %}
 
-                            <button {% if action.warn %} data-warn="true" {% endif %} {% if action.bulk %} data-bulk="true" {% else %} data-bulk="false" {% endif %} class="{% if action.warn %} scary {% endif %}" data-action="key" disabled>{{action.label}}</button>
+                            <button {% if action.warn %} data-warn="true" {% endif %} {% if action.bulk %} data-bulk="true" {% else %} data-bulk="false" {% endif %} class="{% if action.warn %} scary {% endif %}" data-action="{{key}}" disabled>{{action.label}}</button>
 
                         {% endfor %}
 
