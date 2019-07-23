@@ -36,24 +36,13 @@
         </div>
         <div class="presets-manager-content">
                 <div class="heading">
-                        <span id="presetHeading"></span>
+                        <h1 id="presetHeading"></h1>
                         <span id="presetDate"></span>
                     </div>
                     <div class="presetForm" id="presetForm" style="visibility:hidden">
-                        <form>
-            
-                            <label for="presetName">Preset Name</label>
-                            <input type="text" id="presetName" name="presetName" required>
-                            <label for="preseDescription">Preset Description</label>
-                            <input type="text" id="preseDescription" name="preseDescription" required>
-                            <textArea id="presetFields" name="presetFields"></textArea>
-                            <div class="presetDeleteWrapper" id="presetDeleteWrapper" style="visibility:hidden">
-                                <span clsss="presetDelete" data-presetID="" onClick="deletePreset()">Delete</span>
-                            </div>
-                            <div class="presetSaveWrapper" id="presetSaveWrapper" >
-                                <span clsss="presetSave" onClick="savePreset()">Save</span>
-                            </div>
-                        </form>
+                        
+                            {% include 'configForm.html' %}
+                            
                     </div>
             
 

@@ -113,7 +113,7 @@ class scute:
 
             presetFiles.append({"ID": idx, "filename": file, "name":fileJSON["name"], "description":fileJSON["description"], "presets":fileJSON["presets"], "date": fileJSON['dateTime'] })
 
-        return render_template("presets.html", title="Presets", presets=presetFiles)
+        return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.configSchema, current={})
 
 
     def expandJSON(self, json):

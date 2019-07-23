@@ -200,13 +200,13 @@ let loadPreset = function (presetID) {
     removeThisClassFrom('preset-list-item-selected', 'li');
     document.getElementById("preset-list-item-" + presetID).classList.add('preset-list-item-selected');
 
-    document.getElementById("presetDeleteWrapper").style.visibility = 'visible';
+    // document.getElementById("presetDeleteWrapper").style.visibility = 'visible';
     document.getElementById("presetForm").style.visibility = 'visible';
     document.getElementById('presetHeading').textContent = presetList[presetID].name;
-    document.getElementById('presetDate').textContent = presetList[presetID].date;
-    document.getElementById("presetName").value = presetList[presetID].name;
-    document.getElementById("preseDescription").value = presetList[presetID].description;
-    document.getElementById("presetFields").value = JSON.stringify(presetList[presetID].presets);
+    // document.getElementById('presetDate').textContent = presetList[presetID].date;
+    // document.getElementById("presetName").value = presetList[presetID].name;
+    // document.getElementById("preseDescription").value = presetList[presetID].description;
+    // document.getElementById("presetFields").value = JSON.stringify(presetList[presetID].presets);
 
 
 };
