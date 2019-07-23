@@ -434,7 +434,7 @@ button:active {
 }
 
 .buttons-wrapper.form-buttons {
-    margin: 2em 1em;
+    margin: 3em 1em 0;
     text-align: right;
 }
 
@@ -542,6 +542,10 @@ button.scary {
     background-color: white !important;
 }
 
+.presets-manager-content .icon+label {
+    margin-left: 1em;
+}
+
 /* BANNERS */
 
 .banner-block {
@@ -572,14 +576,25 @@ button.scary {
     max-width: 100%;
 }
 
+.config-page-subheading {
+    border-top: solid thick #6ab468;
+}
+
+.config-page-subheading h1 {
+    font-size: 2em;
+}
+
 .form-block {
     background-color: white;
 }
 
 .form-headings {
-    border-top: solid thick #6ab468;
     padding-top: 1em;
     margin: 1em 0;
+}
+
+.config-page-subheading .form-headings {
+    width: 70%;
 }
 
 .form-headings h1, .form-headings div {

@@ -4,6 +4,7 @@
 <section>
     <div class="form-block happy-margin">
         <div class="form-block-wrapper">
+            <div class="config-page-subheading flex">
             <div class="form-headings navy happy-margin">
                 <h1>Settings for {{device}}</h1>
                 <div class="subheading red navy">
@@ -13,6 +14,13 @@
                     <h3>The fields in red are unsaved changes</h3>
                 </div>
             </div>
+
+            <div class="buttons-wrapper form-buttons">
+                <button type="submit" class="featured button">Save</button>
+                <button onclick="savePreset()" type="button" class="primary button">Save as preset</button>
+            </div>
+        </div>
+
             <form class="form-body flex" method="post">
                 {% for key,category in schema.items() | sort(attribute='1.order')%}
                 <div class="form-title happy-padding navy">
@@ -96,10 +104,7 @@
 
                 {% endfor %}
 
-                <div class="buttons-wrapper form-buttons">
-                    <button type="submit" class="featured button">Save</button>
-                    <button onclick="savePreset()" type="button" class="primary button">Save as preset</button>
-                </div>
+                
             </form>
         </div>
     </div>
