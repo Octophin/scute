@@ -163,8 +163,10 @@ nav a {
 
 /* MAIN */
 
-#mainMenu {
+main {
     background-color: #f5f5f5;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
 }
 
 .main-wrapper {
@@ -256,7 +258,7 @@ article.selected {
     border: solid 2px#50B75F;
 }
 
-#mainMenu tr td:not(:first-of-type) {
+main tr td:not(:first-of-type) {
     text-align: center;
 }
 
