@@ -2,162 +2,119 @@
 {% block content %}
 
 
-<main id="mainMenu">
-    <div class="main-wrapper happy-margin">
+    <main id="mainMenu">
+        <div class="main-wrapper happy-margin">
 
-        <section class="main-table-wrapper" toolversion>
-            <div class="table-nav flex top-tail-margin top-tail-padding">
-                <div class="table-nav-left">
-                    <span class="usb-icon inline-block">
-                        <img alt="USB icon" src="/scute/images/usb-icon.png">
-                    </span>
-                    <div class="inline-block navy table-header">
-                        <h2>Tag Manager</h2>
+            <section class="main-table-wrapper" toolversion>
+                <div class="table-nav flex top-tail-margin top-tail-padding">
+                    <div class="table-nav-left">
+                        <span class="usb-icon inline-block">
+                            <img alt="USB icon" src="/scute/images/usb-icon.png">
+                        </span>
+                        <div class="inline-block navy table-header">
+                            <h2>Device Manager</h2>
+                        </div>
+                    </div>
+                    <div class="table-nav-right gray">
+                        <div class="last-loaded key inline-block">
+                            <p class="inline-block light-gray">Last loaded:</p>
+                        </div>
+                        <div class="date value inline-block">
+                            <p class="inline-block">{{ timeLoaded }}</p>
+                        </div>
                     </div>
                 </div>
-                <div class="table-nav-right gray">
-                    <div class="last-loaded key inline-block">
-                        <p class="inline-block light-gray">Last loaded:</p>
-                    </div>
-                    <div class="date value inline-block">
-                        <p class="inline-block">{{ timeLoaded }}</p>
-                    </div>
-                </div>
-            </div>
 
-            <section class="main-table">
-                <table>
-                    <tr>
-                        <td>Report</td>
-                        {% for device in reportValues %}
-                        <td data-device="{{device}}" class="deviceHeader">
-                            {{device}}
-                        </td>
-                        {% endfor %}
-                    </tr>
-                    <!-- categories in report loop -->
-                    {% for key,category in reportSchema.items() | sort(attribute='1.order') %}
-
-                        <!-- report field loop rows -->
-                        {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+                <section class="main-table">
+                    <table>
                         <tr>
-                            <td>{{fieldSchema.label}}</td>
-                            <span class="circle1 circle selected-no"></span>
-                            <!-- output the field cell -->
-                            {% for deviceKey,deviceValues in reportValues.items() %}
-                            <td>
-                                {% if deviceValues[fieldKey] is mapping %}
-                                    mapping 
-                                    <!-- TODO - detect list: this is not working... -->
-                                {% else %}
-                                
-                                {{deviceValues[fieldKey]}}
-                                {% endif %}
-
-                            </td>
-                            {% endfor %}
-                            </span>
-
-                        </tr>
-                        {% endfor %}
-
-                    {% endfor %}
-                    
-                        <!-- action  loop rows -->
-                        {% for actionKey, actionSchema in actions.items()  | sort(attribute='1.order') %}
-                        <tr class="blankField"><td>&nbsp;</td>
-                            {% for deviceKey,deviceValues in reportValues.items() %}
-                            <td>
-                                {% if actionSchema.type == "link" %}
-                                    <!-- One action -->
-                                    <a href="{{ actionSchema.url }}/{{ deviceKey }}"><button>{{ actionSchema.label }}</button></a>
-                                {% elif actionSchema.type == "selectList" %}
-                                    <!-- Form with select list & device -->
-                                    <form action="{{ actionSchema.url }}/{{ deviceKey }}" method="get">
-                                        <select name = "action" onchange='if(this.value != "") { this.form.submit(); }'>
-                                                <option value="">{{actionSchema.label}}</option>
-                                                {% for selectOption in actionSchema.select %}
-                                                <option value = "{{selectOption.value}}">{{selectOption.label}}</option>
-                                                {% endfor %}
-
-                                        </select>
-                                    
-                                    </form>
-                                    
-                                {% endif %}
-                                
-                                
-                                
-                            </td>
+                            <td></td>
+                            {% for device in reportValues %}
+                                <td data-device="{{device}}" class="deviceHeader">
+                                    <span class="circle selected-no"></span>
+                                    {{device}}
+                                </td>
                             {% endfor %}
                         </tr>
+                        <!-- categories in report loop -->
+                        {% for key,category in reportSchema.items() | sort(attribute='1.order') %}
+
+                            <!-- report field loop rows -->
+                            {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+                                <tr>
+
+                                    <td>{{fieldSchema.label}}</td>
+
+                                    <!-- output the field cell -->
+                                    {% for deviceKey,deviceValues in reportValues.items() %}
+                                        <td>
+
+                                        {% if deviceValues[fieldKey] is iterable and deviceValues[fieldKey] is not string %}
+
+                                            {# Check if list #}
+                                            
+                                            {% for value in deviceValues[fieldKey] %}
+
+                                                {{value}}
+
+                                            {% endfor %}
+
+                                        {% else %}
+                                                {{deviceValues[fieldKey]}}
+                                        {% endif %}
+
+                                        </td>
+                                    {% endfor %}
+                                </tr>
+
+                            {% endfor %}
+
                         {% endfor %}
 
-                </table>
+                    </table>
 
+                </section>
+
+                <div class="divider"></div>
+
+                <section class="buttons actions">
+
+                    <div class="buttons-wrapper">
+
+                        <select class="inactive" disabled>
+                            <option>Apply Preset</option>
+                            <option>Preset A</option>
+                            <option>Preset B</option>
+                            <option>Preset C</option>
+                        </select>
+
+                        <button data-action="config" data-bulk="false" disabled>Configure</button>
+
+                        {% for key,action in actions.items() %}
+
+                            <button {% if action.warn %} data-warn="true" {% endif %} {% if action.bulk %} data-bulk="true" {% else %} data-bulk="false" {% endif %} class="{% if action.warn %} scary {% endif %}" data-action="key" disabled>{{action.label}}</button>
+
+                        {% endfor %}
+
+                        <br/>
+
+                    </div>
+
+                </section>
 
             </section>
 
-            <div class="select-all-button-wrapper flex">
-                <div class="selection">
-                    <span class="gray">You have selected:</span>
-                    <span class="gray bold">'Device 1'</span>
+            {# TODO - Make a popup script that triggers this #}
+
+            <section class="are-you-sure">
+                <div class="pop-up navy">
+                    <p>Are you sure you want to apply preset A to Device A?</p>
+                    <div class="pop-up-buttons">
+                        <button>Yes</button>
+                        <button>No</button>
+                    </div>
                 </div>
-                <button>Select all</button>
-            </div>
-
-            <div class="divider"></div>
-
-            <section class="buttons actions">
-                <br><br><h1>&nbsp;&nbsp;Stylesheet Demo Elements</h1>
-                {# Gray / inactive buttons: #}
-                <div class="buttons-wrapper inactive flex">
-                    <button>Export Data</button>
-                    <button>Configure</button>
-                    <select>
-                        <option>Apply Preset</option>
-                        <option>Preset A</option>
-                        <option>Preset B</option>
-                        <option>Preset C</options>
-                    </select>
-                    <span class="dropdown-icon">
-                        <img src="scute/images/drop-down-icon.png" alt="Drop-down icon">
-                    </span>
-                    <button>Delete</button>
-                    <button>Disconnect</button>
-                </div>
-
-                {# Navy / red / active buttons #}
-                <div class="buttons-wrapper flex">
-                    <button>Export Data</button>
-                    <button>Configure</button>
-                    <select>
-                        <option>Apply Preset</option>
-                        <option>Preset A</option>
-                        <option>Preset B</option>
-                        <option>Preset C</options>
-                    </select>
-                    <span class="dropdown-icon">
-                        <img src="scute/images/drop-down-icon.png" alt="Drop-down icon">
-                    </span>
-                    <button class="scary">Delete</button>
-                    <button class="scary">Disconnect</button>
-                </div>
-
             </section>
-
-        </section>
-
-        <section class="are-you-sure">
-            <div class="pop-up navy">
-                <p>Are you sure you want to apply preset A to Device A?</p>
-                <div class="pop-up-buttons">
-                <button>Yes</button>
-                <button>No</button>
-                </div>
-            </div>
-        </section>
-
-    </div>
-</main>
+        </div>
+    </main>
 {% endblock %}

@@ -1,3 +1,10 @@
+let getSelectedDevices = function () {
+
+    
+
+};
+
+
 document.querySelectorAll(".deviceHeader").forEach(function (element) {
 
     element.addEventListener("click", function (e) {
@@ -16,32 +23,53 @@ document.querySelectorAll(".deviceHeader").forEach(function (element) {
 
         let selected = document.querySelectorAll(".deviceHeader[data-active]");
 
+        selected.forEach
+
+        let bulkActions = Array.from(document.querySelectorAll("[data-bulk='true']"));
+
+        let singleActions = Array.from(document.querySelectorAll("[data-bulk='false']"));
+
+
         if (selected.length) {
 
-            document.querySelector(".actions").style.visibility = "visible";
-            document.querySelector(".selected-devices .count").innerHTML = selected.length;
+            bulkActions.forEach(function (element) {
+
+                element.removeAttribute("disabled");
+
+            });
+
+            if (selected.length === 1) {
+
+                singleActions.forEach(function (element) {
+
+                    element.removeAttribute("disabled");
+
+                });
+
+            } else {
+
+                singleActions.forEach(function (element) {
+
+                    element.setAttribute("disabled", true);
+
+                });
+
+            }
 
         } else {
 
-            document.querySelector(".actions").style.visibility = "hidden";
+            Array.from(document.querySelectorAll(".buttons-wrapper select, .buttons-wrapper button")).forEach(function (element) {
+
+                element.setAttribute("disabled", true);
+
+            });
+
 
         }
 
     });
 
 });
-
-let clearDevices = function () {
-
-    document.querySelector(".actions").style.visibility = "hidden";
-
-    document.querySelectorAll(".deviceHeader[data-active]").forEach(function (element) {
-
-        element.removeAttribute("data-active");
-
-    });
-
-};
 
 document.querySelectorAll("input, select").forEach(function (element) {
 
@@ -56,6 +84,19 @@ document.querySelectorAll("input, select").forEach(function (element) {
             e.target.removeAttribute("data-changed");
 
         }
+
+
+    });
+
+});
+
+document.querySelectorAll("data-action").forEach(function (element) {
+
+    element.addEventListener("click", function () {
+
+        let action = element.getAttribute("data-action");
+
+
 
 
     });

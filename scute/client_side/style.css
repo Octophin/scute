@@ -1,5 +1,9 @@
 /* FONTS */
 
+a:link, a:visited {
+    color: inherit;
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
     /* font-weight: normal; */
@@ -134,6 +138,7 @@ nav {
     border-bottom: solid #042A43;
     background: linear-gradient(#EBEBEB, #FFFFFF);
 }
+
 nav a {
     font-weight: 400;
     font-size: 1.2em;
@@ -236,35 +241,23 @@ article.selected {
 }
 
 .circle {
+    display: block;
+    margin: auto;
+    margin-bottom: 0.5em;
     border: solid 2px #0e2940;
     background-color: white;
     width: 1em;
     height: 1em;
     border-radius: 50%;
-    display: inline-block;
-    position: absolute;
-    top: 10.1em;
     z-index: 1;
 }
 
-.circle1 {
-    left: 15.4em;
-}
-
-.circle2 {
-    left: 24.4em;
-}
-
-.circle.selected {
+.deviceHeader[data-active] .circle {
     border: solid 2px#50B75F;
 }
 
 #mainMenu tr td:not(:first-of-type) {
     text-align: center;
-}
-
-.deviceHeader {
-    position: relative;
 }
 
 .main-table {
@@ -330,25 +323,21 @@ tr:nth-child(even) td {
 }
 
 tr:nth-child(odd) td:first-child {
-    background-color: hsla(129, 42%, 52%, 0.05);
+    background-color: #F5F5F5;
 }
 
 tr:nth-child(even) td:first-child {
-    background-color: hsla(129, 42%, 52%, 0.12);
+    background-color: #E4F2E6;
 }
 
 .deviceHeader {
     cursor: pointer;
-}
-
-.deviceHeader[data-active] {
-    background-color: #042A43;
-    color: white;
+    position: relative;
 }
 
 /* BUTTONS */
 
-button {
+button, select {
     margin: 0 0.5em 0.5em 0;
 }
 
@@ -360,7 +349,7 @@ body button.selected {
     border: solid 0.1em red;
 }
 
-button, button.primary {
+button, button.primary, select {
     background-color: transparent;
     border: solid 0.1em #0e2940;
     border-radius: 0.1em;
@@ -402,24 +391,27 @@ button:active {
 }
 
 .buttons-wrapper {
-    flex-flow: row wrap;
-    justify-content: space-between;
-    padding: 2em;
+    padding: 1em;
     width: 100%;
+}
+
+.buttons-wrapper button {
+    width: auto;
+}
+
+.buttons-wrapper:after {
+    content: "";
+    flex: 1;
 }
 
 .divider {
     border-top: solid thin #B3B1B1;
-    margin: 1em ;
+    margin: 1em;
 }
 
-.buttons-wrapper.inactive * {
-    color: #B3B1B1;
-}
-
-.buttons-wrapper.inactive button,
-.buttons-wrapper.inactive select {
-    border: solid thin #B3B1B1;
+.buttons-wrapper [disabled] {
+    cursor: not-allowed;
+    opacity: 0.2;
 }
 
 .buttons-wrapper .dropdown-icon {
@@ -440,7 +432,6 @@ button.scary {
 }
 
 .select-all-button-wrapper {
-    justify-content: space-between;
     align-items: center;
     flex-flow: row nowrap;
     margin: 2em 1em;
@@ -523,13 +514,12 @@ button.scary {
     line-height: 2em;
 }
 
-.preset-list-item-selected{
+.preset-list-item-selected {
     background-color: #6ab469;
 }
 
-.blankField{
+.blankField {
     background-color: white !important;
-
 }
 
 /* BANNERS */
