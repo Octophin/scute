@@ -15,13 +15,15 @@
                 </div>
             </div>
 
-            <div class="buttons-wrapper form-buttons">
-                <button type="submit" class="featured button">Save</button>
-                <button onclick="savePreset()" type="button" class="primary button">Save as preset</button>
-            </div>
-        </div>
 
-            <form class="form-body flex" method="post">
+        </div>
+         
+            <form class="form-body flex" method="post" id="configForm">
+                    <div class="buttons-wrapper form-buttons">
+                            <button  type="submit" class="featured button">Save</button>
+                           <button onclick="savePreset()" type="button" class="primary button">Save as preset</button>
+                       </div>
+
                 {% for key,category in schema.items() | sort(attribute='1.order')%}
                 <div class="form-title happy-padding navy">
                     <h2>{{category.label}}</h2>
