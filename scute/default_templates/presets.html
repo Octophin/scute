@@ -22,7 +22,7 @@
                         {% if presets %}
                         
                             {% for preset in presets  %}
-                                <li class="preset-list-item" id="preset-list-item-{{ preset.ID }}" onclick="loadPreset({{ preset.presetID }})">
+                                <li class="preset-list-item" data-preset-menu="{{preset.presetID}}" onclick="loadPreset('{{ preset.presetID }}')">
                                     <span class="preset-title navy bold">{{ preset.presetName }}</span><br>
                                     <span class="description gray">{{ preset.presetDescription }}</span>
                                 </li>
@@ -55,7 +55,7 @@
 
                 {# Existing preset forms #}
                 {% for preset in presets %}
-                <div data-preset="{{preset.id}}">
+                <div data-preset="{{preset.presetID}}" style="display:none">
                     {% with current = preset %}
                     {% include "presetForm.html" %}
                     {% endwith %}
