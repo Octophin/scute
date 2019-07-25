@@ -1,3 +1,5 @@
+@import url(fonts.css);
+
 /* FONTS */
 
 a:link, a:visited {
@@ -6,7 +8,6 @@ a:link, a:visited {
 
 h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    /* font-weight: normal; */
 }
 
 h1 {
@@ -38,7 +39,7 @@ h6 {
 * {
     max-width: 100%;
     text-decoration-line: none;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'roboto', sans-serif;
     box-sizing: border-box;
 }
 
@@ -73,7 +74,7 @@ body {
 }
 
 .bold {
-    font-weight: bolder;
+    font-weight: 700;
 }
 
 .navy {
@@ -140,7 +141,7 @@ nav {
 }
 
 nav a {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 1.2em;
 }
 
@@ -318,7 +319,7 @@ table tr td:first-of-type {
 }
 
 table tr:first-of-type td {
-    font-weight: bolder;
+    font-weight: 700;
 }
 
 table tr:first-of-type td:hover {
@@ -366,7 +367,7 @@ button, button.primary, select {
     border-radius: 0.1em;
     padding: 0.5em 0.8em;
     font-size: 1.1em;
-    font-weight: 400;
+    font-weight: 500;
     width: 8.8em;
 }
 
@@ -376,7 +377,7 @@ button, button.primary, select {
     border-radius: 0.1em;
     padding: 0.5em 0.8em;
     font-size: 1.1em;
-    font-weight: 400;
+    font-weight: 500;
     display: -webkit-box;
 }
 
@@ -462,7 +463,7 @@ button.scary {
     border-radius: 0.1em;
     padding: 0.5em 0.8em;
     font-size: 1.1em;
-    font-weight: 400;
+    font-weight: 500;
     width: 8.8em;
     line-height: 1.4;
     position: relative;
