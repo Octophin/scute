@@ -76,10 +76,15 @@
                                 <img src="/scute/images/info-icon-navy.png" alt="Info icon">
                             </span>
                         {% endif %}
-                        <input id="{{fieldKey}}" {% if current[fieldKey] is defined %} checked="checked" {% endif %}
-                            type="checkbox" name="{{fieldKey}}" 
-                            {% if fieldSchema.userLocked == true %}  onclick="return false;" {% endif %}                       />
-                        <label for="{{fieldKey}}">{{fieldSchema.label}}{% if fieldSchema.userLocked == true %} (read only){% endif %}</label>
+                        <input id="{{fieldKey}}selected" type="radio" name="{{fieldKey}}" value="selected"  
+                        {% if current[fieldKey] == True %} checked {% endif %}                    
+                        /> <label for="{{fieldKey}}selected">Yes</label>
+                        <input id="{{fieldKey}}notselected" type="radio" name="{{fieldKey}}" value="notselected"  
+                        {% if current[fieldKey] == False %} checked {% endif %}                    
+                        /> 
+                        <label for="{{fieldKey}}notselected">No</label>
+
+                        <label for="{{fieldKey}}selected">{{fieldSchema.label}}{% if fieldSchema.userLocked == true %} (read only){% endif %}</label>
 
                     {% endif %}
                 </div>
