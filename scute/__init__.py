@@ -2,6 +2,7 @@ import json
 from flask import render_template, send_from_directory, request, send_file, safe_join
 import jinja2
 import os
+import re
 import collections
 from datetime import datetime, date
 
@@ -100,27 +101,27 @@ class scute:
     
     def presets(self):
 
-        if request.method == "POST":
-            try:
-                print(request.form)
-            except:
-                pass
-       
-        presetDirectory = '/presets/' # Todo add config parameter
-
+        presetDirectory = 'presets/' # Todo add config parameter
+        
         if not os.path.exists(presetDirectory):
             os.makedirs(presetDirectory)
+
+        if request.method == "POST":
+            saved = request.form.to_dict()
+            presetName = saved["presetName"]
+            saved["presetID"] = re.sub('[^a-zA-Z-]+', ' ', presetName)
+            with open(presetDirectory + "/" + presetName + ".json" , 'w') as presetFile:
+                json.dump(saved, presetFile)
 
         presetFilesNames = os.listdir(presetDirectory)
         presetFilesNames = sorted(presetFilesNames, reverse=False)
 
         presetFiles = []
-        for idx, file in enumerate(presetFilesNames):
+        for file in presetFilesNames:
             with open(presetDirectory + file, "r") as f1:
                 fileRaw = f1.read()
                 fileJSON = json.loads(fileRaw)
-
-            presetFiles.append({"ID": idx, "filename": file, "name":fileJSON["name"], "description":fileJSON["description"], "presets":fileJSON["presets"], "date": fileJSON['dateTime'] })
+                presetFiles.append(fileJSON)
 
         return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.configSchema, current={})
 
