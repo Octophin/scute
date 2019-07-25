@@ -51,7 +51,7 @@
 
                     {% endif %}
 
-                    {% if fieldSchema.type == "integer" %}
+                    {% if fieldSchema.type == "number" %}
 
                         {% if fieldSchema.description|length > 1 %}
                             <span class="icon" title="{{ fieldSchema.description }}">
@@ -65,6 +65,7 @@
                         />
 
                     {% endif %}
+
 
                     {% if fieldSchema.type == "select" %}
 
