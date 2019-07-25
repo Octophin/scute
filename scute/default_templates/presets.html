@@ -1,55 +1,70 @@
 {% extends "base.html" %}
 {% block content %}
 
-<script type="text/javascript">
-    var presetList = [];
-    {% for preset in presets  %}
-    presetList.push({{ preset|tojson }});
+    <section class="happy-margin presetManager">
 
-    {% endfor %}
-</script>
+        <h1 class="navy">Set and Edit Presents Below ({{presets|length}})
+        </h1>
 
-<section class="happy-margin presetManager">
-
-    <h1 class="navy">Set and Edit Presents Below ({{presets|length}}) </h1>
-    
-    <div class="presets-manager-wrapper flex">
-        <div class="presets-manager-list scrolling">
-            <div class="edit-presets-icons flex">
-                <span class="icon add-preset" onclick="addPreset()">
-                    <img src="scute/images/add-icon.png" alt="Delete icon" />
-                </span>
-                <span class="icon">
-                    <img src="scute/images/delete-icon.png" alt="Delete icon" />
-                </span>
-            </div>
-            <div class="presets-list">
-                <ul>
-                    {% for preset in presets  %}
-                    <li onclick="loadPreset({{ preset.ID }})" class="preset-list-item" id="preset-list-item-{{ preset.ID }}"  ><span class="preset-title navy bold">{{ preset.name }}</span><br>
-                        <span class="description gray">{{ preset.description }}</span>
-                    </li>
-                    {% endfor %}
-
-                </ul>
-            </div>
-        </div>
-        <div class="presets-manager-content">
-                <div class="heading">
-                        <h1 id="presetHeading"></h1>
-                        <span id="presetDate"></span>
-                    </div>
-                    <div class="presetForm" id="presetForm" style="visibility:hidden">
+        <div class="presets-manager-wrapper flex">
+            <div class="presets-manager-list scrolling">
+                <div class="edit-presets-icons flex">
+                    <span class="icon add-preset" onclick="addPreset()">
+                        <img alt="Delete icon" src="scute/images/add-icon.png"/>
+                    </span>
+                    <span class="icon">
+                        <img alt="Delete icon" src="scute/images/delete-icon.png"/>
+                    </span>
+                </div>
+                <div class="presets-list">
+                    <ul>
                         
-                            {% include 'configForm.html' %}
-                            
-                    </div>
-            
+                        {% if presets %}
+                        
+                            {% for preset in presets  %}
+                                <li class="preset-list-item" id="preset-list-item-{{ preset.ID }}" onclick="loadPreset({{ preset.ID }})">
+                                    <span class="preset-title navy bold">{{ preset.name }}</span><br>
+                                    <span class="description gray">{{ preset.description }}</span>
+                                </li>
+                            {% endfor %}
 
+                        {% else %}
+
+                        <li>No presets found.</li>
+
+                        {% endif %}
+
+                    </ul>
+                </div>
+            </div>
+            <div class="presets-manager-content">
+                <div class="heading">
+                    <h1 id="presetHeading"></h1>
+                    <span id="presetDate"></span>
+                </div>
+                {# New preset form #}
+                <div data-preset="new">
+                    
+                    <h1>New Preset</h1>
+
+                    {% with current = {} %}
+                        {% include "presetForm.html" %}
+                    {% endwith %}
+
+                </div>
+
+                {# Existing preset forms #}
+                {% for preset in presets %}
+                <div data-preset="{{preset.id}}">
+                    {% with current = preset %}
+                    {% include "presetForm.html" %}
+                    {% endwith %}
+                </div>
+                {% endfor %}
+
+            </div>
         </div>
-    </div>
 
-</section>
+    </section>
 
 {% endblock %}
-

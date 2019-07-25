@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
 
-<section>
-    <div class="form-block happy-margin">
-        <div class="form-block-wrapper">
-            <div class="config-page-subheading flex">
-            <div class="form-headings navy happy-margin">
-                <h1>Settings for {{device}}</h1>
-                <div class="subheading red navy">
-                    <div class="icon">
-                        <img src="/scute/images/info-icon.png">
+    <section>
+        <div class="form-block happy-margin">
+            <div class="form-block-wrapper">
+                <div class="config-page-subheading flex">
+                    <div class="form-headings navy happy-margin">
+                        <h1>Settings for
+                            {{device}}</h1>
+                        <div class="subheading red navy">
+                            <div class="icon">
+                                <img src="/scute/images/info-icon.png">
+                            </div>
+                            <h3>The fields in red are unsaved changes</h3>
+                        </div>
                     </div>
-                    <h3>The fields in red are unsaved changes</h3>
+
+
                 </div>
+                <form class="form-body flex" id="configForm" method="post">
+                    {% include "configForm.html" %}
+                </form>
             </div>
-
-
         </div>
-         
-         {% include "configForm.html" %}
-          
-        </div>
-    </div>
-</section>
+    </section>
 {% endblock %}

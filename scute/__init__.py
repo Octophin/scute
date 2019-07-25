@@ -19,7 +19,7 @@ class scute:
         self.server.jinja_loader = my_loader
         self.server.add_url_rule('/', 'index', self.deviceListView)
         self.server.add_url_rule('/config', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
-        self.server.add_url_rule('/presets', 'presets', self.presets)
+        self.server.add_url_rule('/presets', 'presets', self.presets, methods=["GET", "POST"])
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
         with open(options["reportSchema"]) as reportSchema:  
             fields = {}
@@ -100,7 +100,16 @@ class scute:
     
     def presets(self):
 
-        presetDirectory = here + '/client_side/config_presets/'
+        if request.method == "POST":
+            try:
+                print(request.form)
+            except:
+                pass
+       
+        presetDirectory = '/presets/' # Todo add config parameter
+
+        if not os.path.exists(presetDirectory):
+            os.makedirs(presetDirectory)
 
         presetFilesNames = os.listdir(presetDirectory)
         presetFilesNames = sorted(presetFilesNames, reverse=False)

@@ -1,5 +1,4 @@
 @import url(fonts.css);
-
 /* FONTS */
 
 a:link, a:visited {
@@ -495,6 +494,11 @@ button.scary {
 
 /* PRESETS MANAGER PAGE */
 
+/* Hide save as preset button on presets page as redundant */
+[data-preset] .save-as-preset {
+    display: none !important;
+}
+
 .presets-manager-wrapper {
     flex-flow: row nowrap;
     justify-content: space-between;
@@ -670,7 +674,7 @@ input[type=checkbox]+label {
     right: 43em;
 }
 
-form input[type=checkbox] + label {
+form input[type=checkbox]+label {
     padding-left: 3em;
 }
 
