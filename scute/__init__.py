@@ -22,8 +22,6 @@ class scute:
         self.server.add_url_rule('/config', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/presets', 'presets', self.presets, methods=["GET", "POST"])
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
-        with open(options["actionsSchema"]) as actionsSchema: 
-            self.actionsSchema = json.load(actionsSchema)
     def getConfigSchema(self):
         configSchema = {}
         with open(self.options["configSchema"]) as configSchema:  
@@ -53,6 +51,9 @@ class scute:
                 if "order" not in fields[field]:
                     fields[field]["order"] = 0
         return fields
+    def getActions(self):
+        with open(self.options["actionsSchema"]) as actionsSchema: 
+            return json.load(actionsSchema)
     def getDeviceReport(self, deviceID):
         reportValues = {}
         # First try to get all fields, then overwrite with specific ones
@@ -83,7 +84,7 @@ class scute:
         return deviceReports
 
     def deviceListView(self):
-        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), actions=self.actionsSchema, timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     
     def deviceConfigView(self):
 
