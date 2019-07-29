@@ -70,7 +70,7 @@ let populateButtons = function () {
 
     } else {
 
-        Array.from(document.querySelectorAll(".buttons-wrapper select, .buttons-wrapper button")).forEach(function (element) {
+        Array.from(document.querySelectorAll(".actions select, .actions button")).forEach(function (element) {
 
             element.setAttribute("disabled", true);
 
