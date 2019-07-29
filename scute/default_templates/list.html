@@ -86,7 +86,7 @@
                         <option>Preset C</option>
                     </select>
 
-                    <button data-action="config" data-bulk="false" disabled>Configure</button>
+                    <button onclick="triggerAction(event)" data-action="config" data-bulk="false" disabled>Configure</button>
 
                     {% for key,action in actions.items() %}
 
