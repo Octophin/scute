@@ -3,10 +3,7 @@
         "label": "Export data",
         "order": 2,
         "bulk": true,
-        "list": {
-            "hello": "world",
-            "magic": "wonderful"
-        }
+        "list": "mylist"
     },
     "erase_log": {
         "bulk": true,

@@ -53,6 +53,10 @@ def readConfig(deviceID):
 
 exampleInstance.registerHook("read_config", readConfig)
 
+def getMyList():
+    return {"magic": "world", "hero": "gold", "wonderful": "true"}
+
+exampleInstance.registerHook("get_action_list__mylist", getMyList)
 
 @app.route('/export')
 def export():

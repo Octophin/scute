@@ -105,23 +105,27 @@ This, if it exists takes a device ID and a field name and return a value for the
 
 ## Device actions
 
-Each device can have an action performed on it. Each action should be defined in an actions schema passed in to config. At the moment these are simply links that can be registered as Flask routes:
+Each device can have an action performed on it. Each action should be defined in an actions schema passed in to config. These are links that can be registered as Flask routes with parameters passed in to them automatically:
 
 ```JSON
 
     "<actionRoute>": {
         "label": "<actionLabel>",
         "order": "<actionOrder>",
-        "bulk": "<boolean>"
+        "bulk": "<boolean>",
+        "warn": "<boolean>",
+        "list": "<valueList>"
     }
 
 ```
 
-* key (string) - The path to direct the user to. `/export` would go through to `/export/` and be passed in a query string with `devices[]` populated with a single or multiple devices as an array.
+* key (string) - The path to direct the user to. `/export` would go through to `/export/` and be passed in a query string with `devices[]` populated with a single or multiple devices as an array. If a list is passed in, the query string would also get a `value` parameter with the value of the selected dropdown item.
 
 * label (string) - Friendly name shown on the button.
 * order (number) - Order the button should appear. Lower numbers go first.
 * bulk (boolean) - Can this action be performed on multiple devices?
+* warn (boolean) - Should this display a confirmation popup before the action is performed?
+* list (object or hookname) - Either an object of key / value pairs or the name (string) of a list hook that generates them. The hook should return key / value pairs and will be called as `get_list__<string>` (e.g `get_list__countries`).
 
 Example usage:
 

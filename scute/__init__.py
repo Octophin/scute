@@ -53,7 +53,11 @@ class scute:
         return fields
     def getActions(self):
         with open(self.options["actionsSchema"]) as actionsSchema: 
-            return json.load(actionsSchema)
+            actions = json.load(actionsSchema)
+            for key,value in actions.items():
+                if "list" in value and type(value["list"]) is str:
+                    actions[key]["list"] = self.hooks["get_action_list__" + value["list"]]()
+            return actions
     def getDeviceReport(self, deviceID):
         reportValues = {}
         # First try to get all fields, then overwrite with specific ones
