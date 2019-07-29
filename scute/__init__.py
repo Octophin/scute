@@ -22,31 +22,37 @@ class scute:
         self.server.add_url_rule('/config', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/presets', 'presets', self.presets, methods=["GET", "POST"])
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
-        with open(options["reportSchema"]) as reportSchema:  
-            fields = {}
-            self.reportSchema = json.load(reportSchema)
-            # Extract from categories to get quick access to fields
-            for category in self.reportSchema:
-                if "order" not in self.reportSchema[category]:
-                    self.reportSchema[category]["order"] = 0
-                for field in self.reportSchema[category]["fields"]:
-                    fields[field] = self.reportSchema[category]["fields"][field]
-                    if "order" not in fields[field]:
-                        fields[field]["order"] = 0
-            self.deviceReportFields = fields
-        with open(options["actionsSchema"]) as actionsSchema:  
+        with open(options["actionsSchema"]) as actionsSchema: 
             self.actionsSchema = json.load(actionsSchema)
-        with open(options["configSchema"]) as configSchema:  
-            self.configSchema = json.load(configSchema)
+    def getConfigSchema(self):
+        configSchema = {}
+        with open(self.options["configSchema"]) as configSchema:  
+            configSchema = json.load(configSchema)
+            fields = {}
             # Assign default orders
-            for category in self.configSchema:
-                if "order" not in self.configSchema[category]:
-                    self.configSchema[category]["order"] = 0
-                for field in self.configSchema[category]["fields"]:
-                    fields[field] = self.configSchema[category]["fields"][field]
+            for category in configSchema:
+                if "order" not in configSchema[category]:
+                    self.getConfigSchema()[category]["order"] = 0
+                for field in configSchema[category]["fields"]:
+                    fields[field] = configSchema[category]["fields"][field]
                     if "order" not in fields[field]:
                         fields[field]["order"] = 0
-    
+        return configSchema
+    def getReportSchema(self):
+        with open(self.options["reportSchema"]) as reportSchema:  
+            return json.load(reportSchema)
+    def getReportFields(self):
+        # Extract from categories to get quick access to fields
+        fields = {}
+        reportSchema = self.getReportSchema()
+        for category in reportSchema:
+            if "order" not in reportSchema[category]:
+                reportSchema[category]["order"] = 0
+            for field in reportSchema[category]["fields"]:
+                fields[field] = reportSchema[category]["fields"][field]
+                if "order" not in fields[field]:
+                    fields[field]["order"] = 0
+        return fields
     def getDeviceReport(self, deviceID):
         reportValues = {}
         # First try to get all fields, then overwrite with specific ones
@@ -54,7 +60,7 @@ class scute:
             reportValues = self.hooks["get_report_fields"](deviceID)
         except:
             pass
-        for field in self.deviceReportFields:
+        for field in self.getReportFields():
             try:
                 reportValues[field] = self.hooks["get_report_field__" + field](deviceID)
             except:
@@ -77,7 +83,7 @@ class scute:
         return deviceReports
 
     def deviceListView(self):
-        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.reportSchema, actions=self.actionsSchema, timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), actions=self.actionsSchema, timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     
     def deviceConfigView(self):
 
@@ -97,7 +103,7 @@ class scute:
         except:
             pass
     
-        return render_template("config.html", title="Configuration", schema=self.configSchema, device=device, current=currentConfig)
+        return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig)
     
     def presets(self):
 
@@ -123,9 +129,7 @@ class scute:
                 fileJSON = json.loads(fileRaw)
                 presetFiles.append(fileJSON)
 
-        return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.configSchema, current={})
-
-
+        return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.getConfigSchema(), current={})
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON
         expanded = {}
