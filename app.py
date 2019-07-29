@@ -56,7 +56,7 @@ exampleInstance.registerHook("read_config", readConfig)
 def getMyList():
     return {"magic": "world", "hero": "gold", "wonderful": "true"}
 
-exampleInstance.registerHook("get_action_list__mylist", getMyList)
+exampleInstance.registerHook("get_list__mylist", getMyList)
 
 @app.route('/export')
 def export():

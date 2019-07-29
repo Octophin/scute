@@ -55,8 +55,8 @@ class scute:
         with open(self.options["actionsSchema"]) as actionsSchema: 
             actions = json.load(actionsSchema)
             for key,value in actions.items():
-                if "list" in value and type(value["list"]) is str:
-                    actions[key]["list"] = self.hooks["get_action_list__" + value["list"]]()
+                if "list" in value and not isinstance(value["list"], collections.Mapping):
+                    actions[key]["list"] = self.hooks["get_list__" + value["list"]]()
             return actions
     def getDeviceReport(self, deviceID):
         reportValues = {}
