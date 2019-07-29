@@ -94,47 +94,72 @@ document.querySelectorAll("input, select").forEach(function (element) {
 
 });
 
-document.querySelectorAll("[data-action]").forEach(function (element) {
+let triggerAction = function (e) {
 
-    element.addEventListener("click", function () {
+    if (!getSelectedDevices().length) {
 
-        if (element.hasAttribute("disabled")) {
+        return false;
+
+    }
+
+    let element = e.currentTarget;
+
+    if (element.hasAttribute("disabled")) {
+
+        return false;
+
+    }
+
+    let value;
+
+    if (element.tagName.toLowerCase() === "select") {
+
+        value = element.value;
+
+        if (!value) {
 
             return false;
 
         }
 
-        let action = element.getAttribute("data-action");
-        let selectedDevices = getSelectedDevices();
+    }
 
-        let query = "";
+    let action = element.getAttribute("data-action");
+    let selectedDevices = getSelectedDevices();
 
-        selectedDevices.forEach(function (device) {
+    let query = "";
 
-            query += "devices[]=" + device + "&";
+    selectedDevices.forEach(function (device) {
 
-        });
-
-        let targetURL = action + "?" + query;
-
-        if (element.hasAttribute("data-warn")) {
-
-            let warning = "Apply " + element.innerHTML + " to " + selectedDevices.toString() + "?";
-
-            showConfirm(warning, targetURL);
-
-            return false;
-
-        } else {
-
-            document.location.href = targetURL;
-
-        }
-
+        query += "devices[]=" + device + "&";
 
     });
 
-});
+    let targetURL = action + "?" + query;
+
+    // Add value for select boxes
+
+    if (value) {
+
+        targetURL += "&value=" + value;
+
+    }
+
+    if (element.hasAttribute("data-warn")) {
+
+        let warning = "Apply " + element.innerHTML + " to " + selectedDevices.toString() + "?";
+
+        showConfirm(warning, targetURL);
+
+        return false;
+
+    } else {
+
+        document.location.href = targetURL;
+
+    }
+
+};
 
 let showConfirm = function (warning, targetURL) {
 

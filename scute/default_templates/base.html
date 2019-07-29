@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="/scute/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="/scute/style.css" />
-    {% block head %}{% endblock %}
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <link href="/scute/favicon.ico" rel="icon" type="image/png">
+        <meta content="width=device-width, initial-scale=1" name="viewport">
+        <meta content="no-cache" http-equiv="Pragma">
+        <meta content="-1" http-equiv="Expires">
+        <title>{{title}}</title>
+        <link href="/scute/style.css" rel="stylesheet"/> {% block head %}{% endblock %}
+        </head>
 
-<body>
-    <header>
-        {% include "header.html" %}
-    </header>
+        <body>
+            <header>
+                {% include "header.html" %}
+            </header>
 
-    <main>
-    
-    {% block content %}{% endblock %}
+            <main>
 
-    </main>
+                {% block content %}{% endblock %}
 
-    {% include "footer.html" %}
+            </main>
 
-</body>
+            {% include "footer.html" %}
 
-</html>
+        </body>
+
+    </html>
