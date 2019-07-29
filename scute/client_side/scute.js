@@ -27,53 +27,61 @@ document.querySelectorAll(".deviceHeader").forEach(function (element) {
 
         }
 
-        let selected = getSelectedDevices();
+        populateButtons();
 
-        let bulkActions = Array.from(document.querySelectorAll("[data-bulk='true']"));
+    });
 
-        let singleActions = Array.from(document.querySelectorAll("[data-bulk='false']"));
+});
+
+let populateButtons = function () {
+
+    let selected = getSelectedDevices();
+
+    let bulkActions = Array.from(document.querySelectorAll("[data-bulk='true']"));
+
+    let singleActions = Array.from(document.querySelectorAll("[data-bulk='false']"));
 
 
-        if (selected.length) {
+    if (selected.length) {
 
-            bulkActions.forEach(function (element) {
+        bulkActions.forEach(function (element) {
+
+            element.removeAttribute("disabled");
+
+        });
+
+        if (selected.length === 1) {
+
+            singleActions.forEach(function (element) {
 
                 element.removeAttribute("disabled");
 
             });
 
-            if (selected.length === 1) {
-
-                singleActions.forEach(function (element) {
-
-                    element.removeAttribute("disabled");
-
-                });
-
-            } else {
-
-                singleActions.forEach(function (element) {
-
-                    element.setAttribute("disabled", true);
-
-                });
-
-            }
-
         } else {
 
-            Array.from(document.querySelectorAll(".buttons-wrapper select, .buttons-wrapper button")).forEach(function (element) {
+            singleActions.forEach(function (element) {
 
                 element.setAttribute("disabled", true);
 
             });
 
-
         }
 
-    });
+    } else {
 
-});
+        Array.from(document.querySelectorAll(".buttons-wrapper select, .buttons-wrapper button")).forEach(function (element) {
+
+            element.setAttribute("disabled", true);
+
+        });
+
+
+    }
+
+};
+
+populateButtons();
 
 document.querySelectorAll("input, select").forEach(function (element) {
 
