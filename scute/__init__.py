@@ -1,5 +1,5 @@
 import json
-from flask import render_template, send_from_directory, request, send_file, safe_join
+from flask import render_template, send_from_directory, request, redirect, send_file, safe_join
 import jinja2
 import os
 import re
@@ -97,7 +97,13 @@ class scute:
         # Save config
         if request.method == "POST":
             try:
-                self.hooks["save_config"](device, request.form)
+                # Check if saving preset
+                if "preset" in request.form:
+                    # Go to presets page
+                    # Todo - pre-fill form
+                    return redirect("/presets", code=302)
+                else:
+                    self.hooks["save_config"](device, request.form)
             except:
                 pass
 
@@ -110,7 +116,7 @@ class scute:
     
         return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig)
     
-    def presets(self):
+    def presets(self, current=None):
 
         # Check if deleting a preset
 

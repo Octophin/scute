@@ -193,42 +193,6 @@ let showConfirm = function (warning, targetURL) {
 
 };
 
-
-let savePreset = function () {
-
-    let values = {};
-
-    document.querySelectorAll("input, select").forEach(function (element) {
-
-        // Ignore if exclude from preset
-
-        if (element.parentElement.getAttribute("data-exlude-from-preset")) {
-
-            return false;
-
-        }
-
-        let name = element.getAttribute("name");
-        let value;
-
-        if (element.tagName === "SELECT") {
-
-            value = element.options[element.selectedIndex].value;
-
-        } else {
-
-            value = element.value;
-
-        }
-
-        values[name] = value;
-
-    });
-
-    alert("Not yet implemented but data will be " + JSON.stringify(values));
-
-};
-
 let loadPreset = function (presetID) {
 
     let menus = Array.from(document.querySelectorAll("[data-preset-menu]")).forEach(function (menu) {

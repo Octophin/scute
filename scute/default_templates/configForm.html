@@ -1,6 +1,6 @@
 <div class="buttons-wrapper form-buttons">
     <button class="featured button" type="submit">Save</button>
-    <button class="primary button save-as-preset" onclick="savePreset()" type="button">Save as preset</button>
+    <button class="primary button save-as-preset" name="preset" type="submit">Save as preset</button>
 </div>
 
 {% for key,category in schema.items() | sort(attribute='1.order')%}
@@ -76,26 +76,26 @@
 
             {% if fieldSchema.type == "boolean" %}
 
-            <div class="boolean-field">
+                <div class="boolean-field">
 
-                {% if fieldSchema.description|length > 1 %}
-                    <span class="icon" title="{{ fieldSchema.description }}">
-                        <img alt="Info icon" src="/scute/images/info-icon-navy.png">
-                    </span>
-                {% endif %}
-
-                <label>{{fieldSchema.label}}
-                    {% if fieldSchema.userLocked == true %}
-                        (read only)
+                    {% if fieldSchema.description|length > 1 %}
+                        <span class="icon" title="{{ fieldSchema.description }}">
+                            <img alt="Info icon" src="/scute/images/info-icon-navy.png">
+                        </span>
                     {% endif %}
-                </label>
 
-                <label class="boolean-choice-label" for="{{fieldKey}}selected">Yes</label>
-                <input id="{{fieldKey}}selected" type="radio" name="{{fieldKey}}" value="selected" {% if current[fieldKey] == True %} checked {% endif %}/>
-                <label class="boolean-choice-label" for="{{fieldKey}}notselected">No</label>
-                <input id="{{fieldKey}}notselected" type="radio" name="{{fieldKey}}" value="notselected" {% if current[fieldKey] == False %} checked {% endif %}/>
+                    <label>{{fieldSchema.label}}
+                        {% if fieldSchema.userLocked == true %}
+                            (read only)
+                        {% endif %}
+                    </label>
 
-            </div>
+                    <label class="boolean-choice-label" for="{{fieldKey}}selected">Yes</label>
+                    <input id="{{fieldKey}}selected" type="radio" name="{{fieldKey}}" value="selected" {% if current[fieldKey] == True %} checked {% endif %}/>
+                    <label class="boolean-choice-label" for="{{fieldKey}}notselected">No</label>
+                    <input id="{{fieldKey}}notselected" type="radio" name="{{fieldKey}}" value="notselected" {% if current[fieldKey] == False %} checked {% endif %}/>
+
+                </div>
 
             {% endif %}
         </div>
