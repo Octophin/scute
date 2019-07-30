@@ -544,7 +544,7 @@ button.scary {
     line-height: 2em;
 }
 
-.preset-list-item-selected {
+[data-preset-menu][data-selected] {
     background-color: #6ab469;
 }
 

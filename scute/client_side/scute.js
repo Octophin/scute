@@ -231,6 +231,20 @@ let savePreset = function () {
 
 let loadPreset = function (presetID) {
 
+    let menus = Array.from(document.querySelectorAll("[data-preset-menu]")).forEach(function (menu) {
+
+        if (menu.getAttribute("data-preset-menu") === presetID) {
+
+            menu.setAttribute("data-selected", "true");
+
+        } else {
+
+            menu.removeAttribute("data-selected");
+
+        }
+
+    });
+
     document.querySelectorAll("[data-preset]").forEach(function (element) {
 
         if (element.getAttribute("data-preset") === presetID) {
@@ -244,6 +258,18 @@ let loadPreset = function (presetID) {
         }
 
     });
+
+};
+
+let deletePreset = function () {
+
+    let preset = document.querySelector("[data-preset-menu][data-selected]").getAttribute("data-preset-menu");
+
+    if (preset) {
+
+        showConfirm("Are you sure you want to delete " + preset + " ?", "/presets?delete=" + preset);
+
+    }
 
 };
 

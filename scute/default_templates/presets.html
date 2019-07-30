@@ -9,11 +9,11 @@
         <div class="presets-manager-wrapper">
             <div class="presets-manager-list scrolling">
                 <div class="edit-presets-icons">
-                    <span class="icon add-preset" onclick="addPreset()">
+                    <span class="icon add-preset" onclick="loadPreset('new')">
                         <img alt="Delete icon" src="scute/images/add-icon.png"/>
                     </span>
                     <span class="icon">
-                        <img alt="Delete icon" src="scute/images/delete-icon.png"/>
+                        <img onclick="deletePreset()" alt="Delete icon" src="scute/images/delete-icon.png"/>
                     </span>
                 </div>
                 <div class="presets-list">
