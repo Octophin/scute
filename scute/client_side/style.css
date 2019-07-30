@@ -495,19 +495,24 @@ button.scary {
 /* PRESETS MANAGER PAGE */
 
 /* Hide save as preset button on presets page as redundant */
+
 [data-preset] .save-as-preset {
     display: none !important;
 }
 
 .presets-manager-wrapper {
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    width: 100%;
-    margin: 2em 0;
+    display: flex;
+}
+
+.presets-manager-wrapper .buttons-wrapper.form-buttons {
+    text-align: left;
+}
+
+.presets-list {
+    width: 300px;
 }
 
 .presets-manager-content {
-    flex: 2;
     padding: 1em;
 }
 
@@ -541,18 +546,6 @@ button.scary {
 
 .preset-list-item-selected {
     background-color: #6ab469;
-}
-
-.blankField {
-    background-color: white !important;
-}
-
-.presets-manager-content .icon+label {
-    margin-left: 1em;
-}
-
-.presetForm form .form-field.happy-margin input[type=checkbox]+label {
-    right: 23.5em;
 }
 
 /* BANNERS */
@@ -614,15 +607,8 @@ button.scary {
     margin-top: 1em;
 }
 
-.form-body {
-    flex-flow: row wrap;
-    justify-content: space-between;
-}
-
 .form-field {
-    display: inline-flex;
-    width: 100%;
-    justify-content: space-between;
+    display: block;
 }
 
 label, input, select, .icon, .subheading * {
@@ -660,47 +646,12 @@ input:focus, [data-changed] {
     border: solid thin red;
 }
 
-/*  CHECKBOXES */
-
-input[type="checkbox"] {
-    opacity: 0;
-    position: relative;
-    bottom: -1.5em;
-    z-index: 1;
-    display: contents;
+.boolean-choice-label {
+    width: auto;
 }
 
-input[type=checkbox]+label {
-    right: 43em;
-}
-
-form input[type=checkbox]+label {
-    padding-left: 3em;
-}
-
-.icon+label {
-    margin-left: -2em;
-}
-
-input[type="checkbox"]+label::after {
-    content: "";
-    position: absolute;
-    right: -1.8em;
-    top: 0em;
-    width: 1em;
-    height: 1em;
-    display: inline-block;
-    background-image: none;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border-style: solid;
-    border-color: #616161;
-    border-width: 0.01em;
-    vertical-align: middle;
-}
-
-input:checked+label::after {
-    background-image: url(images/check-icon.png);
+input[type="radio"] {
+    width: auto;
 }
 
 /* MQ - MOBILE */

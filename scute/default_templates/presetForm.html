@@ -1,7 +1,10 @@
 <div class="presetForm">
-    <form class="form-body flex" method="post">
-        <input name="presetName" value="{{current.presetName}}"/>
-        <textarea name="presetDescription">{{current.presetDescription}}</textarea>
+    <form class="form-body" method="post">
+        <br/>
+        <h2>Preset name</h2>
+        <input name="presetName" value="{{current.presetName}}"/><br/>
+        <h2>Preset description</h2>
+        <textarea name="presetDescription">{{current.presetDescription}}</textarea><br/>
         {% include 'configForm.html' %}
     </form>
 </div>

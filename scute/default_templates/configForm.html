@@ -76,21 +76,26 @@
 
             {% if fieldSchema.type == "boolean" %}
 
+            <div class="boolean-field">
+
                 {% if fieldSchema.description|length > 1 %}
                     <span class="icon" title="{{ fieldSchema.description }}">
                         <img alt="Info icon" src="/scute/images/info-icon-navy.png">
                     </span>
                 {% endif %}
-                <input id="{{fieldKey}}selected" type="radio" name="{{fieldKey}}" value="selected" {% if current[fieldKey] == True %} checked {% endif %}/>
-                <label for="{{fieldKey}}selected">Yes</label>
-                <input id="{{fieldKey}}notselected" type="radio" name="{{fieldKey}}" value="notselected" {% if current[fieldKey] == False %} checked {% endif %}/>
-                <label for="{{fieldKey}}notselected">No</label>
 
-                <label for="{{fieldKey}}selected">{{fieldSchema.label}}
+                <label>{{fieldSchema.label}}
                     {% if fieldSchema.userLocked == true %}
                         (read only)
                     {% endif %}
                 </label>
+
+                <label class="boolean-choice-label" for="{{fieldKey}}selected">Yes</label>
+                <input id="{{fieldKey}}selected" type="radio" name="{{fieldKey}}" value="selected" {% if current[fieldKey] == True %} checked {% endif %}/>
+                <label class="boolean-choice-label" for="{{fieldKey}}notselected">No</label>
+                <input id="{{fieldKey}}notselected" type="radio" name="{{fieldKey}}" value="notselected" {% if current[fieldKey] == False %} checked {% endif %}/>
+
+            </div>
 
             {% endif %}
         </div>
