@@ -112,10 +112,17 @@ class scute:
     
     def presets(self):
 
+        # Check if deleting a preset
+
         presetDirectory = 'presets/' # Todo add config parameter
-        
+
         if not os.path.exists(presetDirectory):
             os.makedirs(presetDirectory)
+
+        # Check if deleting and delete preset if yes
+        if request.args.get('delete'):
+            delete = request.args.get('delete')
+            os.remove(presetDirectory + "/" + delete + ".json") 
 
         if request.method == "POST":
             saved = request.form.to_dict()
