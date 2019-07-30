@@ -5,6 +5,7 @@ import os
 import re
 import collections
 from datetime import datetime, date
+import urllib
 
 here = os.path.dirname(os.path.abspath(__file__))
 
@@ -100,8 +101,9 @@ class scute:
                 # Check if saving preset
                 if "preset" in request.form:
                     # Go to presets page
-                    # Todo - pre-fill form
-                    return redirect("/presets", code=302)
+                    
+                    presetQuery = json.dumps(request.form)
+                    return redirect("/presets?config=" + presetQuery, code=302)
                 else:
                     self.hooks["save_config"](device, request.form)
             except:
@@ -130,6 +132,13 @@ class scute:
             delete = request.args.get('delete')
             os.remove(presetDirectory + "/" + delete + ".json") 
 
+        # Check if query contains a preset (from the config page)
+
+        prefill = {}
+
+        if request.args.get("config"):
+            prefill = json.loads(request.args.get("config"))
+
         if request.method == "POST":
             saved = request.form.to_dict()
             presetName = saved["presetName"]
@@ -147,7 +156,7 @@ class scute:
                 fileJSON = json.loads(fileRaw)
                 presetFiles.append(fileJSON)
 
-        return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.getConfigSchema(), current={})
+        return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.getConfigSchema(), current=prefill)
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON
         expanded = {}
