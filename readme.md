@@ -28,6 +28,8 @@ options = {
         "actionsSchema": "actionsSchema.json",
         "configSchema": "configSchema.json",
         "dataViews": "dataViews.json",
+        "presetsDirectory": "/presets",
+        "scriptsDirectory": "/scripts"
     }
 
 myScuteInstance = scute(options, app)
@@ -221,3 +223,38 @@ def saveConfig(deviceID, config):
 myScuteInstance.registerHook("save_config", saveConfig)
 
 ```
+
+## Scripts
+
+Scripts allow you to run pre-defined command line scripts with input of parameters from the GUI. Scripts are by default stored in a `"/scripts"` directory (or the `scriptsDirectory` options parameter when you initialise). They look like the following:
+
+```JSON
+
+{
+    "name": "Basic Script",
+    "description": "List a directory's files and then exit",
+    "commands": [
+        {
+            "command": "cd ${directory} && ls",
+            "description": "Go into the home directory",
+            "parameters": {
+                "directory": "The name of the directory"
+            }
+        },
+        {
+            "command": "ls",
+            "description": "list all files"
+        }
+    ]
+}
+
+```
+
+### Schema info
+
+* Name (string) - Name of the script shown to the user
+* Description (string) - A description shown to the user
+* Commands (array) - A list of commands to run, each takes
+    * Command (string) -  the actual command. Use `${parametername}` to swap out parameters supplied by the user through the interface.
+    * Description (string) - A description of the command, shown before it is run
+    * Parameters (object) - A list of parameters the user will be able to input, they will be swapped out in the command, the value is the label shown to the user, the key is the actual parameter in the command, `${directory}` for example.

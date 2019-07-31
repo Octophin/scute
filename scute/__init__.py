@@ -129,8 +129,8 @@ class scute:
 
         presetDirectory = ""
 
-        if("presetDirectory" in self.options):
-            presetDirectory = self.options["presetDirectory"]
+        if("presetsDirectory" in self.options):
+            presetDirectory = self.options["presetsDirectory"]
         else:
             presetDirectory = 'presets/'
 
@@ -175,7 +175,7 @@ class scute:
         if("scriptsDirectory" in self.options):
             scriptsDirectory = self.options["scriptsDirectory"]
         else:
-            scriptsDirectory = 'presets/'
+            scriptsDirectory = 'scripts/'
 
         scriptSchema = {}
         with open(scriptsDirectory + "/" + script, "r") as f1:
@@ -216,7 +216,7 @@ class scute:
         if("scriptsDirectory" in self.options):
             scriptsDirectory = self.options["scriptsDirectory"]
         else:
-            scriptsDirectory = 'presets/'
+            scriptsDirectory = 'scripts/'
 
         try:
             scriptsFileNames = os.listdir(scriptsDirectory)
