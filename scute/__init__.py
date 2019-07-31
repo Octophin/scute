@@ -194,7 +194,13 @@ class scute:
         if currentCommand > 0:
             commandToRun = currentCommand - 1
             # Run command
+
+            # Check if any parameters have been passed in
+
             command = scriptSchema["commands"][commandToRun]["command"]
+
+            for key,value in request.args.items():
+                command = command.replace("${"+key+"}", value)
             try:
                 output = os.popen(command).read()
             except OSError as exc:

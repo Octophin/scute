@@ -23,7 +23,26 @@
 
     <p>{{script.commands[nextCommand - 1].description}}</p>
 
-    <a href="/scripts/{{fileName}}?command={{nextCommand}}">Run command</a>
+    {# Form for parameters #}
+
+    <form>
+
+        <input type="hidden" name="command" value="{{nextCommand}}">
+
+        {% if script.commands[nextCommand - 1].parameters %}
+
+            {% for key,value in script.commands[nextCommand - 1].parameters.items() %}
+
+                <label for="{{key}}">{{value}}</label>
+                <input type="text" id="{{key}}" name="{{key}}"/>
+
+            {% endfor %}
+
+        {% endif %}
+
+        <imput type="submit" />
+
+    </form>
 
 {% endif %}
 

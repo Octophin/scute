@@ -3,10 +3,10 @@
     "description": "This is an introduction to what the script does",
     "commands": [
         {
-            "command": "cd /var/ && ls",
+            "command": "cd ${directory} && ls",
             "description": "Go into the home directory",
             "parameters": {
-                "directory": "/var/www/turtlesplash"
+                "directory": "The name of the directory"
             }
         },
         {
