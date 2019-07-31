@@ -6,6 +6,7 @@
         <input name="presetName" value="{{current.presetName}}"/><br/><br />
         <h2>Preset description</h2>
         <textarea name="presetDescription">{{current.presetDescription}}</textarea><br/>
+        {% set formType = 'preset' %}
         {% include 'configForm.html' %}
     </form>
 </div>

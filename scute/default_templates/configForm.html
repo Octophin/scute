@@ -11,9 +11,12 @@
         {% endif %}
     </div>
 
+     {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
 
-    {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-        <div class="form-field happy-margin" {% if fieldSchema.exclueFromPresets == true %} data-exclude-from-preset="true" {% endif %}>
+
+     {% if formType != "preset" or formType == "preset" and fieldSchema.excludeFromPresets != true %} 
+
+        <div class="form-field happy-margin" >
 
             {% if fieldSchema.type == "text" %}
 
@@ -99,6 +102,8 @@
 
             {% endif %}
         </div>
+
+        {% endif %}
     {% endfor %}
 
 {% endfor %}

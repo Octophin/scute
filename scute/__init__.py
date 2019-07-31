@@ -96,12 +96,15 @@ class scute:
     def getAllPresetValues(self):
         # scan the preset directory and return value label pairs
         if not os.path.exists('presets'):
-            return []
+            return [{"value": "", "label": "No Presets Found"}]
         pathContent = os.listdir('presets')
         replyValues = []
         for file in pathContent:
             fileParts = file.split(".")
             replyValues.append({"value": file, "label": fileParts[0]})
+        
+        if replyValues == []:
+            replyValues = [{"value": "", "label": "No Presets Found"}]
         return replyValues
 
     def deviceConfigView(self):

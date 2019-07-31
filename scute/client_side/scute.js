@@ -200,6 +200,7 @@ let loadPreset = function (presetID) {
         if (menu.getAttribute("data-preset-menu") === presetID) {
 
             menu.setAttribute("data-selected", "true");
+           
 
         } else {
 
@@ -213,7 +214,7 @@ let loadPreset = function (presetID) {
 
         if (element.getAttribute("data-preset") === presetID) {
 
-            element.style.display = "revert";
+            element.style.display = "block";
 
         } else {
 
