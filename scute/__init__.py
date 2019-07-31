@@ -91,8 +91,19 @@ class scute:
         return deviceReports
 
     def deviceListView(self):
-        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     
+    def getAllPresetValues(self):
+        # scan the preset directory and return value label pairs
+        if not os.path.exists('presets'):
+            return []
+        pathContent = os.listdir('presets')
+        replyValues = []
+        for file in pathContent:
+            fileParts = file.split(".")
+            replyValues.append({"value": file, "label": fileParts[0]})
+        return replyValues
+
     def deviceConfigView(self):
 
         device = request.args.getlist("devices[]")[0]

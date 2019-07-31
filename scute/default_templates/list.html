@@ -78,12 +78,13 @@
             <section class="buttons actions">
 
                 <div class="buttons-wrapper">
-
                     <select data-action="applyPreset" onchange="triggerAction(event)" data-bulk="true" disabled>
-                        <option>Apply Preset</option>
-                        <option value="a">Preset A</option>
-                        <option value="b">Preset B</option>
-                        <option value="c">Preset C</option>
+                        <option value=''>Apply Preset</option>
+
+                        {% for option in presetValues%}
+                            <option value="{{option.value}}">{{option.label}}</option>
+                        {% endfor %}                
+
                     </select>
 
                     <button onclick="triggerAction(event)" data-action="config" data-bulk="false" disabled>Device Config</button>
