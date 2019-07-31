@@ -166,7 +166,31 @@ class scute:
 
         return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.getConfigSchema(), current=prefill)
     def scriptsView(self):
-        return "hello"
+        # Check if deleting a preset
+
+        scriptsDirectory = ""
+
+        if("scriptsDirectory" in self.options):
+            scriptsDirectory = self.options["scriptsDirectory"]
+        else:
+            scriptsDirectory = 'presets/'
+
+        try:
+            scriptsFileNames = os.listdir(scriptsDirectory)
+            scriptsFileNames = sorted(scriptsFileNames, reverse=False)
+        except:
+            scriptsFileNames = []
+
+        scripts = []
+
+        for file in scriptsFileNames:
+            with open(scriptsDirectory + "/" + file, "r") as f1:
+                fileRaw = f1.read()
+                fileJSON = json.loads(fileRaw)
+                scripts.append(fileJSON)
+
+        return render_template("scriptsView.html", title="Scripts", scripts=scripts)
+
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON
         expanded = {}

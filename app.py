@@ -10,7 +10,8 @@ app = Flask(__name__)
 options = {
         "reportSchema": "exampleSchema/reportSchema.json",
         "actionsSchema": "exampleSchema/actionsSchema.json",
-        "configSchema": "exampleSchema/configSchema.json"
+        "configSchema": "exampleSchema/configSchema.json",
+        "scriptsDirectory": "exampleSchema/scripts"
     }
 
 exampleInstance = scute(options, app)
