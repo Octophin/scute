@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{script.name}}</h1>
+
+{% if output %}
+
+<pre>{{output}}</pre>
+
+{% endif %}
+
+{% if nextCommand == 0 %}
+
+    <p>{{script.description}}</p>
+
+    <a href="/scripts/{{fileName}}?command={{nextCommand}}">Start</a>
+
+{% elif nextCommand > script.commands|length %}
+
+    The script is done.
+
+{% else %}
+
+    <p>{{script.commands[nextCommand - 1].description}}</p>
+
+    <a href="/scripts/{{fileName}}?command={{nextCommand}}">Run command</a>
+
+{% endif %}
+
+{% endblock %}

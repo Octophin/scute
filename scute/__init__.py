@@ -6,6 +6,7 @@ import re
 import collections
 from datetime import datetime, date
 import urllib
+import subprocess
 
 here = os.path.dirname(os.path.abspath(__file__))
 
@@ -25,6 +26,7 @@ class scute:
         self.server.add_url_rule('/presets', 'presets', self.presets, methods=["GET", "POST"])
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
         self.server.add_url_rule('/scripts', 'scripts', self.scriptsView, False, methods=["GET", "POST"])
+        self.server.add_url_rule('/scripts/<script>', 'script', self.script, False, methods=["GET", "POST"])
     def getConfigSchema(self):
         configSchema = {}
         with open(self.options["configSchema"]) as configSchema:  
@@ -165,6 +167,41 @@ class scute:
                 presetFiles.append(fileJSON)
 
         return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.getConfigSchema(), current=prefill)
+
+    def script(self, script):
+
+        scriptsDirectory = ""
+
+        if("scriptsDirectory" in self.options):
+            scriptsDirectory = self.options["scriptsDirectory"]
+        else:
+            scriptsDirectory = 'presets/'
+
+        scriptSchema = {}
+        with open(scriptsDirectory + "/" + script, "r") as f1:
+            fileRaw = f1.read()
+            scriptSchema = json.loads(fileRaw)
+
+        if request.args.get("command"):
+            currentCommand = int(request.args.get("command"))
+            nextCommand = currentCommand + 1
+        else:
+            currentCommand = -1
+            nextCommand = 0
+
+        output = ""
+
+        if currentCommand > 0:
+            commandToRun = currentCommand - 1
+            # Run command
+            command = scriptSchema["commands"][commandToRun]["command"]
+            try:
+                output = os.popen(command).read()
+            except OSError as exc:
+                output = exc
+            
+        return render_template("script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output)
+
     def scriptsView(self):
         # Check if deleting a preset
 
@@ -187,6 +224,7 @@ class scute:
             with open(scriptsDirectory + "/" + file, "r") as f1:
                 fileRaw = f1.read()
                 fileJSON = json.loads(fileRaw)
+                fileJSON["fileName"] = file
                 scripts.append(fileJSON)
 
         return render_template("scriptsView.html", title="Scripts", scripts=scripts)

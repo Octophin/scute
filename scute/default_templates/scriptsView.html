@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 {% block content %}
 
-{{scripts}}
+    {% if scripts|length > 0 %}
+
+        {% for script in scripts %}
+
+            <h2>{{script.name}}</h2>
+            <a href="/scripts/{{script.fileName}}">More information</a>
+
+        {% endfor %}
+
+    {% else %}
+
+        <p>No scripts detected</p>
+
+    {% endif %}
 
 {% endblock %}

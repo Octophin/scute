@@ -1,1 +1,17 @@
-{}
+{
+    "name": "My script",
+    "description": "This is an introduction to what the script does",
+    "commands": [
+        {
+            "command": "cd /var/ && ls",
+            "description": "Go into the home directory",
+            "parameters": {
+                "directory": "/var/www/turtlesplash"
+            }
+        },
+        {
+            "command": "ls",
+            "description": "list all files"
+        }
+    ]
+}
