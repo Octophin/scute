@@ -24,6 +24,7 @@ class scute:
         self.server.add_url_rule('/applyPreset', 'applyPreset', self.applyPresetView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/presets', 'presets', self.presets, methods=["GET", "POST"])
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
+        self.server.add_url_rule('/scripts', 'scripts', self.scriptsView, False, methods=["GET", "POST"])
     def getConfigSchema(self):
         configSchema = {}
         with open(self.options["configSchema"]) as configSchema:  
@@ -124,9 +125,12 @@ class scute:
         return render_template("applyPreset.html", title="Apply preset", schema=self.getConfigSchema(), devices=devices, preset=preset)
     def presets(self, current=None):
 
-        # Check if deleting a preset
+        presetDirectory = ""
 
-        presetDirectory = 'presets/' # Todo add config parameter
+        if("presetDirectory" in self.options):
+            presetDirectory = self.options["presetDirectory"]
+        else:
+            presetDirectory = 'presets/'
 
         if not os.path.exists(presetDirectory):
             os.makedirs(presetDirectory)
@@ -161,6 +165,8 @@ class scute:
                 presetFiles.append(fileJSON)
 
         return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.getConfigSchema(), current=prefill)
+    def scriptsView(self):
+        return "hello"
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON
         expanded = {}
