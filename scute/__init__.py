@@ -97,6 +97,7 @@ class scute:
     
     def deviceConfigView(self):
 
+
         device = request.args.getlist("devices[]")[0]
 
         # Save config
@@ -105,11 +106,11 @@ class scute:
                 # Check if saving preset
                 if "preset" in request.form:
                     # Go to presets page
-                    
-                    presetQuery = json.dumps(request.form)
-                    return redirect("/presets?config=" + presetQuery, code=302)
+                    presetQuery = self.processFormTypes(request.form)
+                    presetQueryJSON = json.dumps(presetQuery)
+                    return redirect("/presets?config=" + presetQueryJSON, code=302)
                 else:
-                    self.hooks["save_config"](device, request.form)
+                    self.hooks["save_config"](device, self.processFormTypes(request.form))
             except:
                 pass
 
@@ -150,7 +151,7 @@ class scute:
             prefill = json.loads(request.args.get("config"))
 
         if request.method == "POST":
-            saved = request.form.to_dict()
+            saved = self.processFormTypes(request.form)
             presetName = saved["presetName"]
             saved["presetID"] = re.sub('[^a-zA-Z-]+', ' ', presetName)
             with open(presetDirectory + "/" + presetName + ".json" , 'w') as presetFile:
@@ -264,3 +265,18 @@ class scute:
 
         flatten(object)
         return out
+    def processFormTypes(self, formObject):
+
+        form = formObject.to_dict()
+
+        # Convert a submitted form to have the correct types (booleans only for now)  
+        output = {}
+
+        for key,value in form.items():
+            if value == "notselected":
+                value = False
+            if value == "selected":
+                value = True
+            output[key] = value
+        
+        return output
