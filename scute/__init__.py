@@ -21,6 +21,7 @@ class scute:
         self.server.jinja_loader = my_loader
         self.server.add_url_rule('/', 'index', self.deviceListView)
         self.server.add_url_rule('/config', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
+        self.server.add_url_rule('/applyPreset', 'applyPreset', self.applyPresetView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/presets', 'presets', self.presets, methods=["GET", "POST"])
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
     def getConfigSchema(self):
@@ -117,7 +118,10 @@ class scute:
             pass
     
         return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig)
-    
+    def applyPresetView(self):
+        devices = request.args.getlist("devices[]")
+        preset = request.args.get("value")
+        return render_template("applyPreset.html", title="Apply preset", schema=self.getConfigSchema(), devices=devices, preset=preset)
     def presets(self, current=None):
 
         # Check if deleting a preset

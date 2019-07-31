@@ -79,11 +79,11 @@
 
                 <div class="buttons-wrapper">
 
-                    <select data-bulk="true" disabled>
+                    <select data-action="applyPreset" onchange="triggerAction(event)" data-bulk="true" disabled>
                         <option>Apply Preset</option>
-                        <option>Preset A</option>
-                        <option>Preset B</option>
-                        <option>Preset C</option>
+                        <option value="a">Preset A</option>
+                        <option value="b">Preset B</option>
+                        <option value="c">Preset C</option>
                     </select>
 
                     <button onclick="triggerAction(event)" data-action="config" data-bulk="false" disabled>Device Config</button>
