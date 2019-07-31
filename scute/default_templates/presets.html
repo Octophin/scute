@@ -3,14 +3,13 @@
 
     <section class="happy-margin presetManager">
 
-        <h1 class="navy">Set and Edit Presents Below ({{presets|length}})
-        </h1>
+        <h1 class="navy">Set and Edit Device Presets Below ({{presets|length}})</h1>
 
         <div class="presets-manager-wrapper">
             <div class="presets-manager-list scrolling">
                 <div class="edit-presets-icons">
                     <span class="icon add-preset" onclick="loadPreset('new')">
-                        <img alt="Delete icon" src="scute/images/add-icon.png"/>
+                        <img alt="Add icon" src="scute/images/add-icon.png"/>
                     </span>
                     <span class="icon">
                         <img onclick="deletePreset()" alt="Delete icon" src="scute/images/delete-icon.png"/>
@@ -56,6 +55,7 @@
                 {# Existing preset forms #}
                 {% for preset in presets %}
                 <div data-preset="{{preset.presetID}}" style="display:none">
+                    <h1>{{preset.presetID}}</h1>
                     {% with current = preset %}
                     {% include "presetForm.html" %}
                     {% endwith %}

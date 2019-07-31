@@ -30,13 +30,16 @@ class scute:
     def getConfigSchema(self):
         configSchema = {}
         with open(self.options["configSchema"]) as configSchema:  
+
             configSchema = json.load(configSchema)
+
             fields = {}
             # Assign default orders
             for category in configSchema:
                 if "order" not in configSchema[category]:
                     self.getConfigSchema()[category]["order"] = 0
                 for field in configSchema[category]["fields"]:
+
                     fields[field] = configSchema[category]["fields"][field]
                     if "order" not in fields[field]:
                         fields[field]["order"] = 0
@@ -93,8 +96,22 @@ class scute:
         return deviceReports
 
     def deviceListView(self):
-        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     
+    def getAllPresetValues(self):
+        # scan the preset directory and return value label pairs
+        if not os.path.exists('presets'):
+            return [{"value": "", "label": "No Presets Found"}]
+        pathContent = os.listdir('presets')
+        replyValues = []
+        for file in pathContent:
+            fileParts = file.split(".")
+            replyValues.append({"value": file, "label": fileParts[0]})
+        
+        if replyValues == []:
+            replyValues = [{"value": "", "label": "No Presets Found"}]
+        return replyValues
+
     def deviceConfigView(self):
 
 
@@ -125,7 +142,41 @@ class scute:
     def applyPresetView(self):
         devices = request.args.getlist("devices[]")
         preset = request.args.get("value")
-        return render_template("applyPreset.html", title="Apply preset", schema=self.getConfigSchema(), devices=devices, preset=preset)
+
+        presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
+
+        return render_template("applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset)
+
+
+    def filterOutFieldsWithBooleanAttribute(self, fullSchema, excludeAttribute):
+
+        filteredSchema = {}
+
+        for thisCategory in fullSchema.keys(): # loop categories
+            filteredSchema[thisCategory] = fullSchema[thisCategory]
+            filteredFields = {}
+
+            for fieldName in fullSchema[thisCategory]["fields"]: #loop fields
+                               
+                if (excludeAttribute in fullSchema[thisCategory]["fields"][fieldName] 
+                    and fullSchema[thisCategory]["fields"][fieldName][excludeAttribute] == True):
+                    print("filtering out " + fieldName)
+
+                else:
+                    #only add fields that no not match.
+                    filteredFields[fieldName] = fullSchema[thisCategory]["fields"][fieldName]
+
+            filteredSchema[thisCategory]["fields"] = filteredFields
+            if len(filteredFields) == 0:
+                # remove the category..
+                del(filteredSchema[thisCategory])
+            else:
+                # update the fields.
+                filteredSchema[thisCategory]["fields"] = filteredFields
+                    
+        return filteredSchema
+
+
     def presets(self, current=None):
 
         presetDirectory = ""
@@ -166,8 +217,10 @@ class scute:
                 fileRaw = f1.read()
                 fileJSON = json.loads(fileRaw)
                 presetFiles.append(fileJSON)
+        
+        presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.getConfigSchema(), current=prefill)
+        return render_template("presets.html", title="Presets", presets=presetFiles, schema=presetSchema, current=prefill)
 
     def script(self, script):
 
