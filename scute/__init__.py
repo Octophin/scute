@@ -7,6 +7,8 @@ import collections
 from datetime import datetime, date
 import urllib
 import subprocess
+import unicodedata
+import string
 
 here = os.path.dirname(os.path.abspath(__file__))
 
@@ -203,9 +205,10 @@ class scute:
 
         if request.method == "POST":
             saved = self.processFormTypes(request.form)
-            presetName = saved["presetName"]
-            saved["presetID"] = re.sub('[^a-zA-Z-]+', ' ', presetName)
-            with open(presetDirectory + "/" + presetName + ".json" , 'w') as presetFile:
+            safeName = re.sub('[^a-zA-Z-_0-9]+', ' ', saved["presetName"])
+            safeName = safeName.replace(" ", "_")
+            saved["presetID"] = safeName
+            with open(presetDirectory + safeName + ".json" , 'w') as presetFile:
                 json.dump(saved, presetFile)
 
         presetFilesNames = os.listdir(presetDirectory)
@@ -221,6 +224,8 @@ class scute:
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
         return render_template("presets.html", title="Presets", presets=presetFiles, schema=presetSchema, current=prefill)
+
+
 
     def script(self, script):
 
