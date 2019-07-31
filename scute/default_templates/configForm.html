@@ -4,6 +4,8 @@
 </div>
 
 {% for key,category in schema.items() | sort(attribute='1.order')%}
+
+
     <div class="form-title happy-padding navy">
         <h2>{{category.label}}</h2>
         {% if category.description|length > 1 %}
@@ -12,9 +14,6 @@
     </div>
 
      {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
-
-
-     {% if formType != "preset" or formType == "preset" and fieldSchema.excludeFromPresets != true %} 
 
         <div class="form-field happy-margin" >
 
@@ -103,7 +102,7 @@
             {% endif %}
         </div>
 
-        {% endif %}
+
     {% endfor %}
 
 {% endfor %}

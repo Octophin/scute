@@ -28,13 +28,16 @@ class scute:
     def getConfigSchema(self):
         configSchema = {}
         with open(self.options["configSchema"]) as configSchema:  
+
             configSchema = json.load(configSchema)
+
             fields = {}
             # Assign default orders
             for category in configSchema:
                 if "order" not in configSchema[category]:
                     self.getConfigSchema()[category]["order"] = 0
                 for field in configSchema[category]["fields"]:
+
                     fields[field] = configSchema[category]["fields"][field]
                     if "order" not in fields[field]:
                         fields[field]["order"] = 0
@@ -136,7 +139,41 @@ class scute:
     def applyPresetView(self):
         devices = request.args.getlist("devices[]")
         preset = request.args.get("value")
-        return render_template("applyPreset.html", title="Apply preset", schema=self.getConfigSchema(), devices=devices, preset=preset)
+
+        presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
+
+        return render_template("applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset)
+
+
+    def filterOutFieldsWithBooleanAttribute(self, fullSchema, excludeAttribute):
+
+        filteredSchema = {}
+
+        for thisCategory in fullSchema.keys(): # loop categories
+            filteredSchema[thisCategory] = fullSchema[thisCategory]
+            filteredFields = {}
+
+            for fieldName in fullSchema[thisCategory]["fields"]: #loop fields
+                               
+                if (excludeAttribute in fullSchema[thisCategory]["fields"][fieldName] 
+                    and fullSchema[thisCategory]["fields"][fieldName][excludeAttribute] == True):
+                    print("filtering out " + fieldName)
+
+                else:
+                    #only add fields that no not match.
+                    filteredFields[fieldName] = fullSchema[thisCategory]["fields"][fieldName]
+
+            filteredSchema[thisCategory]["fields"] = filteredFields
+            if len(filteredFields) == 0:
+                # remove the category..
+                del(filteredSchema[thisCategory])
+            else:
+                # update the fields.
+                filteredSchema[thisCategory]["fields"] = filteredFields
+                    
+        return filteredSchema
+
+
     def presets(self, current=None):
 
         presetDirectory = ""
@@ -177,8 +214,11 @@ class scute:
                 fileRaw = f1.read()
                 fileJSON = json.loads(fileRaw)
                 presetFiles.append(fileJSON)
+        
+        presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("presets.html", title="Presets", presets=presetFiles, schema=self.getConfigSchema(), current=prefill)
+        return render_template("presets.html", title="Presets", presets=presetFiles, schema=presetSchema, current=prefill)
+
     def scriptsView(self):
         # Check if deleting a preset
 
