@@ -23,14 +23,14 @@
             {% if fieldSchema.type == "boolean" %}
                 <div class="boolean-field">
             {% endif %}
-            <div class="form-field-top">
-                <span class="icon" title="{{ fieldSchema.description }}">
+            <div class="form-field-top" title="{{ fieldSchema.description }}">
+                {# <span class="icon" title="{{ fieldSchema.description }}">
                     {% if fieldSchema.description|length > 1 %}
                         <img alt="Info icon" src="/scute/images/info-icon-navy.png">
                     {% else %}
                         <div class="no-info"></div>
                     {% endif %}
-                </span>
+                </span> #}
                 <label for="{{fieldKey}}">{{fieldSchema.label}}
                     {% if fieldSchema.userLocked == true %}
                         (read only)
