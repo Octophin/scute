@@ -363,7 +363,7 @@ body button.selected {
     border: solid 0.1em red;
 }
 
-button, button.primary, select {
+button, button.primary, select, .button.start {
     background-color: transparent;
     border: solid 0.1em #0e2940;
     border-radius: 0.1em;
@@ -394,7 +394,7 @@ button.featured {
     border: none;
 }
 
-button:hover {
+button:hover, a.button:hover {
     background-color: white;
     color: #6ab469;
     border: solid 0.1em #6ab469;
