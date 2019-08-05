@@ -278,14 +278,16 @@ class scute:
             # Check if any parameters have been passed in
 
             command = scriptSchema["commands"][commandToRun]["command"]
-
+            output = ""
             for key,value in request.args.items():
                 command = command.replace("${"+key+"}", value)
-            try:
-                output = os.popen(command).read()
-            except OSError as exc:
-                output = exc
-            
+            p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            stdout, stderr = p.communicate()
+            if stdout:
+                output = stdout
+            else:
+                output = stderr
+
         return render_template("script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output)
 
     def scriptsView(self):
