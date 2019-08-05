@@ -10,27 +10,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    font-size: 1.5em;
+    font-size: 1.65em;
 }
 
 h2 {
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 h3, p {
-    font-size: 0.9em;
+    font-size: 1em;
 }
 
 h4 {
-    font-size: 0.8em;
+    font-size: 0.9em;
 }
 
 h5 {
-    font-size: 0.7em;
+    font-size: 0.8em;
 }
 
 h6 {
-    font-size: 0.6em;
+    font-size: 0.7em;
 }
 
 /* GENERAL */
@@ -44,6 +44,7 @@ h6 {
 
 body {
     font-family: Trebuchet MS, Arial, Helvetica, sans-serif !important;
+    font-size: 18px;
     box-sizing: border-box;
     position: relative;
     height: 100%;
@@ -362,7 +363,7 @@ body button.selected {
     border: solid 0.1em red;
 }
 
-button, button.primary, select {
+button, button.primary, select, .button.start {
     background-color: transparent;
     border: solid 0.1em #0e2940;
     border-radius: 0.1em;
@@ -393,7 +394,7 @@ button.featured {
     border: none;
 }
 
-button:hover {
+button:hover, a.button:hover {
     background-color: white;
     color: #6ab469;
     border: solid 0.1em #6ab469;
@@ -547,7 +548,7 @@ button.scary {
 }
 
 [data-preset-menu][data-selected] {
-    background-color: #6ab469;
+    background-color: #50B75F;
 }
 
 /* BANNERS */
@@ -611,17 +612,35 @@ button.scary {
 
 .form-field {
     display: block;
+    display: flex;
 }
+
+.form-field .icon, .form-field .no-info {
+    width: 1em;
+    vertical-align: super;
+    margin-right: 0.75em;
+  }
+
+  .form-field .no-info {
+      height: calc(1em - 2px);
+      width: calc(100% - 2px);
+      background-color: transparent;
+      border-radius: 90%;
+      border: 2px solid #0e2940;
+  }
 
 label, input, select, .icon, .subheading * {
     display: inline-block;
 }
 
+.form-field-top {
+    width: 20em;
+    margin-bottom: 1em;
+}
+
 label {
     color: #8a8a8a;
     position: relative;
-    width: 20em;
-    margin-bottom: 1em;
 }
 
 input {
@@ -634,11 +653,17 @@ input, select {
     border: solid thin #8a8a8a;
     font-size: 1em;
     padding: 0.2em;
+    margin-left: 2em;
+}
+
+.radio-wrapper {
+    margin-left: 2em;
 }
 
 select {
     height: 2.5em;
     width: 60%;
+    max-width: 37rem;
     -webkit-appearance: none;
     padding: 0.5em;
     margin-right: 0;
@@ -655,6 +680,91 @@ input:focus, [data-changed] {
 input[type="radio"] {
     width: auto;
 }
+
+input.number-field {
+    max-width: 8em;
+}
+
+.form-body input[type="text"], textarea {
+    width: 100%;
+    max-width: 37rem;
+}
+
+.radio-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .boolean-choice-label {
+    width: 8em;
+  }
+  
+  .radio-wrapper div {
+    display: flex;
+  }
+  
+  .boolean-field {
+    display: flex;
+  }
+  
+
+/* Scripts Index and View */
+
+.script-item-wrapper {
+    padding-bottom: 1em;
+}
+
+.script-item-wrapper h2 {
+    margin-bottom: 1em
+}
+
+hr {
+    border: none;
+    border-top: solid 1px #8a8a8a;
+}
+
+pre {
+    white-space: pre-wrap;
+    font-family: monospace;
+    background: white;
+    padding: 1em;
+}
+
+.scriptRun > p {
+    margin: 1em;
+}
+
+.scriptRun > a {
+    border: solid 1px;
+    padding: 0.4em 0.75em;
+    line-height: 1.3em;
+    display: inline-block;
+    text-align: center;
+   }
+   
+
+/* Alerts, warnings and popups */
+
+.alert {
+    padding: 1em;
+    display: block;
+    background-color: grey;
+    color: white;
+    margin-bottom: 15px;
+  }
+ .alert.success {
+  background-color:#50B75F;
+  border: 1px solid forestgreen;
+ }
+ .alert.error {
+  background-color: #ff8a8a;
+  border: 1px solid red;
+ }
+ .alert.info {
+  background-color: #5962fd;
+  border: 1px solid blue;
+ }
+
 
 /* MQ - MOBILE */
 

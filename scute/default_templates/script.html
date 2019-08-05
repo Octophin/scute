@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+    <section class="happy-margin scriptRun">
 
 <h1>{{script.name}}</h1>
 
@@ -11,21 +12,21 @@
 
 {% if nextCommand == 0 %}
 
-    <p>{{script.description}}</p>
+    <p class="happy-margin">{{script.description}}</p>
 
-    <a href="/scripts/{{fileName}}?command={{nextCommand}}">Start</a>
+    <a class="happy-margin start button" href="/scripts/{{fileName}}?command={{nextCommand}}">Start</a>
 
 {% elif nextCommand > script.commands|length %}
 
-    The script is done.
+    <span class="alert success">The script is done.</span>
 
 {% else %}
 
-    <p>{{script.commands[nextCommand - 1].description}}</p>
+    <p class="happy-margin">{{script.commands[nextCommand - 1].description}}</p>
 
     {# Form for parameters #}
 
-    <form>
+    <form class="happy-margin">
 
         <input type="hidden" name="command" value="{{nextCommand}}">
 
@@ -45,5 +46,5 @@
     </form>
 
 {% endif %}
-
+</section>
 {% endblock %}
