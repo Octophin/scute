@@ -622,9 +622,18 @@ button.scary {
 
 .form-field .icon, .form-field .no-info {
     width: 1em;
-    vertical-align: super;
+    vertical-align: middle;
     margin-right: 0.75em;
   }
+
+.form-field-top .icon {
+    height: 1.3rem;
+}
+
+.form-field-top .icon img {
+    vertical-align: unset;
+    display: block;
+}
 
   .form-field .no-info {
       height: calc(1em - 2px);
@@ -646,6 +655,7 @@ label, input, select, .icon, .subheading * {
 label {
     color: #8a8a8a;
     position: relative;
+    line-height: 1.35;
 }
 
 input {
