@@ -105,6 +105,7 @@ body {
 }
 
 .icon {
+    cursor: pointer;
     width: 1.5em;
     display: inline-block;
 }

@@ -193,14 +193,25 @@ let showConfirm = function (warning, targetURL) {
 
 };
 
+let uploadPreset = function () {
+
+    document.querySelectorAll("[data-preset]").forEach(function (element) {
+
+        element.style.display = "none";
+
+    });
+
+    document.querySelector("[data-preset='upload']").style.display = "block";
+
+};
+
 let loadPreset = function (presetID) {
 
-    let menus = Array.from(document.querySelectorAll("[data-preset-menu]")).forEach(function (menu) {
+    Array.from(document.querySelectorAll("[data-preset-menu]")).forEach(function (menu) {
 
         if (menu.getAttribute("data-preset-menu") === presetID) {
 
             menu.setAttribute("data-selected", "true");
-           
 
         } else {
 
@@ -212,8 +223,9 @@ let loadPreset = function (presetID) {
 
     document.querySelectorAll("[data-preset]").forEach(function (element) {
 
+        
         if (element.getAttribute("data-preset") === presetID) {
-
+       
             element.style.display = "block";
 
         } else {

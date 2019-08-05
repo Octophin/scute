@@ -9,10 +9,13 @@
             <div class="presets-manager-list scrolling">
                 <div class="edit-presets-icons">
                     <span class="icon add-preset" onclick="loadPreset('new')">
-                        <img alt="Add icon" src="scute/images/add-icon.png"/>
+                        <img alt="Add preset" src="scute/images/add-icon.png"/>
                     </span>
                     <span class="icon">
-                        <img onclick="deletePreset()" alt="Delete icon" src="scute/images/delete-icon.png"/>
+                        <img onclick="deletePreset()" alt="Delete preset" src="scute/images/delete-icon.png"/>
+                    </span>
+                    <span class="icon">
+                        <img onclick="uploadPreset()" alt="Upload preset" src="scute/images/upload-icon.svg"/>
                     </span>
                 </div>
                 <div class="presets-list">
@@ -41,6 +44,23 @@
                     <h1 id="presetHeading"></h1>
                     <span id="presetDate"></span>
                 </div>
+
+                {# Upload new preset #}
+
+                <div data-preset="upload" style="display:none;">
+
+                <form method="POST">
+
+                    <p>Paste a preset. The screen will refresh and the preset contents will appear in the form for you to rename / alter. Note, this only accepts files created through this preset manager (flattened JSON) not raw config files from a device.</p>
+
+                    <textarea name="paste"></textarea><br />
+
+                    <input type="submit"/>
+
+                </form>
+
+                </div>
+
                 {# New preset form #}
                 <div data-preset="new">
                     

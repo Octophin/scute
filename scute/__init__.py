@@ -225,12 +225,15 @@ class scute:
             prefill = json.loads(request.args.get("config"))
 
         if request.method == "POST":
-            saved = self.processFormTypes(request.form)
-            safeName = re.sub('[^a-zA-Z-_0-9]+', ' ', saved["presetName"])
-            safeName = safeName.replace(" ", "_")
-            saved["presetID"] = safeName
-            with open(presetDirectory + safeName + ".json" , 'w') as presetFile:
-                json.dump(saved, presetFile)
+            if "paste" in request.form:
+                prefill = json.loads(request.form["paste"])
+            else:
+                saved = self.processFormTypes(request.form)
+                safeName = re.sub('[^a-zA-Z-_0-9]+', ' ', saved["presetName"])
+                safeName = safeName.replace(" ", "_")
+                saved["presetID"] = safeName
+                with open(presetDirectory + safeName + ".json" , 'w') as presetFile:
+                    json.dump(saved, presetFile)
 
         presetFilesNames = os.listdir(presetDirectory)
         presetFilesNames = sorted(presetFilesNames, reverse=False)
