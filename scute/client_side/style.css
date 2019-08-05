@@ -618,6 +618,13 @@ button.scary {
 .form-field {
     display: block;
     display: flex;
+    justify-content: left;
+    padding-bottom: 0.5em;
+    border-bottom: 0.5px solid hsla(0, 0%, 54%, 0.35);
+}
+
+.form-body input[name="presetName"] {
+    margin-left: 0;
 }
 
 .form-field .icon, .form-field .no-info {
@@ -653,9 +660,10 @@ label, input, select, .icon, .subheading * {
 }
 
 label {
-    color: #8a8a8a;
+    color: hsl(0, 0%, 25%);
     position: relative;
     line-height: 1.35;
+    font-weight: 300;
 }
 
 input {
@@ -669,6 +677,7 @@ input, select {
     font-size: 1em;
     padding: 0.2em;
     margin-left: 2em;
+    margin-bottom: 0.5em;
 }
 
 .radio-wrapper {
@@ -682,6 +691,7 @@ select {
     -webkit-appearance: none;
     padding: 0.5em;
     margin-right: 0;
+    background: white;
 }
 
 input:focus, [data-changed] {
@@ -700,7 +710,7 @@ input.number-field {
     max-width: 8em;
 }
 
-.form-body input[type="text"], textarea {
+.form-body input[type="text"]:not(.number-field), textarea {
     width: 100%;
     max-width: 37rem;
 }
@@ -711,7 +721,7 @@ input.number-field {
   }
   
   .boolean-choice-label {
-    width: 8em;
+    width: calc(100% - 3em);
   }
   
   .radio-wrapper div {
