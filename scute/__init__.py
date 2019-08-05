@@ -1,5 +1,5 @@
 import json
-from flask import render_template, send_from_directory, request, redirect, send_file, safe_join
+from flask import render_template, send_from_directory, request, redirect, send_file, safe_join, g
 import jinja2
 import os
 import re
@@ -130,11 +130,8 @@ class scute:
                     return redirect("/presets?config=" + presetQueryJSON, code=302)
                 else:
                     self.hooks["save_config"](device, self.processFormTypes(request.form))
-
-                    # temp fix for beta test
-                    #TODO - take this out when there are fixed device ids.
-                    if device != self.processFormTypes(request.form)['system.deviceIdentifier']:
-                        return redirect("/")
+                    if "redirect" in g:
+                        return redirect(g.redirect)
 
 
             except:

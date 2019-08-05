@@ -1,7 +1,7 @@
 # Demonstration file
 
 from scute import scute
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, g
 import json
 import os
 
@@ -44,6 +44,7 @@ exampleInstance.registerHook("get_report_field__friendlyName", getFriendlyName)
 
 def saveConfig(deviceID, config):
     with open("exampleConfig_" + deviceID + '_config.json', 'w') as configFile: 
+        g.redirect = "/"
         json.dump(exampleInstance.expandJSON(config), configFile)
 
 exampleInstance.registerHook("save_config", saveConfig)
