@@ -676,8 +676,43 @@ input.number-field {
 
 .form-body input[type="text"], textarea {
     width: 100%;
+    max-width: 37rem;
 }
 
+/* Scripts Index and View */
+
+.script-item-wrapper {
+    padding-bottom: 1em;
+}
+
+.script-item-wrapper h2 {
+    margin-bottom: 1em
+}
+
+hr {
+    border: none;
+    border-top: solid 1px #8a8a8a;
+}
+
+pre {
+    white-space: pre-wrap;
+    font-family: monospace;
+    background: white;
+    padding: 1em;
+}
+
+.scriptRun > p {
+    margin: 1em;
+}
+
+.scriptRun > a {
+    border: solid 1px;
+    padding: 0.4em 0.75em;
+    line-height: 1.3em;
+    display: inline-block;
+    text-align: center;
+   }
+   
 
 
 /* MQ - MOBILE */
