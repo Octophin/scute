@@ -130,6 +130,13 @@ class scute:
                     return redirect("/presets?config=" + presetQueryJSON, code=302)
                 else:
                     self.hooks["save_config"](device, self.processFormTypes(request.form))
+
+                    # temp fix for beta test
+                    #TODO - take this out when there are fixed device ids.
+                    if device != self.processFormTypes(request.form)['system.deviceIdentifier']:
+                        return redirect("/")
+
+
             except:
                 pass
 
@@ -140,6 +147,7 @@ class scute:
         except:
             pass
     
+
         return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig)
 
     def applyPresetView(self):
