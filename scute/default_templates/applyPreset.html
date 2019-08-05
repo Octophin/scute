@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
 
-{{preset}}
+<h1>Applying {{preset}} to {{devices}}</h1>
 
-{{devices}}
+<p>Modify the preset below and hit save to apply it</p>
+
+ <form data-preset class="form-body" id="configForm" method="post">
+    {% include "configForm.html" %}
+</form>
 
 {% endblock %}

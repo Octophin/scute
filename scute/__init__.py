@@ -141,13 +141,34 @@ class scute:
             pass
     
         return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig)
+
     def applyPresetView(self):
         devices = request.args.getlist("devices[]")
         preset = request.args.get("value")
 
+        if request.method == "POST":
+            form = self.processFormTypes(request.form)
+            for device in devices:
+                deviceConfig = self.hooks["read_config"](device)
+                for field,value in form.items():
+                    deviceConfig[field] = value
+                self.hooks["save_config"](device, deviceConfig)
+            return redirect("/")
+
+        presetDirectory = ""
+
+        if("presetsDirectory" in self.options):
+            presetDirectory = self.options["presetsDirectory"]
+        else:
+            presetDirectory = 'presets/'
+
+        with open(presetDirectory + preset, "r") as f1:
+                presetRaw = f1.read()
+                presetJSON = json.loads(presetRaw)
+
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset)
+        return render_template("applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON)
 
 
     def filterOutFieldsWithBooleanAttribute(self, fullSchema, excludeAttribute):
@@ -268,7 +289,6 @@ class scute:
         return render_template("script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output)
 
     def scriptsView(self):
-        # Check if deleting a preset
 
         scriptsDirectory = ""
 
