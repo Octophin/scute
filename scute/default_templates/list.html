@@ -23,6 +23,8 @@
                 </div>
             </div>
 
+            {% if reportValues | length > 0 %}
+
             <section class="main-table">
                 <table>
                     <tr>
@@ -72,6 +74,16 @@
                 </table>
 
             </section>
+            {% else %}
+
+            <section class="main-table">
+                <div class="happy-margin no-devices">
+                    <div class="alert info">
+                        <h1>No configured devices detected.</h1>Please connect a device and <a href="/">reload the page.</a>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
 
             <div class="divider"></div>
 
