@@ -715,6 +715,28 @@ pre {
    }
    
 
+/* Alerts, warnings and popups */
+
+.alert {
+    padding: 1em;
+    display: block;
+    background-color: grey;
+    color: white;
+    margin-bottom: 15px;
+  }
+ .alert.success {
+  background-color:#50B75F;
+  border: 1px solid forestgreen;
+ }
+ .alert.error {
+  background-color: #ff8a8a;
+  border: 1px solid red;
+ }
+ .alert.info {
+  background-color: #5962fd;
+  border: 1px solid blue;
+ }
+
 
 /* MQ - MOBILE */
 
