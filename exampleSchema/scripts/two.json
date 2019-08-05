@@ -1,0 +1,17 @@
+{
+    "name": "My magic script",
+    "description": "Lorem ipsum dolor sit amet consectetur adipiscing elit montes donec auctor in id, ultrices est maecenas cras rutrum platea bibendum ultricies phasellus nunc faucibus. Per tellus a non imperdiet vestibulum purus molestie at, semper fames lobortis inceptos placerat lacinia mollis.",
+    "commands": [
+        {
+            "command": "cd ${directory} && ls",
+            "description": "Go into the home directory",
+            "parameters": {
+                "directory": "The name of the directory"
+            }
+        },
+        {
+            "command": "ls",
+            "description": "list all files"
+        }
+    ]
+}
