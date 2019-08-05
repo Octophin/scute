@@ -710,9 +710,25 @@ input.number-field {
     max-width: 8em;
 }
 
+.form-body input {
+    font-size: 0.9em;
+}
+
+
 .form-body input[type="text"]:not(.number-field), textarea {
     width: 100%;
     max-width: 37rem;
+}
+
+
+textarea {
+    padding: 0.5em;
+    font-size: 0.9em;
+}
+
+textarea[name="paste"] {
+    max-width: 100%;
+    font-family: monospace;
 }
 
 .radio-wrapper {
