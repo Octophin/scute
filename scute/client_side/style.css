@@ -581,8 +581,13 @@ button.scary {
     max-width: 100%;
 }
 
+#configForm {
+    padding: 0 2em;
+  }
+
 .config-page-subheading {
     border-top: solid thick #6ab468;
+    padding: 0 2em;
 }
 
 .config-page-subheading h1 {
