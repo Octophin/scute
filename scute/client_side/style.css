@@ -612,6 +612,7 @@ button.scary {
 
 .form-field {
     display: block;
+    display: flex;
 }
 
 .form-field .icon, .form-field .no-info {
@@ -632,11 +633,14 @@ label, input, select, .icon, .subheading * {
     display: inline-block;
 }
 
+.form-field-top {
+    width: 20em;
+    margin-bottom: 1em;
+}
+
 label {
     color: #8a8a8a;
     position: relative;
-    width: 20em;
-    margin-bottom: 1em;
 }
 
 input {
@@ -649,11 +653,17 @@ input, select {
     border: solid thin #8a8a8a;
     font-size: 1em;
     padding: 0.2em;
+    margin-left: 2em;
+}
+
+.radio-wrapper {
+    margin-left: 2em;
 }
 
 select {
     height: 2.5em;
     width: 60%;
+    max-width: 37rem;
     -webkit-appearance: none;
     padding: 0.5em;
     margin-right: 0;
@@ -679,6 +689,24 @@ input.number-field {
     width: 100%;
     max-width: 37rem;
 }
+
+.radio-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .boolean-choice-label {
+    width: 8em;
+  }
+  
+  .radio-wrapper div {
+    display: flex;
+  }
+  
+  .boolean-field {
+    display: flex;
+  }
+  
 
 /* Scripts Index and View */
 
