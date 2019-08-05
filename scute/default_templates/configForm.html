@@ -5,15 +5,18 @@
 
 {% for key,category in schema.items() | sort(attribute='1.order')%}
 
-
-    <div class="form-title happy-padding navy">
-        <h2>{{category.label}}</h2>
-        {% if category.description|length > 1 %}
-            <p>{{category.description}}</p>
-        {% endif %}
-    </div>
-
      {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}
+
+    {% if loop.first %}
+
+        <div class="form-title happy-padding navy">
+            <h2>{{category.label}}</h2>
+            {% if category.description|length > 1 %}
+                <p>{{category.description}}</p>
+            {% endif %}
+        </div>
+
+    {% endif %}
 
         <div class="form-field happy-margin" >
 
