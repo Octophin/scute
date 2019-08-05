@@ -613,6 +613,20 @@ button.scary {
     display: block;
 }
 
+.form-field .icon, .form-field .no-info {
+    width: 1em;
+    vertical-align: super;
+    margin-right: 0.75em;
+  }
+
+  .form-field .no-info {
+      height: calc(1em - 2px);
+      width: calc(100% - 2px);
+      background-color: transparent;
+      border-radius: 90%;
+      border: 2px solid #0e2940;
+  }
+
 label, input, select, .icon, .subheading * {
     display: inline-block;
 }
@@ -655,6 +669,16 @@ input:focus, [data-changed] {
 input[type="radio"] {
     width: auto;
 }
+
+input.number-field {
+    max-width: 8em;
+}
+
+.form-body input[type="text"], textarea {
+    width: 100%;
+}
+
+
 
 /* MQ - MOBILE */
 
