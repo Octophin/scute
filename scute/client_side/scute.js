@@ -10,22 +10,28 @@ let getSelectedDevices = function () {
 
 };
 
-
 document.querySelectorAll(".deviceHeader").forEach(function (element) {
 
-    element.addEventListener("click", function (e) {
+    let device = element.getAttribute("data-device");
+    let deviceReportCells = document.querySelectorAll("tr [data-device=" + device + "]");
 
-        let element = e.currentTarget;
+    element.addEventListener("click", function () {
 
-        if (element.getAttribute("data-active")) {
+        let isActive = element.getAttribute("data-active");
 
-            element.removeAttribute("data-active");
+        deviceReportCells.forEach(function (tableCell) {
 
-        } else {
+            if (!isActive) {
 
-            element.setAttribute("data-active", "true");
+                tableCell.setAttribute("data-active", "true");
 
-        }
+            } else {
+
+                tableCell.removeAttribute("data-active");
+
+            }
+
+        })
 
         populateButtons();
 
@@ -223,9 +229,9 @@ let loadPreset = function (presetID) {
 
     document.querySelectorAll("[data-preset]").forEach(function (element) {
 
-        
+
         if (element.getAttribute("data-preset") === presetID) {
-       
+
             element.style.display = "block";
 
         } else {
@@ -250,7 +256,6 @@ let deletePreset = function () {
 
 };
 
-function displayLoadingPopup(){
+function displayLoadingPopup() {
     document.getElementById("loadingPopup").style.display = "block";
 }
-

@@ -47,7 +47,7 @@
 
                                 <!-- output the field cell -->
                                 {% for deviceKey,deviceValues in reportValues.items() %}
-                                    <td>
+                                    <td data-device="{{deviceKey}}">
 
                                         {% if deviceValues[fieldKey] is iterable and deviceValues[fieldKey] is not string %}
 
