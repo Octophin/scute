@@ -1,8 +1,10 @@
 # Schema Compiled Utility Template Engine
 
-SCUTE will build an extendable graphical administration interface for hardware devices from JSON schema files, allowing people to view reports about connected devices, update and manage configuration (with preset saving and loading) and perform actions such as viewing and exporting data from the device (on one device or several at once).
+SCUTE will build an extendable graphical administration interface for hardware devices from JSON schema files, allowing people to view reports about connected devices, update and manage configuration (with preset saving and loading) and perform command line actions such as viewing and exporting data from the device (on one device or several at once) through a step-through graphical interface.
 
 It has been built by Octophin Digital for the Arribada Horizon biologging tags.
+
+[How it works](#quick-start)
 
 ![screenshot](https://raw.githubusercontent.com/Octophin/scute/master/scute-home.PNG)
 
