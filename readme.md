@@ -4,6 +4,8 @@ SCUTE will build an extendable graphical administration interface for hardware d
 
 It has been built by Octophin Digital for the Arribada Horizon biologging tags.
 
+![screenshot](https://raw.githubusercontent.com/Octophin/scute/master/scute-home.PNG)
+
 # Quick start
 
 * copy the `app.py` example file and the `exampleSchema` directory from this repository to a new directory
