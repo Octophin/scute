@@ -276,7 +276,7 @@ article.selected {
 .circle .inner-circle {
     width: 0.95em;
     height: 0.95em;
-    background-color: red;
+    background-color: #50B75F;
   }
 
 .deviceHeader[data-active] .circle {
@@ -539,13 +539,6 @@ button.scary {
     border: solid 0.1em #0e2940;
 }
 
-/* @media screen and (max-width: 600px) {
-    section.buttons.actions>.buttons-wrapper * {
-        width: 100%;
-        margin: 0.5em auto;
-        text-align: center;
-} */
-
 /* POP-UP */
 
 .pop-up {
@@ -644,11 +637,14 @@ section.presetManager>h1 {
 
 .presets-list ul li {
     border-top: solid thin #B3B1B1;
-    padding: 1em;
+    padding: 2em 1em;
 }
 
 .preset-title {
     line-height: 2em;
+}
+.preset-list-item:hover {
+    background-color: #E4F2E6;
 }
 
 [data-preset-menu][data-selected] {
@@ -998,4 +994,16 @@ pre {
         margin-left: 0;
         max-width: unset;
     }
+
+    /* CONFIG PAGE - BUTTONS */
+
+    .buttons.actions>.buttons-wrapper * {
+        width: 100%;
+        margin: 0.5em auto;
+        text-align: center;
+    }
+    .buttons.actions>.buttons-wrapper select {
+        text-align: center;
+    }
+
 }
