@@ -602,6 +602,7 @@ section.presetManager>h1 {
 [data-preset] h1 {
     border-bottom: solid 2px;
     padding: 0.1em;
+    margin-left: 0.5em;
 }
 
 .presets-list {
@@ -750,6 +751,10 @@ section.presetManager>h1 {
     vertical-align: middle;
     margin-right: 0.75em;
   }
+  
+  .form-title.happy-padding {
+      padding: 1em 0;
+  }
 
 .form-field-top .icon {
     height: 1.3rem;
@@ -766,6 +771,11 @@ section.presetManager>h1 {
       background-color: transparent;
       border-radius: 90%;
       border: 2px solid #0e2940;
+  }
+
+  .form-field select {
+    margin-left: 1.8em;
+    max-width: 7.2em;
   }
 
 label, input, select, .icon, .subheading * {
@@ -973,6 +983,19 @@ pre {
         margin: 0;
     }
     .form-field input.number-field {
+        max-width: unset;
+    }
+    [data-preset] h1,
+    .form-body h2,
+    .form-body input[name="presetName"],
+    .form-body textarea {
+        margin-left: 0;
+    }
+    .form-buttons {
+        margin: 1em 0;
+    }
+    .form-field select {
+        margin-left: 0;
         max-width: unset;
     }
 }
