@@ -539,12 +539,12 @@ button.scary {
     border: solid 0.1em #0e2940;
 }
 
-@media screen and (max-width: 600px) {
-    body .buttons-wrapper * {
+/* @media screen and (max-width: 600px) {
+    section.buttons.actions>.buttons-wrapper * {
         width: 100%;
         margin: 0.5em auto;
         text-align: center;
-}
+} */
 
 /* POP-UP */
 
@@ -577,12 +577,31 @@ button.scary {
     display: none !important;
 }
 
+section.presetManager {
+    margin: 0;
+}
+
+section.presetManager>h1 {
+    margin: 0.5em;
+}
+
 .presets-manager-wrapper {
     display: flex;
+    margin-top: 2em;
+    background-color: white;
 }
 
 .presets-manager-wrapper .buttons-wrapper.form-buttons {
     text-align: left;
+}
+
+.form-buttons {
+    margin: 1em;
+}
+
+[data-preset] h1 {
+    border-bottom: solid 2px;
+    padding: 0.1em;
 }
 
 .presets-list {
@@ -591,16 +610,25 @@ button.scary {
 
 .presets-manager-content {
     padding: 1em;
+    border-top: solid thin #B3B1B1;
+    width: 100%;
 }
 
 .presets-manager-list {
     border: solid thin #B3B1B1;
+    margin-bottom: 0;
 }
 
 .edit-presets-icons {
     flex-flow: row nowrap;
     justify-content: space-between;
     padding: 1em;
+}
+
+.edit-presets-icons span {
+
+    margin: 0 0.3em;
+    vertical-align: bottom;
 }
 
 .edit-presets-icons img {
@@ -610,6 +638,7 @@ button.scary {
 .presets-list ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .presets-list ul li {
@@ -623,6 +652,16 @@ button.scary {
 
 [data-preset-menu][data-selected] {
     background-color: #50B75F;
+}
+
+@media screen and (max-width: 600px) {
+    .presets-manager-wrapper,
+    .presets-manager-list,
+    .presets-manager-content,
+    .presets-list {
+        display: block;
+        width: 100%;
+    }
 }
 
 /* BANNERS */
@@ -697,8 +736,13 @@ button.scary {
     border-bottom: 0.5px solid hsla(0, 0%, 54%, 0.35);
 }
 
+.form-body h2 {
+    margin-left: 0.8em;
+}
+
 .form-body input[name="presetName"] {
-    margin-left: 0;
+    margin-left: 1em;
+    margin-top: 0.5em;
 }
 
 .form-field .icon, .form-field .no-info {
@@ -798,6 +842,8 @@ input.number-field {
 textarea {
     padding: 0.5em;
     font-size: 0.9em;
+    margin-left: 1em;
+    margin-top: 0.5em;
 }
 
 textarea[name="paste"] {
@@ -816,6 +862,7 @@ textarea[name="paste"] {
   
   .radio-wrapper div {
     display: flex;
+    margin: 0.5em;
   }
   
   .boolean-field {
@@ -899,6 +946,10 @@ pre {
         display: block;
         width: 100%;
     }
+
+    .form-field {
+        margin: 1em 1em 1em 0;
+    }
     .buttons-wrapper {
         display: block;
         width: 100%;
@@ -910,5 +961,18 @@ pre {
     }
     input[type="checkbox"]+label::after {
         right: 0;
+    }
+    .form-body h2+input,
+    .form-body h2+textarea {
+        margin-top: 0.5em;
+    }
+    .form-body .form-title {
+        padding-left: 0;
+    }
+    .form-field-top+input {
+        margin: 0;
+    }
+    .form-field input.number-field {
+        max-width: unset;
     }
 }
