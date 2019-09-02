@@ -266,6 +266,19 @@ article.selected {
     z-index: 1;
 }
 
+.deviceHeader .circle {
+    position: absolute;
+    top: -0.5rem;
+    z-index: 3;
+    left: calc(50% - 0.5em);
+  }
+
+.circle .inner-circle {
+    width: 0.95em;
+    height: 0.95em;
+    background-color: red;
+  }
+
 .deviceHeader[data-active] .circle {
     border: solid 2px#50B75F;
 }
@@ -310,7 +323,7 @@ main tr td:not(:first-of-type) {
 td {
     color: #042A43;
     padding: 1em;
-    margin: 0.2em;
+    /* margin: 0.2em; */
     width: 8.5em;
     font-weight: 300;
 }
@@ -348,19 +361,9 @@ tr:nth-child(even) td:first-child {
     cursor: pointer;
     position: relative;
 }
-
-.deviceHeader .circle {
-    position: absolute;
-    top: -0.5rem;
-    z-index: 3;
-  }
   
   .main-table table {
     margin-top: 1rem;
-  }
-  
-  .deviceHeader .circle {
-    left: calc(50% - 0.5em);
   }
   
   .main-table {
@@ -369,22 +372,48 @@ tr:nth-child(even) td:first-child {
   }
   
   td {
-    border-left: solid 2px transparent;
-    border-right: solid 2px transparent;
+    border-left: solid 3px transparent;
+    border-right: solid 3px transparent;
   }
   
   table tr:first-of-type td {
-    border-top: solid 2px transparent;
+    border-top: solid 3px transparent;
   }
 
 [data-active] {
-    border-left: solid 2px #50B75F;
-    border-right: solid 2px #50B75F;
+    border-left: solid 3px #50B75F;
+    border-right: solid 3px #50B75F;
+    color: #2E6937;
   }
   
   .deviceHeader[data-active] {
-    border-top: solid 2px #50b75f;
+    border-top: solid 3px #50b75f;
+    border-radius: 0.2em 0.2em 0 0;
   }
+  
+  .deviceHeader[data-active] .circle {
+    /* border: solid 2px#50B75F; */
+    border: solid 3px #50B75F;
+  }
+  
+
+.deviceHeader .circle {
+    /* z-index: 3; */
+    position: ;
+  }
+  
+  .circle .inner-circle {
+    /* width: 0.95em; */
+    /* height: 0.95em; */
+    width: 100%;
+    height: 100%;
+    display: block;
+    border-radius: 50%;
+    margin: auto;
+    left: calc(50% - 0.375em);
+    border: solid 3px white;
+  }
+  
   
   
 /* BUTTONS */
@@ -398,7 +427,7 @@ button:hover, a:hover, .home-icon:hover {
 }
 
 body button.selected {
-    border: solid 0.1em red;
+    border: solid 0.1em #2E6937;
 }
 
 button, button.primary, select, .button.start {
