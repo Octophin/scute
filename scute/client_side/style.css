@@ -1074,15 +1074,6 @@ pre {
 
     /* NAV / BURGER */
 
-    nav.flex {
-        display: block;
-    }
-
-    .nav-tab:not(:first-of-type) {
-        width: 100%;
-        display: block;
-    }
-
     #burger span {
         width: 1.5em;
         margin: 0;
@@ -1090,6 +1081,16 @@ pre {
         padding: 0.2em;
         display: block;
         position: relative;
-        left: 88%;
+        left: 90%;
+        top: 2em;
+    }
+
+    [data-open] .nav-tab:not(:first-of-type) {
+        width: 100%;
+        display: block;
+    }
+
+    [data-open] nav.flex {
+        display: block;
     }
 }
