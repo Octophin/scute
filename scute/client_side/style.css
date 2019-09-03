@@ -1074,6 +1074,10 @@ pre {
 
     /* NAV / BURGER */
 
+    nav {
+        margin-top: -1.5em;
+    }
+
     #burger span {
         width: 1.5em;
         margin: 0;
@@ -1081,8 +1085,12 @@ pre {
         padding: 0.2em;
         display: block;
         position: relative;
-        left: 90%;
-        top: 2em;
+        left: 92%;
+        top: 1em;
+    }
+
+    .nav-tab:not(:first-of-type) {
+        display: none;
     }
 
     [data-open] .nav-tab:not(:first-of-type) {
@@ -1092,5 +1100,22 @@ pre {
 
     [data-open] nav.flex {
         display: block;
+    }
+
+    [data-open] #burger span:first-of-type,
+    [data-open] #burger span:nth-of-type(2),
+    [data-open] #burger span:last-of-type {
+        transition: 0.2s ease-in-out;
+    }
+
+    [data-open] #burger span:first-of-type {
+        transform: rotate(45deg);
+        top: 1.25em;
+    }
+    [data-open] #burger span:nth-of-type(2) {
+        transform: rotate(135deg);
+    }
+    [data-open] #burger span:last-of-type {
+        opacity: 0;
     }
 }
