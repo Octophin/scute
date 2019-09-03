@@ -130,17 +130,21 @@ label .icon:hover {
 
 nav {
     flex-flow: row nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     margin: 0;
     border-bottom: solid thin #B3B1B1;
 }
 
+nav .mob-menu {
+    display: flex;
+}
+
 .nav-tab {
-    width: calc(100% / 4);
+    width: auto;
     text-align: center;
     border-right: solid thin #B3B1B1;
     margin: 0;
-    padding: 0.8em 0;
+    padding: 1em;
 }
 
 .nav-tab.selected {
@@ -401,12 +405,6 @@ table tr:first-of-type td {
 .deviceHeader[data-active] .circle {
     /* border: solid 2px#50B75F; */
     border: solid 3px #50B75F;
-}
-
-
-.deviceHeader .circle {
-    /* z-index: 3; */
-    position: ;
 }
 
 .circle .inner-circle {
@@ -1071,46 +1069,60 @@ pre {
     .buttons.actions>.buttons-wrapper select {
         text-align: center;
     }
+}
 
-    /* NAV / BURGER */
+@media screen and (max-width: 600px) {
+    /* NAV MOBILE */
 
     nav {
         margin-top: -1.5em;
     }
+    .mob-menu div {
+        visibility: hidden;
+        position: relative;
+        top: -200px;
+    }
+    [data-open] .mob-menu div {
+        visibility: visible;
+        position: relative;
+        top: 0;
+    }
+    .mob-menu div,
+    [data-open] .mob-menu div {
+        transition: all 0.4s ease-in-out;
+    }
+    [data-open] nav.flex,
+    [data-open] .mob-menu {
+        display: block;
+    }
+    .nav-tab.nav-branding,
+    [data-open] .nav-tab.nav-branding {
+        z-index: 1;
+        position: relative;
+        min-width: 100%;
+        text-align: left;
+    }
+
+    /* BURGER */
 
     #burger span {
         width: 1.5em;
         margin: 0;
-        border-bottom: solid 2px black;
+        border-bottom: solid 2px white;
         padding: 0.2em;
         display: block;
         position: relative;
-        left: 92%;
-        top: 1em;
+        left: 86%;
+        top: 1.2em;
     }
-
-    .nav-tab:not(:first-of-type) {
-        display: none;
-    }
-
-    [data-open] .nav-tab:not(:first-of-type) {
-        width: 100%;
-        display: block;
-    }
-
-    [data-open] nav.flex {
-        display: block;
-    }
-
-    [data-open] #burger span:first-of-type,
-    [data-open] #burger span:nth-of-type(2),
-    [data-open] #burger span:last-of-type {
+    #burger span {
         transition: 0.2s ease-in-out;
+        z-index: 2;
+        position: relative;
     }
-
     [data-open] #burger span:first-of-type {
         transform: rotate(45deg);
-        top: 1.25em;
+        top: 1.45em;
     }
     [data-open] #burger span:nth-of-type(2) {
         transform: rotate(135deg);
