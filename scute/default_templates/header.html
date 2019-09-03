@@ -10,15 +10,16 @@
         <div class="nav-tab nav-branding">
             <a>ARRIBADA INITIATIVE</a>
         </div>
-        <div class="nav-tab navy {% if request.endpoint == "index" %}selected{% endif %}">
-            <a href="/">Device Manager</a>
+        <div class="mob-menu">
+            <div class="nav-tab navy {% if request.endpoint == "index" %}selected{% endif %}">
+                <a href="/">Device Manager</a>
+            </div>
+            <div class="nav-tab navy {% if request.endpoint == "presets" %}selected{% endif %}">
+                <a href="/presets">Preset Manager</a>
+            </div>
+            <div class="nav-tab navy {% if request.endpoint == "scripts" %}selected{% endif %}">
+                <a href="/scripts">Scripts</a>
+            </div>
         </div>
-        <div class="nav-tab navy {% if request.endpoint == "presets" %}selected{% endif %}">
-            <a href="/presets">Preset Manager</a>
-        </div>
-        <div class="nav-tab navy {% if request.endpoint == "scripts" %}selected{% endif %}">
-            <a href="/scripts">Scripts</a>
-        </div>
-
     </nav>
 </section>
