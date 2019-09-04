@@ -279,7 +279,7 @@ class scute:
             nextCommand = 0
 
         output = ""
-
+        error = False
         if currentCommand > 0:
             commandToRun = currentCommand - 1
             # Run command
@@ -294,7 +294,6 @@ class scute:
             stdout, stderr = p.communicate()
             if stdout:
                 output = stdout
-                error = False
             else:
                 output = stderr
                 error = True
