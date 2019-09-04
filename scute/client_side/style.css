@@ -1077,30 +1077,26 @@ pre {
     nav {
         margin-top: -1.5em;
     }
-
-    nav .mob-menu {
-        max-height: 3em;
-    }
     
     [data-open] nav .mob-menu {
         max-height: unset;
     }
 
-    .mob-menu div {
+    .mob-menu {
         visibility: hidden;
         position: relative;
         top: -150px;
     }
 
-    [data-open] .mob-menu div {
+    [data-open] .mob-menu {
         visibility: visible;
         position: relative;
-        top: 0;
+        top: 3.5em;
         background-color: white;
     }
 
-    .mob-menu div,
-    [data-open] .mob-menu div {
+    .mob-menu,
+    [data-open] .mob-menu {
         transition: all 0.4s ease-in-out;
     }
 
@@ -1118,7 +1114,7 @@ pre {
 
     nav.flex,
     .mob-menu {
-        position: absolute;
+        position: fixed;
         width: 100%;
         background-color: white;
     }
