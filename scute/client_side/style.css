@@ -957,6 +957,17 @@ pre {
     font-family: monospace;
 }
 
+.script-error-message {
+    margin: 1em 0.75em;
+    color: red;
+}
+
+pre[data-error] {
+    margin: 1em 0.75em;
+    border: solid thin red;
+    background-color: #ff8a8a;
+}
+
 /* Alerts, warnings and popups */
 
 .alert {
