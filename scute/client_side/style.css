@@ -1076,22 +1076,24 @@ pre {
 
     nav {
         margin-top: -1.5em;
-    }
-    
-    [data-open] nav .mob-menu {
-        max-height: unset;
+        border-bottom: none;
     }
 
     .mob-menu {
-        visibility: hidden;
         position: relative;
         top: -150px;
+        display: block;
+        background-color: white;
+    }
+
+    nav .mob-menu {
+        display: block;
     }
 
     [data-open] .mob-menu {
         visibility: visible;
         position: relative;
-        top: 3.5em;
+        top: 0;
         background-color: white;
     }
 
@@ -1100,12 +1102,10 @@ pre {
         transition: all 0.4s ease-in-out;
     }
 
-    [data-open] nav.flex,
-    [data-open] .mob-menu {
+    [data-open] nav.flex {
         display: block;
         position: absolute;
         width: 100%;
-        background-color: white;
     }
 
     [data-open] .mob-menu div:last-of-type {
@@ -1116,7 +1116,6 @@ pre {
     .mob-menu {
         position: fixed;
         width: 100%;
-        background-color: white;
     }
     
     .nav-tab.nav-branding,
@@ -1126,7 +1125,7 @@ pre {
         min-width: 100%;
         text-align: left;
     }
-    
+
     /* BURGER */
     
     #burger span {
