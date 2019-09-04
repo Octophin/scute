@@ -1,25 +1,22 @@
-<section id="shortReport">
+<a id="burger" onclick="toggleBurger()">
+    <span></span>
+    <span></span>
+    <span></span>
+</a>
 
-    <a id="burger" onclick="toggleBurger()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </a>
-
-    <nav class="flex">
-        <div class="nav-tab nav-branding">
-            <a>ARRIBADA INITIATIVE</a>
+<nav class="flex">
+    <div class="nav-tab nav-branding">
+        <a>ARRIBADA INITIATIVE</a>
+    </div>
+    <div class="mob-menu">
+        <div class="nav-tab navy {% if request.endpoint == "index" %}selected{% endif %}">
+            <a href="/">Device Manager</a>
         </div>
-        <div class="mob-menu">
-            <div class="nav-tab navy {% if request.endpoint == "index" %}selected{% endif %}">
-                <a href="/">Device Manager</a>
-            </div>
-            <div class="nav-tab navy {% if request.endpoint == "presets" %}selected{% endif %}">
-                <a href="/presets">Preset Manager</a>
-            </div>
-            <div class="nav-tab navy {% if request.endpoint == "scripts" %}selected{% endif %}">
-                <a href="/scripts">Scripts</a>
-            </div>
+        <div class="nav-tab navy {% if request.endpoint == "presets" %}selected{% endif %}">
+            <a href="/presets">Preset Manager</a>
         </div>
-    </nav>
-</section>
+        <div class="nav-tab navy {% if request.endpoint == "scripts" %}selected{% endif %}">
+            <a href="/scripts">Scripts</a>
+        </div>
+    </div>
+</nav>
