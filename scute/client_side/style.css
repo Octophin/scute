@@ -1077,24 +1077,52 @@ pre {
     nav {
         margin-top: -1.5em;
     }
+
+    nav .mob-menu {
+        max-height: 3em;
+    }
+    
+    [data-open] nav .mob-menu {
+        max-height: unset;
+    }
+
     .mob-menu div {
         visibility: hidden;
         position: relative;
-        top: -200px;
+        top: -150px;
     }
+
     [data-open] .mob-menu div {
         visibility: visible;
         position: relative;
         top: 0;
+        background-color: white;
     }
+
     .mob-menu div,
     [data-open] .mob-menu div {
         transition: all 0.4s ease-in-out;
     }
+
     [data-open] nav.flex,
     [data-open] .mob-menu {
         display: block;
+        position: absolute;
+        width: 100%;
+        background-color: white;
     }
+
+    [data-open] .mob-menu div:last-of-type {
+        box-shadow: 0 4px 15px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    nav.flex,
+    .mob-menu {
+        position: absolute;
+        width: 100%;
+        background-color: white;
+    }
+    
     .nav-tab.nav-branding,
     [data-open] .nav-tab.nav-branding {
         z-index: 1;
@@ -1102,9 +1130,9 @@ pre {
         min-width: 100%;
         text-align: left;
     }
-
+    
     /* BURGER */
-
+    
     #burger span {
         width: 1.5em;
         margin: 0;
@@ -1113,21 +1141,26 @@ pre {
         display: block;
         position: relative;
         left: 86%;
-        top: 1.2em;
+        top: 1em;
     }
+    
     #burger span {
         transition: 0.2s ease-in-out;
         z-index: 2;
         position: relative;
     }
+    
     [data-open] #burger span:first-of-type {
         transform: rotate(45deg);
-        top: 1.45em;
+        top: 1.25em;
     }
+    
     [data-open] #burger span:nth-of-type(2) {
         transform: rotate(135deg);
     }
+    
     [data-open] #burger span:last-of-type {
         opacity: 0;
     }
 }
+
