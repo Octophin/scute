@@ -6,7 +6,7 @@
 
 {% if output %}
 
-<pre>{{output}}</pre>
+<pre {% if error %}data-error{% endif %}>{{output}}</pre>
 
 {% endif %}
 

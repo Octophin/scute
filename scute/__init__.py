@@ -265,6 +265,7 @@ class scute:
         else:
             scriptsDirectory = 'scripts/'
 
+
         scriptSchema = {}
         with open(scriptsDirectory + "/" + script, "r") as f1:
             fileRaw = f1.read()
@@ -293,10 +294,12 @@ class scute:
             stdout, stderr = p.communicate()
             if stdout:
                 output = stdout
+                error = False
             else:
                 output = stderr
+                error = True
 
-        return render_template("script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output)
+        return render_template("script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output, error = error)
 
     def scriptsView(self):
 
