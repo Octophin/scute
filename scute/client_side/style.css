@@ -150,7 +150,7 @@ nav .mob-menu {
 .nav-tab.selected {
     border-bottom: solid #042A43;
     background: linear-gradient(#EBEBEB, #FFFFFF);
-}
+} 
 
 nav a {
     font-weight: 500;
@@ -943,6 +943,16 @@ pre {
     margin-left: 0.5em;
 }
 
+.scriptRun form input {
+    width: auto;
+    margin: 1em;
+}
+
+.scriptRun form button {
+    margin: 0;
+    vertical-align: middle;
+}
+
 #directory {
     font-family: monospace;
 }
@@ -1079,12 +1089,18 @@ pre {
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 750px) {
     /* NAV MOBILE */
 
     nav {
         border-bottom: none;
     }
+
+    nav .nav-tab.navy:hover,
+    nav .nav-tab.selected:hover {
+        background: #042A43;
+        color: white;
+    } 
 
     .mob-menu {
         position: relative;
