@@ -13,7 +13,7 @@ let getSelectedDevices = function () {
 document.querySelectorAll(".deviceHeader").forEach(function (element) {
 
     let device = element.getAttribute("data-device");
-    let deviceReportCells = document.querySelectorAll("tr [data-device=" + device + "]");
+    let deviceReportCells = document.querySelectorAll("tr [data-device='" + device + "']");
 
     element.addEventListener("click", function () {
 
