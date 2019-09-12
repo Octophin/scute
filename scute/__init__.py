@@ -23,7 +23,7 @@ class scute:
         ])
         self.server.jinja_loader = my_loader
         self.server.add_url_rule('/', 'index', self.indexView)
-        self.server.add_url_rule('/list', 'index', self.deviceListView)
+        self.server.add_url_rule('/list', 'list', self.deviceListView)
         self.server.add_url_rule('/config', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/applyPreset', 'applyPreset', self.applyPresetView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/presets', 'presets', self.presets, methods=["GET", "POST"])
