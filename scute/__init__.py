@@ -93,8 +93,12 @@ class scute:
     
     def getAllDeviceReports(self):
         deviceReports = {}
-        for device in self.getDevices():
-            deviceReports[device] = self.getDeviceReport(device)
+        devices = self.getDevices()
+        if 'error' in devices:
+            deviceReports = devices
+        else:
+            for device in devices:
+                deviceReports[device] = self.getDeviceReport(device)
         return deviceReports
 
     def deviceListView(self):
