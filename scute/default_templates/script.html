@@ -6,7 +6,14 @@
 
 {% if output %}
 
-<pre>{{output}}</pre>
+{% if error %}
+
+    <h2 class="script-error-message">This script doesn't exist! Are you sure you want to continue?</h2>
+
+{% endif %}
+
+<pre {% if error %}data-error{% endif %}>{{output}}</pre>
+
 
 {% endif %}
 

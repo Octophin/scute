@@ -259,3 +259,11 @@ let deletePreset = function () {
 function displayLoadingPopup() {
     document.getElementById("loadingPopup").style.display = "block";
 }
+
+
+// Burger Menu
+
+function toggleBurger() {
+    document.body.toggleAttribute("data-open");
+}
+toggleBurger();

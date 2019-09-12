@@ -1,8 +1,14 @@
-<section id="shortReport">
-    <nav class="flex">
-        <div class="nav-tab nav-branding">
-            <a href="/">ARRIBADA INITIATIVE</a>
-        </div>
+<a id="burger" onclick="toggleBurger()">
+    <span></span>
+    <span></span>
+    <span></span>
+</a>
+
+<nav class="flex">
+    <div class="nav-tab nav-branding">
+        <a href="/">ARRIBADA INITIATIVE</a>
+    </div>
+    <div class="mob-menu">
         <div class="nav-tab navy {% if request.endpoint == "list" %}selected{% endif %}">
             <a href="/list">Device Manager</a>
         </div>
@@ -12,6 +18,5 @@
         <div class="nav-tab navy {% if request.endpoint == "scripts" %}selected{% endif %}">
             <a href="/scripts">Scripts</a>
         </div>
-
-    </nav>
-</section>
+    </div>
+</nav>
