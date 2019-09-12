@@ -103,7 +103,7 @@ class scute:
         return deviceReports
 
     def indexView(self):
-        return render_template("index.html", title="Horizon" timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        return render_template("index.html", title="Horizon", timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     
 
     def deviceListView(self):
