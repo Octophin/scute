@@ -22,7 +22,8 @@ class scute:
             jinja2.FileSystemLoader(here + '/default_templates')
         ])
         self.server.jinja_loader = my_loader
-        self.server.add_url_rule('/', 'index', self.deviceListView)
+        self.server.add_url_rule('/', 'index', self.indexView)
+        self.server.add_url_rule('/list', 'index', self.deviceListView)
         self.server.add_url_rule('/config', 'deviceConfig', self.deviceConfigView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/applyPreset', 'applyPreset', self.applyPresetView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/presets', 'presets', self.presets, methods=["GET", "POST"])
@@ -100,6 +101,10 @@ class scute:
             for device in devices:
                 deviceReports[device] = self.getDeviceReport(device)
         return deviceReports
+
+    def indexView(self):
+        return render_template("index.html", title="Horizon" timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    
 
     def deviceListView(self):
         return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
