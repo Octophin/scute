@@ -167,7 +167,7 @@ class scute:
                 for field,value in form.items():
                     deviceConfig[field] = value
                 self.hooks["save_config"](device, deviceConfig)
-            return redirect("/")
+            return redirect("/list")
 
         presetDirectory = ""
 

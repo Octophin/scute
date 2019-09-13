@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="main-wrapper">
 
-<h1>Applying {{preset}} to {{devices}}</h1>
+    <section class="white-background  happy-margin table-nav">
+        <div class="happy-margin">
+            <span class="happy-margin">
 
-<p>Modify the preset below and hit save to apply it</p>
+                <h1>Applying preset '{{preset}}' to 
+                    {% for device in devices%}
+                    {{device}}&nbsp;
+                    {%endfor%}
+                </h1>
+                
+                <p>You can adjust the preset below if required. Hit save to apply the settings to the device(s)</p>
+            </span>
 
- <form data-preset class="form-body" id="configForm" method="post">
-    {% include "configForm.html" %}
-</form>
-
+            <form data-preset class="form-body" id="configForm" method="post">
+                {% include "configForm.html" %}
+            </form>
+        </div>
+    </section>
+</div>
 {% endblock %}

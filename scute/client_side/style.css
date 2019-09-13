@@ -198,9 +198,18 @@ main {
     padding-bottom: 2em;
 }
 
-.main-table-wrapper {
+.main-table-wrapper, .white-background {
     background-color: white;
 }
+
+.splash-screen-wrapper{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    background-color: white;
+  
+  }
 
 /* TAB TITLES */
 
@@ -662,6 +671,18 @@ section.presetManager>h1 {
     background-color: #E4F2E6;
 }
 
+/* SCRIPTS */ 
+
+.commandList {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 7px;
+    border: solid 1px grey;
+    background-color: white;
+    display: block;
+}
+
+
 [data-preset-menu][data-selected] {
     background-color: #50B75F;
 }
@@ -992,6 +1013,33 @@ pre[data-error] {
     background-color: #5962fd;
     border: 1px solid blue;
 }
+
+/* Logs and alalysis */
+
+.analysisBlock.title{
+    width: 100%;
+    background-color: lightslategrey;
+    color: black;
+  }
+  
+  .logPreview {
+  
+    padding:10px; 
+    width: 98%; 
+    height: 400px; 
+    overflow-x: hidden; 
+    overflow-x: auto; 
+    text-align:justify; 
+    border: 1px solid grey;
+  
+  }
+  .logPreview textarea {
+    overflow-y: scroll;
+    height: 300px;
+    width: 100%;
+    resize: none; /* Remove this if you want the user to resize the textarea */
+}
+  
 
 /* Burger Menu */
 
