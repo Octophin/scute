@@ -30,7 +30,7 @@ class scute:
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
         self.server.add_url_rule('/scripts', 'scripts', self.scriptsView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/scripts/<script>', 'script', self.script, False, methods=["GET", "POST"])
-        self.server.add_url_rule('/help', 'help', self.deviceListView)
+        self.server.add_url_rule('/help', 'help', self.helpView)
     def getConfigSchema(self):
         configSchema = {}
         with open(self.options["configSchema"]) as configSchema:  
