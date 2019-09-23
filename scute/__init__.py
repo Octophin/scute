@@ -30,6 +30,7 @@ class scute:
         self.server.add_url_rule('/scute/<path:filename>', 'static_assets', self.static_assets)
         self.server.add_url_rule('/scripts', 'scripts', self.scriptsView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/scripts/<script>', 'script', self.script, False, methods=["GET", "POST"])
+        self.server.add_url_rule('/help', 'help', self.deviceListView)
     def getConfigSchema(self):
         configSchema = {}
         with open(self.options["configSchema"]) as configSchema:  
@@ -101,6 +102,14 @@ class scute:
             for device in devices:
                 deviceReports[device] = self.getDeviceReport(device)
         return deviceReports
+
+
+    def getHelpInfo(self):
+        helpInfo = {}
+        with open("helpInformaiton.json", "r") as f1:
+                dataRaw = f1.read()
+                helpInfo = json.loads(dataRaw)
+        return helpInfo
 
     def indexView(self):
         return render_template("index.html", title="Horizon", timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
@@ -183,6 +192,10 @@ class scute:
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
         return render_template("applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON)
+
+    def helpView(self):
+        return render_template("helpPage.html", title="Horizon Help",helpInfo=self.getHelpInfo())
+    
 
 
     def filterOutFieldsWithBooleanAttribute(self, fullSchema, excludeAttribute):

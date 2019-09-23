@@ -1,0 +1,15 @@
+{
+    "pageHeader": "This is the Page header",
+    "sections": {
+        "sectionHeader": "This is the secion header",
+        "blocks": {
+            "block1": {
+                "blockHeader": "This is the block header",
+                "blockContent": "This is the block content"
+            },
+            "block2": {
+                "blockHeader": "This is the block header",
+                "blockContent": "This is the block content"
+            }
+        }
+    }
