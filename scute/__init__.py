@@ -106,13 +106,11 @@ class scute:
 
     def getHelpInfo(self):
         helpInfo = {}
-        print(self.options["helpInfo"])
+
         with open(self.options["helpInfo"], "r") as f1:
                 dataRaw = f1.read()
-                print(dataRaw)
                 helpInfo = json.loads(dataRaw)
 
-        print(helpInfo)
         return helpInfo
 
     def indexView(self):
