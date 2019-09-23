@@ -106,7 +106,7 @@ class scute:
 
     def getHelpInfo(self):
         helpInfo = {}
-        with open("helpInformaiton.json", "r") as f1:
+        with open("/helpInformation.json.json", "r") as f1:
                 dataRaw = f1.read()
                 helpInfo = json.loads(dataRaw)
         return helpInfo
