@@ -22,6 +22,12 @@ def getDevices():
 
 exampleInstance.registerHook("get_devices", getDevices)
 
+def getHeaderData():
+    return {"headerItem1": "headerItem1","headerItem2": "headerItem2","headerItem3": "headerItem3"}
+
+exampleInstance.registerHook("get_header_data", getHeaderData)
+
+
 def getFields(deviceID):
     return  {
            "id": "11:11:00:00:00:00",

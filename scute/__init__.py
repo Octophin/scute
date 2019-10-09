@@ -92,7 +92,7 @@ class scute:
     
     def getDevices(self):
         return self.hooks["get_devices"]()
-    
+
     def getAllDeviceReports(self):
         deviceReports = {}
         devices = self.getDevices()
@@ -102,6 +102,9 @@ class scute:
             for device in devices:
                 deviceReports[device] = self.getDeviceReport(device)
         return deviceReports
+
+    def getHeaderData(self):
+        return self.hooks["get_header_data"]()
 
 
     def getHelpInfo(self):
@@ -114,11 +117,11 @@ class scute:
         return helpInfo
 
     def indexView(self):
-        return render_template("index.html", title="Horizon", timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        return render_template("index.html", title="Horizon", headerData = self.getHeaderData())
     
 
     def deviceListView(self):
-        return render_template("list.html", title="Horizon",reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+        return render_template("list.html", title="Horizon", headerData = self.getHeaderData(), reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     
     def getAllPresetValues(self):
         # scan the preset directory and return value label pairs
@@ -165,7 +168,7 @@ class scute:
             pass
     
 
-        return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig)
+        return render_template("config.html", title="Configuration", headerData = self.getHeaderData(), schema=self.getConfigSchema(), device=device, current=currentConfig)
 
     def applyPresetView(self):
         devices = request.args.getlist("devices[]")
@@ -193,10 +196,10 @@ class scute:
 
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON)
+        return render_template("applyPreset.html", title="Apply preset", headerData = self.getHeaderData(), schema=presetSchema, devices=devices, preset=preset, current = presetJSON)
 
     def helpView(self):
-        return render_template("helpPage.html", title="Horizon Help",helpInfo=self.getHelpInfo())
+        return render_template("helpPage.html", title="Horizon Help", headerData = self.getHeaderData(), helpInfo=self.getHelpInfo())
     
 
 
@@ -276,7 +279,7 @@ class scute:
         
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("presets.html", title="Presets", presets=presetFiles, schema=presetSchema, current=prefill)
+        return render_template("presets.html", title="Presets", headerData = self.getHeaderData(), presets=presetFiles, schema=presetSchema, current=prefill)
 
 
 
@@ -322,7 +325,7 @@ class scute:
                 output = stderr
                 error = True
 
-        return render_template("script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output, error = error)
+        return render_template("script.html", title=scriptSchema["name"], headerData = self.getHeaderData(), script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output, error = error)
 
     def scriptsView(self):
 
@@ -348,7 +351,7 @@ class scute:
                 fileJSON["fileName"] = file
                 scripts.append(fileJSON)
 
-        return render_template("scriptsView.html", title="Scripts", scripts=scripts)
+        return render_template("scriptsView.html", title="Scripts", headerData = self.getHeaderData(), scripts=scripts)
 
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON
