@@ -24,7 +24,7 @@ exampleInstance.registerHook("get_devices", getDevices)
 
 
 def getIndexData():
-    return {}
+    {"accessAllowed": True, "usermessage": {"type": "success",  "message": "OK"}}
 
 exampleInstance.registerHook("get_index_data", getIndexData)
 

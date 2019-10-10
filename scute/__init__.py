@@ -120,9 +120,14 @@ class scute:
         return helpInfo
 
     def indexView(self):
-        
-        return render_template("index.html", title="Horizon", indexData = self.getIndexData(), headerData = self.getHeaderData())
-    
+
+        indexData = self.getIndexData()
+        if indexData.accessAllowed == True:
+                 
+            return render_template("index.html", title="Horizon", indexData = indexData, headerData = self.getHeaderData())
+        else:
+            return render_template("defaultPage.html", title="Horizon", userMassage = indexData.useressage, indexData = indexData, headerData = self.getHeaderData())
+
 
     def deviceListView(self):
         return render_template("list.html", title="Horizon", headerData = self.getHeaderData(), reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
