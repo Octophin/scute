@@ -122,7 +122,7 @@ class scute:
     def indexView(self):
 
         indexData = self.getIndexData()
-        if indexData.accessAllowed == True:
+        if indexData['accessAllowed'] == True:
                  
             return render_template("index.html", title="Horizon", indexData = indexData, headerData = self.getHeaderData())
         else:
