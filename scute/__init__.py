@@ -106,6 +106,9 @@ class scute:
     def getHeaderData(self):
         return self.hooks["get_header_data"]()
 
+    def getIndexData(self):
+        return self.hooks["get_index_data"]()
+
 
     def getHelpInfo(self):
         helpInfo = {}
@@ -117,7 +120,8 @@ class scute:
         return helpInfo
 
     def indexView(self):
-        return render_template("index.html", title="Horizon", headerData = self.getHeaderData())
+        
+        return render_template("index.html", title="Horizon", indexData = self.getIndexData(), headerData = self.getHeaderData())
     
 
     def deviceListView(self):

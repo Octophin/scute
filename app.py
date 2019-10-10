@@ -22,6 +22,12 @@ def getDevices():
 
 exampleInstance.registerHook("get_devices", getDevices)
 
+
+def getIndexData():
+    return {}
+
+exampleInstance.registerHook("get_index_data", getIndexData)
+
 def getHeaderData():
     return {"headerItem1": "headerItem1","headerItem2": "headerItem2","headerItem3": "headerItem3"}
 
