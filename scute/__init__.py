@@ -126,7 +126,7 @@ class scute:
                  
             return render_template("index.html", title="Horizon", indexData = indexData, headerData = self.getHeaderData())
         else:
-            return render_template("defaultPage.html", title="Horizon", userMassage = indexData.useressage, indexData = indexData, headerData = self.getHeaderData())
+            return render_template("defaultPage.html", title="Horizon", userMassage = indexData['useressage'], indexData = indexData, headerData = self.getHeaderData())
 
 
     def deviceListView(self):
