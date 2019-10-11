@@ -270,20 +270,11 @@ toggleBurger();
 
 function formatDateTime(date) {
     var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear(),
-        hour = d.getHours(),
-        minute = d.getMinutes();
+        month = (d.getMonth() + 1).toString(),
+        day = d.getDate().toString(),
+        year = d.getFullYear().toString(),
+        hour = d.getHours().toString(),
+        minute = d.getMinutes().toString();
 
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
-    if (hour.length < 2) 
-        hour = '0' + hour;
-    if (minute.length < 2) 
-        minute = '0' + minute;
-
-    return year + '-' + month + '-' +  day + ' ' + hour + ':' + minute;
+    return year + '-' + month.padStart(2, '0') + '-' + day.padStart(2, '0') + ' ' + hour.padStart(2, '0') + ':' + minute.padStart(2, '0');
 }
