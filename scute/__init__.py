@@ -181,7 +181,7 @@ class scute:
 
     def applyPresetView(self):
         devices = request.args.getlist("devices[]")
-        preset = request.args.get("presetname")
+        preset = request.args.get("value")
 
         if request.method == "POST":
             form = self.processFormTypes(request.form)
