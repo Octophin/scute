@@ -257,6 +257,8 @@ class scute:
         if request.args.get('delete'):
             delete = request.args.get('delete')
             os.remove(presetDirectory + "/" + delete + ".json") 
+            # refresh the page to remove the 'delete' from URL params.
+            return redirect("/presets")
 
         # Check if query contains a preset (from the config page)
 
