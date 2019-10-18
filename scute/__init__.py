@@ -190,6 +190,9 @@ class scute:
                 for field,value in form.items():
                     deviceConfig[field] = value
                 self.hooks["save_config"](device, deviceConfig)
+            
+            session['userMessage'] = {"type": 'success', "message": "Presets Applied." }
+
             return redirect("/list")
 
         presetDirectory = ""
