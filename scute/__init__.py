@@ -162,7 +162,7 @@ class scute:
                     session['userMessage'] = {"type": 'success', "message": "Preset Saved." }
                     return redirect("/presets?config=" + presetQueryJSON, code=302)
                 else:
-                    sssion['userMessage'] = {"type": 'success', "message": "Config Saved." }
+                    session['userMessage'] = {"type": 'success', "message": "Config Saved." }
                     self.hooks["save_config"](device, self.processFormTypes(request.form))
                     if "redirect" in g:
                         return redirect(g.redirect)
