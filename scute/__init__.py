@@ -1,5 +1,5 @@
 import json
-from flask import render_template, send_from_directory, request, redirect, send_file, safe_join, g
+from flask import render_template, send_from_directory, request, redirect, send_file, safe_join, g, session
 import jinja2
 import os
 import re
