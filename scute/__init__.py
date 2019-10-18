@@ -159,8 +159,10 @@ class scute:
                     # Go to presets page
                     presetQuery = self.processFormTypes(request.form)
                     presetQueryJSON = json.dumps(presetQuery)
+                    session['userMessage'] = {"type": 'success', "message": "Preset Saved." }
                     return redirect("/presets?config=" + presetQueryJSON, code=302)
                 else:
+                    sssion['userMessage'] = {"type": 'success', "message": "Config Saved." }
                     self.hooks["save_config"](device, self.processFormTypes(request.form))
                     if "redirect" in g:
                         return redirect(g.redirect)
@@ -261,6 +263,7 @@ class scute:
             delete = request.args.get('delete')
             os.remove(presetDirectory + "/" + delete + ".json") 
             # refresh the page to remove the 'delete' from URL params.
+            session['userMessage'] = {"type": 'success', "message": "Preset Deleted." }
             return redirect("/presets")
 
         # Check if query contains a preset (from the config page)
