@@ -9,6 +9,7 @@ import urllib
 import subprocess
 import unicodedata
 import string
+import mistune #markdown renderer
 
 here = os.path.dirname(os.path.abspath(__file__))
 
@@ -115,7 +116,7 @@ class scute:
 
         with open(self.options["helpInfo"], "r") as f1:
                 dataRaw = f1.read()
-                helpInfo = json.loads(dataRaw)
+                helpInfo = mistune.markdown(dataRaw)
 
         return helpInfo
 

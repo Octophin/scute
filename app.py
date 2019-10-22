@@ -12,7 +12,7 @@ options = {
         "actionsSchema": "exampleSchema/actionsSchema.json",
         "configSchema": "exampleSchema/configSchema.json",
         "scriptsDirectory": "exampleSchema/scripts",
-        "helpInfo": "helpInformation.json"
+        "helpInfo": "helpInformation.md"
     }
 
 exampleInstance = scute(options, app)
