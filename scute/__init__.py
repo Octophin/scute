@@ -178,11 +178,10 @@ class scute:
             pass
 
 
-        configDataAreas = currentConfig.keys()
-
-        if len(configDataAreas) != 8:
-            
-            session['userMessage'] = {"type": 'error', "message": "Invalid config detected.  There is only data in " + str(configDataAreas) + " data blocks.  Consider applying new config in the SCRIPTS section."}
+        if 'invalidConfigDetected' in session and session['invalidConfigDetected'] == True:
+            session.pop('invalidConfigDetected', None)
+                  
+            session['userMessage'] = {"type": 'error', "message": "Invalid config detected.  Consider applying new config in the SCRIPTS section."}
                     
             return redirect('list') 
     
