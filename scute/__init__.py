@@ -181,8 +181,6 @@ class scute:
         if 'invalidConfigDetected' in currentConfig and currentConfig['invalidConfigDetected'] == True:
                               
             session['userMessage'] = {"type": 'error', "message": "Invalid config detected for " + currentConfig['local.friendlyName']  + "("+ str(device) + ").  Consider applying new config in the SCRIPTS section."}
-                    
-            return redirect('list') 
     
 
         return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, headerData = self.getHeaderData())
