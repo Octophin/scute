@@ -267,7 +267,7 @@ class scute:
             delete = request.args.get('delete')
             os.remove(presetDirectory + "/" + delete + ".json") 
             # refresh the page to remove the 'delete' from URL params.
-            session['userMessage'] = {"type": 'info', "message": "Preset Deleted." }
+            session['userMessage'] = {"type": 'info', "message": "Preset Deleted: <strong>" + delete +"</strong>." }
             return redirect("/presets")
 
         # Check if query contains a preset (from the config page)
@@ -283,11 +283,13 @@ class scute:
             else:
                 saved = self.processFormTypes(request.form)
                 safeName = re.sub('[^a-zA-Z-_0-9]+', ' ', saved["presetName"])
+                safeName = safeName.strip()
                 safeName = safeName.replace(" ", "_")
+
                 saved["presetID"] = safeName
                 with open(presetDirectory + safeName + ".json" , 'w') as presetFile:
                     json.dump(saved, presetFile)
-                session['userMessage'] = {"type": 'success', "message": "Preset Saved." }
+                session['userMessage'] = {"type": 'success', "message": "Preset Saved: <strong>" + safeName + "</strong>." }
 
         presetFilesNames = os.listdir(presetDirectory)
         presetFilesNames = sorted(presetFilesNames, reverse=False)
