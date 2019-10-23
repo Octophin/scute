@@ -180,7 +180,7 @@ class scute:
 
         if 'invalidConfigDetected' in currentConfig and currentConfig['invalidConfigDetected'] == True:
                               
-            session['userMessage'] = {"type": 'error', "message": "Invalid config detected for " + currentConfig['local.friendlyName']  + "("+ str(device) + ").  Consider applying new config in the SCRIPTS section."}
+            session['userMessage'] = {"type": 'error', "message": "Invalid config detected for '" + currentConfig['local.friendlyName']  + "("+ str(device) + ")'.  Consider applying new config in the SCRIPTS section."}
     
 
         return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, headerData = self.getHeaderData())
@@ -267,7 +267,7 @@ class scute:
             delete = request.args.get('delete')
             os.remove(presetDirectory + "/" + delete + ".json") 
             # refresh the page to remove the 'delete' from URL params.
-            session['userMessage'] = {"type": 'success', "message": "Preset Deleted." }
+            session['userMessage'] = {"type": 'info', "message": "Preset Deleted." }
             return redirect("/presets")
 
         # Check if query contains a preset (from the config page)
@@ -287,6 +287,7 @@ class scute:
                 saved["presetID"] = safeName
                 with open(presetDirectory + safeName + ".json" , 'w') as presetFile:
                     json.dump(saved, presetFile)
+                session['userMessage'] = {"type": 'success', "message": "Preset Saved." }
 
         presetFilesNames = os.listdir(presetDirectory)
         presetFilesNames = sorted(presetFilesNames, reverse=False)
