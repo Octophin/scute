@@ -180,7 +180,7 @@ class scute:
 
         if 'invalidConfigDetected' in currentConfig and currentConfig['invalidConfigDetected'] == True:
                               
-            session['userMessage'] = {"type": 'error', "message": "Invalid config detected for '" + currentConfig['local.friendlyName']  + "("+ str(device) + ")'.  Consider applying new config in the SCRIPTS section."}
+            session['userMessage'] = {"type": 'error', "message": "Invalid config detected for '<strong>" + currentConfig['local.friendlyName']  + " ("+ str(device) + ")</strong>'.<br />Please enter config manually, apply a preset or apply the default preset via the SCRIPTS."}
     
 
         return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, headerData = self.getHeaderData())
@@ -197,7 +197,7 @@ class scute:
                     deviceConfig[field] = value
                 self.hooks["save_config"](device, deviceConfig)
             
-            session['userMessage'] = {"type": 'success', "message": "Presets Applied." }
+            session['userMessage'] = {"type": 'success', "message": "Preset <strong>" + preset + "</strong> applied to " + join(devices) }
 
             return redirect("/list")
 
