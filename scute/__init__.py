@@ -178,7 +178,7 @@ class scute:
             pass
 
 
-        configDataAreas = currentConfig['result'].keys()
+        configDataAreas = currentConfig.keys()
 
         if len(configDataAreas) != 8:
             
