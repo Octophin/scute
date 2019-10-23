@@ -176,6 +176,15 @@ class scute:
             currentConfig = self.hooks["read_config"](device)
         except:
             pass
+
+
+        configDataAreas = currentConfig['result'].keys()
+
+        if len(configDataAreas) != 8:
+            
+            session['userMessage'] = {"type": 'error', "message": "Invalid config detected.  There is only data in " + configDataAreas + "data blocks.  Consider applying new config in the SCRIPTS section."}
+                    
+            return redirect('list') 
     
 
         return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, headerData = self.getHeaderData())
