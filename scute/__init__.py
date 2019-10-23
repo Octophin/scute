@@ -178,9 +178,8 @@ class scute:
             pass
 
 
-        if 'invalidConfigDetected' in session and session['invalidConfigDetected'] == True:
-            session.pop('invalidConfigDetected', None)
-                  
+        if 'invalidConfigDetected' in currentConfig and currentConfig['invalidConfigDetected'] == True:
+                              
             session['userMessage'] = {"type": 'error', "message": "Invalid config detected.  Consider applying new config in the SCRIPTS section."}
                     
             return redirect('list') 
