@@ -180,7 +180,7 @@ class scute:
 
         if 'invalidConfigDetected' in currentConfig and currentConfig['invalidConfigDetected'] == True:
                               
-            session['userMessage'] = {"type": 'error', "message": "Invalid config detected.  Consider applying new config in the SCRIPTS section."}
+            session['userMessage'] = {"type": 'error', "message": "Invalid config detected for " + currentConfig['local.friendlyName']  + "("+ str(device) + ").  Consider applying new config in the SCRIPTS section."}
                     
             return redirect('list') 
     
