@@ -163,6 +163,7 @@ class scute:
                     return redirect("/presets?config=" + presetQueryJSON, code=302)
                 else:
                     saveResponse = self.hooks["save_config"](device, self.processFormTypes(request.form))
+                    print(saveResponse)
                     if saveResponse:
                         session['userMessage'] = saveResponse
 
