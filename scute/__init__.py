@@ -210,7 +210,7 @@ class scute:
                 else:
                     responseMessages.append("Applied to " + device + " sucessfully.")
            
-            session['userMessage'] = {"type": responseType, "message": "Apply Preset <strong>" + preset + "</strong> results<br > " + '<br />'.join(responseMessages) }
+            session['userMessage'] = {"type": responseType, "message": "<strong>Apply Preset " + preset + " results</strong><br > " + '<br />'.join(responseMessages) }
 
             return redirect("/list")
 
