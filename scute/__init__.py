@@ -205,7 +205,7 @@ class scute:
                 # error or success?
                 if saveResponse['type'] == "error" and responseType == 'success':
                     responseType = 'error'
-                if saveResponse['type'] == "error"
+                if saveResponse['type'] == "error":
                     responseMessages.append("Error for " + device + " - " + saveResponse['message'])
                 else:
                     responseMessages.append("Applied to " + device + " sucessfully.")
