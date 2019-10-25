@@ -131,7 +131,7 @@ class scute:
 
 
     def deviceListView(self):
-        return render_template("list.html", title="Horizon", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), timeLoaded=datetime.now().strftime("%Y-%m-%d %H:%M:%S"), headerData = self.getHeaderData())
+        return render_template("list.html", title="Horizon", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), headerData = self.getHeaderData())
     
     def getAllPresetValues(self):
         # scan the preset directory and return value label pairs
@@ -162,7 +162,10 @@ class scute:
                     presetQueryJSON = json.dumps(presetQuery)
                     return redirect("/presets?config=" + presetQueryJSON, code=302)
                 else:
-                    self.hooks["save_config"](device, self.processFormTypes(request.form))
+                    saveResponse = self.hooks["save_config"](device, self.processFormTypes(request.form))
+                    if saveResponse:
+                        session['userMessage'] = saveResponse
+
                     if "redirect" in g:
                         return redirect(g.redirect)
 
@@ -195,7 +198,9 @@ class scute:
                 deviceConfig = self.hooks["read_config"](device)
                 for field,value in form.items():
                     deviceConfig[field] = value
-                self.hooks["save_config"](device, deviceConfig)
+                saveResponse = self.hooks["save_config"](device, deviceConfig)
+                #TODO - some success, some failure..?
+
             
             session['userMessage'] = {"type": 'success', "message": "Preset <strong>" + preset + "</strong> applied to " + ', '.join(devices) }
 
