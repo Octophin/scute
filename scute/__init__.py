@@ -163,7 +163,7 @@ class scute:
                     return redirect("/presets?config=" + presetQueryJSON, code=302)
                 else:
                     saveResponse = self.hooks["save_config"](device, self.processFormTypes(request.form))
-                    print(saveResponse)
+
                     if saveResponse:
                         session['userMessage'] = saveResponse
 
@@ -194,16 +194,23 @@ class scute:
         preset = request.args.get("value")
 
         if request.method == "POST":
+            responseType = 'success'
+            responseMessages = []
             form = self.processFormTypes(request.form)
             for device in devices:
                 deviceConfig = self.hooks["read_config"](device)
                 for field,value in form.items():
                     deviceConfig[field] = value
                 saveResponse = self.hooks["save_config"](device, deviceConfig)
-                #TODO - some success, some failure..?
-
-            
-            session['userMessage'] = {"type": 'success', "message": "Preset <strong>" + preset + "</strong> applied to " + ', '.join(devices) }
+                # error or success?
+                if saveResponse['type'] == "error" and responseType == 'success':
+                    responseType = 'error'
+                if saveResponse['type'] == "error"
+                    responseMessages.append("Error for " + device + " - " + saveResponse['message'])
+                else:
+                    responseMessages.append("Applied to " + device + " sucessfully.")
+           
+            session['userMessage'] = {"type": responseType, "message": "Apply Preset <strong>" + preset + "</strong> results\n " + '\n'.join(responseMessages) }
 
             return redirect("/list")
 
