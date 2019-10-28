@@ -10,7 +10,7 @@ let getSelectedDevices = function () {
 
 };
 
-document.querySelectorAll(".deviceHeader").forEach(function (element) {
+document.querySelectorAll(".clickSelect").forEach(function (element) {
 
     let device = element.getAttribute("data-device");
     let deviceReportCells = document.querySelectorAll("tr [data-device='" + device + "']");
@@ -31,7 +31,7 @@ document.querySelectorAll(".deviceHeader").forEach(function (element) {
 
             }
 
-        })
+        });
 
         populateButtons();
 
@@ -68,7 +68,9 @@ let populateButtons = function () {
 
             singleActions.forEach(function (element) {
 
-                element.setAttribute("disabled", true);
+                if (!element.classList.contains('notHidden')) {
+                    element.setAttribute("disabled", true);
+                }
 
             });
 
@@ -78,7 +80,9 @@ let populateButtons = function () {
 
         Array.from(document.querySelectorAll(".actions select, .actions button")).forEach(function (element) {
 
-            element.setAttribute("disabled", true);
+            if (!element.classList.contains('notHidden')) {
+                element.setAttribute("disabled", true);
+            }
 
         });
 
@@ -126,7 +130,8 @@ let triggerAction = function (e) {
 
     let value;
 
-    if (element.tagName.toLowerCase() === "select") {
+    // if (element.tagName.toLowerCase() === "select") {  // no longer a select..
+    if (element.classList.contains('actionButton')){
 
         value = element.value;
 
@@ -158,12 +163,33 @@ let triggerAction = function (e) {
         targetURL += "&value=" + value;
 
     }
+    
 
-    if (element.hasAttribute("data-warn")) {
+    if (element.hasAttribute("data-warn") || element.hasAttribute("data-usermessage")) {
 
-        let warning = "Apply " + element.innerHTML + " to " + selectedDevices.toString() + "?";
+        let devicesDisplay = selectedDevices.join(', ');
 
-        showConfirm(warning, targetURL);
+        let warning = "Run " + element.innerHTML + " for " + devicesDisplay + "?";
+
+        if(element.hasAttribute("data-usermessage")){
+            let message = element.getAttribute("data-usermessage");
+            if (selectedDevices.length === 1){
+                message = message.replace('(s)', '');
+            } else {
+                message = message.replace('(s)', 's');
+            }
+            
+            warning = message + '<br />' +  devicesDisplay; 
+
+        }
+
+        let lockscreenData = element.getAttribute("data-lockscreen");
+        let lockscreen = false;
+        if (lockscreenData === "true"){
+            lockscreen = true;
+        }
+
+        showConfirm(warning, targetURL, lockscreen);
 
         return false;
 
@@ -175,7 +201,38 @@ let triggerAction = function (e) {
 
 };
 
-let showConfirm = function (warning, targetURL) {
+let showConfirm = function (warning, targetURL, lockscreen=false) {
+
+    // Remove existing popup
+
+    if (document.getElementById("popup")) {
+
+        document.getElementById("popup").outerHTML = "";
+
+    }
+
+    let lockscreenJS = '';
+
+    if (lockscreen){
+        lockscreenJS = 'lockScreenOverlay(); ';
+    }
+
+    let popup = `<section id="popup" class="are-you-sure">
+                    <div class="pop-up navy">
+                        <p>${warning}</p>
+                        <div class="pop-up-buttons">
+                            <button onclick="${lockscreenJS}okClickProcess('${targetURL}')">Yes</button>
+                            <button onclick="document.getElementById('popup').outerHTML = ''">No</button>
+                        </div>
+                    </div>
+                </section>`;
+
+    document.querySelector("main").insertAdjacentHTML("afterbegin", popup);
+
+};
+
+
+let showAlert = function (warning) {
 
     // Remove existing popup
 
@@ -189,13 +246,21 @@ let showConfirm = function (warning, targetURL) {
                     <div class="pop-up navy">
                         <p>${warning}</p>
                         <div class="pop-up-buttons">
-                            <button onclick="document.location.href='${targetURL}'">Yes</button>
-                            <button onclick="document.getElementById('popup').outerHTML = ''">No</button>
+                            <button onclick="document.getElementById('popup').outerHTML = ''">OK</button>
                         </div>
                     </div>
                 </section>`;
 
     document.querySelector("main").insertAdjacentHTML("afterbegin", popup);
+
+};
+
+
+let okClickProcess = function (targetURL){
+    console.log(targetURL);
+    // close the poptp this came from and redirect the page
+    document.getElementById('popup').outerHTML = '';
+    document.location.href = targetURL;
 
 };
 
@@ -233,10 +298,12 @@ let loadPreset = function (presetID) {
         if (element.getAttribute("data-preset") === presetID) {
 
             element.style.display = "block";
+            element.setAttribute("data-selectedForm", "true");
 
         } else {
 
             element.style.display = "none";
+            element.removeAttribute("data-selectedForm");
 
         }
 
@@ -258,7 +325,76 @@ let deletePreset = function () {
 
 function displayLoadingPopup() {
     document.getElementById("loadingPopup").style.display = "block";
+    lockScreenOverlay();
 }
+
+function lockScreenOverlay() {
+
+    document.getElementById("clickOverlay").style.display = "block";
+}
+
+let loadScript = function (script) {
+
+    Array.from(document.querySelectorAll("[data-preset-menu]")).forEach(function (menu) {
+
+        if (menu.getAttribute("data-preset-menu") === script) {
+
+            menu.setAttribute("data-selected", "true");
+
+        } else {
+
+            menu.removeAttribute("data-selected");
+
+        }
+
+    });
+
+    document.querySelectorAll("[data-preset]").forEach(function (element) {
+
+
+        if (element.getAttribute("data-preset") === script) {
+
+            element.style.display = "block";
+            element.setAttribute("data-selectedForm", "true");
+
+        } else {
+
+            element.style.display = "none";
+            element.removeAttribute("data-selectedForm");
+
+        }
+
+    });
+
+
+
+};
+
+
+let deleteScript = function () {
+
+    let target = document.querySelector("[data-preset-menu][data-selected]").getAttribute("data-preset-menu");
+
+    let targetType = document.querySelector("[data-preset-menu][data-selected]").getAttribute("data-type");
+
+    if (targetType == "system") {
+
+        showAlert("You can not delete pre-loaded scripts.");
+
+    } else {
+        
+        if (target) {
+    
+            showConfirm("Are you sure you want to delete " + target + " ?", "/scripts?delete=" + target);
+    
+        }
+    }
+
+
+};
+
+
+
 
 
 // Burger Menu
@@ -278,3 +414,168 @@ function formatDateTime(date) {
 
     return year + '-' + month.padStart(2, '0') + '-' + day.padStart(2, '0') + ' ' + hour.padStart(2, '0') + ':' + minute.padStart(2, '0');
 }
+
+function getFieldName(field){
+    
+    fieldName = field.id.split(".");
+    return " - " + fieldName[1] + " (" + fieldName[0] + ") \n";
+}
+
+var buttonClicked; // used to flay which of 2 form button types has been clicked - CONFIG page.
+
+function confirmSubmitConfig(theForm) {
+
+    if (buttonClicked === "save"){
+       
+        lastHubTime = document.getElementById("time-hub").innerHTML;
+        deviceIDString = document.getElementById("deviceIDString").innerHTML;
+
+
+        changedFields = document.querySelectorAll("[data-changed]");
+
+        if (changedFields.length == 0){
+
+            message = 'No fields have been changed. \n\n';
+
+        } else {
+            
+            message = changedFields.length + ' fields have changed. \n';
+
+            fieldList =  Object.values(changedFields).map(getFieldName); // returns array 
+
+            message += fieldList.join('') +  '\n\n'; // avoid the auto joining ','
+
+        }
+
+        message += 'Save This Config to Device "' + deviceIDString + '"? \n\nThe device time will be set to the Hub Time: ' + lastHubTime + ' \nHub Time can be updated in the SCRIPTS section.';
+
+        return confirm(message);
+
+    } else {
+        message = "Click 'OK' to transfer these config setting to the Preset Page.\nEnter a preset name and press save on the next page.";
+
+        return confirm(message);
+    }
+
+}
+
+function showHideDiv(targetID) {
+
+    let x = document.getElementById(targetID);
+    if (x.style.display === "none" || x.style.display === "") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+
+}
+
+
+if(document.getElementById("warningFieldsChanged")){
+
+    checkForChanges();
+
+}
+
+function checkForChanges(){
+    changedFields = document.querySelectorAll("[data-changed]");
+    let x = document.getElementById('warningFieldsChanged');
+    if (changedFields.length != 0){
+        x.style.display = "block";
+        
+    } else {
+        x.style.display = "none";
+
+    }
+    setTimeout(checkForChanges, 1000);
+}
+
+function checkPresetName(){
+
+    // which preset div is selected?
+
+    presetName = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[0].value.trim();
+
+    if (presetName === ''){
+                showAlert("Preset Name can not be blank");
+        return false;
+    }
+
+
+    let existing = document.getElementsByClassName("preset-title");
+
+    let existingNames = Object.values(existing).map(x => x.innerText);
+
+
+
+    if(existingNames.includes(presetName)){
+
+        if (confirm("Preset Name exists - overwrite it?")){
+
+            return true;
+            
+        } else {
+
+            return false;
+            
+        }
+
+    } else {
+    
+        return true;
+
+    }
+
+    
+    
+
+}
+   
+function checkScriptName(){
+
+    // which preset div is selected?
+
+    scriptName = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[0].value.trim();
+    scriptDescription = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[1].value.trim();
+    scriptCommands = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("textarea")[0].value.trim();
+
+    if (scriptName === '' || scriptDescription=== '' || scriptCommands===''){
+        showAlert("All 3 fields must be completed.");
+        return false;
+    }
+
+    scriptFileName = scriptName.toLowerCase().replace(/\ /g, "_") + ".json";
+
+    let existing = document.getElementsByClassName("preset-list-item"); // data-preset-menu
+
+    let existingNames = Object.values(existing).map(x => x.dataset.presetMenu);
+
+
+
+    if(existingNames.includes(scriptFileName)){
+
+        if (confirm("Script Name exists - overwrite it?")){
+
+            
+            return true;
+ 
+            
+        } else {
+
+            return false;
+            
+        }
+
+    } else {
+    
+        return true;
+
+    }
+
+    
+    
+    
+
+}
+    
+    

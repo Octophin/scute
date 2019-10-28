@@ -1,57 +1,56 @@
 {% extends "base.html" %}
 {% block content %}
-    <section class="happy-margin scriptRun">
 
-<h1>{{script.name}}</h1>
+<div class="main-wrapper">
 
-{% if output %}
+    <section class="white-background happy-margin table-nav scriptRun">
+        <div class="happy-margin">
+            <h1>{{script.name}}</h1>
 
-{% if error %}
+            {% if output %}
+            <br><span class="commandList">Result from: [ {{ script.commands[nextCommand - 2].command }} ]<br></span>
+            <pre>{{output}}</pre>
+            <hr>
+            {% endif %}
+        </div>
+        {% if nextCommand == 0 %}
 
-    <h2 class="script-error-message">This script doesn't exist! Are you sure you want to continue?</h2>
+        <p class="happy-margin">{{script.description}}</p>
 
-{% endif %}
+        <a class="happy-margin start button" href="/scripts/{{fileName}}?command={{nextCommand}}">Start</a>
 
-<pre {% if error %}data-error{% endif %}>{{output}}</pre>
+        {% elif nextCommand > script.commands|length %}
+        <div class="happy-margin">
+            <span class="alert success happy-margin">The script is complete.</span>&nbsp;
+        </div>
 
+        {% else %}
 
-{% endif %}
+        <div class="happy-margin">{{script.commands[nextCommand - 1].description}}</div>
 
-{% if nextCommand == 0 %}
+        {# Form for parameters #}
+        <div class="happy-margin">
+            <form class="happy-margin">
 
-    <p class="happy-margin">{{script.description}}</p>
+                <input type="hidden" name="command" value="{{nextCommand}}">
 
-    <a class="happy-margin start button" href="/scripts/{{fileName}}?command={{nextCommand}}">Start</a>
+                {% if script.commands[nextCommand - 1].parameters %}
 
-{% elif nextCommand > script.commands|length %}
-
-    <span class="alert success">The script is done.</span>
-
-{% else %}
-
-    <p class="happy-margin">{{script.commands[nextCommand - 1].description}}</p>
-
-    {# Form for parameters #}
-
-    <form class="happy-margin">
-
-        <input type="hidden" name="command" value="{{nextCommand}}">
-
-        {% if script.commands[nextCommand - 1].parameters %}
-
-            {% for key,value in script.commands[nextCommand - 1].parameters.items() %}
+                {% for key,value in script.commands[nextCommand - 1].parameters.items() %}
 
                 <label for="{{key}}">{{value}}</label>
-                <input type="text" id="{{key}}" name="{{key}}"/>
+                <input type="text" id="{{key}}" name="{{key}}" />
 
-            {% endfor %}
+                {% endfor %}
+
+                {% endif %}
+                <span class="commandList">About to run: [ {{ script.commands[nextCommand - 1].command }} ]<br></span>
+                <button type="submit">Run Command</button><br>&nbsp;
+
+            </form>
+        </div>
 
         {% endif %}
-
-        <button type="submit">Next</button>
-
-    </form>
-
-{% endif %}
-</section>
+    </section>
+</div>
 {% endblock %}

@@ -389,9 +389,6 @@ class scute:
             filename = re.sub('[^a-zA-Z-_0-9]+', ' ', request.form["scriptName"])
             filename = filename.strip().lower().replace(" ", "_")
 
-            print(request.form['scriptCommands'])
-
-            
 
             try:
                 commands = json.loads(request.form['scriptCommands'])
@@ -399,12 +396,10 @@ class scute:
                 session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong>You must enter a valid json array. Please check and try again." }
                 return redirect("/scripts") # reloads this page.
 
-            print(commands)
-
             # validate the input commands...
             if  not iter(commands):
                 session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> You must supply an array.  Please check and try again." }
-            elif "command"  not in commands[0]:
+            elif len(commands) == 0 or "command" not in commands[0]:
                 session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> No Commands found. Please check and try again." }
 
             else:
@@ -414,8 +409,7 @@ class scute:
                 newScript['name'] = request.form["scriptName"]
                 newScript['description'] = request.form['scriptDescription']
                 newScript['commands'] = commands
-
-                print(newScript)
+                newScript['type'] = "user"
 
                 with open(scriptsDirectory + filename + ".json" , 'w') as outputFile:
                     json.dump(newScript, outputFile)

@@ -1,22 +1,29 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <section class="happy-margin presetManager">
-
-        <h1 class="navy">Create and Edit Device Presets</h1>
-
+<div class="main-wrapper happy-margin">
+    <section class="main-table-wrapper">
+    <div class="table-nav top-tail-margin top-tail-padding">   
+    <div class="happy-margin">
+        <h1 class="navy">Preset Manager</h1>
+        {% if headerData.pageTitle %}
+        <div class="introText happy-margin">{{headerData.pageTitle|safe}}</div>
+        {% endif%}
+    </div>   
+        <div class='happy-margin'>
         <div class="presets-manager-wrapper">
             <div class="presets-manager-list scrolling">
                 <div class="edit-presets-icons">
                     <span class="icon add-preset" onclick="loadPreset('new')">
-                        <img alt="Add preset" src="scute/images/add-icon.png"/>
+                        <img title="Add preset" src="scute/images/add-icon.png"/>
                     </span>
                     <span class="icon">
-                        <img onclick="deletePreset()" alt="Delete preset" src="scute/images/delete-icon.png"/>
+                            <img onclick="uploadPreset()" title="Paste in preset" src="scute/images/upload-icon.png"/>
                     </span>
-                    <span class="icon">
-                        <img onclick="uploadPreset()" alt="Upload preset" src="scute/images/upload-icon.svg"/>
+                    <span class="icon toRight">
+                        <img onclick="deletePreset()" title="Delete preset" src="scute/images/delete-icon.png"/>
                     </span>
+
                 </div>
                 <div class="presets-list">
                     <ul>
@@ -24,6 +31,7 @@
                         {% if presets %}
                         
                             {% for preset in presets  %}
+                            
                                 <li class="preset-list-item" data-preset-menu="{{preset.presetID}}" onclick="loadPreset('{{ preset.presetID }}')">
                                     <span class="preset-title navy bold">{{ preset.presetName }}</span><br>
                                     <span class="description gray">{{ preset.presetDescription }}</span>
@@ -47,22 +55,22 @@
 
                 {# Upload new preset #}
 
-                <div data-preset="upload" style="display:none;">
+                <div class="happy-margin" data-preset="upload" style="display:none;">
 
                 <form method="POST">
 
                     <p>Paste a preset. The screen will refresh and the preset contents will appear in the form for you to rename / alter. Note, this only accepts files created through this preset manager (flattened JSON) not raw config files from a device.</p>
 
-                    <textarea name="paste"></textarea><br />
+                    <textarea class="pastePresetArea" name="paste"></textarea><br />
 
-                    <input type="submit"/>
+                    <button type="button">Save</button>
 
                 </form>
 
                 </div>
 
                 {# New preset form #}
-                <div data-preset="new">
+                <div data-preset="new" data-selectedform="true">
                     
                     <h1>New Preset</h1>
 
@@ -75,6 +83,7 @@
                 {# Existing preset forms #}
                 {% for preset in presets %}
                 <div data-preset="{{preset.presetID}}" style="display:none">
+                    <a  class='onRight inlineLink noUnderline' href="/download_file?type=preset&file={{preset.presetID}}" title='Download and this preset. Make sure you save any changes first.'>Download Preset</a>
                     <h1>{{preset.presetID}}</h1>
                     {% with current = preset %}
                     {% include "presetForm.html" %}
@@ -84,7 +93,9 @@
 
             </div>
         </div>
-
+        </div>
+        <br />
+    </div>
     </section>
-
+</div>
 {% endblock %}
