@@ -373,6 +373,16 @@ class scute:
         else:
             scriptsDirectory = 'scripts/'
 
+
+        # Check if deleting and delete scripe if yes
+        if request.args.get('delete'):
+            delete = request.args.get('delete')
+            os.remove(scriptsDirectory + "/" + delete ) 
+            # refresh the page to remove the 'delete' from URL params.
+            session['userMessage'] = {"type": 'info', "message": "Script Deleted: <strong>" + delete +"</strong>." }
+            return redirect("/scripts") # clear the 'delete' from URL - reloads this page.
+
+
         try:
             scriptsFileNames = os.listdir(scriptsDirectory)
             scriptsFileNames = sorted(scriptsFileNames, reverse=False)
