@@ -384,9 +384,10 @@ class scute:
 
 
         if request.method == "POST":
+            print("got here")
+            print(request.form)
             if "paste" in request.form:
-                print("got here")
-                print(request.form)
+                
             #     prefill = json.loads(request.form["paste"])
             # else:
             #     saved = self.processFormTypes(request.form)
