@@ -392,7 +392,7 @@ class scute:
             commands = json.loads(request.form['scriptCommands'])
 
             # validate the input commands...
-            if !iter(commands) or "command"  not in commands:
+            if  not iter(commands) or "command"  not in commands:
                 session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> Please check and try again." }
             else:
 
