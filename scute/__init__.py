@@ -389,11 +389,18 @@ class scute:
             filename = re.sub('[^a-zA-Z-_0-9]+', ' ', request.form["scriptName"])
             filename = filename.strip().lower().replace(" ", "_")
 
+            print(request.form['scriptCommands'])
+
             commands = json.loads(request.form['scriptCommands'])
 
+            print(commands)
+
             # validate the input commands...
-            if  not iter(commands) or "command"  not in commands:
-                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> Please check and try again." }
+            if  not iter(commands):
+                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> You must supply an array.  Please check and try again." }
+            elif "command"  not in commands:
+                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> No Commands found. Please check and try again." }
+
             else:
 
                 # new script object
