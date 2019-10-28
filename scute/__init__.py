@@ -385,18 +385,26 @@ class scute:
 
         if request.method == "POST":
 
+            # make filename safe
             filename = re.sub('[^a-zA-Z-_0-9]+', ' ', request.form["scriptName"])
-            filename = filename.strip().replace(" ", "_")
+            filename = filename.strip().lower().replace(" ", "_")
 
-            # new script format
-            newScript = {}
-            newScript['name'] = request.form["scriptName"]
-            newScript['description'] = request.form['scriptDescription']
-            newScript['scriptCommands'] = request.form['scriptCommands']
+            # validate the input commands...
+            if False:
+                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> Please check and try again." }
+            else:
 
-            with open(scriptsDirectory + filename + ".json" , 'w') as outputFile:
-                json.dump(newScript, outputFile)
-            session['userMessage'] = {"type": 'success', "message": "Script Saved: <strong>" + newScript['name']  +" ("  + filename+ ")</strong>." }
+                # new script object
+                newScript = {}
+                newScript['name'] = request.form["scriptName"]
+                newScript['description'] = request.form['scriptDescription']
+                newScript['scriptCommands'] = request.form['scriptCommands']
+
+                print(newScript)
+
+                with open(scriptsDirectory + filename + ".json" , 'w') as outputFile:
+                    json.dump(newScript, outputFile)
+                session['userMessage'] = {"type": 'success', "message": "Script Saved: <strong>" + newScript['name']  +" ("  + filename+ ")</strong>." }
 
 
         try:
