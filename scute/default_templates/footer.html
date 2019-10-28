@@ -22,15 +22,19 @@
     let localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     let thisEndpoint = '{{request.endpoint}}'
+
     // CLOCK UPDATE: forward this back to specific page.  
     if (thisEndpoint === 'script'){ 
         thisEndpoint = 'scripts'
     }
-    if (thisEndpoint === 'view_log'){ 
+    if (thisEndpoint === 'view_log' || thisEndpoint === 'config' || thisEndpoint === 'deviceConfig'){ 
         thisEndpoint = 'list'
     }
 
-    if (localDateTime != '{{headerData.hubDateTime}}') {
+    hubDateTimeBits = '{{headerData.hubDateTime}}'.split(' ');
+    hubDateTime = hubDateTimeBits[1] + " " + hubDateTimeBits[2]
+
+    if (localDateTime != hubDateTime || localTimezone != hubDateTimeBits[0]) {
         document.getElementById("clockWarning").innerHTML = "<form id='syncClockForm' action='/sync_clock'> \
                     <input type='hidden' name='clock_sync' value='" + localDateTime + "' /> \
                     <input type='hidden' name='passTo' value='" + thisEndpoint + "' /> \
