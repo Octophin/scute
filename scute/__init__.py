@@ -391,14 +391,20 @@ class scute:
 
             print(request.form['scriptCommands'])
 
-            commands = json.loads(request.form['scriptCommands'])
+            
+
+            try:
+                commands = json.loads(request.form['scriptCommands'])
+            except:
+                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong>You must enter a valid json array. Please check and try again." }
+                return redirect("/scripts") # reloads this page.
 
             print(commands)
 
             # validate the input commands...
             if  not iter(commands):
                 session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> You must supply an array.  Please check and try again." }
-            elif "command"  not in commands:
+            elif "command"  not in commands[0]:
                 session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> No Commands found. Please check and try again." }
 
             else:
