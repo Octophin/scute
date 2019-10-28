@@ -398,7 +398,7 @@ class scute:
                 newScript = {}
                 newScript['name'] = request.form["scriptName"]
                 newScript['description'] = request.form['scriptDescription']
-                newScript['scriptCommands'] = request.form['scriptCommands']
+                newScript['commands'] = request.form['scriptCommands']
 
                 print(newScript)
 
