@@ -384,21 +384,20 @@ class scute:
 
 
         if request.method == "POST":
-            print("got here")
-            print(request.form)
-           # if "paste" in request.form:
-                
-            #     prefill = json.loads(request.form["paste"])
-            # else:
-            #     saved = self.processFormTypes(request.form)
-            #     safeName = re.sub('[^a-zA-Z-_0-9]+', ' ', saved["presetName"])
-            #     safeName = safeName.strip()
-            #     safeName = safeName.replace(" ", "_")
 
-            #     saved["presetID"] = safeName
-            #     with open(presetDirectory + safeName + ".json" , 'w') as presetFile:
-            #         json.dump(saved, presetFile)
-            #     session['userMessage'] = {"type": 'success', "message": "Preset Saved: <strong>" + safeName + "</strong>." }
+            filename = re.sub('[^a-zA-Z-_0-9]+', ' ', request.form["scriptName"])
+            filename = filename.strip().replace(" ", "_")
+
+            # new script format
+            newScript = {}
+            newScript['name'] = request.form["scriptName"]
+            newScript['description'] = request.form['scriptDescription']
+            newScript['scriptCommands'] = request.form['scriptCommands']
+
+            with open(scriptsDirectory + filename + ".json" , 'w') as outputFile:
+                json.dump(newScript, outputFile)
+            session['userMessage'] = {"type": 'success', "message": "Script Saved: <strong>" + newScript['name']  +" ("  + filename+ ")</strong>." }
+
 
         try:
             scriptsFileNames = os.listdir(scriptsDirectory)
