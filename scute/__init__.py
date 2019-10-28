@@ -383,6 +383,21 @@ class scute:
             return redirect("/scripts") # clear the 'delete' from URL - reloads this page.
 
 
+        if request.method == "POST":
+            if "paste" in request.form:
+                print(request.form)
+            #     prefill = json.loads(request.form["paste"])
+            # else:
+            #     saved = self.processFormTypes(request.form)
+            #     safeName = re.sub('[^a-zA-Z-_0-9]+', ' ', saved["presetName"])
+            #     safeName = safeName.strip()
+            #     safeName = safeName.replace(" ", "_")
+
+            #     saved["presetID"] = safeName
+            #     with open(presetDirectory + safeName + ".json" , 'w') as presetFile:
+            #         json.dump(saved, presetFile)
+            #     session['userMessage'] = {"type": 'success', "message": "Preset Saved: <strong>" + safeName + "</strong>." }
+
         try:
             scriptsFileNames = os.listdir(scriptsDirectory)
             scriptsFileNames = sorted(scriptsFileNames, reverse=False)
