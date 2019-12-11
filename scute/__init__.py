@@ -107,10 +107,6 @@ class scute:
     def getHeaderData(self):
         return self.hooks["get_header_data"]()
 
-    def getIndexData(self):
-        return self.hooks["get_index_data"]()
-
-
     def getHelpInfo(self):
         helpInfo = {}
 
@@ -120,18 +116,16 @@ class scute:
 
         return helpInfo
 
+
     def indexView(self):
 
-        indexData = self.getIndexData()
-        if indexData['accessAllowed'] == True:
+        indexData = {"header": "Welcome To SCUTE", "content": "<a href='/list'>Scan For Devices</a>"}
                  
-            return render_template("index.html", title="Horizon", indexData = indexData, headerData = self.getHeaderData())
-        else:
-            return render_template("defaultPage.html", title="Horizon", userMassage = indexData['usermessage'], indexData = indexData, headerData = self.getHeaderData())
+        return render_template("index.html", title="Home", indexData = indexData, headerData = self.getHeaderData())
 
 
     def deviceListView(self):
-        return render_template("list.html", title="Horizon", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), headerData = self.getHeaderData())
+        return render_template("list.html", title="Devices", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), headerData = self.getHeaderData())
     
     def getAllPresetValues(self):
         # scan the preset directory and return value label pairs

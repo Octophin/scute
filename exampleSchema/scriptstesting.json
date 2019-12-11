@@ -1,0 +1,1 @@
+{"commands": [{"command": "date '+%Y-%m-%d %H:%M'", "description": "This is an example script format.  Running this script will get the Hub Time"}], "type": "user", "name": "testing", "description": "ikhjkhjk"}
