@@ -2,6 +2,7 @@
 
 from scute import scute
 from flask import Flask, request, jsonify, g
+from datetime import datetime, date
 import json
 import os
 
@@ -33,14 +34,13 @@ def getIndexData():
 
 exampleInstance.registerHook("get_index_data", getIndexData)
 
-def getHeaderData():
+def getSystemInfo():
 
+    # add anything here you want available to all pages.
+    now = datetime.now()
+    return {"scuteVersion": exampleInstance.getSCUTEVersion(),"currentDateTime": now.strftime("%c")}
 
-    now = app.datetime.now()
-
-    return {"scuteVersion": "123","currentDateTime": now.strftime("%H:%M:%S")}
-
-exampleInstance.registerHook("get_header_data", getHeaderData)
+exampleInstance.registerHook("get_system_info", getSystemInfo)
 
 
 def getFields(deviceID):

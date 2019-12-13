@@ -1,15 +1,9 @@
 <footer>
 
     {% include "layout/client_footer.html" %}
-    Hub IP: <span id="time-hub" class="time-hub">{{headerData.systemIPAddress}}</span><br />
-    SD Card: {{headerData.hubSDSpace}}<br />
-    Hub Time: <span id="time-hub" class="time-hub">{{headerData.hubDateTime}}</span><br />
-    Computer Time: <span id="footer-time-computer" class="time-computer"></span><br />
-    GUI Version: <span class="gui-version">{{headerData.guiVersion}}</span>,
-    Hardware Version: <span class="gui-version">{{headerData.hardwareVersion}}</span>,
-    Tools Version: <span class="gui-version">{{headerData.toolsVersion}}</span> <br />
 
-    <a href="/my_actions" target="_blank">Action History</a>
+    {% if systemInfo.currentDateTime %}{{systemInfo.currentDateTime | safe}}<br>{%endif%}
+    {% if systemInfo.scuteVersion %}SCUTE: <a href='https://github.com/Octophin/scute' target='_blank' title='SCUTE on GitHub'>{{systemInfo.scuteVersion | safe}}</a><br>{%endif%}
 
 </footer>
 
@@ -31,7 +25,7 @@
         thisEndpoint = 'list'
     }
 
-    hubDateTimeBits = '{{headerData.hubDateTime}}'.split(' ');
+    hubDateTimeBits = '{{systemInfo.hubDateTime}}'.split(' ');
     hubDateTime = hubDateTimeBits[1] + " " + hubDateTimeBits[2]
 
     if (localDateTime != hubDateTime || localTimezone != hubDateTimeBits[0]) {
