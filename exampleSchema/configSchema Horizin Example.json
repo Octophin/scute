@@ -10,6 +10,7 @@
 				"type": "text",
 				"excludeFromPresets": true,
 				"order": 1,
+				"default": "HORIZON_TAG",
 				"userLocked": false,
 				"advanced": false,
 				"jsonType": "text",
@@ -18,10 +19,10 @@
 			"system.deviceIdentifier": {
 				"label": "ID",
 				"type": "text",
-				"description": "The system version of the device ID",
+				"description": "ID string in the format: 'xx:xx:xx:xx:xx:xx:xx:xx'",
 				"excludeFromPresets": true,
 				"order": 2,
-				"default": "XX-123",
+				"default": "The device identity expressed as a MAC address style ID",
 				"userLocked": true,
 				"advanced": false,
 				"jsonType": "text"
@@ -49,12 +50,149 @@
 		"description": "",
 		"order": 3,
 		"fields": {
+			"gps.lastKnownPosition": {
+				"label": "Last known GPS position",
+				"description": "",
+				"order": 1,
+				"hasSubLevel": true,
+				"fields": {
+					"lastknown.accuracyHorizontal": {
+						"type": "number",
+						"description": "The horizontal accuracy of the last known GPS position",
+						"excludeFromPresets": true,
+						"order": 1,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "float"
+					},
+					"lastknown.accuracyVertical": {
+						"type": "number",
+						"description": "The vertical accuracy of the last known GPS position",
+						"excludeFromPresets": true,
+						"order": 2,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "float"
+					},
+					"lastknown.height": {
+						"type": "number",
+						"description": "Read-only last recorded height",
+						"excludeFromPresets": true,
+						"order": 3,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "float"
+					},
+					"lastknown.iTOW": {
+						"type": "number",
+						"description": "",
+						"excludeFromPresets": true,
+						"order": 4,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "float"
+					},
+					"lastknown.latitude": {
+						"type": "number",
+						"description": "Read-only last recorded latitude",
+						"excludeFromPresets": true,
+						"order": 5,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "float"
+					},
+					"lastknown.longitude": {
+						"type": "number",
+						"description": "Read-only last recorded longitude",
+						"excludeFromPresets": true,
+						"order": 6,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "float"
+					},
+					"lastknown.day": {
+						"type": "number",
+						"description": "Day when last recorded GPS position was obtained",
+						"excludeFromPresets": true,
+						"order": 7,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "int"
+					},
+					"lastknown.month": {
+						"type": "number",
+						"description": "Month when last recorded GPS position was obtained",
+						"excludeFromPresets": true,
+						"order": 8,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "int"
+					},
+					"lastknown.year": {
+						"type": "number",
+						"description": "Year when last recorded GPS position was obtained",
+						"excludeFromPresets": true,
+						"order": 9,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "int"
+					},
+					"lastknown.hours": {
+						"type": "number",
+						"description": "Hour when last recorded GPS position was obtained",
+						"excludeFromPresets": true,
+						"order": 10,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "int"
+					},
+					"lastknown.minutes": {
+						"type": "number",
+						"description": "Minute when last recorded GPS position was obtained",
+						"excludeFromPresets": true,
+						"order": 11,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "int"
+					},
+					"lastknown.seconds": {
+						"type": "number",
+						"description": "Second when last recorded GPS position was obtained",
+						"excludeFromPresets": true,
+						"order": 12,
+						"userLocked": false,
+						"advanced": false,
+						"jsonType": "int"
+					}
+				}
+			},
 			"gps.logPositionEnable": {
 				"label": "Enable GPS Log",
 				"type": "boolean",
 				"description": "Enable GPS logging",
 				"order": 2,
 				"default": true,
+				"userLocked": false,
+				"advanced": false,
+				"jsonType": "boolean"
+			},
+			"gps.logTTFFEnable": {
+				"label": "Enable TTFF Log",
+				"type": "boolean",
+				"description": "Enable logging time till first fix",
+				"order": 3,
+				"default": true,
+				"userLocked": false,
+				"advanced": false,
+				"jsonType": "boolean"
+			},
+			"gps.logDebugEnable": {
+				"label": "Debug Log",
+				"type": "boolean",
+				"description": "Enable logging GPS debug events",
+				"order": 4,
+				"excludeFromPresets": false,
+				"default": false,
 				"userLocked": false,
 				"advanced": false,
 				"jsonType": "boolean"
@@ -92,6 +230,17 @@
 				"advanced": false,
 				"jsonType": "int"
 			},
+			"gps.veryFirstFixHoldTime": {
+				"label": "Very First Fix Hold Time",
+				"type": "number",
+				"description": "Hold period after first GPS fix before shutting down (0=>disabled)",
+				"excludeFromPresets": false,
+				"order": 7,
+				"default": 120,
+				"userLocked": false,
+				"advanced": false,
+				"jsonType": "int"
+			},
 			"gps.mode": {
 				"label": "Mode",
 				"description": "One of { 'SWITCH_TRIGGERED', 'SCHEDULED', 'HYBRID' }",
@@ -103,6 +252,23 @@
 				"order": 8,
 				"default": "SCHEDULED",
 				"userLocked": false,
+				"advanced": false,
+				"jsonType": "text"
+			}
+		}
+	},
+	"rtc": {
+		"label": "RTC",
+		"description": "",
+		"order": 4,
+		"fields": {
+			"rtc.dateTime": {
+				"label": "Date Time",
+				"type": "text",
+				"description": "Accepts any reasonable time string e.g. 'Wed, 21 Feb 2018 16:17:13 GMT'",
+				"order": 2,
+				"excludeFromPresets": true,
+				"userLocked": true,
 				"advanced": false,
 				"jsonType": "text"
 			}
@@ -148,6 +314,17 @@
 				"advanced": false,
 				"jsonType": "text"
 			},
+
+			"logging.startEndSyncEnable": {
+				"label": "Hrt Enable",
+				"type": "boolean",
+				"description": "Reserved for future use",
+				"excludeFromPresets": true,
+				"order": 7,
+				"userLocked": true,
+				"advanced": true,
+				"jsonType": "boolean"
+			},
 			"logging.dateTimeStampEnable": {
 				"label": "Date Time Log Enable",
 				"type": "boolean",
@@ -176,6 +353,17 @@
 				"userLocked": false,
 				"advanced": false,
 				"jsonType": "boolean"
+			},
+			"saltwaterSwitch.hysteresisPeriod": {
+				"label": "Hysteresis Period",
+				"type": "number",
+				"description": "Required settling period in seconds for debouncing switch closed events (0=>no debouncing)",
+				"excludeFromPresets": false,
+				"order": 1,
+				"default": 0,
+				"userLocked": false,
+				"advanced": false,
+				"jsonType": "int"
 			}
 		}
 	},
@@ -216,6 +404,28 @@
 				"userLocked": false,
 				"advanced": false,
 				"jsonType": "int"
+			},
+			"bluetooth.advertisingInterval": {
+				"label": "Advertising Interval",
+				"type": "number",
+				"description": "Expressed in units of 0.625 ms",
+				"excludeFromPresets": false,
+				"order": 5,
+				"default": 0,
+				"userLocked": false,
+				"advanced": false,
+				"jsonType": "float"
+			},
+			"bluetooth.connectionInterval": {
+				"label": "Connection Interval",
+				"type": "number",
+				"description": "Expressed in units of 1.25 ms",
+				"excludeFromPresets": false,
+				"order": 6,
+				"default": 0,
+				"userLocked": false,
+				"advanced": false,
+				"jsonType": "float"
 			},
 			"bluetooth.inactivityTimeout": {
 				"label": "Connection Inactivity Timeout",

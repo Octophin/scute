@@ -75,7 +75,7 @@
                     <h1>New Preset</h1>
 
                     {% with current = current %}
-                        {% include "presetForm.html" %}
+                        {% include "forms/presetForm.html" %}
                     {% endwith %}
 
                 </div>
@@ -85,7 +85,7 @@
                 <div data-preset="{{preset.presetID}}" style="display:none">
                     <h1>{{preset.presetID}}</h1>
                     {% with current = preset %}
-                    {% include "presetForm.html" %}
+                    {% include "forms/presetForm.html" %}
                     {% endwith %}
                 </div>
                 {% endfor %}

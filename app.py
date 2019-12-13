@@ -17,6 +17,11 @@ options = {
 
 exampleInstance = scute(options, app)
 
+
+@app.route('/export')
+def hello_world():
+    return 'Hello, World!'
+
 def getDevices():
     return ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"]
 
@@ -29,7 +34,11 @@ def getIndexData():
 exampleInstance.registerHook("get_index_data", getIndexData)
 
 def getHeaderData():
-    return {"headerItem1": "headerItem1","headerItem2": "headerItem2","headerItem3": "headerItem3"}
+
+
+    now = app.datetime.now()
+
+    return {"scuteVersion": "123","currentDateTime": now.strftime("%H:%M:%S")}
 
 exampleInstance.registerHook("get_header_data", getHeaderData)
 

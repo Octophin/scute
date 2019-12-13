@@ -121,11 +121,11 @@ class scute:
 
         indexData = {"header": "Welcome To SCUTE", "content": "<a href='/list'>Scan For Devices</a>"}
                  
-        return render_template("index.html", title="Home", indexData = indexData, headerData = self.getHeaderData())
+        return render_template("content/index.html", title="Home", indexData = indexData, headerData = self.getHeaderData())
 
 
     def deviceListView(self):
-        return render_template("list.html", title="Devices", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), headerData = self.getHeaderData())
+        return render_template("content/list.html", title="Devices", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), headerData = self.getHeaderData())
     
     def getAllPresetValues(self):
         # scan the preset directory and return value label pairs
@@ -181,7 +181,7 @@ class scute:
             session['userMessage'] = {"type": 'error', "message": "Invalid config detected for '<strong>" + currentConfig['local.friendlyName']  + " ("+ str(device) + ")</strong>'.<br />Please enter config manually, apply a preset or apply the default config via the SCRIPTS."}
     
 
-        return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, headerData = self.getHeaderData())
+        return render_template("content/config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, headerData = self.getHeaderData())
 
     def applyPresetView(self):
         devices = request.args.getlist("devices[]")
@@ -221,10 +221,10 @@ class scute:
 
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON, headerData = self.getHeaderData())
+        return render_template("content/applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON, headerData = self.getHeaderData())
 
     def helpView(self):
-        return render_template("helpPage.html", title="Horizon Help", helpInfo=self.getHelpInfo(), headerData = self.getHeaderData())
+        return render_template("content/helpPage.html", title="Horizon Help", helpInfo=self.getHelpInfo(), headerData = self.getHeaderData())
     
 
 
@@ -310,7 +310,7 @@ class scute:
         
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("presets.html", title="Presets", presets=presetFiles, schema=presetSchema, current=prefill, headerData = self.getHeaderData())
+        return render_template("content/presets.html", title="Presets", presets=presetFiles, schema=presetSchema, current=prefill, headerData = self.getHeaderData())
 
 
 
@@ -321,7 +321,7 @@ class scute:
         if("scriptsDirectory" in self.options):
             scriptsDirectory = self.options["scriptsDirectory"]
         else:
-            scriptsDirectory = 'scripts/'
+            scriptsDirectory = 'content/scripts/'
 
 
         scriptSchema = {}
@@ -356,7 +356,7 @@ class scute:
                 output = stderr
                 error = True
 
-        return render_template("script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output, error = error, headerData = self.getHeaderData())
+        return render_template("content/script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output, error = error, headerData = self.getHeaderData())
 
     def scriptsView(self):
 
@@ -365,7 +365,7 @@ class scute:
         if("scriptsDirectory" in self.options):
             scriptsDirectory = self.options["scriptsDirectory"]
         else:
-            scriptsDirectory = 'scripts/'
+            scriptsDirectory = 'content/scripts/'
 
 
         # Check if deleting and delete scripe if yes
@@ -425,7 +425,7 @@ class scute:
                 fileJSON["fileName"] = file
                 scripts.append(fileJSON)
 
-        return render_template("scriptsView.html", title="Scripts", scripts=scripts, headerData = self.getHeaderData())
+        return render_template("content/scriptsView.html", title="Scripts", scripts=scripts, headerData = self.getHeaderData())
 
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON
