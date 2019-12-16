@@ -3,9 +3,8 @@
 
 <div class="main-wrapper happy-margin">
     <section class="main-table-wrapper">
-        <div class="table-nav top-tail-margin top-tail-padding">
+        {% include "layout/contentTitle.html" %}
             <div class="happy-margin">
-                <h1 class="navy">Script Manager</h1>
                 {% if systemInfo.pageTitle %}
                 <div class="introText happy-margin">{{systemInfo.pageTitle|safe}}</div>
                 {% endif%}
@@ -119,9 +118,8 @@
 
                         </div>
                     </div>
-                </div>
-                <br />
-            </div>
+
+
     </section>
 </div>
 <script>

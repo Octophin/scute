@@ -3,13 +3,14 @@
 
 <div class="main-wrapper happy-margin">
     <section class="main-table-wrapper">
-    <div class="table-nav top-tail-margin top-tail-padding">   
-    <div class="happy-margin">
-        <h1 class="navy">Preset Manager</h1>
+
+        {% include "layout/contentTitle.html" %}
+        
         {% if systemInfo.pageTitle %}
-        <div class="introText happy-margin">{{systemInfo.pageTitle|safe}}</div>
+        <div class="happy-margin">
+            <div class="introText happy-margin">{{systemInfo.pageTitle|safe}}</div>
+        </div>   
         {% endif%}
-    </div>   
         <div class='happy-margin'>
         <div class="presets-manager-wrapper">
             <div class="presets-manager-list scrolling">
@@ -94,7 +95,7 @@
         </div>
         </div>
         <br />
-    </div>
+
     </section>
 </div>
 {% endblock %}

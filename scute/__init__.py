@@ -187,7 +187,7 @@ class scute:
             session['userMessage'] = {"type": 'error', "message": "Invalid config detected for '<strong>" + currentConfig['local.friendlyName']  + " ("+ str(device) + ")</strong>'.<br />Please enter config manually, apply a preset or apply the default config via the SCRIPTS."}
     
 
-        return render_template("content/config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, systemInfo = self.getSystemInfo())
+        return render_template("content/config.html", title="Device Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, systemInfo = self.getSystemInfo())
 
     def applyPresetView(self):
         devices = request.args.getlist("devices[]")
@@ -316,7 +316,7 @@ class scute:
         
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("content/presets.html", title="Presets", presets=presetFiles, schema=presetSchema, current=prefill, systemInfo = self.getSystemInfo())
+        return render_template("content/presetsView.html", title="Preset Manager", presets=presetFiles, schema=presetSchema, current=prefill, systemInfo = self.getSystemInfo())
 
 
 

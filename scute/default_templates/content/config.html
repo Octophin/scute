@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <section>
-        <div class="form-block happy-margin">
-            <div class="form-block-wrapper">
-                <div class="config-page-subheading flex">
+<div class="main-wrapper happy-margin">
+
+    <section class="main-table-wrapper">
+        {% include "layout/contentTitle.html" %}
+        <div class="happy-margin">
                     <div class="form-headings navy happy-margin">
-                        <h1>Config Settings for device:<br /><span id="deviceIDString">{{current['local.friendlyName']}} ({{device}})</span></h1>
-                        <span class="happy-margin">Device time: {{current['rtc.dateTime']}} <a class='inlineLink toRight noUnderLine' href='download_config?devices[]={{device}}&a={{systemInfo.timestamp}}>'>Download Config</a>
-                        </span>
+                        <h2>Config Settings for device: <span id="deviceIDString">{{current['local.friendlyName']}} ({{device}})</span></h2>
+
                         <div id="warningFieldsChanged" class="warningFieldsChanged subheading red navy">
                             <div class="icon">
                                 <img src="/scute/images/info-icon.png">
@@ -17,20 +17,18 @@
                         </div>
                     </div>
 
-
-                </div>
                 <form class="form-body" id="configForm" method="post" onsubmit="return confirmSubmitConfig(this)">
                     <div class="form-buttons">
-                        <button class="featured button" type="submit" onclick="lockScreenOverlay(); buttonClicked='save'">Apply</button>
+                        <button class="featured button" type="submit" onclick="lockScreenOverlay(); buttonClicked='save'">Apply Changes</button>
                         <button class="primary button save-as-preset" name="preset" type="submit" onclick="buttonClicked='preset'" >Save To Preset</button>
                     </div>
                     {% include "forms/configForm.html" %}
                     <div class="form-buttons">
-                        <button class="featured button" name="save" type="submit" onclick="lockScreenOverlay(); buttonClicked='save'">Apply</button>
+                        <button class="featured button" name="save" type="submit" onclick="lockScreenOverlay(); buttonClicked='save'">Apply Changes</button>
                         <button class="primary button save-as-preset" name="preset" type="submit" onclick="buttonClicked='preset'">Save To Preset</button>
                     </div>
-                </form><br />
+                </form>
             </div>
-        </div>
     </section>
+    </div>
 {% endblock %}

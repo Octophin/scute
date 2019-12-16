@@ -2,8 +2,9 @@
 {% block content %}
 <div class="main-wrapper happy-margin">
 
-    <section class="white-background  happy-margin table-nav">
-        <div class="happy-margin">
+    <section class="main-table-wrapper">
+        {% include "layout/contentTitle.html" %}
+
             <span class="happy-margin">
                 {% set presetToApply = preset.split('.') %}
 
@@ -26,8 +27,7 @@
                     <button onclick="lockScreenOverlay();" class="featured button" type="submit">Apply</button>
                 </div>                
             </form>
-            <br />
-        </div>
+
     </section>
 </div>
 {% endblock %}

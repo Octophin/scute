@@ -5,20 +5,11 @@
 <div class="main-wrapper happy-margin">
 
     <section class="main-table-wrapper" toolversion>
-        <div class="table-nav flex top-tail-margin top-tail-padding">
-            <div class="table-nav-left">
-                <span class="usb-icon inline-block">
-                    <img alt="USB icon" src="/scute/images/usb-icon.png">
-                </span>
-                <div class="inline-block navy table-header">
-                    <h2>{{ title }}</h2>
-                </div>
-            </div>
+        {% include "layout/contentTitle.html" %}
 
-        </div>
         {% if userMessage|length > 0 %}
-
         <div class="happy-margin">
+            <!-- content  here-->
 
             <div class="alert {{userMessage.type}}">
                 {{userMessage.message | safe}}
@@ -26,14 +17,8 @@
         </div>
 
         {% endif %}
-        <div class="happy-margin">
-            &nbsp;
- 
-        </div>
+
     </section>
-
-
-
 
 </div>
 {% endblock %}
