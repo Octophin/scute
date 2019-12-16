@@ -8,39 +8,3 @@
 </footer>
 
 <script src="/scute/scute.js"></script>
-<!-- <script src="/static/scute.js"></script> for local testing-->
-<script>
-
-    let localDateTime = formatDateTime(new Date());
-
-    let localTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-    let thisEndpoint = '{{request.endpoint}}'
-
-    // CLOCK UPDATE: forward this back to specific page.  
-    if (thisEndpoint === 'script') {
-        thisEndpoint = 'scripts'
-    }
-    if (thisEndpoint === 'view_log' || thisEndpoint === 'config' || thisEndpoint === 'deviceConfig') {
-        thisEndpoint = 'list'
-    }
-
-    hubDateTimeBits = '{{systemInfo.hubDateTime}}'.split(' ');
-    hubDateTime = hubDateTimeBits[1] + " " + hubDateTimeBits[2]
-
-    if (localDateTime != hubDateTime || localTimezone != hubDateTimeBits[0]) {
-        document.getElementById("clockWarning").innerHTML = "<form id='syncClockForm' action='/sync_clock'> \
-                    <input type='hidden' name='clock_sync' value='" + localDateTime + "' /> \
-                    <input type='hidden' name='passTo' value='" + thisEndpoint + "' /> \
-                    <a class='warningButton noUnderline' href='#' onclick=\"document.getElementById('syncClockForm').submit()\" \
-                    title='Sync Hub Time to Computer Time?'>Time Mismatch</a></form>";
-    }
-
-    document.getElementById("time-computer").innerHTML = localTimezone + " " + localDateTime;
-
-    if (document.getElementById("footer-time-computer")) {
-        document.getElementById("footer-time-computer").innerHTML = localTimezone + " " + localDateTime;
-    }
-
-
-</script>

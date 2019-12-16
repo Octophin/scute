@@ -427,10 +427,6 @@ function confirmSubmitConfig(theForm) {
 
     if (buttonClicked === "save"){
        
-        lastHubTime = document.getElementById("time-hub").innerHTML;
-        deviceIDString = document.getElementById("deviceIDString").innerHTML;
-
-
         changedFields = document.querySelectorAll("[data-changed]");
 
         if (changedFields.length == 0){
@@ -447,7 +443,7 @@ function confirmSubmitConfig(theForm) {
 
         }
 
-        message += 'Save This Config to Device "' + deviceIDString + '"? \n\nThe device time will be set to the Hub Time: ' + lastHubTime + ' \nHub Time can be updated in the SCRIPTS section.';
+        message += 'Save This Config to Device "' + deviceIDString.innerText + '"?';
 
         return confirm(message);
 

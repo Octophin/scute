@@ -55,9 +55,11 @@ class scute:
                     if "order" not in fields[field]:
                         fields[field]["order"] = 0
         return configSchema
+    
     def getReportSchema(self):
         with open(self.options["reportSchema"]) as reportSchema:  
             return json.load(reportSchema)
+    
     def getReportFields(self):
         # Extract from categories to get quick access to fields
         fields = {}
@@ -70,6 +72,7 @@ class scute:
                 if "order" not in fields[field]:
                     fields[field]["order"] = 0
         return fields
+    
     def getActions(self):
         with open(self.options["actionsSchema"]) as actionsSchema: 
             actions = json.load(actionsSchema)
@@ -77,6 +80,7 @@ class scute:
                 if "list" in value and not isinstance(value["list"], collections.Mapping):
                     actions[key]["list"] = self.hooks["get_list__" + value["list"]]()
             return actions
+    
     def getDeviceReport(self, deviceID):
         reportValues = {}
         # First try to get all fields, then overwrite with specific ones
@@ -122,15 +126,14 @@ class scute:
 
         return helpInfo
 
-
     def indexView(self):
 
         indexData = {"header": "Welcome To SCUTE", "content": "<a href='/list'>Scan For Devices</a>"}
-                 
         return render_template("content/index.html", title="Home", indexData = indexData, systemInfo = self.getSystemInfo())
 
 
     def deviceListView(self):
+        
         return render_template("content/list.html", title="Devices", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), systemInfo = self.getSystemInfo())
     
     def getAllPresetValues(self):
@@ -148,7 +151,6 @@ class scute:
         return replyValues
 
     def deviceConfigView(self):
-
 
         device = request.args.getlist("devices[]")[0]
 
@@ -230,7 +232,7 @@ class scute:
         return render_template("content/applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON, systemInfo = self.getSystemInfo())
 
     def helpView(self):
-        return render_template("content/helpPage.html", title="Horizon Help", helpInfo=self.getHelpInfo(), systemInfo = self.getSystemInfo())
+        return render_template("content/helpPage.html", title="Help", helpInfo=self.getHelpInfo(), systemInfo = self.getSystemInfo())
     
 
 
@@ -369,7 +371,7 @@ class scute:
         scriptsDirectory = ""
 
         if("scriptsDirectory" in self.options):
-            scriptsDirectory = self.options["scriptsDirectory"]
+            scriptsDirectory = self.options["scriptsDirectory"] + '/'
         else:
             scriptsDirectory = 'content/scripts/'
 
