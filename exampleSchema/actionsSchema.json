@@ -3,16 +3,26 @@
         "label": "Export data",
         "order": 2,
         "bulk": true,
-        "list": "mylist"
+        "list": "myExampleList"
     },
     "erase_log": {
         "bulk": true,
         "warn": true,
-        "label": "Erase Log"
+        "label": "Erase Log",
+        "userMessage": "Erase Logs for selected device(s)?",
+        "toolTip": "Erases data logs for selected devices.",
+        "lockScreen": true
     },
-    "reset_flash": {
+    "reset_device": {
         "bulk": false,
         "warn": true,
-        "label": "Reset Device"
+        "label": "Reset Device",
+        "toolTip": "Performa a hardware reset for selected device.",
+        "lockScreen": true
+    },
+    "another_task": {
+        "bulk": true,
+        "warn": false,
+        "label": "Another Task"
     }
 }

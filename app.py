@@ -1,7 +1,7 @@
 # Demonstration file
 
 from scute import scute
-from flask import Flask, request, jsonify, g
+from flask import Flask, request, jsonify, g, render_template
 from datetime import datetime, date
 import json
 import os
@@ -18,10 +18,6 @@ options = {
 
 exampleInstance = scute(options, app)
 
-
-@app.route('/export')
-def hello_world():
-    return 'Hello, World!'
 
 def getDevices():
     return ["ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"]
@@ -77,18 +73,41 @@ def readConfig(deviceID):
 
 exampleInstance.registerHook("read_config", readConfig)
 
-def getMyList():
-    return {"magic": "world", "hero": "gold", "wonderful": "true"}
+def getExampleList():
+    return {"Example 1": "Example_1","Example 2": "Example_2","Example 3": "Example_3"}
 
-exampleInstance.registerHook("get_list__mylist", getMyList)
+exampleInstance.registerHook("get_list__myExampleList", getExampleList)
+
+
+# Additional Routes
 
 @app.route('/export')
 def export():
     devices = request.args.getlist("devices[]")
-    return 'Export data for ' + json.dumps(devices)
+    userMessage = {"message": "Export TBC: <strong>" + json.dumps(devices) + "</strong>"}
 
-@app.route('/disconnect')
-def disconnect():
+    return render_template("content/defaultPage.html", title="Export", systemInfo = getSystemInfo(), userMessage = userMessage )
+
+
+@app.route('/erase_log')
+def erase_log():
     devices = request.args.getlist("devices[]")
-    return 'Disconnecting ' + json.dumps(devices)
+    userMessage = {"message": "Erase Log TBC: <strong>" + json.dumps(devices) + "</strong>"}
+
+    return render_template("content/defaultPage.html", title="Erase Log", systemInfo = getSystemInfo(), userMessage = userMessage )
+
+
+@app.route('/reset_device')
+def reset_device():
+    devices = request.args.getlist("devices[]")
+    userMessage = {"message": "Reset Device TBC: <strong>" + json.dumps(devices) + "</strong>"}
+
+    return render_template("content/defaultPage.html", title="Reset Device", systemInfo = getSystemInfo(), userMessage = userMessage )
+
+@app.route('/another_task')
+def another_task():
+    devices = request.args.getlist("devices[]")
+    userMessage = {"message": "Another Task TBC: <strong>" + json.dumps(devices) + "</strong>"}
+
+    return render_template("content/defaultPage.html", title="Another Task", systemInfo = getSystemInfo(), userMessage = userMessage )
 
