@@ -206,7 +206,7 @@ let triggerAction = function (e) {
 
 };
 
-let showConfirm = function (warning, targetURL, lockscreen=false, buttonSet=[]) {
+let showConfirm = function (warning, targetURL, lockscreen=false, buttonSet=[], isForm = false) {
 
     
     // Remove existing popup
@@ -221,17 +221,23 @@ let showConfirm = function (warning, targetURL, lockscreen=false, buttonSet=[]) 
         buttonSet = ["OK!", "Cancel"];
     }
 
+    // lock the screen?
     let lockscreenJS = '';
-
     if (lockscreen){
         lockscreenJS = 'lockScreenOverlay(); ';
+    }
+
+    //is this a form confirm?
+    let onclickProcess = `okClickProcess('${targetURL}'); `;
+    if (isForm){
+        onclickProcess = `document.getElementById('${isForm}').submit(); `;
     }
 
     let popup = `<section id="popup" class="are-you-sure">
                     <div class="pop-up navy">
                         <p>${warning}</p>
                         <div class="pop-up-buttons">
-                            <button onclick="${lockscreenJS}okClickProcess('${targetURL}')">${buttonSet[0]}</button>`;
+                            <button onclick="${lockscreenJS} ${onclickProcess} ">${buttonSet[0]}</button>`;
     if (buttonSet.length !== 1){
         popup += `<button onclick="document.getElementById('popup').outerHTML = ''">${buttonSet[1]}</button>`;
     }
@@ -434,7 +440,7 @@ function getFieldName(field){
     return " - " + fieldName[1] + " (" + fieldName[0] + ") \n";
 }
 
-var buttonClicked; // used to flay which of 2 form button types has been clicked - CONFIG page.
+var buttonClicked; // used to flag which of 2 form button types has been clicked - CONFIG page.
 
 function confirmSubmitConfig(theForm) {
 
@@ -458,13 +464,18 @@ function confirmSubmitConfig(theForm) {
 
         message += 'Save This Config to Device "' + deviceIDString.innerText + '"?';
 
-        return confirm(message);
+        showConfirm(message, '', false, ["Apply Changes","Cancel"], theForm.id );
+
+        return false;
 
     } else {
-        message = "Click 'OK' to transfer these config setting to the Preset Page.\nEnter a preset name and press save on the next page.";
+        message = "Click 'OK' to transfer these config setting to the Preset Page.<br>Enter a preset name and press save on the next page.";
 
-        return confirm(message);
-    }
+        showConfirm(message, '', false, ["Button one","Button Two"], theForm.id );
+
+        return false;
+
+            }
 
 }
 

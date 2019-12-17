@@ -1,6 +1,7 @@
 {
     "name": "My Second Example",
     "description": "Lorem ipsum dolor sit amet consectetur adipiscing elit montes donec auctor in id, lobortis inceptos placerat lacinia mollis.",
+    "type": "system",
     "commands": [
         {
             "command": "cd ${directory} && ls",
