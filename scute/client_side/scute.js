@@ -206,7 +206,7 @@ let triggerAction = function (e) {
 
 };
 
-let showConfirm = function (warning, targetURL, lockscreen=false, buttonSet) {
+let showConfirm = function (warning, targetURL, lockscreen=false, buttonSet=[]) {
 
     
     // Remove existing popup
