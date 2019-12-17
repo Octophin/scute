@@ -165,11 +165,16 @@ let triggerAction = function (e) {
     }
     
 
-    if (element.hasAttribute("data-warn") || element.hasAttribute("data-usermessage")) {
+    if (element.hasAttribute("data-popupWarning") || element.hasAttribute("data-usermessage")) {
 
         let devicesDisplay = selectedDevices.join(', ');
 
         let warning = "Run " + element.innerHTML + " for " + devicesDisplay + "?";
+
+        let popupButtons = [];
+        if(element.hasAttribute("data-popupButtons")){
+            popupButtons = element.getAttribute("data-popupButtons").split('|'); 
+        }
 
         if(element.hasAttribute("data-usermessage")){
             let message = element.getAttribute("data-usermessage");
@@ -189,7 +194,7 @@ let triggerAction = function (e) {
             lockscreen = true;
         }
 
-        showConfirm(warning, targetURL, lockscreen);
+        showConfirm(warning, targetURL, lockscreen, popupButtons);
 
         return false;
 
@@ -201,14 +206,19 @@ let triggerAction = function (e) {
 
 };
 
-let showConfirm = function (warning, targetURL, lockscreen=false) {
+let showConfirm = function (warning, targetURL, lockscreen=false, buttonSet) {
 
+    
     // Remove existing popup
-
     if (document.getElementById("popup")) {
 
         document.getElementById("popup").outerHTML = "";
 
+    }
+
+    // button text array.  Only first and second elements are used.
+    if( buttonSet === '' || buttonSet === null || buttonSet.length === 0){
+        buttonSet = ["OK!", "Cancel"];
     }
 
     let lockscreenJS = '';
@@ -221,11 +231,14 @@ let showConfirm = function (warning, targetURL, lockscreen=false) {
                     <div class="pop-up navy">
                         <p>${warning}</p>
                         <div class="pop-up-buttons">
-                            <button onclick="${lockscreenJS}okClickProcess('${targetURL}')">Yes</button>
-                            <button onclick="document.getElementById('popup').outerHTML = ''">No</button>
-                        </div>
-                    </div>
-                </section>`;
+                            <button onclick="${lockscreenJS}okClickProcess('${targetURL}')">${buttonSet[0]}</button>`;
+    if (buttonSet.length !== 1){
+        popup += `<button onclick="document.getElementById('popup').outerHTML = ''">${buttonSet[1]}</button>`;
+    }
+                           
+    popup += `</div>
+              </div>
+            </section>`;
 
     document.querySelector("main").insertAdjacentHTML("afterbegin", popup);
 

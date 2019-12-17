@@ -7,22 +7,24 @@
     },
     "erase_log": {
         "bulk": true,
-        "warn": true,
+        "popupWarning": true,
+        "popupButtons": "Proceed|Cancel",
         "label": "Erase Log",
-        "userMessage": "Erase Logs for selected device(s)?",
+        "userMessage": "Erase Logs for selected device(s)? <br>This can not be undone.",
         "toolTip": "Erases data logs for selected devices.",
         "lockScreen": true
     },
     "reset_device": {
         "bulk": false,
-        "warn": true,
+        "popupWarning": true,
         "label": "Reset Device",
-        "toolTip": "Performa a hardware reset for selected device.",
+        "toolTip": "Run a hardware reset for selected device.",
         "lockScreen": true
     },
     "another_task": {
         "bulk": true,
-        "warn": false,
+        "popupWarning": true,
+        "popupButtons": "I understand",
         "label": "Another Task"
     }
 }

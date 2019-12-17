@@ -127,9 +127,11 @@
 
                 {% if action.list %}
 
-                <select onchange="triggerAction(event)" {% if action.warn %} data-warn="true" {% endif %}
+                <select onchange="triggerAction(event)" {% if action.popupWarning %} data-popupWarning="true" {% endif %}
                     {% if action.bulk %} data-bulk="true" {% else %} data-bulk="false" {% endif %}
-                    class="{% if action.warn %} scary {% endif %}" data-action="{{key}}" 
+                    {% if action.popupButtons %} data-popupButtons="{{action.popupButtons}}" {% endif %}
+
+                    class="{% if action.popupWarning %} scary {% endif %}" data-action="{{key}}" 
                     {% if action.lockScreen %} data-lockscreen="true" {% else %} data-lockscreen="false" {% endif %} disabled>
 
                     <option value="">{{action.label}}</option>
@@ -144,10 +146,11 @@
 
                 {% else %}
 
-                <button onclick="triggerAction(event)" {% if action.warn %} data-warn="true" {% endif %}
+                <button onclick="triggerAction(event)" {% if action.popupWarning %} data-popupWarning="true" {% endif %}
                     {% if action.userMessage %} data-usermessage="{{action.userMessage}}" {% endif %}
                     {% if action.bulk %} data-bulk="true" {% else %} data-bulk="false" {% endif %}
-                    class="{% if action.warn %} scary {% endif %}" data-action="{{key}}" disabled
+                    {% if action.popupButtons %} data-popupButtons="{{action.popupButtons}}" {% endif %}
+                    class="{% if action.popupWarning %} scary {% endif %}" data-action="{{key}}" disabled
                     {% if action.toolTip %} title="{{action.toolTip}}" {% endif %}
                     {% if action.lockScreen %} data-lockscreen="true" {% else %} data-lockscreen="false" {% endif %}>{{action.label}}</button>
 

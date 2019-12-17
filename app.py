@@ -112,7 +112,7 @@ exampleInstance.registerHook("get_list__myExampleList", getExampleList)
 def export():
     devices = request.args.getlist("devices[]")
     userMessage = {
-        "message": "Export TBC: <strong>" + json.dumps(devices) + "</strong>"
+        "message": "Export Client Function: <strong>" + json.dumps(devices) + "</strong>"
     }
 
     return render_template("content/defaultPage.html",
@@ -126,7 +126,7 @@ def erase_log():
     devices = request.args.getlist("devices[]")
     userMessage = {
         "message":
-        "Erase Log TBC: <strong>" + json.dumps(devices) + "</strong>"
+        "Erase Log Client Function: <strong>" + json.dumps(devices) + "</strong>"
     }
 
     return render_template("content/defaultPage.html",
@@ -140,7 +140,7 @@ def reset_device():
     devices = request.args.getlist("devices[]")
     userMessage = {
         "message":
-        "Reset Device TBC: <strong>" + json.dumps(devices) + "</strong>"
+        "Reset Device Client Function: <strong>" + json.dumps(devices) + "</strong>"
     }
 
     return render_template("content/defaultPage.html",
@@ -154,7 +154,7 @@ def another_task():
     devices = request.args.getlist("devices[]")
     userMessage = {
         "message":
-        "Another Task TBC: <strong>" + json.dumps(devices) + "</strong>"
+        "Another Task Client Function: <strong>" + json.dumps(devices) + "</strong>"
     }
 
     return render_template("content/defaultPage.html",
