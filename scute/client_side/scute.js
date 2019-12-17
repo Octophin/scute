@@ -230,6 +230,12 @@ let showConfirm = function (warning, targetURL, lockscreen=false, buttonSet=[], 
     //is this a form confirm?
     let onclickProcess = `okClickProcess('${targetURL}'); `;
     if (isForm){
+
+
+        if(buttonClicked==="preset"){
+            // add 'preset' to the form
+        }
+
         onclickProcess = `document.getElementById('${isForm}').submit(); `;
     }
 
@@ -471,13 +477,12 @@ function confirmSubmitConfig(theForm) {
     } else {
         message = "Click 'OK' to transfer these config setting to the Preset Page.<br>Enter a preset name and press save on the next page.";
 
-        alert(confirm(message));
+        return confirm(message);
         
-        showConfirm(message, '', false, ["Save To Preset","Cancel"], theForm.id );
+        //showConfirm(message, '', false, ["Save To Preset","Cancel"], theForm.id );
 
-        return false;
-
-            }
+ 
+        }
 
 }
 
