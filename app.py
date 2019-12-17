@@ -29,23 +29,10 @@ def getDevices():
 
 exampleInstance.registerHook("get_devices", getDevices)
 
-
-def getIndexData():
-    {
-        "accessAllowed": True,
-        "usermessage": {
-            "type": "success",
-            "message": "OK"
-        }
-    }
-
-
-exampleInstance.registerHook("get_index_data", getIndexData)
-
-
+#data for all pages.  Header & footer info, user control etc..
 def getSystemInfo():
 
-    # user message in session? extract it for display and remove it from session.
+    # is there a user message in session? extract it for display and remove it from session.
     if 'userMessage' in session:
         userMessage = session['userMessage']
         session.pop('userMessage')

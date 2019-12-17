@@ -129,7 +129,7 @@ class scute:
     def indexView(self):
 
         indexData = {"header": "Welcome To SCUTE", "content": "<a href='/list'>Scan For Devices</a>"}
-        return render_template("content/index.html", title="Home", indexData = indexData, systemInfo = self.getSystemInfo())
+        return render_template("content/index.html", title="SCUTE", indexData = indexData, systemInfo = self.getSystemInfo())
 
 
     def deviceListView(self):
