@@ -6,3 +6,4 @@ presets
 app.pyc
 *.pyc
 scute/__init__.pyc
+.vscode/settings.json
