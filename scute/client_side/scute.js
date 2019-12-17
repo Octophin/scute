@@ -471,7 +471,9 @@ function confirmSubmitConfig(theForm) {
     } else {
         message = "Click 'OK' to transfer these config setting to the Preset Page.<br>Enter a preset name and press save on the next page.";
 
-        showConfirm(message, '', false, ["Button one","Button Two"], theForm.id );
+        alert(confirm(message));
+        
+        showConfirm(message, '', false, ["Save To Preset","Cancel"], theForm.id );
 
         return false;
 
