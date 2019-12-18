@@ -2,8 +2,9 @@
 {% block content %}
 <div class="main-wrapper happy-margin">
 
-    <section class="white-background  happy-margin table-nav">
-        <div class="happy-margin">
+    <section class="main-table-wrapper">
+        {% include "layout/contentTitle.html" %}
+
             <span class="happy-margin">
                 {% set presetToApply = preset.split('.') %}
 
@@ -12,8 +13,8 @@
                     {{device}}&nbsp;
                     {%endfor%}
                 </h1>
-                {% if headerData.pageTitle %}
-                <div class="introText happy-margin">{{headerData.pageTitle|safe}}</div>
+                {% if systemInfo.pageTitle %}
+                <div class="introText happy-margin">{{systemInfo.pageTitle|safe}}</div>
                 {% endif%}
             </span>
 
@@ -21,13 +22,12 @@
                 <div class="form-buttons">
                     <button onclick="lockScreenOverlay();" class="featured button" type="submit">Apply</button>
                 </div>
-                {% include "configForm.html" %}
+                {% include "forms/configForm.html" %}
                 <div class="form-buttons">
                     <button onclick="lockScreenOverlay();" class="featured button" type="submit">Apply</button>
                 </div>                
             </form>
-            <br />
-        </div>
+
     </section>
 </div>
 {% endblock %}

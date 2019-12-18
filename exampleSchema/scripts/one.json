@@ -1,6 +1,7 @@
 {
-    "name": "My script",
+    "name": "Example Script",
     "description": "This is an introduction to what the script does",
+    "type": "system",
     "commands": [
         {
             "command": "cd ${directory} && ls",

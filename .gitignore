@@ -3,7 +3,8 @@ __pycache__
 .DS_Store
 exampleConfig*
 presets
-app.pyc
-*.pyc
-scute/__init__.pyc
+
 .vscode/settings.json
+**/*.pyc
+
+.vscode/

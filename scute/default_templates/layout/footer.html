@@ -1,0 +1,14 @@
+<footer>
+
+    {% include "layout/client_footer.html" %}
+
+    <div class="happy-margin">
+        {% if systemInfo.currentDateTime %}{{systemInfo.currentDateTime | safe}}<br>{%endif%}
+        {% if systemInfo.scuteVersion %}SCUTE: <a href='https://github.com/Octophin/scute' target='_blank'
+            title='SCUTE on GitHub'>{{systemInfo.scuteVersion | safe}}</a><br>{%endif%}
+    </div>
+
+</footer>
+
+<script src="/scute/scute.js"></script>
+<script src="/scute/replaceOrRemove.js"></script>

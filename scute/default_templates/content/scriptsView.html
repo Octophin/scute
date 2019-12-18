@@ -3,11 +3,10 @@
 
 <div class="main-wrapper happy-margin">
     <section class="main-table-wrapper">
-        <div class="table-nav top-tail-margin top-tail-padding">
+        {% include "layout/contentTitle.html" %}
             <div class="happy-margin">
-                <h1 class="navy">Script Manager</h1>
-                {% if headerData.pageTitle %}
-                <div class="introText happy-margin">{{headerData.pageTitle|safe}}</div>
+                {% if systemInfo.pageTitle %}
+                <div class="introText happy-margin">{{systemInfo.pageTitle|safe}}</div>
                 {% endif%}
                 <div class='happy-margin'>
                     <div class="presets-manager-wrapper">
@@ -80,11 +79,11 @@
                                     <input name="scriptDescription" type="text" value="" /><br>
 
                                     <label for="scriptCommands">Commands</label><br />
-                                    <textarea name="scriptCommands" class="scriptBody happy-margin">[{"command": "date '+%Y-%m-%d %H:%M'", "description": "This is an example script format.  Running this script will get the Hub Time"}]</textarea>
+                                    <textarea name="scriptCommands" class="scriptBody happy-margin">[{"command": "date '+%Y-%m-%d %H:%M'", "description": "This is an example script format.  Running this script will get the local Time"}]</textarea>
                                 </div>
                                 <div class="form-buttons">
                                     <button onclick="return  checkScriptName();" class="featured button"
-                                        type="submit">Save</button>
+                                        type="submit">Save Script</button>
                                 </div>
                             </form>
 
@@ -112,11 +111,6 @@
                                         </div>
 
                                     </div>
-                                    <a class=' inlineLink noUnderline'
-                                        href="/download_file?type=script&file={{element.fileName}}"
-                                        title='Download and this script.'>Download Script</a>
-
-
 
                                 </div>
                                 {% endfor %}
@@ -124,9 +118,8 @@
 
                         </div>
                     </div>
-                </div>
-                <br />
-            </div>
+
+
     </section>
 </div>
 <script>

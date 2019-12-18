@@ -6,9 +6,7 @@
     <link rel="icon" type="image/png" href="/scute/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="/scute/style.css" />
-    <link rel="stylesheet" href="/static/horizonStyles.css" />
-    
+    {% include "includes.html" %}
     {% block head %}{% endblock %}
 </head>
 
@@ -16,19 +14,19 @@
     <div id='clickOverlay'>
     </div>
     <header>
-        {% include "header.html" %}
+        {% include "layout/header.html" %}
     </header>
 
     <main>
-    {% if headerData.userMessage %}
-        <div id='userMessage' onclick='showHideDiv("userMessage")' class='userMessage alert {{headerData.userMessage.type}}'>{{headerData.userMessage.message|safe}}</div>
+    {% if systemInfo.userMessage %}
+        <div id='userMessage' onclick='showHideDiv("userMessage")' class='userMessage alert {{systemInfo.userMessage.type}}'>{{systemInfo.userMessage.message|safe}}</div>
     {%endif%}
     
     {% block content %}{% endblock %}
 
     </main>
 
-    {% include "footer.html" %}
+    {% include "layout/footer.html" %}
 </body>
 
 </html>

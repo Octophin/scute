@@ -13,6 +13,8 @@ import mistune #markdown renderer
 
 here = os.path.dirname(os.path.abspath(__file__))
 
+scuteVersion =  '0.5.0' # for now this needs to match the version in setup.py
+
 class scute:
     hooks = {}
     def __init__(self, options, flaskServer):
@@ -32,6 +34,10 @@ class scute:
         self.server.add_url_rule('/scripts', 'scripts', self.scriptsView, False, methods=["GET", "POST"])
         self.server.add_url_rule('/scripts/<script>', 'script', self.script, False, methods=["GET", "POST"])
         self.server.add_url_rule('/help', 'help', self.helpView)
+ 
+    def getSCUTEVersion(self):
+        return scuteVersion
+
     def getConfigSchema(self):
         configSchema = {}
         with open(self.options["configSchema"]) as configSchema:  
@@ -49,9 +55,11 @@ class scute:
                     if "order" not in fields[field]:
                         fields[field]["order"] = 0
         return configSchema
+    
     def getReportSchema(self):
         with open(self.options["reportSchema"]) as reportSchema:  
             return json.load(reportSchema)
+    
     def getReportFields(self):
         # Extract from categories to get quick access to fields
         fields = {}
@@ -64,6 +72,7 @@ class scute:
                 if "order" not in fields[field]:
                     fields[field]["order"] = 0
         return fields
+    
     def getActions(self):
         with open(self.options["actionsSchema"]) as actionsSchema: 
             actions = json.load(actionsSchema)
@@ -71,6 +80,7 @@ class scute:
                 if "list" in value and not isinstance(value["list"], collections.Mapping):
                     actions[key]["list"] = self.hooks["get_list__" + value["list"]]()
             return actions
+    
     def getDeviceReport(self, deviceID):
         reportValues = {}
         # First try to get all fields, then overwrite with specific ones
@@ -104,12 +114,8 @@ class scute:
                 deviceReports[device] = self.getDeviceReport(device)
         return deviceReports
 
-    def getHeaderData(self):
-        return self.hooks["get_header_data"]()
-
-    def getIndexData(self):
-        return self.hooks["get_index_data"]()
-
+    def getSystemInfo(self):
+        return self.hooks["get_system_info"]()
 
     def getHelpInfo(self):
         helpInfo = {}
@@ -122,16 +128,13 @@ class scute:
 
     def indexView(self):
 
-        indexData = self.getIndexData()
-        if indexData['accessAllowed'] == True:
-                 
-            return render_template("index.html", title="Horizon", indexData = indexData, headerData = self.getHeaderData())
-        else:
-            return render_template("defaultPage.html", title="Horizon", userMassage = indexData['usermessage'], indexData = indexData, headerData = self.getHeaderData())
+        indexData = {"header": "Welcome To SCUTE", "content": "<a href='/list'>Scan For Devices</a>"}
+        return render_template("content/index.html", title="SCUTE", indexData = indexData, systemInfo = self.getSystemInfo())
 
 
     def deviceListView(self):
-        return render_template("list.html", title="Horizon", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), headerData = self.getHeaderData())
+        
+        return render_template("content/list.html", title="Devices", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), systemInfo = self.getSystemInfo())
     
     def getAllPresetValues(self):
         # scan the preset directory and return value label pairs
@@ -149,14 +152,17 @@ class scute:
 
     def deviceConfigView(self):
 
-
         device = request.args.getlist("devices[]")[0]
 
         # Save config
         if request.method == "POST":
+
+            clickAction = request.values['clickAction']
+
             try:
+
                 # Check if saving preset
-                if "preset" in request.form:
+                if clickAction == "preset" :
                     # Go to presets page
                     presetQuery = self.processFormTypes(request.form)
                     presetQueryJSON = json.dumps(presetQuery)
@@ -187,7 +193,7 @@ class scute:
             session['userMessage'] = {"type": 'error', "message": "Invalid config detected for '<strong>" + currentConfig['local.friendlyName']  + " ("+ str(device) + ")</strong>'.<br />Please enter config manually, apply a preset or apply the default config via the SCRIPTS."}
     
 
-        return render_template("config.html", title="Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, headerData = self.getHeaderData())
+        return render_template("content/config.html", title="Device Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, systemInfo = self.getSystemInfo())
 
     def applyPresetView(self):
         devices = request.args.getlist("devices[]")
@@ -227,10 +233,10 @@ class scute:
 
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON, headerData = self.getHeaderData())
+        return render_template("content/applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON, systemInfo = self.getSystemInfo())
 
     def helpView(self):
-        return render_template("helpPage.html", title="Horizon Help", helpInfo=self.getHelpInfo(), headerData = self.getHeaderData())
+        return render_template("content/helpPage.html", title="Help", helpInfo=self.getHelpInfo(), systemInfo = self.getSystemInfo())
     
 
 
@@ -316,7 +322,7 @@ class scute:
         
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("presets.html", title="Presets", presets=presetFiles, schema=presetSchema, current=prefill, headerData = self.getHeaderData())
+        return render_template("content/presetsView.html", title="Preset Manager", presets=presetFiles, schema=presetSchema, current=prefill, systemInfo = self.getSystemInfo())
 
 
 
@@ -327,7 +333,7 @@ class scute:
         if("scriptsDirectory" in self.options):
             scriptsDirectory = self.options["scriptsDirectory"]
         else:
-            scriptsDirectory = 'scripts/'
+            scriptsDirectory = 'content/scripts/'
 
 
         scriptSchema = {}
@@ -362,16 +368,16 @@ class scute:
                 output = stderr
                 error = True
 
-        return render_template("script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output, error = error, headerData = self.getHeaderData())
+        return render_template("content/script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output, error = error, systemInfo = self.getSystemInfo())
 
     def scriptsView(self):
 
         scriptsDirectory = ""
 
         if("scriptsDirectory" in self.options):
-            scriptsDirectory = self.options["scriptsDirectory"]
+            scriptsDirectory = self.options["scriptsDirectory"] + '/'
         else:
-            scriptsDirectory = 'scripts/'
+            scriptsDirectory = 'content/scripts/'
 
 
         # Check if deleting and delete scripe if yes
@@ -431,7 +437,7 @@ class scute:
                 fileJSON["fileName"] = file
                 scripts.append(fileJSON)
 
-        return render_template("scriptsView.html", title="Scripts", scripts=scripts, headerData = self.getHeaderData())
+        return render_template("content/scriptsView.html", title="Scripts", scripts=scripts, systemInfo = self.getSystemInfo())
 
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON

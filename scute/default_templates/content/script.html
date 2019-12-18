@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="main-wrapper">
+<div class="main-wrapper happy-margin">
 
-    <section class="white-background happy-margin table-nav scriptRun">
+    <section class="main-table-wrapper scriptRun">
+        {% include "layout/contentTitle.html" %}
         <div class="happy-margin">
-            <h1>{{script.name}}</h1>
 
             {% if output %}
             <br><span class="commandList">Result from: [ {{ script.commands[nextCommand - 2].command }} ]<br></span>
             <pre>{{output}}</pre>
             <hr>
             {% endif %}
-        </div>
+        
         {% if nextCommand == 0 %}
 
         <p class="happy-margin">{{script.description}}</p>
@@ -20,13 +20,13 @@
         <a class="happy-margin start button" href="/scripts/{{fileName}}?command={{nextCommand}}">Start</a>
 
         {% elif nextCommand > script.commands|length %}
-        <div class="happy-margin">
-            <span class="alert success happy-margin">The script is complete.</span>&nbsp;
-        </div>
+
+        <span class="alert success happy-margin">The script is complete.</span>&nbsp;
+
 
         {% else %}
 
-        <div class="happy-margin">{{script.commands[nextCommand - 1].description}}</div>
+        {{script.commands[nextCommand - 1].description}}
 
         {# Form for parameters #}
         <div class="happy-margin">
@@ -51,6 +51,7 @@
         </div>
 
         {% endif %}
+        </div>
     </section>
 </div>
 {% endblock %}
