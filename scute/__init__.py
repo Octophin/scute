@@ -156,9 +156,13 @@ class scute:
 
         # Save config
         if request.method == "POST":
+
+            clickAction = request.values['clickAction']
+
             try:
+
                 # Check if saving preset
-                if "preset" in request.form:
+                if clickAction == "preset" :
                     # Go to presets page
                     presetQuery = self.processFormTypes(request.form)
                     presetQueryJSON = json.dumps(presetQuery)

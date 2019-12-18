@@ -122,49 +122,50 @@ function lockScreenOverlay() {
     document.getElementById("clickOverlay").style.display = "block";
 }
 
-function getFieldName(field){
-    
-    fieldName = field.id.split(".");
-    return " - " + fieldName[1] + " (" + fieldName[0] + ") \n";
+function getFieldName(field) {
+
+    let fieldName = field.id.split(".");
+    return " - " + fieldName[1] + " (" + fieldName[0] + ") <br />";
 }
 
-var buttonClicked; // used to flag which of 2 form button types has been clicked - CONFIG page.
 
 function confirmSubmitConfig(theForm) {
 
-    if (buttonClicked === "save"){
-       
-        changedFields = document.querySelectorAll("[data-changed]");
+    let message = '';
 
-        if (changedFields.length == 0){
+    if (theForm.clickAction.value === "save") {
 
-            message = 'No fields have been changed. \n\n';
+        let changedFields = document.querySelectorAll("[data-changed]");
+
+        if (changedFields.length == 0) {
+
+            message = 'No fields have been changed. <br /><br />';
 
         } else {
-            
-            message = changedFields.length + ' fields have changed. \n';
 
-            fieldList =  Object.values(changedFields).map(getFieldName); // returns array 
+            message = '<strong>' + changedFields.length + ' field(s) changed. </strong><br />';
 
-            message += fieldList.join('') +  '\n\n'; // avoid the auto joining ','
+            let fieldList = Object.values(changedFields).map(getFieldName); // returns array 
+
+            message += fieldList.join('') + '<br /><br />'; // avoid the auto joining ','
 
         }
 
         message += 'Save This Config to Device "' + deviceIDString.innerText + '"?';
 
-        showConfirm(message, '', false, ["Apply Changes","Cancel"], theForm.id );
+        showConfirm(message, '', false, ["Apply Changes", "Cancel"], theForm.id);
 
         return false;
 
     } else {
-        message = "Click 'OK' to transfer these config setting to the Preset Page.<br>Enter a preset name and press save on the next page.";
+        message = "Click 'Continue' to transfer these settings to the Preset Page.<br>Enter a preset name and press save on the next page.";
 
-        return confirm(message);
-        
-        //showConfirm(message, '', false, ["Save To Preset","Cancel"], theForm.id );
+        showConfirm(message, '', false, ["Continue", "Cancel"], theForm.id);
 
- 
-        }
+        return false;
+
+
+    }
 
 }
 
@@ -186,18 +187,18 @@ function showHideDiv(targetID) {
 // This is fine, could maybe improve to check if the previous change is different
 // I have done this before by adding a data-attribute for the original value in the template (Jinja)
 
-if(document.getElementById("warningFieldsChanged")){
+if (document.getElementById("warningFieldsChanged")) {
 
     checkForChanges();
 
 }
 
-function checkForChanges(){
-    changedFields = document.querySelectorAll("[data-changed]");
+function checkForChanges() {
+    let changedFields = document.querySelectorAll("[data-changed]");
     let x = document.getElementById('warningFieldsChanged');
-    if (changedFields.length != 0){
+    if (changedFields.length != 0) {
         x.style.display = "block";
-        
+
     } else {
         x.style.display = "none";
 

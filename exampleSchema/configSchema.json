@@ -97,8 +97,9 @@
 				"description": "One of { 'SWITCH_TRIGGERED', 'SCHEDULED', 'HYBRID' }",
 				"type": "select",
 				"list": {
-					"PERIODIC": "Periodic",
-					"SCHEDULED": "Scheduled"
+					"SWITCH_TRIGGERED": "Switch Triggered",
+					"SCHEDULED": "Scheduled",
+					"HYBRID": "Hybrid"
 				},
 				"order": 8,
 				"default": "SCHEDULED",
@@ -124,22 +125,13 @@
 				"advanced": false,
 				"jsonType": "boolean"
 			},
-			"logging.fileSize": {
-				"label": "Log Filesize",
-				"type": "number",
-				"description": "Read-only count of the log size",
-				"excludeFromPresets": true,
-				"order": 3,
-				"userLocked": true,
-				"advanced": false,
-				"jsonType": "int"
-			},
 			"logging.fileType": {
 				"label": "Log File Type",
 				"type": "select",
-				"description": "Read-only type of log file (LINEAR or CIRCULAR)",
+				"description": "Log file (LINEAR or CIRCULAR)",
 				"list": {
-					"LINEAR": "Linear"
+					"LINEAR": "Linear",
+					"CIRCULAR": "Circular"
 				},
 				"excludeFromPresets": true,
 				"order": 4,

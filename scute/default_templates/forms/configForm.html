@@ -1,4 +1,4 @@
-
+<input type="hidden" name="clickAction" id="clickAction" value=""/>
 {% for key,category in schema.items() | sort(attribute='1.order')%}
 
     {% for fieldKey,fieldSchema in category.fields.items() | sort(attribute='1.order') %}

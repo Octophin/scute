@@ -1,5 +1,6 @@
 /////////////////////////////
-// future SCUTE development will re-work these functions.
+// future SCUTE development 
+// will re-work these functions.
 /////////////////////////////
 
 
@@ -23,7 +24,6 @@ let triggerAction = function (e) {
 
     let value;
 
-    // if (element.tagName.toLowerCase() === "select") {  // no longer a select..
     if (element.classList.contains('actionButton')){
 
         value = element.value;
@@ -126,11 +126,6 @@ let showConfirm = function (warning, targetURL, lockscreen=false, buttonSet=[], 
     //is this a form confirm?
     let onclickProcess = `okClickProcess('${targetURL}'); `;
     if (isForm){
-
-
-        if(buttonClicked==="preset"){
-            // add 'preset' to the form
-        }
 
         onclickProcess = `document.getElementById('${isForm}').submit(); `;
     }
@@ -336,7 +331,7 @@ function checkPresetName(){
 
     // which preset div is selected?
 
-    presetName = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[0].value.trim();
+    let presetName = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[0].value.trim();
 
     if (presetName === ''){
                 showAlert("Preset Name can not be blank");
@@ -378,16 +373,16 @@ function checkScriptName(){
 
     // which preset div is selected?
 
-    scriptName = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[0].value.trim();
-    scriptDescription = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[1].value.trim();
-    scriptCommands = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("textarea")[0].value.trim();
+    let scriptName = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[0].value.trim();
+    let scriptDescription = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[1].value.trim();
+    let scriptCommands = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("textarea")[0].value.trim();
 
     if (scriptName === '' || scriptDescription=== '' || scriptCommands===''){
         showAlert("All 3 fields must be completed.");
         return false;
     }
 
-    scriptFileName = scriptName.toLowerCase().replace(/\ /g, "_") + ".json";
+    let scriptFileName = scriptName.toLowerCase().replace(/\ /g, "_") + ".json";
 
     let existing = document.getElementsByClassName("preset-list-item"); // data-preset-menu
 
@@ -418,23 +413,8 @@ function checkScriptName(){
 }
 
 
-
-// All date time formatting should happen on the server side. 
-// Note for future reference there is a wonderful date time library for JavaScript (overkill here!) called Moment.js
-function formatDateTime(date) {
-    var d = new Date(date),
-        month = (d.getMonth() + 1).toString(),
-        day = d.getDate().toString(),
-        year = d.getFullYear().toString(),
-        hour = d.getHours().toString(),
-        minute = d.getMinutes().toString();
-
-    return year + '-' + month.padStart(2, '0') + '-' + day.padStart(2, '0') + ' ' + hour.padStart(2, '0') + ':' + minute.padStart(2, '0');
-}
-
-
 // Burger Menu
-// Investigate how to make this CSS only!
+// Make this CSS only!
 
 function toggleBurger() {
     document.body.toggleAttribute("data-open");

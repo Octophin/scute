@@ -1,9 +1,7 @@
-#This is the Help Information from helpfiles/helpInformation.md
+##This is the Help Information from helpfiles/helpInformation.md
 
 
-
-
-## Introduction
+### Introduction
 
 This is the Vanilla install of SCUTE, running with dummy data.  Please follow the instructions on GitHib on hoe to setup for your installation.
 
