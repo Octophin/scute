@@ -114,7 +114,7 @@ let showConfirm = function (warning, targetURL, lockscreen=false, buttonSet=[], 
 
     // button text array.  Only first and second elements are used.
     if( buttonSet === '' || buttonSet === null || buttonSet.length === 0){
-        buttonSet = ["OK!", "Cancel"];
+        buttonSet = ["Continue", "Cancel"];
     }
 
     // lock the screen?
