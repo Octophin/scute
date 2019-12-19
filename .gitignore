@@ -6,5 +6,6 @@ presets
 
 .vscode/settings.json
 **/*.pyc
+*.pyc
 
 .vscode/
