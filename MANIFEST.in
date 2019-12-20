@@ -1,4 +1,4 @@
 include scute/client_side/*
 include scute/client_side/images/*
 include scute/client_side/fonts/*
-recursive-include scute/default_templates/*
+recursive-include scute/default_templates
