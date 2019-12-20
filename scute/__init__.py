@@ -302,8 +302,11 @@ class scute:
                 try:
                     prefill = json.loads(request.form["paste"])
                 except:
-                    session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Preset. </strong><br />Please check and try again.  Note: this only accepts json data created through this preset manager (flattened JSON)." }
+                    session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Preset.</strong><br />Please check and try again.  Note: this only accepts json data created through this preset manager (flattened JSON)." }
                     return redirect("/presets") # reloads this page.
+                
+                session['userMessage'] = {"type": 'info', "message": "<strong>Preset Valdated.</strong><br />Please check the name and description, make any changes required and press save." }
+
 
             else:
                 saved = self.processFormTypes(request.form)
