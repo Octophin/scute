@@ -334,7 +334,7 @@ function checkPresetName(){
     let presetName = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("input")[0].value.trim();
 
     if (presetName === ''){
-                showAlert("Preset Name can not be blank");
+        showAlert("Preset Name can not be blank");
         return false;
     }
 
@@ -347,15 +347,10 @@ function checkPresetName(){
 
     if(existingNames.includes(presetName)){
 
-        if (confirm("Preset Name exists - overwrite it?")){
+        showConfirm("Preset Name exists - overwrite it?", '', false, [], 'presetForm');
 
-            return true;
-            
-        } else {
+        return false;
 
-            return false;
-            
-        }
 
     } else {
     

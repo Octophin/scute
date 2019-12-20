@@ -278,6 +278,9 @@ class scute:
         else:
             presetDirectory = 'presets/'
 
+        if presetDirectory[len(presetDirectory)-1] != "/":
+            presetDirectory = presetDirectory + "/"
+
         if not os.path.exists(presetDirectory):
             os.makedirs(presetDirectory)
 
@@ -310,10 +313,11 @@ class scute:
 
             else:
                 saved = self.processFormTypes(request.form)
+                print(saved)
                 safeName = re.sub('[^a-zA-Z-_0-9]+', ' ', saved["presetName"])
                 safeName = safeName.strip()
                 safeName = safeName.replace(" ", "_")
-
+                print("WWWWWWWWWWWWWWWWWWWW", presetDirectory, safeName)
                 saved["presetID"] = safeName
                 with open(presetDirectory + safeName + ".json" , 'w') as presetFile:
                     json.dump(saved, presetFile)
@@ -321,7 +325,7 @@ class scute:
 
         presetFilesNames = os.listdir(presetDirectory)
         presetFilesNames = sorted(presetFilesNames, reverse=False)
-
+        print(presetFilesNames)
         presetFiles = []
         for file in presetFilesNames:
             with open(presetDirectory + file, "r") as f1:

@@ -57,11 +57,7 @@
 
                             <div data-preset="welcome">
 
-                                <h2>Select a script to run, or <a href='#' onclick="loadScript('new')">add a new
-                                        one.</a>
-                                </h2>
-
-
+                                <h2>Select a script to run, or <a href='#' onclick="loadScript('new')">add a new one.</a></h2>
 
                             </div>
 
@@ -82,8 +78,7 @@
                                     <textarea name="scriptCommands" class="scriptBody happy-margin">[{"command": "date '+%Y-%m-%d %H:%M'", "description": "This is an example script format.  Running this script will get the local Time"}]</textarea>
                                 </div>
                                 <div class="form-buttons">
-                                    <button onclick="return  checkScriptName();" class="featured button"
-                                        type="submit">Save Script</button>
+                                    <button onclick="return  checkScriptName();" class="featured button" type="submit">Save Script</button>
                                 </div>
                             </form>
 
@@ -112,6 +107,7 @@
 
                                     </div>
 
+                                    <button type="button" class="onRight tertiary noUnderline"><a class="noUnderline" href="/download_file?type=script&file={{element.fileName}}" title=" Download this script">Download</a></button>
                                 </div>
                                 {% endfor %}
                             

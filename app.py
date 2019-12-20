@@ -1,7 +1,7 @@
 # Demonstration file
 
 from scute import scute
-from flask import Flask, request, jsonify, g, render_template, session
+from flask import Flask, request, jsonify, g, render_template, session, send_file, send_from_directory, redirect
 from datetime import datetime, date
 import json
 import os
@@ -14,6 +14,7 @@ options = {
     "actionsSchema": "exampleSchema/actionsSchema.json",
     "configSchema": "exampleSchema/configSchema.json",
     "scriptsDirectory": "exampleSchema/scripts",
+    "presetsDirectory": "presets",
     "helpInfo": "helpfiles/index.md"
 }
 
@@ -147,6 +148,35 @@ def reset_device():
                            title="Reset Device",
                            systemInfo=getSystemInfo(),
                            userMessage=userMessage)
+
+@app.route('/download_file')
+def downloadFile ():  
+    # this can be extended for other file types.
+    # don't allow full file specificaiton
+    
+    allowedTypes = ['preset', 'script']
+
+    fileName = request.args.getlist("file")[0]
+    fileType = request.args.getlist("type")[0]
+
+
+
+    if fileType in allowedTypes:
+        print(exampleInstance.options)
+        if fileType == 'preset':
+            fileLocation = exampleInstance.options['presetsDirectory']  + '/' + fileName + '.json'
+            downloadFileName = 'preset_'+fileName+'.json'
+        if fileType == 'script':
+            fileLocation = exampleInstance.options['scriptsDirectory']  + '/' + fileName
+            downloadFileName = 'script_'+fileName
+
+        return send_from_directory('', fileLocation , as_attachment=True, attachment_filename=downloadFileName )
+    
+    # still here?  error.
+    session['userMessage'] = {"type": 'error', "message": "Invalid file download request." }
+    
+    return redirect('list')
+    
 
 
 @app.route('/another_task')

@@ -514,7 +514,7 @@ button.secondary {
     border: solid 0.1em #d3ecf1;
 }
 
-a.button.tertiary {
+button.tertiary, a.button.tertiary {
     color: white;
     background-color: #6196b7;
     border: solid 0.1em #6196b7;
@@ -662,7 +662,7 @@ section.presetManager>h1 {
 }
 
 [data-preset] h1 {
-    border-bottom: solid 2px;
+    text-decoration: underline;
     padding: 0.1em;
     margin-left: 0.5em;
 }
@@ -1397,11 +1397,6 @@ pre[data-error] {
      text-align: center;
      display: block;
  
-     -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
-        -moz-animation: fadein 1s; /* Firefox < 16 */
-         -ms-animation: fadein 1s; /* Internet Explorer */
-          -o-animation: fadein 1s; /* Opera < 12.1 */
-             animation: fadein 1s;
  }
  
  @keyframes fadein {

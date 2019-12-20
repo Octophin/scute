@@ -83,6 +83,8 @@
                 {# Existing preset forms #}
                 {% for preset in presets %}
                 <div data-preset="{{preset.presetID}}" style="display:none">
+                    <button type="button" class="onRight tertiary noUnderline"><a class="noUnderline" href="/download_file?type=preset&file={{preset.presetID}}" title=" Download this preset">Download</a></button>
+
                     <h1>{{preset.presetID}}</h1>
                     {% with current = preset %}
                     {% include "forms/presetForm.html" %}
