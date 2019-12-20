@@ -36,6 +36,7 @@ class scute:
         self.server.add_url_rule('/help', 'help', self.helpView)
  
     def getSCUTEVersion(self):
+        print("hello")
         return scuteVersion
 
     def getConfigSchema(self):
