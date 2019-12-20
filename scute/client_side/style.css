@@ -532,6 +532,7 @@ button.tertiary:hover,
 a.button.tertiary:hover {
     background-color: white;
     color: #6196b7;
+    border: solid 0.1em #6196b7;
 
 }
 
