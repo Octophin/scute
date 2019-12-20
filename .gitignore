@@ -5,7 +5,7 @@ exampleConfig*
 presets
 
 .vscode/settings.json
-**/*.pyc
+scute/*.pyc
 *.pyc
 
 .vscode/

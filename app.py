@@ -159,10 +159,8 @@ def downloadFile ():
     fileName = request.args.getlist("file")[0]
     fileType = request.args.getlist("type")[0]
 
-
-
     if fileType in allowedTypes:
-        print(exampleInstance.options)
+
         if fileType == 'preset':
             fileLocation = exampleInstance.options['presetsDirectory']  + '/' + fileName + '.json'
             downloadFileName = 'preset_'+fileName+'.json'

@@ -316,7 +316,7 @@ let deleteScript = function () {
         
         if (target) {
     
-            showConfirm("Are you sure you want to delete " + target + " ?", "/scripts?delete=" + target);
+            showConfirm("Are you sure you want to delete<br /><strong>" + target + " ?</strong>", "/scripts?delete=" + target);
     
         }
     }
@@ -343,11 +343,11 @@ function checkPresetName(){
 
     let existingNames = Object.values(existing).map(x => x.innerText);
 
-
-
     if(existingNames.includes(presetName)){
 
-        showConfirm("Preset Name exists - overwrite it?", '', false, [], 'presetForm');
+        let selectedForm = document.querySelectorAll("[data-selectedForm]")[0].getElementsByTagName("form")[0].id;
+
+        showConfirm("Preset Name exists - Update it?", '', false, [], selectedForm);
 
         return false;
 
@@ -389,10 +389,8 @@ function checkScriptName(){
 
         if (confirm("Script Name exists - overwrite it?")){
 
-            
             return true;
- 
-            
+             
         } else {
 
             return false;

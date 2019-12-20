@@ -252,7 +252,7 @@ class scute:
                                
                 if (excludeAttribute in fullSchema[thisCategory]["fields"][fieldName] 
                     and fullSchema[thisCategory]["fields"][fieldName][excludeAttribute] == True):
-                    print("filtering out " + fieldName)
+                    print("Filtering out " + fieldName)
 
                 else:
                     #only add fields that no not match.
@@ -313,11 +313,9 @@ class scute:
 
             else:
                 saved = self.processFormTypes(request.form)
-                print(saved)
                 safeName = re.sub('[^a-zA-Z-_0-9]+', ' ', saved["presetName"])
                 safeName = safeName.strip()
                 safeName = safeName.replace(" ", "_")
-                print("WWWWWWWWWWWWWWWWWWWW", presetDirectory, safeName)
                 saved["presetID"] = safeName
                 with open(presetDirectory + safeName + ".json" , 'w') as presetFile:
                     json.dump(saved, presetFile)
@@ -325,7 +323,7 @@ class scute:
 
         presetFilesNames = os.listdir(presetDirectory)
         presetFilesNames = sorted(presetFilesNames, reverse=False)
-        print(presetFilesNames)
+
         presetFiles = []
         for file in presetFilesNames:
             with open(presetDirectory + file, "r") as f1:
@@ -418,8 +416,8 @@ class scute:
             # validate the input command array
             if  not iter(commands):
                 session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands.</strong> You must enter a valid json array.  Please check and try again." }
-            elif len(commands) == 0 or "command" not in commands:
-                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands.</strong> Invalid Commands detected. Please check and try again." }
+            elif len(commands) == 0 or "command" not in commands[0]:
+                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands.</strong> Invalid command array. Please check and try again." }
 
             else:
 
