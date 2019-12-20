@@ -399,14 +399,14 @@ class scute:
             try:
                 commands = json.loads(request.form['scriptCommands'])
             except:
-                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong>You must enter a valid json array. Please check and try again." }
+                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands.</strong>Please check and try again." }
                 return redirect("/scripts") # reloads this page.
 
-            # validate the input commands...
+            # validate the input command array
             if  not iter(commands):
-                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> You must supply an array.  Please check and try again." }
-            elif len(commands) == 0 or "command" not in commands[0]:
-                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands Entered.</strong> No Commands found. Please check and try again." }
+                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands.</strong> You must enter a valid json array.  Please check and try again." }
+            elif len(commands) == 0 or "command" not in commands:
+                session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Commands.</strong> Invalid Commands detected. Please check and try again." }
 
             else:
 
@@ -415,7 +415,7 @@ class scute:
                 newScript['name'] = request.form["scriptName"]
                 newScript['description'] = request.form['scriptDescription']
                 newScript['commands'] = commands
-                newScript['type'] = "user"
+                newScript['type'] = "user" #'system' scripts can not be deleted, 'user' can.
 
                 with open(scriptsDirectory + filename + ".json" , 'w') as outputFile:
                     json.dump(newScript, outputFile)

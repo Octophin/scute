@@ -116,13 +116,13 @@ body {
 
 .icon {
     cursor: pointer;
-    height: 2em;
-    width: 2em;
+    height: 2.5em;
+    width: 2.5em;
     display: inline-block;
 }
 
 .icon img {
-    vertical-align: middle;
+    vertical-align: text-bottom;
 }
 
 label .icon:hover {
@@ -680,7 +680,7 @@ section.presetManager>h1 {
 }
 
 .edit-presets-icons img {
-    width: 2em;
+    width: 2.5em;
 }
 
 .presets-list ul {
