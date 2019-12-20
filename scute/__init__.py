@@ -298,7 +298,13 @@ class scute:
 
         if request.method == "POST":
             if "paste" in request.form:
-                prefill = json.loads(request.form["paste"])
+
+                try:
+                    prefill = json.loads(request.form["paste"])
+                except:
+                    session['userMessage'] = {"type": 'error', "message": "<strong>Invalid Preset. </strong><br />Please check and try again.  Note: this only accepts json data created through this preset manager (flattened JSON)." }
+                    return redirect("/presets") # reloads this page.
+
             else:
                 saved = self.processFormTypes(request.form)
                 safeName = re.sub('[^a-zA-Z-_0-9]+', ' ', saved["presetName"])
