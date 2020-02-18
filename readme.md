@@ -262,3 +262,20 @@ Scripts allow you to run pre-defined command line scripts with input of paramete
     * Command (string) -  the actual command. Use `${parametername}` to swap out parameters supplied by the user through the interface.
     * Description (string) - A description of the command, shown before it is run
     * Parameters (object) - A list of parameters the user will be able to input, they will be swapped out in the command, the value is the label shown to the user, the key is the actual parameter in the command, `${directory}` for example.
+
+## Template hooks
+
+You may wish to add additional template variables to your templates. There is a `register_template_vars` hook for this purpose. It receives one parameter, the name of the template being rendered, and should return a dictionary. The dictionary returned will be placed in a `vars` object to use in your template.
+
+For example:
+
+```Python
+
+def loadCustomVars(template):
+    return {
+        "currentTemplate": template,
+        "time" : datetime.now().strftime("%H:%M:%S")
+    }
+
+
+```

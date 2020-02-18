@@ -28,6 +28,14 @@ def getDevices():
     ]
 
 
+def loadCustomVars(template):
+    return {
+        "template": template,
+        "time" : datetime.now().strftime("%H:%M:%S")
+    }
+
+exampleInstance.registerHook("register_template_vars", loadCustomVars)
+
 exampleInstance.registerHook("get_devices", getDevices)
 
 #data for all pages.  Header & footer info, user control etc..
