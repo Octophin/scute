@@ -20,17 +20,15 @@ options = {
 
 exampleInstance = scute(options, app)
 
-
+@exampleInstance.hook("get_devices")
 def getDevices():
 
     return [
         "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE"
     ]
 
-
-exampleInstance.registerHook("get_devices", getDevices)
-
 #data for all pages.  Header & footer info, user control etc..
+@exampleInstance.hook("get_system_info")
 def getSystemInfo():
 
     # is there a user message in session? extract it for display and remove it from session.
@@ -50,9 +48,7 @@ def getSystemInfo():
     }
 
 
-exampleInstance.registerHook("get_system_info", getSystemInfo)
-
-
+@exampleInstance.hook("get_report_fields")
 def getFields(deviceID):
     return {
         "id": "11:11:00:00:00:00",
@@ -64,16 +60,12 @@ def getFields(deviceID):
     }
 
 
-exampleInstance.registerHook("get_report_fields", getFields)
-
-
+@exampleInstance.hook("get_report_field__friendlyName")
 def getFriendlyName(deviceID):
     return deviceID[0] + deviceID[1]
 
 
-exampleInstance.registerHook("get_report_field__friendlyName", getFriendlyName)
-
-
+@exampleInstance.hook("save_config")
 def saveConfig(deviceID, config):
 
     session['userMessage'] = {
@@ -86,17 +78,13 @@ def saveConfig(deviceID, config):
         json.dump(exampleInstance.expandJSON(config), configFile)
 
 
-exampleInstance.registerHook("save_config", saveConfig)
-
-
+@exampleInstance.hook("read_config")
 def readConfig(deviceID):
     with open("exampleConfig_" + deviceID + '_config.json', 'r') as configFile:
         return exampleInstance.flattenJSON(json.load(configFile))
 
 
-exampleInstance.registerHook("read_config", readConfig)
-
-
+@exampleInstance.hook("get_list__myExampleList")
 def getExampleList():
     return {
         "Example 1": "Example_1",
@@ -104,8 +92,6 @@ def getExampleList():
         "Example 3": "Example_3"
     }
 
-
-exampleInstance.registerHook("get_list__myExampleList", getExampleList)
 
 # Additional Routes
 

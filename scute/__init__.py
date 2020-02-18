@@ -100,6 +100,11 @@ class scute:
     
     def registerHook(self, hookName, hookFunction):
         self.hooks[hookName] = hookFunction
+
+    def hook(self, hookName):
+        def registerHookInternal(hookFunction):
+            return self.registerHook(hookName, hookFunction)
+        return registerHookInternal
     
     def getDevices(self):
         return self.hooks["get_devices"]()
