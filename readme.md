@@ -1,17 +1,27 @@
 # Schema Compiled Utility Template Engine
 
-SCUTE will build an extendable graphical administration interface for hardware devices from JSON schema files, allowing people to view reports about connected devices, update and manage configuration (with preset saving and loading) and perform command line actions such as viewing and exporting data from the device (on one device or several at once) through a step-through graphical interface.
+SCUTE will build an extendable graphical administration interface for hardware devices from JSON schema files, allowing people to view reports about connected devices, update and manage configuration (with preset saving and loading) and perform command line actions such as viewing and exporting data (on one device or several at once) through a step-through graphical interface.
 
-It has been built by Octophin Digital for the Arribada Horizon biologging tags.
+It is built to support integration with any hardware through a hook-based Python api.
+
+Its templating and functionality is made to be as flexible as possible, taking inspiration from the theming, plugins and actions of content management systems like WordPress and Drupal.
+
+An example set up:
+
+* A computer such as a Raspberry Pi runs the SCUTE software with custom hooks programmed in to call various hardware functions on attached devices (via usb or bluetooth for example)
+* A user connects to this computer via a web browser and uses the scute administration interface on their own laptop, tablet or phone.
+
+*Scute was built by Octophin Digital for the Arribada Horizon biologging tags.*
 
 [How it works](#quick-start)
 
-![screenshot](https://raw.githubusercontent.com/Octophin/scute/master/scute-home.PNG)
+![screenshot](scute-home.PNG)
 
 # Quick start
 
+* Install `python` and `pip`
 * copy the `app.py` example file and the `exampleSchema` directory from this repository to a new directory
-* `pip install git+https://github.com/octophin/scute`
+* run `pip install git+https://github.com/octophin/scute`
 * make changes to `app.py` and the JSON schema files to make it relevant to your device
 * optionally, make copies of the templates under `scute/default_templates` and place them in your Flask templates folder (usually `/templates`). Files in this directory will override the default ones.
 * Run the app using `python -m flask run`
@@ -31,7 +41,6 @@ options = {
         "reportSchema": "reportSchema.json",
         "actionsSchema": "actionsSchema.json",
         "configSchema": "configSchema.json",
-        "dataViews": "dataViews.json",
         "presetsDirectory": "/presets",
         "scriptsDirectory": "/scripts"
     }
