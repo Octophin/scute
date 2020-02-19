@@ -51,14 +51,14 @@ myScuteInstance = scute(options, app)
 
 # Hooks
 
-SCUTE makes use of various hooks that can be registered using the `registerHook` method on the class. This takes a hook name (string) and a function for that hook. For example:
+SCUTE makes use of various hooks that can be registered using a special decorator. This takes a hook name (string). For example:
 
 ```Python
 
+@myScuteInstance.hook("get_devices")
 def getDevices():
     return ["deviceOne", "deviceTwo"]
 
-myScuteInstance.registerHook("get_devices", getDevices)
 
 ```
 
@@ -215,11 +215,10 @@ To load in saved configuration into the already set form values, use the `read_c
 
 ```Python
 
+@myScuteInstance.hook("read_config")
 def readConfig(deviceID):
     with open(deviceID + '_config.json', 'r') as configFile:
         return json.load(configFile)
-
-myScuteInstance.registerHook("read_config", readConfig)
 
 ```
 
@@ -229,11 +228,11 @@ When the configuration form is saved a `save_config` hook is run. For example:
 
 ```Python
 
+@myScuteInstance.hook("save_config")
 def saveConfig(deviceID, config):
     with open(deviceID + '_config.json', 'w') as configFile:  
         json.dump(config, configFile)
 
-myScuteInstance.registerHook("save_config", saveConfig)
 
 ```
 
