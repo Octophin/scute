@@ -16,9 +16,9 @@ here = os.path.dirname(os.path.abspath(__file__))
 import pkg_resources 
 
 try:
-    version = pkg_resources.require("scute")[0].version
+    scuteVersion = pkg_resources.require("scute")[0].version
 except:
-    version =  "-.-.-"
+    scuteVersion =  "x.x.x"
 
 class scute:
     hooks = {}
