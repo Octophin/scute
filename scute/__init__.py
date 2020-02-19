@@ -21,7 +21,7 @@ class scute:
 
         @flaskServer.context_processor
         def default_vars():
-            return {"systemInfo":self.getSystemInfo(), "options":self.options, "vars":self.tryHook("register_template_vars", request)}
+            return {"systemInfo":self.getSystemInfo(), "scute_options":self.options, "hook_vars":self.tryHook("register_template_vars", request)}
 
         self.options = options
         self.server = flaskServer

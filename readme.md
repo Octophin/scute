@@ -279,3 +279,11 @@ def loadCustomVars(request):
 
 
 ```
+
+# Templating
+
+Every template in the scute default_templates folder can be overriden with your own template placed in a `templates` folder. Each template has the following special scute global variables available:
+
+* systemInfo - anything coming from a `get_system_info` hook
+* scute_options - the options object you initially passed into your app
+* hook_vars - the result of the `register_template_vars` hook for the current request. See [template hooks](#template-hooks).
