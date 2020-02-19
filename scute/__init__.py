@@ -13,7 +13,12 @@ import mistune #markdown renderer
 
 here = os.path.dirname(os.path.abspath(__file__))
 
-scuteVersion =  '0.5.2' # for now this needs to match the version in setup.py
+import pkg_resources 
+
+try:
+    version = pkg_resources.require("scute")[0].version
+except:
+    version =  "-.-.-"
 
 class scute:
     hooks = {}
