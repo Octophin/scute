@@ -21,7 +21,7 @@ class scute:
 
         @flaskServer.context_processor
         def default_vars():
-            return {"systemInfo":self.getSystemInfo(), "scute_options":self.options, "hook_vars":self.tryHook("register_template_vars", request)}
+            return {"systemInfo":self.tryHook("get_system_info"), "scute_options":self.options, "hook_vars":self.tryHook("register_template_vars", request)}
 
         self.options = options
         self.server = flaskServer
@@ -125,9 +125,6 @@ class scute:
             for device in devices:
                 deviceReports[device] = self.getDeviceReport(device)
         return deviceReports
-
-    def getSystemInfo(self):
-        return self.hooks["get_system_info"]()
 
     def getHelpInfo(self):
         helpInfo = {}
