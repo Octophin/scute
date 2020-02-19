@@ -19,6 +19,10 @@ class scute:
     hooks = {}
     def __init__(self, options, flaskServer):
 
+        @flaskServer.context_processor
+        def default_vars():
+            return {"systemInfo":self.getSystemInfo(), "options":self.options, "vars":self.tryHook("register_template_vars", request)}
+
         self.options = options
         self.server = flaskServer
         my_loader = jinja2.ChoiceLoader([
@@ -137,12 +141,12 @@ class scute:
     def indexView(self):
 
         indexData = {"header": "Welcome To SCUTE", "content": "<a href='/list'>Scan For Devices</a>"}
-        return render_template("content/index.html", title="Welcome", indexData = indexData, systemInfo = self.getSystemInfo(), options=self.options, vars=self.tryHook("register_template_vars", "content/index.html"))
+        return render_template("content/index.html", title="Welcome", indexData = indexData)
 
 
     def deviceListView(self):
         
-        return render_template("content/list.html", title="Devices", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions(), systemInfo = self.getSystemInfo(), options=self.options, vars=self.tryHook("register_template_vars", "content/list.html"))
+        return render_template("content/list.html", title="Devices", reportValues=self.getAllDeviceReports(), reportSchema=self.getReportSchema(), presetValues=self.getAllPresetValues(), actions=self.getActions())
     
     def getAllPresetValues(self):
         # scan the preset directory and return value label pairs
@@ -201,7 +205,7 @@ class scute:
             session['userMessage'] = {"type": 'error', "message": "Invalid config detected for '<strong>" + currentConfig['local.friendlyName']  + " ("+ str(device) + ")</strong>'.<br />Please enter config manually, apply a preset or apply the default config via the SCRIPTS."}
     
 
-        return render_template("content/config.html", title="Device Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig, systemInfo = self.getSystemInfo(), options=self.options, vars=self.tryHook("register_template_vars", "content/config.html"))
+        return render_template("content/config.html", title="Device Configuration", schema=self.getConfigSchema(), device=device, current=currentConfig)
 
     def applyPresetView(self):
         devices = request.args.getlist("devices[]")
@@ -241,10 +245,10 @@ class scute:
 
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("content/applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON, systemInfo = self.getSystemInfo(), options=self.options, vars=self.tryHook("register_template_vars", "content/applyPreset.html"))
+        return render_template("content/applyPreset.html", title="Apply preset", schema=presetSchema, devices=devices, preset=preset, current = presetJSON)
 
     def helpView(self):
-        return render_template("content/helpPage.html", title="Help", helpInfo=self.getHelpInfo(), systemInfo = self.getSystemInfo(), options=self.options, vars=self.tryHook("register_template_vars", "content/helpPage.html"))
+        return render_template("content/helpPage.html", title="Help", helpInfo=self.getHelpInfo())
     
 
 
@@ -341,7 +345,7 @@ class scute:
         
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("content/presetsView.html", title="Preset Manager", presets=presetFiles, schema=presetSchema, current=prefill, systemInfo = self.getSystemInfo(), options=self.options, vars=self.tryHook("register_template_vars", "content/presetsView.html"))
+        return render_template("content/presetsView.html", title="Preset Manager", presets=presetFiles, schema=presetSchema, current=prefill)
 
 
 
@@ -387,7 +391,7 @@ class scute:
                 output = stderr
                 error = True
 
-        return render_template("content/script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output, error = error, systemInfo = self.getSystemInfo(), options=self.options, vars=self.tryHook("register_template_vars", "content/script.html"))
+        return render_template("content/script.html", title=scriptSchema["name"], script=scriptSchema, nextCommand = nextCommand, fileName=script, output=output, error = error)
 
     def scriptsView(self):
 
@@ -456,7 +460,7 @@ class scute:
                 fileJSON["fileName"] = file
                 scripts.append(fileJSON)
 
-        return render_template("content/scriptsView.html", title="Scripts", scripts=scripts, systemInfo = self.getSystemInfo(), options=self.options, vars=self.tryHook("register_template_vars", "content/scriptsView.html"))
+        return render_template("content/scriptsView.html", title="Scripts", scripts=scripts)
 
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON

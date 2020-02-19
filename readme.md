@@ -265,15 +265,15 @@ Scripts allow you to run pre-defined command line scripts with input of paramete
 
 ## Template hooks
 
-You may wish to add additional template variables to your templates. There is a `register_template_vars` hook for this purpose. It receives one parameter, the name of the template being rendered, and should return a dictionary. The dictionary returned will be placed in a `vars` object to use in your template.
+You may wish to add additional template variables to your templates. There is a `register_template_vars` hook for this purpose. It receives one parameter, the current Request object, and should return a dictionary. The dictionary returned will be placed in a `vars` object to use in your template.
 
 For example:
 
 ```Python
 
-def loadCustomVars(template):
+def loadCustomVars(request):
     return {
-        "currentTemplate": template,
+        "url": request.url,
         "time" : datetime.now().strftime("%H:%M:%S")
     }
 

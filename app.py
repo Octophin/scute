@@ -28,9 +28,9 @@ def getDevices():
     ]
 
 
-def loadCustomVars(template):
+def loadCustomVars(request):
     return {
-        "template": template,
+        "url": request.url,
         "time" : datetime.now().strftime("%H:%M:%S")
     }
 
