@@ -271,3 +271,28 @@ Scripts allow you to run pre-defined command line scripts with input of paramete
     * Command (string) -  the actual command. Use `${parametername}` to swap out parameters supplied by the user through the interface.
     * Description (string) - A description of the command, shown before it is run
     * Parameters (object) - A list of parameters the user will be able to input, they will be swapped out in the command, the value is the label shown to the user, the key is the actual parameter in the command, `${directory}` for example.
+
+## Template hooks
+
+You may wish to add additional template variables to your templates. There is a `register_template_vars` hook for this purpose. It receives one parameter, the current Request object, and should return a dictionary. The dictionary returned will be placed in a `vars` object to use in your template.
+
+For example:
+
+```Python
+
+def loadCustomVars(request):
+    return {
+        "url": request.url,
+        "time" : datetime.now().strftime("%H:%M:%S")
+    }
+
+
+```
+
+# Templating
+
+Every template in the scute default_templates folder can be overriden with your own template placed in a `templates` folder. Each template has the following special scute global variables available:
+
+* systemInfo - anything coming from a `get_system_info` hook
+* scute_options - the options object you initially passed into your app
+* hook_vars - the result of the `register_template_vars` hook for the current request. See [template hooks](#template-hooks).
