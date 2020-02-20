@@ -487,6 +487,7 @@ table tr:last-of-type td[data-active] {
 /* BUTTONS */
 
 button,
+.button
 select,
 .buttons-wrapper select {
     margin: 0 0.5em 0.5em 0;
@@ -619,7 +620,9 @@ button.scary {
     margin: 2em 1em;
 }
 
-.buttons-wrapper select {
+.buttons-wrapper .button {display: inline-block;} 
+
+.buttons-wrapper select, .buttons-wrapper button {
     background-color: transparent;
     border-radius: 0.1em;
     padding: 0.5em 0.8em;
