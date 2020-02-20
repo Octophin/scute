@@ -117,9 +117,18 @@ function displayLoadingPopup() {
     lockScreenOverlay();
 }
 
-function lockScreenOverlay() {
+function lockScreenOverlay(show = true) {
 
-    document.getElementById("clickOverlay").style.display = "block";
+    if(show){
+
+        document.getElementById("clickOverlay").style.display = "block";
+        
+    } else {
+        
+        document.getElementById("clickOverlay").style.display = "none";
+
+    }
+
 }
 
 function getFieldName(field) {
