@@ -1,4 +1,5 @@
-# Schema Compiled Utility Template Engine 
+<!-- omit in toc -->
+# Schema Compiled Utility Template Engine
 
 SCUTE will build an extendable graphical administration interface for hardware devices from JSON schema files, allowing people to view reports about connected devices, update and manage configuration (with preset saving and loading) and perform command line actions such as viewing and exporting data (on one device or several at once) through a step-through graphical interface.
 
@@ -13,9 +14,28 @@ An example set up:
 
 *Scute was built by Octophin Digital for the Arribada Horizon biologging tags.*
 
-[How it works](#quick-start)
-
 ![screenshot](scute-home.PNG)
+
+- [Quick start](#quick-start)
+- [Initialisation](#initialisation)
+- [Hooks](#hooks)
+  - [Device list](#device-list)
+  - [Device Report JSON schema](#device-report-json-schema)
+    - [Category](#category)
+    - [Field](#field)
+    - [Getting report field data](#getting-report-field-data)
+  - [Device actions](#device-actions)
+  - [Configuration management](#configuration-management)
+    - [Category](#category-1)
+    - [Fields](#fields)
+    - [Loading in saved configuration into the form](#loading-in-saved-configuration-into-the-form)
+    - [Saving configuration](#saving-configuration)
+  - [Scripts](#scripts)
+    - [Schema info](#schema-info)
+  - [Template hooks](#template-hooks)
+- [Templating](#templating)
+- [Translations](#translations)
+  - [Contributing to scute translations](#contributing-to-scute-translations)
 
 # Quick start
 
@@ -295,3 +315,29 @@ Every template in the scute default_templates folder can be overriden with your 
 * systemInfo - anything coming from a `get_system_info` hook
 * scute_options - the options object you initially passed into your app
 * hook_vars - the result of the `register_template_vars` hook for the current request. See [template hooks](#template-hooks).
+
+
+# Translations
+
+Scute makes use of Flask_Babel to provide translations. It automatically looks in a "/translations" folder in your app if you wish to provide your own translations.
+
+To change the default locale of your app use the `BABEL_DEFAULT_LOCALE` Flask config setting. For example (app is your Flask app):
+
+```python
+
+    app.config.update({
+        'BABEL_DEFAULT_LOCALE': 'de_DE', 
+    })
+
+```
+
+## Contributing to scute translations
+
+We'd love it if you provided some translations to scute. To do so:
+
+* Check templates and python files for translatable text. `pybabel extract -F babel.cfg -k _l -o messages.pot .`
+* Add a language (czech `cs` in this example) - `pybabel init -i messages.pot -d scute/translations -l cs`
+* Edit the file in for example `scute/translations/cs/LC_MESSAGES/messages.po`
+* Run `pybabel compile -d scute/translations` to compile the translations
+
+To test a locale, use `BABEL_DEFAULT_LOCALE` as above.

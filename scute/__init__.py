@@ -1,5 +1,6 @@
 import json
 from flask import render_template, send_from_directory, request, redirect, send_file, safe_join, g, session
+from flask_babel import Babel
 import jinja2
 import os
 import re
@@ -23,6 +24,17 @@ except:
 class scute:
     hooks = {}
     def __init__(self, options, flaskServer):
+
+        flaskServer.config.update({
+            'BABEL_TRANSLATION_DIRECTORIES': here + '/translations;translations',
+        })
+
+        babel = Babel(flaskServer)
+
+        @babel.localeselector
+        def get_locale():
+            # return request.accept_languages.best_match(app.config['LANGUAGES'])
+            return 'cs'
 
         @flaskServer.context_processor
         def default_vars():
