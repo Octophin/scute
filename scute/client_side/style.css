@@ -153,9 +153,14 @@ nav .mob-menu {
 
 .nav-tab.selected {
     border-bottom: solid #284c76;
-    border-top: solid #284c76;
     background: linear-gradient(white, #d3ecf1);
 } 
+
+@media (max-width: 800px){
+    [data-open] .nav-tab.selected {
+        border-top: solid #284c76;
+    }
+}
 
 nav a {
     font-weight: 500;
