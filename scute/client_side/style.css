@@ -1165,13 +1165,17 @@ pre[data-error] {
     .sidepanel-toggle {
         cursor: pointer;
         position: absolute;
-        right: 0px;
-        top: 0px;
+        right: -15px;
+        top: 5px;
         display: block; 
-        width: 20px; 
-        height: 20px; 
-        background-color:black;
+        width: 30px; 
+        height: 30px;
+        background-color:white;
+        background-size:contain;
+        background-image: url("/scute/images/arrow.svg");
     }
+
+    .presets-manager-wrapper[data-sidepanel-on] .sidepanel-toggle {transform: rotate(180deg)}
 
 }
 
