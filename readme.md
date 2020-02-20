@@ -1,4 +1,4 @@
-![scuteicon](scute/client_side/images/scuteicon.svg)
+<img src="scute/client_side/images/scuteicon.svg" width="40px">
 
 # Schema Compiled Utility Template Engine 
 
