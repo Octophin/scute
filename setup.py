@@ -9,7 +9,7 @@ setup(name='scute',
       license='MIT',
       packages=['scute'],
       install_requires=[
-          'Flask', 'mistune'
+          'Flask', 'mistune', 'flask-babel'
       ],
       include_package_data=True,
       zip_safe=False)
