@@ -1,4 +1,6 @@
-# Schema Compiled Utility Template Engine
+![scuteicon](scute/client_side/images/scuteicon.svg)
+
+# Schema Compiled Utility Template Engine 
 
 SCUTE will build an extendable graphical administration interface for hardware devices from JSON schema files, allowing people to view reports about connected devices, update and manage configuration (with preset saving and loading) and perform command line actions such as viewing and exporting data (on one device or several at once) through a step-through graphical interface.
 
