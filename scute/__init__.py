@@ -29,7 +29,7 @@ class scute:
             'BABEL_TRANSLATION_DIRECTORIES': here + '/translations;translations',
         })
 
-        babel = Babel(flaskServer)
+        Babel(flaskServer)
 
         @flaskServer.context_processor
         def default_vars():
