@@ -203,8 +203,6 @@ main {
     padding-bottom: 2em;
 }
 
-
-
 .main-table-wrapper, .white-background {
     background-color: white;
     padding-bottom: 1em;
@@ -470,9 +468,6 @@ table tr:last-of-type td[data-active] {
     table tr td:first-of-type {
         display: none;
     }
-    .main-table {
-        margin: 0;
-    }
 }
 
 
@@ -696,11 +691,6 @@ section.presetManager>h1 {
 .presets-manager-list {
     border: solid thin #284c76;
     margin-bottom: 0;
-    height: 100%;
-}
-
-#side-slide-toggle, #side-slide-toggle + label {
-    display: none;
 }
 
 .edit-presets-icons {
@@ -764,62 +754,6 @@ section.presetManager>h1 {
         width: 100%;
     }
 }
-
-@media screen and (max-width: 900px) {
-
-    .happy-margin.primary-page-content {
-        margin: 0 0 0 1em;
-      }
-
-    .presets-manager-wrapper {
-        position: relative;
-        margin-top: 1.5em;
-    }
-    .presets-manager-content {
-        padding-right: 0;
-    }
-    .presets-manager-list {
-        position: absolute;
-        background: white;
-        left: -120%;
-        transition: all 0.4s ease-in-out;
-        height: auto;
-    }
-    #side-slide-toggle:checked ~ .presets-manager-list {
-        left: 0.75rem;
-    }
-    #side-slide-toggle, #side-slide-toggle + label {
-        display: block;
-        position: absolute;
-        height: 3rem;
-        width: 3rem;
-        margin: 0; 
-        left: -2.15rem;
-        top: 0;
-        padding: 0.2rem;
-    } 
-    #side-slide-toggle {
-        opacity: 0;
-        z-index: 5;
-    }
-    #side-slide-toggle + label {
-        /* box-shadow: 3px 4px 5px 2px rgba(0,0,0,0.5); */
-        background-color: #ffffff;
-        z-index: 4;
-        border-top: solid thin #284c76;
-        border: solid thin #284c76;
-    }
-    #side-slide-toggle + label img {
-        transition: all 0.4s ease-in-out;
-    }
-    #side-slide-toggle:checked + label img {
-        transform: rotateY(0.5turn);
-    }
-}
-
-@media screen and (max-width: 700px) {
-}
-
 
 /* BANNERS */
 
@@ -1280,7 +1214,7 @@ pre[data-error] {
 
     .buttons.actions>.buttons-wrapper * {
         width: 100%;
-        margin: 0.35em auto;
+        margin: 0.5em auto;
         text-align: center;
     }
 
@@ -1295,12 +1229,8 @@ pre[data-error] {
     
     header {
         position: fixed;
-        z-index: 5;
+        z-index: 4;
         width: 100%;
-    }
-
-    .main-wrapper {
-        margin-top: 1.9rem;
     }
 
     nav {

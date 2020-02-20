@@ -8,51 +8,45 @@
                 {% if systemInfo.pageTitle %}
                 <div class="introText happy-margin">{{systemInfo.pageTitle|safe}}</div>
                 {% endif%}
-                <div class='happy-margin primary-page-content'>
+                <div class='happy-margin'>
                     <div class="presets-manager-wrapper">
-                        <aside class="mob-side-slide">
-                            <input type="checkbox" id="side-slide-toggle" name="side-slide-toggle">
-                            <label for="side-slide-toggle">
-                                <span><img title="toggle-slide-menu" src="scute/images/collapse-menu.svg"/></span>
-                            </label>
-                            <div class="presets-manager-list scrolling">
-                                <div class="edit-presets-icons">
-                                    <span class="icon add-preset" onclick="loadScript('new')">
-                                        <img title="Add Script" src="scute/images/add-icon.png" />
-                                    </span>
-                                    <!-- <span class="icon">
-                                        <img onclick="uploadScript()" alt="Upload Script" src="scute/images/upload-icon.png"/>
-                                    </span> -->
-                                    <span class="icon toRight">
-                                        <img onclick="deleteScript()" title="Delete Script"
-                                            src="scute/images/delete-icon.png" />
-                                    </span>
+                        <div class="presets-manager-list scrolling">
+                            <div class="edit-presets-icons">
+                                <span class="icon add-preset" onclick="loadScript('new')">
+                                    <img title="Add Script" src="scute/images/add-icon.png" />
+                                </span>
+                                <!-- <span class="icon">
+                            <img onclick="uploadScript()" alt="Upload Script" src="scute/images/upload-icon.png"/>
+                    </span> -->
+                                <span class="icon toRight">
+                                    <img onclick="deleteScript()" title="Delete Script"
+                                        src="scute/images/delete-icon.png" />
+                                </span>
 
-                                </div>
-                                <div class="presets-list">
-                                    <ul>
-
-                                        {% if scripts %}
-
-                                        {% for element in scripts  %}
-
-                                        <li class="preset-list-item" data-preset-menu="{{element.fileName}}" data-type="{{element.type}}"
-                                            onclick="loadScript('{{ element.fileName }}')"><a href="#pageTop">
-                                            <span class="preset-title navy bold">{{ element.name }}</span><br>
-                                            <span class="description gray">{{ element.description }}</span></a>
-                                        </li>
-                                        {% endfor %}
-
-                                        {% else %}
-
-                                        <li>No scripts found.</li>
-
-                                        {% endif %}
-
-                                    </ul>
-                                </div>
                             </div>
-                        </aside>
+                            <div class="presets-list">
+                                <ul>
+
+                                    {% if scripts %}
+
+                                    {% for element in scripts  %}
+
+                                    <li class="preset-list-item" data-preset-menu="{{element.fileName}}" data-type="{{element.type}}"
+                                        onclick="loadScript('{{ element.fileName }}')"><a href="#pageTop">
+                                        <span class="preset-title navy bold">{{ element.name }}</span><br>
+                                        <span class="description gray">{{ element.description }}</span></a>
+                                    </li>
+                                    {% endfor %}
+
+                                    {% else %}
+
+                                    <li>No scripts found.</li>
+
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+                        </div>
                         <div class="presets-manager-content">
                             <div class="heading">
                                 <h1 id="presetHeading"></h1>
