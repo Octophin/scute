@@ -1188,10 +1188,8 @@ pre[data-error] {
     .table-nav,
     .table-nav-left,
     .table-nav-right {
+        margin: 1em;
         display: block;
-        width: 100%;
-        margin: 1em auto;
-        height: unset;
     }
 
     /* FORMS */
