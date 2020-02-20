@@ -26,7 +26,7 @@ An example set up:
 * run `pip install git+https://github.com/octophin/scute`
 * make changes to `app.py` and the JSON schema files to make it relevant to your device
 * optionally, make copies of the templates under `scute/default_templates` and place them in your Flask templates folder (usually `/templates`). Files in this directory will override the default ones.
-* Run the app using `python -m flask run`
+* Run the app using `python -m flask run` (note that if you've run a Flask app before you may have to run `export FLASK_APP=app` or similar beforehand. [Check the Flask documentation for more details](https://palletsprojects.com/p/flask/))
 
 # Initialisation
 
