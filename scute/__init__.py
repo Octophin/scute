@@ -31,11 +31,6 @@ class scute:
 
         babel = Babel(flaskServer)
 
-        @babel.localeselector
-        def get_locale():
-            # return request.accept_languages.best_match(app.config['LANGUAGES'])
-            return 'cs'
-
         @flaskServer.context_processor
         def default_vars():
             return {"systemInfo":self.tryHook("get_system_info"), "scute_options":self.options, "hook_vars":self.tryHook("register_template_vars", request)}
