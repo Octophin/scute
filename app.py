@@ -9,14 +9,7 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-options = {
-    "reportSchema": "exampleSchema/reportSchema.json",
-    "actionsSchema": "exampleSchema/actionsSchema.json",
-    "configSchema": "exampleSchema/configSchema.json",
-    "scriptsDirectory": "exampleSchema/scripts",
-    "presetsDirectory": "presets",
-    "helpInfo": "helpfiles/index.md"
-}
+options = json.load(open("scute.json", "r"))
 
 exampleInstance = scute(options, app)
 

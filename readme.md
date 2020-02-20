@@ -40,7 +40,8 @@ An example set up:
 # Quick start
 
 * Install `python` and `pip`
-* copy the `app.py` example file and the `exampleSchema` directory from this repository to a new directory
+* Copy the `app.py` example file and the `exampleSchema` directory from this repository to a new directory
+* Copy the scute.json example file from this directory
 * run `pip install git+https://github.com/octophin/scute`
 * make changes to `app.py` and the JSON schema files to make it relevant to your device
 * optionally, make copies of the templates under `scute/default_templates` and place them in your Flask templates folder (usually `/templates`). Files in this directory will override the default ones.
@@ -50,20 +51,31 @@ An example set up:
 
 SCUTE makes a `SCUTE` class available. It is used in the following way:
 
-```Python
+Scute stores its setup options in json format. Although you can pass them directly in as a dictionary, we recommend you use load the json into a dictionary with python. An example options file will look like:
 
-from scute import scute
-from flask import Flask
+```JSON
 
-app = Flask(__name__)
-
-options = {
+    {
         "reportSchema": "reportSchema.json",
         "actionsSchema": "actionsSchema.json",
         "configSchema": "configSchema.json",
         "presetsDirectory": "/presets",
         "scriptsDirectory": "/scripts"
     }
+
+```
+
+In your main `app.py` file you would run something like the following to initialise scute. Note that this won't do much on its own until you set up some devices, report, action and configuration hooks (see below or look through the example `app.py`).
+
+```Python
+
+from scute import scute
+from flask import Flask
+from json import json
+
+app = Flask(__name__)
+
+options = json.load(open("scute.json", "r"))
 
 myScuteInstance = scute(options, app)
 

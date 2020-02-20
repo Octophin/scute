@@ -1,0 +1,8 @@
+{
+  "reportSchema": "exampleSchema/reportSchema.json",
+  "actionsSchema": "exampleSchema/actionsSchema.json",
+  "configSchema": "exampleSchema/configSchema.json",
+  "scriptsDirectory": "exampleSchema/scripts",
+  "presetsDirectory": "presets",
+  "helpInfo": "helpfiles/index.md"
+}
