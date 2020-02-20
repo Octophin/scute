@@ -331,7 +331,7 @@ Every template in the scute default_templates folder can be overriden with your 
 
 # Translations
 
-Scute makes use of Flask_Babel to provide translations. It automatically looks in a "/translations" folder in your app if you wish to provide your own translations.
+Scute makes use of Flask_Babel to provide translations. It automatically looks in a "/translations" folder in your app if you wish to provide your own translations. Please see [Flask-Babel documentation](https://github.com/python-babel/flask-babel) for more information on how to do this.
 
 To change the default locale of your app use the `BABEL_DEFAULT_LOCALE` Flask config setting. For example (app is your Flask app):
 
