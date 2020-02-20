@@ -412,7 +412,7 @@ function checkScriptName(){
 function toggleBurger() {
     document.body.toggleAttribute("data-open");
 }
-toggleBurger();
+
 
 
 

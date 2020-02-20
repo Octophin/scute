@@ -459,6 +459,17 @@ table tr:last-of-type td[data-active] {
     font-weight: lighter;
 }
 
+@media screen and (max-width: 750px) {
+
+    tr td[data-field-label]::before {
+        content: attr(data-field-label) ": ";
+        float: left;
+    }
+    table tr td:first-of-type {
+        display: none;
+    }
+}
+
 
 
 /* BUTTONS */
@@ -1215,8 +1226,16 @@ pre[data-error] {
 @media screen and (max-width: 750px) {
     /* NAV MOBILE */
 
+    
+    header {
+        position: fixed;
+        z-index: 4;
+        width: 100%;
+    }
+
     nav {
         border-bottom: none;
+        background-color: transparent;
     }
 
     nav .nav-tab.navy:hover,
@@ -1227,7 +1246,7 @@ pre[data-error] {
 
     .mob-menu {
         position: relative;
-        top: -150px;
+        top: -100%;
         display: block;
         background-color: white;
     }
@@ -1238,8 +1257,8 @@ pre[data-error] {
 
     [data-open] .mob-menu {
         visibility: visible;
-        position: relative;
-        top: 0;
+        /* position: relative; */
+        top: 4.25rem;
         background-color: white;
     }
 
