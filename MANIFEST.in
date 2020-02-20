@@ -1,3 +1,4 @@
+include scute/translations *.*
 include scute/client_side/*
 include scute/client_side/images/*
 include scute/client_side/fonts/*
