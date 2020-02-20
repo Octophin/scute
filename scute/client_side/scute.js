@@ -205,3 +205,20 @@ function checkForChanges() {
     }
     setTimeout(checkForChanges, 1000);
 }
+
+
+function toggleSidebar(){
+
+    let sidebar = document.querySelector(".presets-manager-wrapper");
+
+    if(!sidebar.hasAttribute("data-sidepanel-on")){
+
+        sidebar.setAttribute("data-sidepanel-on", "true");
+        
+    } else {
+        
+        sidebar.removeAttribute("data-sidepanel-on");
+
+    }
+
+}

@@ -359,7 +359,7 @@ class scute:
         
         presetSchema = self.filterOutFieldsWithBooleanAttribute(self.getConfigSchema(), "excludeFromPresets")
 
-        return render_template("content/presetsView.html", title="Preset Manager", presets=presetFiles, schema=presetSchema, current=prefill)
+        return render_template("content/presetsView.html", title="Preset Manager", presets=presetFiles, schema=presetSchema, current=prefill, sidepanel=True)
 
 
 
@@ -474,7 +474,7 @@ class scute:
                 fileJSON["fileName"] = file
                 scripts.append(fileJSON)
 
-        return render_template("content/scriptsView.html", title="Scripts", scripts=scripts)
+        return render_template("content/scriptsView.html", title="Scripts", scripts=scripts, sidepanel=True)
 
     def expandJSON(self, json):
         # Expand a JSON object with dot based keys into a nested JSON

@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="main-wrapper happy-margin">
+<div class="main-wrapper">
     <section class="main-table-wrapper">
 
         {% include "layout/contentTitle.html" %}
         
         {% if systemInfo.pageTitle %}
-        <div class="happy-margin">
+        <div>
             <div class="introText happy-margin">{{systemInfo.pageTitle|safe}}</div>
         </div>   
         {% endif%}
-        <div class='happy-margin'>
+        <div>
         <div class="presets-manager-wrapper">
             <div class="presets-manager-list scrolling">
+                <div class="sidepanel-toggle" onclick="toggleSidebar()"></div>
                 <div class="edit-presets-icons">
                     <span class="icon add-preset" onclick="loadPreset('new')">
                         <img title="Add preset" src="scute/images/add-icon.png"/>

@@ -153,6 +153,7 @@ nav .mob-menu {
 
 .nav-tab.selected {
     border-bottom: solid #284c76;
+    border-top: solid #284c76;
     background: linear-gradient(white, #d3ecf1);
 } 
 
@@ -193,8 +194,14 @@ nav a {
 main {
     background: linear-gradient(#fff, #d3ecf1);
     padding-bottom: 0.5em;
-    padding-top: 0.5em;
+    padding-top: 1em;
     max-width: 100%;
+}
+
+@media (min-width: 1000px){
+
+    main {padding-top: 0em;}
+
 }
 
 .main-wrapper {
@@ -1123,6 +1130,50 @@ pre[data-error] {
 }
 
 /* MQ - MOBILE */
+
+.sidepanel-toggle {display: none;}
+
+@media screen and (max-width: 900px){
+
+    .presets-manager-wrapper {
+        position: relative; 
+        left: -280px; 
+        transition: all 200ms;
+    }
+
+    .presets-manager-list {
+        width: 300px;
+        position: relative;
+    } 
+
+    .main-wrapper {
+        margin:0px;
+    }
+
+    [data-sidepanel] {
+        overflow-x: hidden;
+    }
+
+    .presets-manager-content * {max-width: calc(100vw - 70px)}
+
+    .presets-manager-wrapper[data-sidepanel-on] {
+        left: 0;
+    } 
+
+    [data-sidepanel] .main-wrapper {max-width: none; width: calc(100vw + 280px)}
+
+    .sidepanel-toggle {
+        cursor: pointer;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        display: block; 
+        width: 20px; 
+        height: 20px; 
+        background-color:black;
+    }
+
+}
 
 @media screen and (max-width: 730px) {
 
