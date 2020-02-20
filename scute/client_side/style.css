@@ -744,16 +744,7 @@ section.presetManager>h1 {
     background-color: #a4ceee;
 }
 
-@media screen and (max-width: 600px) {
 
-    .presets-manager-wrapper,
-    .presets-manager-list,
-    .presets-manager-content,
-    .presets-list {
-        display: block;
-        width: 100%;
-    }
-}
 
 /* BANNERS */
 
@@ -1353,11 +1344,6 @@ pre[data-error] {
  .leftAlign{
      text-align: left !important;
  }
- .onRight{
-     position: absolute;
-     right: 1.5em;
- }
- 
 
  .noUnderline{
      text-decoration-line: none !important;
