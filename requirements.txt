@@ -1,3 +1,4 @@
 flask
 mistune
 flask-babel
+pybabel-json-md

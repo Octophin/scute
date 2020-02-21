@@ -13,7 +13,7 @@ setup(name='scute',
       license='MIT',
       packages=['scute'],
       install_requires=[
-          'Flask', 'mistune', 'flask-babel'
+          'Flask', 'mistune', 'flask-babel', 'pybabel-json-md'
       ],
       include_package_data=True,
       zip_safe=False)
