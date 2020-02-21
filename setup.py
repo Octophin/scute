@@ -2,10 +2,6 @@ from setuptools import setup
 
 setup(name='scute',
       version='0.6.3',
-      entry_points = """
-        [babel.extractors]
-        scute_schema = scute.translator:extract_schema_translation
-        """,
       description='Tool for making hardware user interfaces',
       url='https://github.com/Octophin/scute',
       author='Octophin Digital',
