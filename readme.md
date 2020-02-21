@@ -331,7 +331,7 @@ Every template in the scute default_templates folder can be overriden with your 
 
 # Translations
 
-Scute makes use of Flask_Babel to provide translations. It automatically looks in a "/translations" folder in your app if you wish to provide your own translations. Please see [Flask-Babel documentation](https://github.com/python-babel/flask-babel) for more information on how to do this.
+Scute makes use of Flask_Babel to provide translations.
 
 To change the default locale of your app use the `BABEL_DEFAULT_LOCALE` Flask config setting. For example (app is your Flask app):
 
@@ -343,9 +343,25 @@ To change the default locale of your app use the `BABEL_DEFAULT_LOCALE` Flask co
 
 ```
 
+Scute automatically looks in a "/translations" folder in your app if you wish to provide your own translations for your instance. Please see [Flask-Babel documentation](https://github.com/python-babel/flask-babel) for more information on how to do this or follow the guide below:
+
+* Add a `babel.cfg` file at the root of your project with something like the following. This will check python files, templates and json files for translations.
+
+`
+[python: **.py]
+[jinja2: templates/**.html]
+extensions=jinja2.ext.autoescape,jinja2.ext.with_
+[json_md: **.json]
+`
+
+* Make a messages.pot file for these traslations with `pybabel extract -F babel.cfg -k _l -o messages.pot .`
+* Add a language (czech `cs` in this example) - `pybabel init -i messages.pot -d translations -l cs`
+* Edit the file in for example `translations/cs/LC_MESSAGES/messages.po`
+* Run `pybabel compile -d translations` to compile the translations
+
 ## Contributing to scute translations
 
-We'd love it if you provided some translations to scute. To do so:
+We'd love it if you provided some translations to scute. To do so it's very similar to the above:
 
 * Check templates and python files for translatable text. `pybabel extract -F babel.cfg -k _l -o messages.pot .`
 * Add a language (czech `cs` in this example) - `pybabel init -i messages.pot -d scute/translations -l cs`
