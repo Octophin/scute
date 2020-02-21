@@ -347,12 +347,12 @@ Scute automatically looks in a "/translations" folder in your app if you wish to
 
 * Add a `babel.cfg` file at the root of your project with something like the following. This will check python files, templates and json files for translations.
 
-`
+```
 [python: **.py]
 [jinja2: templates/**.html]
 extensions=jinja2.ext.autoescape,jinja2.ext.with_
 [json_md: **.json]
-`
+```
 
 * Make a messages.pot file for these traslations with `pybabel extract -F babel.cfg -k _l -o messages.pot .`
 * Add a language (czech `cs` in this example) - `pybabel init -i messages.pot -d translations -l cs`
