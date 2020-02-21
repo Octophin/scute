@@ -8,7 +8,7 @@
             <!-- // do nothing -->
         {% else %}
                 <div class="form-title happy-padding navy">
-                    <h2>{{category.label}}</h2>
+                    <h2>{{_(category.label)}}</h2>
                     {% if category.description|length > 1 %}
                         <p>{{category.description}}</p>
                     {% endif %}
