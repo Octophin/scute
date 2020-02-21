@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='scute',
-      version='0.6.1',
+      version='0.6.2',
       entry_points = """
         [babel.extractors]
         scute_schema = scute.translator:extract_schema_translation

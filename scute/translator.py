@@ -12,6 +12,7 @@ def extract_schema_translation(fileobj, keywords, comment_tags, options):
              tuples
     :rtype: ``iterator``
     """
+    print("hello")
     mytuple = ("apple", "banana", "cherry")
     return iter(mytuple)
     
