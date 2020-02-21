@@ -29,7 +29,13 @@ class scute:
             'BABEL_TRANSLATION_DIRECTORIES': here + '/translations;translations',
         })
 
-        Babel(flaskServer)
+        babel = Babel(flaskServer)
+
+        # Use the browser's language preferences to select an available translation
+        @babel.localeselector
+        def get_locale():
+            translations = [str(translation) for translation in babel.list_translations()]
+            return request.accept_languages.best_match(translations)
 
         @flaskServer.context_processor
         def default_vars():
