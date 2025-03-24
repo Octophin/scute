@@ -100,7 +100,7 @@ class scute:
         with open(self.options["actionsSchema"]) as actionsSchema: 
             actions = json.load(actionsSchema)
             for key,value in actions.items():
-                if "list" in value and not isinstance(value["list"], collections.Mapping):
+                if "list" in value and not isinstance(value["list"], collections.abc.Mapping):
                     actions[key]["list"] = self.hooks["get_list__" + value["list"]]()
             return actions
     
