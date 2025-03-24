@@ -1,5 +1,5 @@
 import json
-from flask import render_template, send_from_directory, request, redirect, send_file, safe_join, g, session
+from flask import render_template, send_from_directory, request, redirect, g, session
 from flask_babel import Babel
 import jinja2
 import os
@@ -32,10 +32,10 @@ class scute:
         babel = Babel(flaskServer)
 
         # Use the browser's language preferences to select an available translation
-        @babel.localeselector
-        def get_locale():
-            translations = [str(translation) for translation in babel.list_translations()]
-            return request.accept_languages.best_match(translations)
+        # @babel.localeselector
+        # def get_locale():
+        #     translations = [str(translation) for translation in babel.list_translations()]
+        #     return request.accept_languages.best_match(translations)
 
         @flaskServer.context_processor
         def default_vars():
