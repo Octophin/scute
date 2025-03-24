@@ -11,6 +11,7 @@ import subprocess
 import unicodedata
 import string
 import mistune #markdown renderer
+import traceback
 
 here = os.path.dirname(os.path.abspath(__file__))
 
@@ -134,6 +135,7 @@ class scute:
             return self.hooks[hookName](*args)
         except Exception as e:
             print(e)
+            print(traceback.format_exc())
             pass
     
     def getDevices(self):
